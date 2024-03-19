@@ -11,7 +11,7 @@
 		<%@ include file="elements/home/navbar.jsp" %>
 		<%@ include file="elements/home/banner.jsp" %>
 		<%@ include file="elements/home/topsell.jsp" %>
-		<%@ include file="elements/home/oldbook.jsp" %>
+		<%@ include file="elements/home/favorite_types.jsp" %>
 	</body>
 	
 	
