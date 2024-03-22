@@ -21,22 +21,22 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0 fs-5">
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">HOME</a>
+					<a class="nav-link" href="">HOME</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">SHOP</a>
+					<a class="nav-link" href="">SHOP</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">BLOG</a>
+					<a class="nav-link" href="forum.htm">BLOG</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">OLD BOOK</a>
+					<a class="nav-link" href="">OLD BOOK</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">CONTACT</a>
+					<a class="nav-link" href="">CONTACT</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="">ABOUT</a>
+					<a class="nav-link" href="">ABOUT</a>
 				</li>
 			</ul>
 		</div>
