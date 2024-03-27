@@ -1,9 +1,9 @@
 <style>	
-	.favorite_types .card:hover {
+	.favorite-types .card:hover {
 		transform: translate(0px, -5px);
 	}
 
-	.favorite_types .card:hover {
+	.favorite-types .card:hover {
 		transform: translate(0px, -5px);
 
 		transition: all 0.5s;
@@ -12,19 +12,12 @@
 		/* transition: all 0.5s ease-in-out; */
 	}
 	
-	.favorite_types .card {
+	.favorite-types .card {
 		margin-bottom: 1.5rem;
 	}
 	
-	.favorite_types .title {
+	.favorite-types .title {
 		box-shadow: 2.5px 5px 7.5px 5px lightgrey;
-	}
-
-	.favorite_types .card {
-		margin-bottom: 1.5rem;
-	}
-
-	.favorite_types .title {
 		margin-bottom: 1rem;
 	}
 </style>

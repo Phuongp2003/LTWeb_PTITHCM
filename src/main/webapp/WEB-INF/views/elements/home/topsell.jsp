@@ -1,6 +1,3 @@
-<!-- <div class="topsell container-fluid w-100">
-	<img src="https://th.bing.com/th/id/OIP.cfv_IunjPTXr7CEc-aDbUQAAAA?rs=1&pid=ImgDetMain" alt="">
-</div> -->
 <style>
 	.top-sell .card {
 		display: inline-flex;
@@ -16,10 +13,7 @@
 	}
 
 	.top-sell .card {
-		/* width: 25%;
-		margin-right: 1.5rem;
 		margin-bottom:1.5rem ; */
-		/* width: 80%; */
 	}
 
 	.top-sell .title {
