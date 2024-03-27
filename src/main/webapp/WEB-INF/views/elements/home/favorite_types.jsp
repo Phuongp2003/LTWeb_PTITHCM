@@ -1,15 +1,9 @@
-<style>
-	.favorite_types .card {
-		display: inline-flex;
-	.card {
-		display: inline-flex;
-	}
-	
+<style>	
 	.favorite_types .card:hover {
 		transform: translate(0px, -5px);
-		
+	}
 
-	.card:hover {
+	.favorite_types .card:hover {
 		transform: translate(0px, -5px);
 
 		transition: all 0.5s;
@@ -19,29 +13,19 @@
 	}
 	
 	.favorite_types .card {
-		
-		margin-right: 1.5rem;
 		margin-bottom: 1.5rem;
-		/* margin-left:1.5rem ;
-		margin-top:1.5rem ; */
-		
-		width: 80%;
-		
-		
 	}
 	
 	.favorite_types .title {
 		box-shadow: 2.5px 5px 7.5px 5px lightgrey;
 	}
 
-	.card {
+	.favorite_types .card {
 		margin-bottom: 1.5rem;
 	}
 
-	.title {
+	.favorite_types .title {
 		margin-bottom: 1rem;
-		
-		
 	}
 </style>
 
