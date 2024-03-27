@@ -17,7 +17,6 @@
 	}
 	
 	.favorite-types .title {
-		box-shadow: 2.5px 5px 7.5px 5px lightgrey;
 		margin-bottom: 1rem;
 	}
 </style>
