@@ -1,5 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.compile.nullAnalysis.mode": "automatic",
-    "maven.view": "flat"
+    "maven.view": "flat",
+    "livePreview.defaultPreviewPath": "/src/main/webapp/WEB-INF/views/elements/navbar.jsp"
 }

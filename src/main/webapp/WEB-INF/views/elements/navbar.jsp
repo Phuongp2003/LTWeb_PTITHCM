@@ -1,9 +1,3 @@
-<!-- <style>
-	nav {
-		width: 100%;
-	}
-</style> -->
-
 <nav class="navbar navbar-light bg-light fs-3">
 	<!-- flex-row-reverse -> đặt từ phải qua -->
 	<div class="container-fluid flex-row-reverse mx-auto justify-content-start w-75">
