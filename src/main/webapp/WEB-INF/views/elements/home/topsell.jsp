@@ -2,11 +2,11 @@
 	<img src="https://th.bing.com/th/id/OIP.cfv_IunjPTXr7CEc-aDbUQAAAA?rs=1&pid=ImgDetMain" alt="">
 </div> -->
 <style>
-	.card {
+	.top-sell .card {
 		display: inline-flex;
 	}
 
-	.card:hover {
+	.top-sell .card:hover {
 		/* transform: translate(0px,-5px); */
 
 		/* transition: all 0.5s; */
@@ -15,14 +15,14 @@
 		/* transition: all 0.5s ease-in-out; */
 	}
 
-	.card {
+	.top-sell .card {
 		/* width: 25%;
 		margin-right: 1.5rem;
 		margin-bottom:1.5rem ; */
 		/* width: 80%; */
 	}
 
-	.title {
+	.top-sell .title {
 		margin-bottom: 1rem;
 	}
 
