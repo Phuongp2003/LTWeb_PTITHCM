@@ -4,7 +4,7 @@
 <html lang="en">
 	
 	<head>
-		<%@ include file="partial/home/head.jsp" %>
+		<%@ include file="partial/head.jsp" %>
 	</head>
 	
 	<body>
