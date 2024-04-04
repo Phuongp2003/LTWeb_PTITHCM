@@ -15,10 +15,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0 fs-5">
 				<li class="nav-item">
-					<a class="nav-link" href="">HOME</a>
+					<a class="nav-link" href="home.htm">HOME</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">SHOP</a>
+					<a class="nav-link" href="shop.htm">SHOP</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="forum.htm">BLOG</a>

@@ -1,38 +1,4 @@
-<style>
-	ul{
-		list-style: none;
-	}
-	a{
-		text-decoration: none;
-    	color: white;
-	}
-	.footer{
-		margin-top: 5rem;
-		position: relative;
-	}
-	.footer-bg{
-		background-color:#09182e;
-		z-index: 1;
-		position: absolute;
-		height: 100%;
-	} 
-	.footer .navbar-nav{
-		z-index: 2;
-	}
-	.footer .nav-link{
-		color: white;
-	}
-	.footer-copyright{
-		padding-top: 1rem;
-		z-index: 2;
-		position: absolute;
-		width: 100%;
-		text-align: center;
-		color: white;
-		background-color: gray;
-	}
-</style>
-
+<%@ page pageEncoding="UTF-8"%>
 <div class="footer">
 	<div class="footer-bg w-100"></div>
 	<nav class="navbar navbar-expand-lg footer-redictlink">
@@ -63,6 +29,6 @@
 		</div>
 	</nav>
 	<div class="footer-copyright">
-		<p>©Bản quyền thuộc về VERGENCY.</p>
+		<p>©Bản quyền.</p>
 	</div>
 </div>
