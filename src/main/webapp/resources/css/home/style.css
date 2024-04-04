@@ -88,6 +88,9 @@ a{
     display: flex;
     justify-content:space-around;
 }
+.collection-product{
+    margin-top: 1rem;
+}
 .collection-product .card{
     margin-bottom: 1.5rem;
 }
