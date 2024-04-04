@@ -3,4 +3,4 @@
 /.classpath
 /.project
 src/main/java/lib
-src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/classes/
