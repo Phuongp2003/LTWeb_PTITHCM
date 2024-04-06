@@ -107,4 +107,4 @@ java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitialize
 	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:335)
 ```
 
-- This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](##2-tomcat) to know how to change your jdk version.
+- This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](#2-tomcat) to know how to change your jdk version.
