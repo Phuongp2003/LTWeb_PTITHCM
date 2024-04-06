@@ -1,7 +1,7 @@
 # Java Web Project with Tomcat and Maven(for build)
 
 - This is a simple project to create a web project with java, tomcat and maven.
-- Required: jdk1.8, maven, tomcat, ms sql server with database name "WEB_SACH" and table "Book" with columns "id" and "name".
+- Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), maven, tomcat, ms sql server with database name "WEB_SACH" and table "Book" with columns "id" and "name".
 
 # HOW TO USE
 
