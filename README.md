@@ -1,16 +1,41 @@
+# Java Web Project with Tomcat and Maven(for build)
+
+- This is a simple project to create a web project with java, tomcat and maven.
+- Required: jdk1.8, maven, tomcat, ms sql server with database name "WEB_SACH" and table "Book" with columns "id" and "name".
+
 # HOW TO USE
 
 1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
 2. Download maven.
-3. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server.
-4. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
-5. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
+3. Downlaod jdk1.8 (required).
+4. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server.
+5. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
+6. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
 
 - Choose server -> your server
 - Add params -> yes -> your project name (it will be your slug to view the project on the browser)
 - Project name -> empty
 
 5. Open your browser and go to http://localhost:8080/<your_project_name>
+
+# Requirements configuration
+
+## 1. Maven
+
+- Install sqlldbc4: Terminal -> Run task -> maven: install sqlldbc4
+  manual:
+
+```
+mvn install:install-file -Dfile=setup/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar
+```
+
+## 2. Tomcat
+
+- Setup vm.install.path
+  - With tomcat from disk: when install, i will show a window like this, just edit in field "vm.install.path" to your jdk path.
+    ![alt text](setup/image.png)
+  - With tomcat download from server: right click on your server -> Edit Server...
+    It will open a file json, find "vm.install.path" and change it to your jdk path.
 
 # NOTE
 

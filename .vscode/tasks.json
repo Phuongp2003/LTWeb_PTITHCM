@@ -20,6 +20,15 @@
                 "kind": "build"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Maven: install sqljdbc4",
+            "type": "shell",
+            "command": "mvn install:install-file -Dfile=setup/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar",
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": []
         }
     ]
 }

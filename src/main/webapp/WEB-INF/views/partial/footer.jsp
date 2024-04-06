@@ -1,10 +1,10 @@
 <%@ page pageEncoding="UTF-8"%>
 <style>
-	ul {
+	.footer ul {
 		list-style: none;
 	}
 	
-	a {
+	.footer a {
 		text-decoration: none;
 		color: white;
 	}

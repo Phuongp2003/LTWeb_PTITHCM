@@ -9,6 +9,9 @@
 	
 	<body>
 		<%@ include file="elements/navbar.jsp" %>
+		<%@ include file="elements/forum/user.jsp" %>
+		<%@ include file="elements/forum/post.jsp" %>
+		
 	</body>
 	
 	
