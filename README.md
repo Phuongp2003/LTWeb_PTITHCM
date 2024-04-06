@@ -80,3 +80,31 @@ mvn install:install-file -Dfile=setup/sqljdbc4.jar -DgroupId=com.microsoft.sqlse
 |
 |___pom.xml
 ```
+
+## 5. Bug with Community Server Connectors
+
+- If you have a bug with Community Server Connectors, it may cause by your java version. You can change your java version to 9 or higher to fix this bug. Check JAVA_HOME in your system environment variables if it's installed.
+
+## 6. Bug with Tomcat
+
+- Server log maybe look like this:
+
+```
+java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitializerError [in thread "localhost-startStop-1"]
+	org.springframework.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:166)
+	org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+	org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:216)
+	org.springframework.cglib.core.KeyFactory$Generator.create(KeyFactory.java:144)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:116)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:108)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:104)
+	org.springframework.cglib.proxy.Enhancer.<clinit>(Enhancer.java:69)
+	org.springframework.aop.framework.CglibAopProxy.createEnhancer(CglibAopProxy.java:234)
+	org.springframework.aop.framework.CglibAopProxy.getProxy(CglibAopProxy.java:177)
+	org.springframework.aop.framework.ProxyFactory.getProxy(ProxyFactory.java:111)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.createProxy(AbstractAutoProxyCreator.java:490)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary(AbstractAutoProxyCreator.java:375)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:335)
+```
+
+- This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](#requirements-configuration##2-tomcat) to know how to change your jdk version.
