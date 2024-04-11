@@ -10,6 +10,7 @@ public class IndexController {
     public String home(Model model) {
         model.addAttribute("title", "PTITHCM Book Shop");
         model.addAttribute("type", "home");
+        System.out.println("Home page");
         return "home";
     }
 }
