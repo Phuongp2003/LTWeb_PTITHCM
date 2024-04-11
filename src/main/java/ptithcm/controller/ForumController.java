@@ -19,18 +19,12 @@ public class ForumController {
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", "001");
         model.addAttribute("user_name", "Test User");
-
+        post.clear();
         for (int i = 0; i < 5; i++) {
-            Post p = new Post();
-            p.setId("00" + i);
-            p.setTitle("Title " + i);
-            p.setContent("Content " + i);
-            p.setAuthor("Author " + i);
-            post.add(p);
+            post.add(new Post("00" + i, "Title " + i, "Content " + i, "Author " + i));
         }
 
         model.addAttribute("posts", post);
-        post.clear();
         return "forum";
     }
 

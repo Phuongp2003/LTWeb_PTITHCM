@@ -3,49 +3,53 @@ package ptithcm.bean;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "Sach")
 public class Book {
 	@Id
 	@GeneratedValue
-	private String Id;
-	private String Name;
-	private String Description;
-	private Integer Price;
+	private String MASACH;
+	private String TENSACH;
+	private Integer LANTAIBAN;
 
-	public String getId() {
-		return Id;
+	public Book() {
 	}
 
-	public void setId(String id) {
-		Id = id;
+	public Book(String MASACH, String TENSACH, Integer LANTAIBAN, Integer Price) {
+		this.MASACH = MASACH;
+		this.TENSACH = TENSACH;
+		this.LANTAIBAN = LANTAIBAN;
 	}
 
-	public String getName() {
-		return Name;
+	public String getMASACH() {
+		return MASACH;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setMASACH(String MASACH) {
+		this.MASACH = MASACH;
 	}
 
-	public String getDescription() {
-		return Description;
+	public String getTENSACH() {
+		return TENSACH;
 	}
 
-	public void setDescription(String description) {
-		Description = description;
+	public void setTENSACH(String TENSACH) {
+		this.TENSACH = TENSACH;
 	}
 
-	public Integer getPrice() {
-		return Price;
+	public Integer getLANTAIBAN() {
+		return LANTAIBAN;
 	}
 
-	public void setPrice(Integer price) {
-		Price = price;
+	public void setLANTAIBAN(Integer LANTAIBAN) {
+		this.LANTAIBAN = LANTAIBAN;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [Id=" + Id + ", Name=" + Name + ", Description=" + Description + ", Price=" + Price + "]";
+		return "Book{" +
+				"MASACH='" + MASACH + '\'' +
+				", TENSACH='" + TENSACH + '\'' +
+				", LANTAIBAN=" + LANTAIBAN +
+				'}';
 	}
 }

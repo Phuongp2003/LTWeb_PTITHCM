@@ -11,11 +11,11 @@ import ptithcm.bean.Book;
 import java.util.List;
 
 @Service
+@SuppressWarnings("unchecked")
 public class BookService {
     @Autowired
     SessionFactory factory;
 
-    @SuppressWarnings("unchecked")
     @Transactional
     public List<Book> getAllBooks() {
         Session session = factory.getCurrentSession();

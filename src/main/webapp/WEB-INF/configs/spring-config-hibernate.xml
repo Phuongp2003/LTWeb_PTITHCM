@@ -9,7 +9,7 @@
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<!-- DataSource Configuration -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" p:url="jdbc:sqlserver://localhost:1433; Database=WEB_SACH" p:username="sa" p:password="sa" />
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" p:url="jdbc:sqlserver://localhost:1433; Database=BOOKSHOP" p:username="sa" p:password="sa" />
 	
 	<!-- Hibernate Configuration -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

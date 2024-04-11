@@ -7,7 +7,7 @@
 
 1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
 2. Download maven.
-3. Downlaod jdk1.8 (required).
+3. Downlaod [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
 4. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server.
 5. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
 6. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
@@ -26,7 +26,7 @@
   manual:
 
 ```
-mvn install:install-file -Dfile=setup/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar
+mvn install:install-file -Dfile="setup/sqljdbc4.jar" -DgroupId="com.microsoft.sqlserver" -DartifactId=sqljdbc4 -Dversion="4.0" -Dpackaging=jar
 ```
 
 ## 2. Tomcat
