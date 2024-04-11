@@ -7,16 +7,21 @@
 
 1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
 2. Download maven.
-3. Downlaod [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
-4. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server.
+3. Download [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
+4. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server, recommend tomcat 8.5.
 5. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
 6. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
+   - Choose server -> your server
+   - Add params -> yes -> your project name (it will be your slug to view the project on the browser)
+   - Project name -> empty
 
-- Choose server -> your server
-- Add params -> yes -> your project name (it will be your slug to view the project on the browser)
-- Project name -> empty
-
-5. Open your browser and go to http://localhost:8080/<your_project_name>
+7. Open your browser and go to http://localhost:8080/<your_project_name>
+8. Setup hot reload: 
+   1. At explorer, find tag "JAVA PROJECTS" -> click on "..." -> choose "Configure Classpath " -> edit output path to "src/main/webapp/WEB-INF/classes" -> Save -> Apply.
+   2. On settings, find "Java: Auto Build" -> check it.
+   3. On settings, find "java.debug.settings.hotCodeReplace" -> change it to "auto".
+   4. On settings, find "java.configuration.updateBuildConfiguration" -> change it to "automatic"
+9. Setup database: check src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
 
 # Requirements configuration
 
@@ -108,3 +113,8 @@ java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitialize
 ```
 
 - This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](#2-tomcat) to know how to change your jdk version.
+
+## 7. Run/Debug issue
+
+- Server status must be "Started(or Debugging), Synchronized" to run/debug the project.
+- In debugmode, you can hot reload the project by changing the code and save it, then click the hotload on debug bar.

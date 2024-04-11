@@ -1,6 +1,9 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
     "java.compile.nullAnalysis.mode": "automatic",
     "maven.view": "flat",
-    "livePreview.defaultPreviewPath": "/src/main/webapp/WEB-INF/views/elements/navbar.jsp"
+    "livePreview.defaultPreviewPath": "/src/main/webapp/WEB-INF/views/elements/navbar.jsp",
+    "java.debug.settings.hotCodeReplace": "auto",
+    "liveServer.settings.fullReload": false,
+    "java.autobuild.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
 }
