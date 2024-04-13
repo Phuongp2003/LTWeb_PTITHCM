@@ -1,14 +1,16 @@
-# Java Web Project with Tomcat and Maven(for build)
+# Java Spring MVC Project with Tomcat
 
-- This is a simple project to create a web project with java, tomcat and maven.
-- Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), maven, tomcat, ms sql server with database name "WEB_SACH" and table "Book" with columns "id" and "name".
+- This is a simple project to create a web project with java, tomcat.
+- Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), tomcat, ms sql server with database name "BOOKSHOP".
 
 # HOW TO USE
+Tote: At the second time open project, it will warn you about "Run time need JDK 17+" like this, just skip it: 
+![alt text](setup/warn.png)
 
 1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
 2. Download [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
 3. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server, recommend tomcat 8.5.
-4. Just go to java file and save to build a classes path(some devices must go to all file to build all).
+4. In the first time open project, you should build the project by run task build (ctrl + shift + b) or your java build tool. After build the first time, just go to java file and save to build a classes path.
 5. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
    - Choose server -> your server
    - Add params -> yes -> your project name (it will be your slug to view the project on the browser)
@@ -101,3 +103,9 @@ java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitialize
 
 - Server status must be "Started(or Debugging), Synchronized" to run/debug the project.
 - In debugmode, you can hot reload the project by changing the code and save it, then click the hotload on debug bar.
+
+## 8. Java issues
+- I got some issues with java bean:
+![alt text](setup/bean.png)
+
+- Just try to clear cache of your IDE and java project, then rebuild the project with a pray ╰(*°▽°*)╯.

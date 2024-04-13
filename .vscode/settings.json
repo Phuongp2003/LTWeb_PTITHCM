@@ -22,7 +22,6 @@
             "default": true
         }
     ],
-    "java.dependency.packagePresentation": "flat",
     "java.jdt.ls.java.home": "C:\\Program Files (x86)\\Java\\jdk-1.8",
     "rsp-ui.rsp.java.home": "C:\\Program Files\\Java\\jdk-18.0.2.1"
 }
