@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<style></style>
 <div class="footer">
 	<div class="footer-bg w-100"></div>
 	<nav class="navbar navbar-expand-lg footer-redictlink">

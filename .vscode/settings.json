@@ -1,9 +1,27 @@
 {
+    "java.project.resourceFilters": [
+        ".classpath",
+        ".project",
+        ".settings",
+    ],
     "java.compile.nullAnalysis.mode": "automatic",
-    "maven.view": "flat",
-    "livePreview.defaultPreviewPath": "/src/main/webapp/WEB-INF/views/elements/navbar.jsp",
     "java.debug.settings.hotCodeReplace": "auto",
-    "liveServer.settings.fullReload": false,
     "java.autobuild.enabled": true,
     "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": [
+        "src\\main\\webapp\\WEB-INF\\lib\\*"
+    ],
+    "java.project.sourcePaths": [
+        "src\\main\\java"
+    ],
+    "java.project.outputPath": "src\\main\\webapp\\WEB-INF\\classes",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "C:\\Program Files (x86)\\Java\\jdk-1.8",
+            "default": true
+        }
+    ],
+    "java.jdt.ls.java.home": "C:\\Program Files (x86)\\Java\\jdk-1.8",
+    "rsp-ui.rsp.java.home": "C:\\Program Files\\Java\\jdk-18.0.2.1"
 }
