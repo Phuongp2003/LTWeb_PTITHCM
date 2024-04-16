@@ -2,6 +2,13 @@
 /.bin
 /.classpath
 /.project
+/.settings
 /src/main/java/lib
 /src/main/webapp/WEB-INF/classes
 src/main/webapp/WEB-INF/classes
+/bin/
+/bin/
+/build/
+!/.settings/org.eclipse.wst.common.component
+!/.settings/.jsdtscope
+!/.settings/.jsdtscope.txt
