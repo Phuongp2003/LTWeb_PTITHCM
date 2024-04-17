@@ -6,7 +6,7 @@
 /.vscode
 /src/main/java/lib
 /src/main/webapp/WEB-INF/classes
-/src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
+src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml  
 /bin/
 /build/
 !/.settings/org.eclipse.wst.common.component
