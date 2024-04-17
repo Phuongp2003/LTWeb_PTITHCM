@@ -8,7 +8,6 @@
 /src/main/webapp/WEB-INF/classes
 /src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
 /bin/
-/bin/
 /build/
 !/.settings/org.eclipse.wst.common.component
 !/.settings/.jsdtscope
