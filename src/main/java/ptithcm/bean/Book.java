@@ -11,6 +11,10 @@ public class Book {
 	private String TENSACH;
 	private Integer LANTAIBAN;
 
+	@ManyToOne
+	@JoinColumn(name="MATL")
+	private TypeBook typebook;
+
 	public Book() {
 	}
 
@@ -42,6 +46,13 @@ public class Book {
 
 	public void setLANTAIBAN(Integer LANTAIBAN) {
 		this.LANTAIBAN = LANTAIBAN;
+	}
+
+	public TypeBook getTypeBook() {
+		return typebook;
+	}
+	public void setTypeBook(TypeBook typebook) {
+		this.typebook = typebook;
 	}
 
 	@Override

@@ -17,12 +17,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Danh mục nhóm</h4>
-                            <i class="bi bi-dash h3"></i>
+                            <!-- <i class="bi bi-dash h3"></i> -->
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
+                            <c:forEach var="type" items="${types}">
+                                <a href=""><li class="list-group-item">${type.TENTL}</li></a>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
