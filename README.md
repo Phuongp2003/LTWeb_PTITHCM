@@ -1,4 +1,4 @@
-# Java Spring MVC Project with Tomcat
+# Java Spring MVC Project with Tomcat 
 
 - This is a simple project to create a web project with java, tomcat.
 - Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), tomcat, ms sql server with database name "BOOKSHOP".

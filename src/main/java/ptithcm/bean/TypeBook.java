@@ -9,7 +9,7 @@ public class TypeBook {
     private String MATL;
     private String TENTL;
 
-    @OneToMany(mappedBy="theloai", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="typebook", fetch=FetchType.EAGER)
 	private Collection<Book> books;
 
     public TypeBook(){};
