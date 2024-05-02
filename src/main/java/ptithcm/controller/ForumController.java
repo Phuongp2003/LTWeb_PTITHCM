@@ -26,7 +26,7 @@ public class ForumController {
             post.add(new Post("00" + i,
                     "Title " + i,
                     "Content " + i
-                            + " is the content of that post.                   It long, very long.                     It have a large of words.",
+                            + " is the content of that post. It long, very long. It have a large of words.",
                     "Description of post " + i,
                     "Author " + i));
         }
@@ -51,4 +51,31 @@ public class ForumController {
         model.addAttribute("post", postTest);
         return "post";
     }
+
+    @RequestMapping(value = "post/{id}/edit")
+    public String editPost(Model model, @PathVariable("id") String id) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", "001");
+        model.addAttribute("user_name", "Test User");
+        for (Post i : post) {
+            if (i.getId().equals(id)) {
+                postTest = i;
+                break;
+            }
+        }
+
+        model.addAttribute("post", postTest);
+        return "editPost";
+    }
+
+    @RequestMapping(value = "create-post")
+    public String createPost(Model model) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", "001");
+        model.addAttribute("user_name", "Test User");
+        return "createpost";
+    }
+    
 }
