@@ -22,7 +22,7 @@ public class ShopController {
     @Autowired
     SessionFactory factory;
 
-    @RequestMapping("")
+    @RequestMapping
     public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
         model.addAttribute("type", "shop");
