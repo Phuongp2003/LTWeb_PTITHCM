@@ -15,10 +15,18 @@ public class Book {
 	@JoinColumn(name="MATL")
 	private TypeBook typebook;
 
+	@ManyToOne
+	@JoinColumn(name="MATG")
+	private Author author;
+
+	@ManyToOne
+	@JoinColumn(name="MANXB")
+	private Author producer;
+
 	public Book() {
 	}
 
-	public Book(String MASACH, String TENSACH, Integer LANTAIBAN, Integer Price) {
+	public Book(String MASACH, String TENSACH, Integer LANTAIBAN) {
 		this.MASACH = MASACH;
 		this.TENSACH = TENSACH;
 		this.LANTAIBAN = LANTAIBAN;

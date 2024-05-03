@@ -28,7 +28,7 @@ public class ForumController {
                     "Content " + i
                             + " is the content of that post.                   It long, very long.                     It have a large of words.",
                     "Description of post " + i,
-                    "Author " + i));
+                    "Author " + i,"Employee " + i));
         }
 
         model.addAttribute("posts", post);

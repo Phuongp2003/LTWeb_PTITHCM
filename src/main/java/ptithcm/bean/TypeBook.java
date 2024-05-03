@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="TheLoai")
+
 public class TypeBook {
     @Id
     private String MATL;
@@ -38,7 +39,7 @@ public class TypeBook {
 		return books;
 	}
 
-	public void setStaffs(Collection<Book> books) {
+	public void setBooks(Collection<Book> books) {
 		this.books = books;
 	}
 }
