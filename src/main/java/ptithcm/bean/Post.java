@@ -74,8 +74,8 @@ public class Post {
         this.author = author;
     }
 
-    public String getEmployee() {
-        return id;
+    public Employee getEmployee() {
+        return employee;
     }
 
     public void setEmployee(Employee employee) {

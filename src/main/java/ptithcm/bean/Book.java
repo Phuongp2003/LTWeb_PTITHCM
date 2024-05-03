@@ -21,7 +21,7 @@ public class Book {
 
 	@ManyToOne
 	@JoinColumn(name = "MANXB")
-	private Author producer;
+	private Producer producer;
 
 	public Book() {
 	}
