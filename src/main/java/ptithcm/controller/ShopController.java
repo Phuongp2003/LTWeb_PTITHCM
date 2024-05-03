@@ -23,14 +23,14 @@ public class ShopController {
     SessionFactory factory;
 
     @RequestMapping("")
-    public String shop(ModelMap model){
+    public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
         model.addAttribute("type", "shop");
         Session session = factory.getCurrentSession();
-		String hql = "FROM TypeBook";
-		Query query = session.createQuery(hql);
-		List<TypeBook> list = query.list();
-		model.addAttribute("types", list);
-		return "shop";
+        String hql = "FROM TypeBook";
+        Query query = session.createQuery(hql);
+        List<TypeBook> list = query.list();
+        model.addAttribute("types", list);
+        return "shop";
     }
 }
