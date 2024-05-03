@@ -12,3 +12,4 @@ src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
 !/.settings/org.eclipse.wst.common.component
 !/.settings/.jsdtscope
 !/.settings/jsdtscope.txt
+!/.vscode/settings.json.example
