@@ -40,7 +40,7 @@ public class Employee {
 		return MANV;
 	}
 
-	public void setMANV(String MATG) {
+	public void setMANV(String MANV) {
 		this.MANV = MANV;
 	}
 
