@@ -7,59 +7,60 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "NhanVien")
 public class Employee {
-    @Id
+	@Id
 	@GeneratedValue
 	private String MANV;
 	private String HO;
 	private String TEN;
-    private String CCCD;
+	private String CCCD;
 	private String SDT;
-    private String EMAIL;
-    private Boolean GIOTINH;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private Date NGAYSINH;
-    @OneToMany(mappedBy="author", fetch=FetchType.EAGER)
+	private String EMAIL;
+	private Boolean GIOTINH;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	private Date NGAYSINH;
+	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
 	private Collection<Post> posts;
 
-    public Employee(){};
-    public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL,Boolean GIOTINH){
-        this.MANV = MANV;
-        this.HO = HO;
-        this.TEN = TEN;
-        this.CCCD = CCCD;
-        this.SDT = SDT;
-        this.EMAIL = EMAIL;
-        this.GIOTINH = GIOTINH;
-        
+	public Employee() {
+	};
 
-    }
+	public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOTINH) {
+		this.MANV = MANV;
+		this.HO = HO;
+		this.TEN = TEN;
+		this.CCCD = CCCD;
+		this.SDT = SDT;
+		this.EMAIL = EMAIL;
+		this.GIOTINH = GIOTINH;
 
-    public String getMANV() {
+	}
+
+	public String getMANV() {
 		return MANV;
 	}
 
 	public void setMANV(String MATG) {
 		this.MANV = MANV;
 	}
-    
-    public String getHO() {
+
+	public String getHO() {
 		return HO;
 	}
 
 	public void setHO(String HO) {
 		this.HO = HO;
 	}
-    
-    public String getTEN() {
+
+	public String getTEN() {
 		return TEN;
 	}
 
 	public void setTEN(String TEN) {
 		this.TEN = TEN;
 	}
-    
-    public String getCCCD() {
+
+	public String getCCCD() {
 		return CCCD;
 	}
 
@@ -67,24 +68,23 @@ public class Employee {
 		this.CCCD = CCCD;
 	}
 
-    
-    public String getSDT() {
+	public String getSDT() {
 		return SDT;
 	}
 
 	public void setSDT(String SDT) {
 		this.SDT = SDT;
 	}
-    
-    public String getEMAIL() {
+
+	public String getEMAIL() {
 		return EMAIL;
 	}
 
 	public void setEMAIL(String EMAIL) {
 		this.EMAIL = EMAIL;
 	}
-    
-    public Boolean getGIOTINH() {
+
+	public Boolean getGIOTINH() {
 		return GIOTINH;
 	}
 
@@ -92,7 +92,7 @@ public class Employee {
 		this.GIOTINH = GIOTINH;
 	}
 
-    public Date getNGAYSINH() {
+	public Date getNGAYSINH() {
 		return NGAYSINH;
 	}
 
@@ -100,13 +100,12 @@ public class Employee {
 		this.NGAYSINH = NGAYSINH;
 	}
 
-    public Collection<Post> getPosts() {
+	public Collection<Post> getPosts() {
 		return posts;
 	}
 
 	public void setPosts(Collection<Post> posts) {
 		this.posts = posts;
 	}
-
 
 }

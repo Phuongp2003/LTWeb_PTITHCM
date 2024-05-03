@@ -22,14 +22,15 @@ public class ForumController {
         model.addAttribute("user_id", "001");
         model.addAttribute("user_name", "Test User");
         post.clear();
-        for (int i = 0; i < 5; i++) {
-            post.add(new Post("00" + i,
-                    "Title " + i,
-                    "Content " + i
-                            + " is the content of that post. It long, very long. It have a large of words.",
-                    "Description of post " + i,
-                    "Author " + i,"Employee " + i));
-        }
+        // for (int i = 0; i < 5; i++) {
+        // post.add(new Post("00" + i,
+        // "Title " + i,
+        // "Content " + i
+        // + " is the content of that post. It long, very long. It have a large of
+        // words.",
+        // "Description of post " + i,
+        // "Author " + i,"Employee " + i));
+        // }
 
         model.addAttribute("posts", post);
         return "forum";
@@ -77,5 +78,5 @@ public class ForumController {
         model.addAttribute("user_name", "Test User");
         return "createpost";
     }
-    
+
 }

@@ -6,26 +6,26 @@ import javax.persistence.*;
 @Table(name = "BaiViet")
 public class Post {
     @Id
-	@GeneratedValue
-    @Column(name="MABV")
+    @GeneratedValue
+    @Column(name = "MABV")
     private String id;
-    @Column(name="TIEUDE")
+    @Column(name = "TIEUDE")
     private String title;
-    @Column(name="NOIDUNG")
+    @Column(name = "NOIDUNG")
     private String content;
-    @Column(name="MOTA")
+    @Column(name = "MOTA")
     private String desciption;
     @ManyToOne
-	@JoinColumn(name="MAKH")
-    private String author;
+    @JoinColumn(name = "MAKH")
+    private Author author;
     @ManyToOne
-	@JoinColumn(name="MANV")
-    private String employee;
+    @JoinColumn(name = "MANV")
+    private Employee employee;
 
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, String author,String employee) {
+    public Post(String id, String title, String content, String description, Author author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -66,11 +66,11 @@ public class Post {
         this.desciption = description;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -78,13 +78,13 @@ public class Post {
         return id;
     }
 
-    public void setEmployee(String employee) {
+    public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", author=" + author +  ", employee=" + employee +"]";
+                + ", author=" + author + ", employee=" + employee + "]";
     }
 }

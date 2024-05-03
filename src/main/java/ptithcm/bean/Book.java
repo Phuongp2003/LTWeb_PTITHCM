@@ -12,15 +12,15 @@ public class Book {
 	private Integer LANTAIBAN;
 
 	@ManyToOne
-	@JoinColumn(name="MATL")
+	@JoinColumn(name = "MATL")
 	private TypeBook typebook;
 
 	@ManyToOne
-	@JoinColumn(name="MATG")
+	@JoinColumn(name = "MATG")
 	private Author author;
 
 	@ManyToOne
-	@JoinColumn(name="MANXB")
+	@JoinColumn(name = "MANXB")
 	private Author producer;
 
 	public Book() {
@@ -59,6 +59,7 @@ public class Book {
 	public TypeBook getTypeBook() {
 		return typebook;
 	}
+
 	public void setTypeBook(TypeBook typebook) {
 		this.typebook = typebook;
 	}
