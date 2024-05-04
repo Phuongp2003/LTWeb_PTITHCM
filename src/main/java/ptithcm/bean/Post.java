@@ -17,7 +17,7 @@ public class Post {
     private String desciption;
     @ManyToOne
     @JoinColumn(name = "MAKH")
-    private Author author;
+    private Customer author;
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee employee;
@@ -25,7 +25,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Author author, Employee employee) {
+    public Post(String id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -66,11 +66,11 @@ public class Post {
         this.desciption = description;
     }
 
-    public Author getAuthor() {
+    public Customer getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(Customer author) {
         this.author = author;
     }
 

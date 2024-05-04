@@ -1,19 +1,21 @@
 package ptithcm.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptithcm.bean.Post;
+import ptithcm.service.ListPostService;
 
 @Controller
 @RequestMapping("/forum")
 public class ForumController {
-    List<Post> post = new ArrayList<Post>();
+    @Autowired
+    private ListPostService postsList;
 
     @RequestMapping("")
     public String forum(Model model) {
@@ -21,17 +23,8 @@ public class ForumController {
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", "001");
         model.addAttribute("user_name", "Test User");
-        post.clear();
-        // for (int i = 0; i < 5; i++) {
-        // post.add(new Post("00" + i,
-        // "Title " + i,
-        // "Content " + i
-        // + " is the content of that post. It long, very long. It have a large of
-        // words.",
-        // "Description of post " + i,
-        // "Author " + i,"Employee " + i));
-        // }
-
+        List<Post> post = postsList.getAllPosts();
+        
         model.addAttribute("posts", post);
         return "forum";
     }
@@ -42,6 +35,7 @@ public class ForumController {
     public String post(Model model, @PathVariable("id") String id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        List<Post> post = postsList.getAllPosts();
         for (Post i : post) {
             if (i.getId().equals(id)) {
                 postTest = i;
@@ -59,6 +53,7 @@ public class ForumController {
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", "001");
         model.addAttribute("user_name", "Test User");
+        List<Post> post = postsList.getAllPosts();
         for (Post i : post) {
             if (i.getId().equals(id)) {
                 postTest = i;

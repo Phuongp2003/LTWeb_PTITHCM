@@ -203,13 +203,13 @@
 						'<button type="button" name="delete-element-row" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
 						'</div>' +
 						'<div class="size-controller">' +
-						'<input type="number" name="ewidth" placeholder="Width" value="200"> x ' +
-						'<input type="number" name="eheight" placeholder="Height" value="200">' +
+						'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="200"> x ' +
+						'<input class="eh-controller size-controller" type="number" name="eheight" placeholder="Height" value="200">' +
 						'</div>' +
 						'</div>';
 					contentRow.append(imageBlock);
 					// Handle real-time width/height change
-					$('#image-' + contentRowCounter + ' input').on('keyup', function(e) {
+					$('#image-' + contentRowCounter + ' .size-controller').on('keyup', function(e) {
 						if (e.keyCode === 13) { // Check if Enter key is pressed
 							var maxWidth = $(this).closest('.content-row').width(); // Get width of content row
 							var totalWidth = 0;
@@ -239,6 +239,7 @@
 							});
 						}
 					});
+					
 					contentRowCounter++;
 					checkAndDisableButtons();
 				};
@@ -265,13 +266,14 @@
 				'<button type="button" name="set-center-row" title="Align text center."><i class="bi bi-text-center"></i></button>' +
 				'<button type="button" name="set-right-row" title="Align text right."><i class="bi bi-text-right"></i></button>' +
 				'</div>' +
+				'<input class="font-size-controller" type="number" name="fs-input" placeholder="Height" value="12">' +
 				'<div class="size-controller">' +
-				'<input type="number" name="ewidth" placeholder="Width" value="500"> x ' +
-				'<input type="text" name="eheight" placeholder="Height" value="auto" disabled>' +
+				'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="500"> x ' +
+				'<input class="eh-controller size-controller" type="text" name="eheight" placeholder="Height" value="auto" disabled>' +
 				'</div>' +
 				'</div>'
 			contentRow.append(textBlock);
-			$('#text-' + contentRowCounter + ' input').on('keyup', function(e) {
+			$('#text-' + contentRowCounter + ' size-controller').on('keyup', function(e) {
 				if (e.keyCode === 13) { // Check if Enter key is pressed
 					var maxWidth = $(this).closest('.content-row').width(); // Get width of content row
 					var totalWidth = 0;
@@ -296,6 +298,17 @@
 					// Apply width and height to the image
 					$(this).closest('.post-text').css({
 						'width': width + 'px'
+					});
+				}
+			});
+			$('#text-' + contentRowCounter + ' font-size-controller').on('keyup', function(e) {
+				if (e.keyCode === 13) { // Check if Enter key is pressed
+					var fs = parseInt($(this).closest('.post-text').find('input[name="fs-input"]').val());
+					console.log("🚀 ~ $ ~ fs:", fs)
+					
+					// Apply width and height to the ctextarea element
+					$(this).closest('.post-text').find('.ctextarea').css({
+						'width': fs + 'px'
 					});
 				}
 			});

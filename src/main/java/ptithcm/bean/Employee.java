@@ -15,7 +15,7 @@ public class Employee {
 	private String CCCD;
 	private String SDT;
 	private String EMAIL;
-	private Boolean GIOTINH;
+	private Boolean GIOITINH;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;
@@ -25,14 +25,14 @@ public class Employee {
 	public Employee() {
 	};
 
-	public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOTINH) {
+	public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
 		this.MANV = MANV;
 		this.HO = HO;
 		this.TEN = TEN;
 		this.CCCD = CCCD;
 		this.SDT = SDT;
 		this.EMAIL = EMAIL;
-		this.GIOTINH = GIOTINH;
+		this.GIOITINH = GIOITINH;
 
 	}
 
@@ -84,12 +84,12 @@ public class Employee {
 		this.EMAIL = EMAIL;
 	}
 
-	public Boolean getGIOTINH() {
-		return GIOTINH;
+	public Boolean getGIOITINH() {
+		return GIOITINH;
 	}
 
-	public void setGIOTINH(Boolean GIOTINH) {
-		this.GIOTINH = GIOTINH;
+	public void setGIOITINH(Boolean GIOITINH) {
+		this.GIOITINH = GIOITINH;
 	}
 
 	public Date getNGAYSINH() {

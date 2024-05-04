@@ -2,32 +2,33 @@ package ptithcm.bean;
 
 import java.util.Collection;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "TacGia")
 public class Author {
-    @Id
+	@Id
 	@GeneratedValue
 	private String MATG;
 	private String HO;
 	private String TEN;
-    private String EMAIL;
+	private String EMAIL;
 
-	@OneToMany(mappedBy="author", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
 	private Collection<Book> books;
 
-    public Author(){};
-    public Author(String MATG, String HO, String TEN,String EMAIL){
-        this.MATG = MATG;
-        this.HO = HO;
-        this.TEN = TEN;
-        this.EMAIL = EMAIL;
+	public Author() {
+	};
 
-    }
+	public Author(String MATG, String HO, String TEN, String EMAIL) {
+		this.MATG = MATG;
+		this.HO = HO;
+		this.TEN = TEN;
+		this.EMAIL = EMAIL;
 
-    public String getMATG() {
+	}
+
+	public String getMATG() {
 		return MATG;
 	}
 
@@ -43,7 +44,7 @@ public class Author {
 		this.HO = HO;
 	}
 
-    public String getTEN() {
+	public String getTEN() {
 		return TEN;
 	}
 
@@ -51,7 +52,7 @@ public class Author {
 		this.TEN = TEN;
 	}
 
-    public String getEMAIL() {
+	public String getEMAIL() {
 		return EMAIL;
 	}
 
@@ -59,7 +60,7 @@ public class Author {
 		this.EMAIL = EMAIL;
 	}
 
-    public Collection<Book> getBooks() {
+	public Collection<Book> getBooks() {
 		return books;
 	}
 
