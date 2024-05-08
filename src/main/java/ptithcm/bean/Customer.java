@@ -9,50 +9,62 @@ import java.util.*;
 @Entity
 @Table(name = "KhachHang")
 public class Customer {
-    @Id
+	@Id
 	@GeneratedValue
-	private String MAKH;
-	private String HO;
-	private String TEN;
-    private String EMAIL;
-	private String SDT;
-    private Boolean GIOTINH;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private Date NGAYSINH;
-    @OneToMany(mappedBy="author", fetch=FetchType.EAGER)
+	private String MAKH;// property
+	private String HO;// property
+	private String TEN;// property
+	private String EMAIL;// property
+	private String SDT;// property
+	private Boolean GIOTINH;// property
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	private Date NGAYSINH;// property
+	@OneToMany(mappedBy = "post_customer", fetch = FetchType.EAGER)
 	private Collection<Post> posts;
 
-    public Customer(){};
-    public Customer(String MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOTINH, Date NGAYSINH){
-        this.MAKH = MAKH;
-        this.HO = HO;
-        this.TEN = TEN;
-        this.SDT = SDT;
-        this.EMAIL = EMAIL;
-        this.GIOTINH = GIOTINH;
-        this.NGAYSINH = NGAYSINH;
-        
+	@OneToOne(mappedBy = "account_customer", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
 
-    }
+	@OneToOne(mappedBy = "cart_customer", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Cart cart;
 
-    public String getMAKH() {
+	@OneToMany(mappedBy = "bill_customer", fetch = FetchType.LAZY)
+	private Collection<Bill> bills;
+
+	public Customer() {
+	};
+
+	public Customer(String MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOTINH, Date NGAYSINH) {
+		this.MAKH = MAKH;
+		this.HO = HO;
+		this.TEN = TEN;
+		this.SDT = SDT;
+		this.EMAIL = EMAIL;
+		this.GIOTINH = GIOTINH;
+		this.NGAYSINH = NGAYSINH;
+
+	}
+
+	public String getMAKH() {
 		return MAKH;
 	}
 
 	public void setMAKH(String MAKH) {
 		this.MAKH = MAKH;
 	}
-    
-    public String getHO() {
+
+	public String getHO() {
 		return HO;
 	}
 
 	public void setHO(String HO) {
 		this.HO = HO;
 	}
-    
-    public String getTEN() {
+
+	public String getTEN() {
 		return TEN;
 	}
 
@@ -60,24 +72,23 @@ public class Customer {
 		this.TEN = TEN;
 	}
 
-    
-    public String getSDT() {
+	public String getSDT() {
 		return SDT;
 	}
 
 	public void setSDT(String SDT) {
 		this.SDT = SDT;
 	}
-    
-    public String getEMAIL() {
+
+	public String getEMAIL() {
 		return EMAIL;
 	}
 
 	public void setEMAIL(String EMAIL) {
 		this.EMAIL = EMAIL;
 	}
-    
-    public Boolean getGIOTINH() {
+
+	public Boolean getGIOTINH() {
 		return GIOTINH;
 	}
 
@@ -85,7 +96,7 @@ public class Customer {
 		this.GIOTINH = GIOTINH;
 	}
 
-    public Date getNGAYSINH() {
+	public Date getNGAYSINH() {
 		return NGAYSINH;
 	}
 
@@ -93,12 +104,36 @@ public class Customer {
 		this.NGAYSINH = NGAYSINH;
 	}
 
-    public Collection<Post> getPosts() {
+	public Collection<Post> getPosts() {
 		return posts;
 	}
 
 	public void setPosts(Collection<Post> posts) {
 		this.posts = posts;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	// public Cart getCart() {
+	// return cart;
+	// }
+
+	// public void setCart(Cart cart) {
+	// this.cart = cart;
+	// }
+
+	// public Collection<Bill> getBills() {
+	// return bills;
+	// }
+
+	// public void setBills(Collection<Bill> bills) {
+	// this.bills = bills;
+	// }
 
 }

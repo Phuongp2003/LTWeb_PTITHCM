@@ -8,30 +8,30 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private String id;
+    private String id;// property
     @Column(name = "TIEUDE")
-    private String title;
+    private String title;// property
     @Column(name = "NOIDUNG")
-    private String content;
+    private String content;// property
     @Column(name = "MOTA")
-    private String desciption;
+    private String desciption;// property
     @ManyToOne
     @JoinColumn(name = "MAKH")
-    private Author author;
+    private Customer post_customer;// property
     @ManyToOne
     @JoinColumn(name = "MANV")
-    private Employee employee;
+    private Employee post_employee;// property
 
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Author author, Employee employee) {
+    public Post(String id, String title, String content, String description, Customer post_customer, Employee post_employee) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.desciption = description;
-        this.author = author;
-        this.employee = employee;
+        this.post_customer = post_customer;
+        this.post_employee = post_employee;
     }
 
     public String getId() {
@@ -66,25 +66,35 @@ public class Post {
         this.desciption = description;
     }
 
-    public Author getAuthor() {
-        return author;
+
+    public String getDesciption() {
+        return desciption;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
     }
 
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", author=" + author + ", employee=" + employee + "]";
+                + ", customer=" + post_customer + ", employee=" + post_employee + "]";
     }
+
+    public Customer getPost_customer() {
+        return post_customer;
+    }
+
+    public void setPost_customer(Customer post_customer) {
+        this.post_customer = post_customer;
+    }
+
+    public Employee getPost_employee() {
+        return post_employee;
+    }
+
+    public void setPost_employee(Employee post_employee) {
+        this.post_employee = post_employee;
+    }
+    
 }

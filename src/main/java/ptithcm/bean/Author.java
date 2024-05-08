@@ -10,10 +10,10 @@ import javax.persistence.*;
 public class Author {
     @Id
 	@GeneratedValue
-	private String MATG;
-	private String HO;
-	private String TEN;
-    private String EMAIL;
+	private String MATG;// property
+	private String HO;// property
+	private String TEN;// property
+    private String EMAIL;// property
 
 	@OneToMany(mappedBy="author", fetch=FetchType.EAGER)
 	private Collection<Book> books;

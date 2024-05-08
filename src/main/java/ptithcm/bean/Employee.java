@@ -9,18 +9,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee {
 	@Id
 	@GeneratedValue
-	private String MANV;
-	private String HO;
-	private String TEN;
-	private String CCCD;
-	private String SDT;
-	private String EMAIL;
-	private Boolean GIOTINH;
+	private String MANV;// property
+	private String HO;// property
+	private String TEN;// property
+	private String CCCD;// property
+	private String SDT;// property
+	private String EMAIL;// property
+	private Boolean GIOTINH;// property
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	private Date NGAYSINH;
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	private Date NGAYSINH;// property
+	@OneToMany(mappedBy = "post_employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
+
+	@OneToMany(mappedBy = "receivedbill_employee", fetch = FetchType.LAZY)
+	private Collection<ReceivedBill> receivedbills;
+
+	@OneToOne(mappedBy = "account_employee", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
+
+	@OneToMany(mappedBy = "bill_employee", fetch = FetchType.LAZY)
+	private Collection<Bill> bills;
 
 	public Employee() {
 	};
