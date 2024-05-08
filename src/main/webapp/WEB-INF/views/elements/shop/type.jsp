@@ -21,7 +21,7 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <c:forEach var="type" items="${types}">
-                                <a href=""><li class="list-group-item">${type.TENTL}</li></a>
+                                <a href="shop/typebook.htm?id=${type.MATL}"><li class="list-group-item">${type.TENTL}</li></a>
                             </c:forEach>
                         </ul>
                     </div>

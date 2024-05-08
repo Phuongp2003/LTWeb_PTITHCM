@@ -10,11 +10,8 @@
 	<body>
 		<%@ include file="elements/navbar.jsp" %>
 		<%@ include file="elements/shop/banner.jsp" %>
-		<%@ include file="elements/shop/type.jsp" %>
-	</body>
-	
-	
+		<%@ include file="elements/shop/test.jsp" %>
+		
+	</body>	
 	<%@ include file="partial/footer.jsp" %>
-	
 </html>
-
