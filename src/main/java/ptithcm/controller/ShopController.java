@@ -20,7 +20,6 @@ public class ShopController {
     @RequestMapping("")
     public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
-        model.addAttribute("type", "shop");
         List<TypeBook> types = typeBookService.getAllTypeBooks();
         System.out.println(types);
         model.addAttribute("types", types);
@@ -29,7 +28,7 @@ public class ShopController {
 
     @RequestMapping(value = "typebook/{MATL}")
     public String typebook(ModelMap model, @PathVariable("MATL") String MATL) {
-        model.addAttribute("type", "typeBookService.getTypeBookByID(MATL)");
+        model.addAttribute("type", typeBookService.getTypeBookByID(MATL));
         return "typebook";
     }
 }

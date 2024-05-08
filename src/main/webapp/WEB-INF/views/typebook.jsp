@@ -10,7 +10,7 @@
 	<body>
 		<%@ include file="elements/navbar.jsp" %>
 		<%@ include file="elements/shop/banner.jsp" %>
-		<%@ include file="elements/shop/test.jsp" %>
+		<%@ include file="elements/shop/typeDetail.jsp" %>
 		
 	</body>	
 	<%@ include file="partial/footer.jsp" %>
