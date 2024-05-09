@@ -8,7 +8,7 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private String id;
+    private Number id;
     @Column(name = "TIEUDE")
     private String title;
     @Column(name = "NOIDUNG")
@@ -25,7 +25,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Customer author, Employee employee) {
+    public Post(Number id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -34,11 +34,11 @@ public class Post {
         this.employee = employee;
     }
 
-    public String getId() {
+    public Number getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Number id) {
         this.id = id;
     }
 
