@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Book {
 	@Id
 	@GeneratedValue
-	private String MASACH;
+	private int MASACH;
 	private String TENSACH;
 	private Integer LANTAIBAN;
 
@@ -26,17 +26,17 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String MASACH, String TENSACH, Integer LANTAIBAN) {
+	public Book(int MASACH, String TENSACH, Integer LANTAIBAN) {
 		this.MASACH = MASACH;
 		this.TENSACH = TENSACH;
 		this.LANTAIBAN = LANTAIBAN;
 	}
 
-	public String getMASACH() {
+	public int getMASACH() {
 		return MASACH;
 	}
 
-	public void setMASACH(String MASACH) {
+	public void setMASACH(int MASACH) {
 		this.MASACH = MASACH;
 	}
 

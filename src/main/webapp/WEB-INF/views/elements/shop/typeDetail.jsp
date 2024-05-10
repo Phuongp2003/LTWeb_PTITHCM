@@ -6,7 +6,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/home.htm">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">KINH DỊ</li>
+                        <li class="breadcrumb-item active" aria-current="page"></li>
                     </ol>
                 </nav>
             </div>
@@ -20,9 +20,6 @@
                             <!-- <i class="bi bi-dash h3"></i> -->
                         </div>
                         <ul class="list-group list-group-flush">
-                            <c:forEach var="type" items="${types}">
-                                <a href="shop/typebook/${type.MATL}.htm"><li class="list-group-item">${type.TENTL}</li></a>
-                            </c:forEach>
                         </ul>
                     </div>
                 </div>

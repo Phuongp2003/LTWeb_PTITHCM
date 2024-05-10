@@ -7,23 +7,23 @@ import javax.persistence.*;
 
 public class TypeBook {
     @Id
-    private String MATL;
+    private int MATL;
     private String TENTL;
 
     @OneToMany(mappedBy="typebook", fetch=FetchType.EAGER)
 	private Collection<Book> books;
 
     public TypeBook(){};
-    public TypeBook(String MATL, String TENTL){
+    public TypeBook(int MATL, String TENTL){
         this.MATL = MATL;
         this.TENTL = TENTL;
     }
 
-    public String getMATL() {
+    public int getMATL() {
 		return MATL;
 	}
 
-	public void setMATL(String MATL) {
+	public void setMATL(int MATL) {
 		this.MATL = MATL;
 	}
 
