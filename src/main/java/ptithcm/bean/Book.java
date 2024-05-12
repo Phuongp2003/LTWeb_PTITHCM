@@ -19,7 +19,6 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "MATG")
 	private Author author;// property
-	
 	@ManyToOne
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
@@ -50,6 +49,7 @@ public class Book {
 	}
 
 	public void setMASACH(int mASACH) {
+
 		MASACH = mASACH;
 	}
 

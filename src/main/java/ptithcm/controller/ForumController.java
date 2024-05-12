@@ -71,7 +71,6 @@ public class ForumController {
         return "createpost";
     }
 
-    @SuppressWarnings("unlikely-arg-type")
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
     public String createPost(@RequestParam("title") String title, @RequestParam("description") String description,
             @RequestParam("content") String content, Model model) {
