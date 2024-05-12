@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Author {
 	@Id
 	@GeneratedValue
-	private String MATG;// property
+	private int MATG;// property
 	private String HO;// property
 	private String TEN;// property
     private String EMAIL;// property
@@ -20,7 +20,7 @@ public class Author {
 	public Author() {
 	};
 
-	public Author(String MATG, String HO, String TEN, String EMAIL) {
+	public Author(int MATG, String HO, String TEN, String EMAIL) {
 		this.MATG = MATG;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -28,11 +28,11 @@ public class Author {
 
 	}
 
-	public String getMATG() {
+	public int getMATG() {
 		return MATG;
 	}
 
-	public void setMATG(String MATG) {
+	public void setMATG(int MATG) {
 		this.MATG = MATG;
 	}
 

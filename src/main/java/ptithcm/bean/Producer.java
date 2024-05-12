@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Producer {
 	@Id
 	@GeneratedValue
-	private String MANXB;// property
+	private int MANXB;// property
 	private String TENNXB;// property
 	private String EMAIL;// property
 	private String SDT;// property
@@ -20,7 +20,7 @@ public class Producer {
 	public Producer() {
 	};
 
-	public Producer(String MANXB, String TENNXB, String EMAIL, String SDT, String DIACHI) {
+	public Producer(int MANXB, String TENNXB, String EMAIL, String SDT, String DIACHI) {
 		this.MANXB = MANXB;
 		this.TENNXB = TENNXB;
 		this.EMAIL = EMAIL;
@@ -29,11 +29,11 @@ public class Producer {
 
 	}
 
-	public String getMANXB() {
+	public int getMANXB() {
 		return MANXB;
 	}
 
-	public void setMANXB(String MANXB) {
+	public void setMANXB(int MANXB) {
 		this.MANXB = MANXB;
 	}
 

@@ -37,7 +37,7 @@ public class ForumController {
     }
 
     @RequestMapping(value = "post/{id}")
-    public String post(Model model, @PathVariable("id") String id) {
+    public String post(Model model, @PathVariable("id") int id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         Post post;
@@ -48,7 +48,7 @@ public class ForumController {
     }
 
     @RequestMapping(value = "post/{id}/edit")
-    public String editPost(Model model, @PathVariable("id") String id) {
+    public String editPost(Model model, @PathVariable("id") int id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", "001");
@@ -71,6 +71,7 @@ public class ForumController {
         return "createpost";
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
     public String createPost(@RequestParam("title") String title, @RequestParam("description") String description,
             @RequestParam("content") String content, Model model) {
@@ -79,13 +80,13 @@ public class ForumController {
         List<Customer> users = postService.getAllCustomers();
         System.out.println("User" + users);
         for (Customer customer : users) {
-            if (customer.getMAKH().equals("001")) {
+            if (customer.getMAKH() == 1) {
                 user = customer;
                 break;
             }
         }
         System.out.println("User" + user);
-        Post post = new Post(34, title, content, description, user, null);
+        Post post = new Post(23, title, content, description, user, null);
         postServices.createPost(post);
         model.addAttribute("title", "PTITHCM Forum");
         return "home";

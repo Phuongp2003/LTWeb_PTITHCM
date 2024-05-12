@@ -8,16 +8,18 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private Number id;
+    private int id;
     @Column(name = "TIEUDE")
     private String title;// property
     @Column(name = "NOIDUNG")
     private String content;// property
     @Column(name = "MOTA")
     private String desciption;// property
+
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;
+
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee employee;// property
@@ -25,7 +27,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(Number id, String title, String content, String description, Customer author, Employee employee) {
+    public Post(int id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -38,7 +40,7 @@ public class Post {
         return id;
     }
 
-    public void setId(Number id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,12 +76,12 @@ public class Post {
         this.author = author;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -87,21 +89,4 @@ public class Post {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
                 + ", customer=" + author + ", employee=" + employee + "]";
     }
-
-    public Customer getPost_customer() {
-        return author;
-    }
-
-    public void setPost_customer(Customer post_customer) {
-        this.author = post_customer;
-    }
-
-    public Employee getPost_employee() {
-        return employee;
-    }
-
-    public void setPost_employee(Employee post_employee) {
-        this.employee = post_employee;
-    }
-    
 }

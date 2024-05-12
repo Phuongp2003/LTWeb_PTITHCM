@@ -23,16 +23,16 @@ public class ListPostService {
     @ModelAttribute("posts")
     public List<Post> getAllPosts() {
         Session session = factory.getCurrentSession();
-        String hql = "from post";
-        System.out.println(hql);
+        String hql = "from Post";
         Query query = session.createQuery(hql);
-        System.out.println(query.list());
-        return query.list();
+
+        List<Post> list = query.list();
+        return list;
     }
 
     @Transactional
     @ModelAttribute("posts")
-    public Post getPostByID(String id) {
+    public Post getPostByID(int id) {
         Session session = factory.getCurrentSession();
         String hql = "from Post where id = :id";
         Query query = session.createQuery(hql);
@@ -42,7 +42,7 @@ public class ListPostService {
 
     @Transactional
     @ModelAttribute("posts")
-    public Post getPostsByUserIDP(String id) {
+    public Post getPostsByUserIDP(int id) {
         Session session = factory.getCurrentSession();
         String hql = "from Post where user_id = :id";
         Query query = session.createQuery(hql);
@@ -54,15 +54,11 @@ public class ListPostService {
     @ModelAttribute("posts")
     public Post createPost(Post post) {
         Session session = factory.getCurrentSession();
-        Transaction t = session.beginTransaction();
-        try {
-            session.save(post);
-            t.commit();
-        } catch (Exception e) {
-            t.rollback();
-        } finally {
-            session.close();
-        }
+        String hql = "SELECT max(id) FROM Post";
+        Query query = session.createQuery(hql);
+        Integer maxID = (Integer) query.uniqueResult();
+        post.setId(maxID != null ? maxID + 1 : 1);
+        session.save(post);
         return post;
     }
 }

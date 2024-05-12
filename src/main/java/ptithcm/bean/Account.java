@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue
-    private String ID;// property
+    private int ID;// property
     private String USERNAME;// property
     private String PASSWORD;// property
 
@@ -24,7 +24,7 @@ public class Account {
     public Account() {
     };
 
-    public Account(String ID, String USERNAME, String PASSWORD, Employee account_employee, Customer account_customer) {
+    public Account(int ID, String USERNAME, String PASSWORD, Employee account_employee, Customer account_customer) {
         this.ID = ID;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
@@ -33,11 +33,11 @@ public class Account {
 
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String iD) {
+    public void setID(int iD) {
         ID = iD;
     }
 
@@ -57,8 +57,6 @@ public class Account {
         PASSWORD = pASSWORD;
     }
 
-
-
     public Customer getAccount_customer() {
         return account_customer;
     }
@@ -74,8 +72,5 @@ public class Account {
     public void setAccount_employee(Employee account_employee) {
         this.account_employee = account_employee;
     }
-    
-
-    
 
 }
