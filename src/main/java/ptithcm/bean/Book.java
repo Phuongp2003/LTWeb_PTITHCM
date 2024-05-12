@@ -36,6 +36,9 @@ public class Book {
 	@OneToMany(mappedBy = "cartdetail_book", fetch = FetchType.LAZY)
 	private Collection<CartDetail> cartdetails;
 
+	@OneToMany(mappedBy = "discountdetail_book", fetch = FetchType.LAZY)
+	private Collection<DiscountDetail> discountdetails;
+
 	public Book() {
 	}
 
@@ -118,11 +121,19 @@ public class Book {
 	}
 
 	public Collection<BillDetail> getBilldetails() {
-	return billdetails;
+		return billdetails;
 	}
 
 	public void setBilldetails(Collection<BillDetail> billdetails) {
-	this.billdetails = billdetails;
+		this.billdetails = billdetails;
+	}
+
+	public Collection<DiscountDetail> getDiscountdetails() {
+		return discountdetails;
+	}
+
+	public void setDiscountdetails(Collection<DiscountDetail> discountdetails) {
+		this.discountdetails = discountdetails;
 	}
 
 	@Override
