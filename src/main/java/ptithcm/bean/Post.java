@@ -20,7 +20,7 @@ public class Post {
     private Customer author;
     @ManyToOne
     @JoinColumn(name = "MANV")
-    private Employee post_employee;// property
+    private Employee employee;// property
 
     public Post() {
     }
@@ -30,8 +30,8 @@ public class Post {
         this.title = title;
         this.content = content;
         this.desciption = description;
-        this.post_customer = post_customer;
-        this.post_employee = post_employee;
+        this.author = author;
+        this.employee = employee;
     }
 
     public Number getId() {
@@ -85,23 +85,23 @@ public class Post {
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", customer=" + post_customer + ", employee=" + post_employee + "]";
+                + ", customer=" + author + ", employee=" + employee + "]";
     }
 
     public Customer getPost_customer() {
-        return post_customer;
+        return author;
     }
 
     public void setPost_customer(Customer post_customer) {
-        this.post_customer = post_customer;
+        this.author = post_customer;
     }
 
     public Employee getPost_employee() {
-        return post_employee;
+        return employee;
     }
 
     public void setPost_employee(Employee post_employee) {
-        this.post_employee = post_employee;
+        this.employee = post_employee;
     }
     
 }
