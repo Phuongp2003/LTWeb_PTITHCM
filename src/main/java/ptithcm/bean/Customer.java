@@ -90,10 +90,11 @@ public class Customer {
 
 	public Boolean getGIOTINH() {
 		return GIOTINH;
+
 	}
 
-	public void setGIOTINH(Boolean GIOTINH) {
-		this.GIOTINH = GIOTINH;
+	public void setGIOITINH(Boolean GIOITINH) {
+		this.GIOITINH = GIOITINH;
 	}
 
 	public Date getNGAYSINH() {
@@ -110,10 +111,6 @@ public class Customer {
 
 	public void setPosts(Collection<Post> posts) {
 		this.posts = posts;
-	}
-
-	public Account getAccount() {
-		return account;
 	}
 
 	public void setAccount(Account account) {
@@ -135,5 +132,9 @@ public class Customer {
 	// public void setBills(Collection<Bill> bills) {
 	// this.bills = bills;
 	// }
+
+	public String getFullname() {
+		return HO + " " + TEN;
+	}
 
 }

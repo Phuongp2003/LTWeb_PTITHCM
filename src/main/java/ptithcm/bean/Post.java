@@ -8,7 +8,7 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private String id;// property
+    private Number id;
     @Column(name = "TIEUDE")
     private String title;// property
     @Column(name = "NOIDUNG")
@@ -17,7 +17,7 @@ public class Post {
     private String desciption;// property
     @ManyToOne
     @JoinColumn(name = "MAKH")
-    private Customer post_customer;// property
+    private Customer author;
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee post_employee;// property
@@ -25,7 +25,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Customer post_customer, Employee post_employee) {
+    public Post(Number id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -34,11 +34,11 @@ public class Post {
         this.post_employee = post_employee;
     }
 
-    public String getId() {
+    public Number getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Number id) {
         this.id = id;
     }
 
@@ -66,6 +66,13 @@ public class Post {
         this.desciption = description;
     }
 
+    public Customer getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Customer author) {
+        this.author = author;
+    }
 
     public String getDesciption() {
         return desciption;

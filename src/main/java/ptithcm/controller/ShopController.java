@@ -1,36 +1,34 @@
 package ptithcm.controller;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import ptithcm.bean.TypeBook;
+import ptithcm.service.TypeBookService;
 
-@Transactional
+import java.util.List;
+
 @Controller
 @RequestMapping("/shop")
-@SuppressWarnings("unchecked")
 public class ShopController {
     @Autowired
-    SessionFactory factory;
+    private TypeBookService typeBookService;
 
     @RequestMapping("")
     public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
-        model.addAttribute("type", "shop");
-        Session session = factory.getCurrentSession();
-        String hql = "FROM TypeBook";
-        Query query = session.createQuery(hql);
-        List<TypeBook> list = query.list();
-        model.addAttribute("types", list);
+        List<TypeBook> types = typeBookService.getAllTypeBooks();
+        System.out.println(types);
+        model.addAttribute("types", types);
         return "shop";
+    }
+
+    @RequestMapping(value = "typebook/{MATL}")
+    public String typebook(ModelMap model, @PathVariable("MATL") String MATL) {
+        model.addAttribute("type", typeBookService.getTypeBookByID(MATL));
+        return "typebook";
     }
 }

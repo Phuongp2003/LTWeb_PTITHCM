@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
 	.content-row {
 		display: flex;
@@ -50,7 +51,8 @@
 		display: inline-block;
 	}
 	
-	.post-content:hover>.row-element-controller {
+	.post-content:hover>.row-element-controller,
+	.post-content:focus-within>.row-element-controller {
 		display: flex;
 	}
 	
@@ -81,7 +83,7 @@
 		border-radius: 5px;
 		z-index: 50;
 		flex-direction: column;
-		top: -80px;
+		top: -110px;
 	}
 	
 	.row-element-controller button,
@@ -98,17 +100,28 @@
 	.post-element-controller button:hover {
 		background-color: #f0f0f0;
 	}
+	
+	.font-size-controller {
+		width: 50px;
+		overflow: none;
+	}
 </style>
 
 
 <div class="forum-post-create container-fluid w-75">
-	<form action="create-success" method="POST">
+	<form:form method="POST" action="/webapp/forum/create-success.htm" modelAttribute="post">
 		<div class="port-title">
-			<input type="text" name="title" id="title" placeholder="Title">
+			<form:label path="title">Title: </form:label>
+			<form:input path="title" />
+		</div>
+		<div class="port-description">
+			<form:label path="description">Description: </form:label>
+			<form:input path="description" />
 		</div>
 		<div class="post-controller">
 			<button type="button" name="add-element-row" title="Add text-block"><i class="bi bi-plus-square"></i></button>
 		</div>
+		<form:label path="content">Content: </form:label>
 		<div class="post-contents">
 			<div class="content-row" id="content-row-0">
 				<div class="post-element-controller" id="e-controller-0">
@@ -135,7 +148,8 @@
 				</div>
 			</div>
 		</div>
-	</form>
+		<button type="submit">Save</button>
+	</form:form>
 	<input type="file" id="imageInput" style="display: none;" accept="image/*">
 </div>
 
@@ -164,7 +178,7 @@
 				'<button type="button" name="center-element-1" title="Center lv 1 this element.">Lv1</button>' +
 				'<button type="button" name="center-element-2" title="Center lv 2 this element.">Lv2</button>' +
 				'<button type="button" name="center-element-3" title="Center lv 3 this element.">Lv3</button>' +
-				'<button type="button" name="center-element-4" title="Center lv 4 this element.">Lv4</button>' +
+				'<button class="non-disabled-btn" type="button" name="center-element-4" title="Center lv 4 this element.">Lv4</button>' +
 				'</div>' +
 				'<div class="pec-row4">' +
 				'<button type="button" name="add-text" title="Add text block to this element."><i class="bi bi-card-text"></i></button>' +
@@ -203,13 +217,13 @@
 						'<button type="button" name="delete-element-row" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
 						'</div>' +
 						'<div class="size-controller">' +
-						'<input type="number" name="ewidth" placeholder="Width" value="200"> x ' +
-						'<input type="number" name="eheight" placeholder="Height" value="200">' +
+						'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="200"> x ' +
+						'<input class="eh-controller size-controller" type="number" name="eheight" placeholder="Height" value="200">' +
 						'</div>' +
 						'</div>';
 					contentRow.append(imageBlock);
 					// Handle real-time width/height change
-					$('#image-' + contentRowCounter + ' input').on('keyup', function(e) {
+					$('#image-' + contentRowCounter + ' .size-controller').on('keyup', function(e) {
 						if (e.keyCode === 13) { // Check if Enter key is pressed
 							var maxWidth = $(this).closest('.content-row').width(); // Get width of content row
 							var totalWidth = 0;
@@ -239,6 +253,7 @@
 							});
 						}
 					});
+					
 					contentRowCounter++;
 					checkAndDisableButtons();
 				};
@@ -256,7 +271,8 @@
 		// Event listener for add text block button
 		$('.post-contents').on('click', '[name="add-text"]', function() {
 			var contentRow = $(this).closest('.content-row');
-			var textBlock = '<div class="post-text post-content" id="text-' + contentRowCounter + '" style="width: 500px;">' +
+			var textBlock =
+				'<div class="post-text post-content" id="text-' + contentRowCounter + '" style="width: 500px;">' +
 				'<div class="content-' + contentRowCounter + ' ctextarea" id="content-' + contentRowCounter + '" contenteditable="true" style="width: 500px; min-height: 30px;"></div>' +
 				'<div class="row-element-controller">' +
 				'<div class="text-controller">' +
@@ -265,13 +281,31 @@
 				'<button type="button" name="set-center-row" title="Align text center."><i class="bi bi-text-center"></i></button>' +
 				'<button type="button" name="set-right-row" title="Align text right."><i class="bi bi-text-right"></i></button>' +
 				'</div>' +
+				'<div class="font-controller">' +
+				'<input class="font-size-controller" type="number" name="fs-input" placeholder="Height" value="12">' +
+				'<select class="color-selector" name="text-color">' +
+				'<option value="red">Red</option>' +
+				'<option value="yellow">Yellow</option>' +
+				'<option value="blue">Blue</option>' +
+				'<option value="green">Green</option>' +
+				'<option value="black" selected>Black</option>' +
+				'<option value="white">White</option>' +
+				'</select>' +
+				'<select class="font-family-selector" name="font-family">' +
+				'<option value="Arial">Arial</option>' +
+				'<option value="Verdana">Verdana</option>' +
+				'<option value="Georgia">Georgia</option>' +
+				'<option value="Times New Roman">Times New Roman</option>' +
+				'<option value="Courier New">Courier New</option>' +
+				'</select>' +
+				'</div>' +
 				'<div class="size-controller">' +
-				'<input type="number" name="ewidth" placeholder="Width" value="500"> x ' +
-				'<input type="text" name="eheight" placeholder="Height" value="auto" disabled>' +
+				'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="500"> x ' +
+				'<input class="eh-controller size-controller" type="text" name="eheight" placeholder="Height" value="auto" disabled>' +
 				'</div>' +
 				'</div>'
 			contentRow.append(textBlock);
-			$('#text-' + contentRowCounter + ' input').on('keyup', function(e) {
+			$('#text-' + contentRowCounter + ' size-controller').on('keyup', function(e) {
 				if (e.keyCode === 13) { // Check if Enter key is pressed
 					var maxWidth = $(this).closest('.content-row').width(); // Get width of content row
 					var totalWidth = 0;
@@ -296,6 +330,17 @@
 					// Apply width and height to the image
 					$(this).closest('.post-text').css({
 						'width': width + 'px'
+					});
+				}
+			});
+			$('#text-' + contentRowCounter + ' font-size-controller').on('keyup', function(e) {
+				if (e.keyCode === 13) { // Check if Enter key is pressed
+					var fs = parseInt($(this).closest('.post-text').find('input[name="fs-input"]').val());
+					console.log("🚀 ~ $ ~ fs:", fs)
+					
+					// Apply width and height to the ctextarea element
+					$(this).closest('.post-text').find('.ctextarea').css({
+						'width': fs + 'px'
 					});
 				}
 			});
@@ -366,15 +411,18 @@
 				var postContentCount = $(this).find('.post-content').length;
 				
 				if (postContentCount <= 1) {
-					$(this).find('.pec-row2 button, .pec-row3 button').prop('disabled', true);
+					$(this).find('.pec-row2 button').prop('disabled', true);
 				} else {
-					$(this).find('.pec-row2 button, .pec-row3 button').prop('disabled', false);
+					$(this).find('.pec-row2 button').prop('disabled', false);
 				}
 			});
 		}
 		checkAndDisableButtons();
 		
 		/* Element row button action */
+		$('.parent-element').on('click', function() {
+			$(this).addClass('active');
+		});
 		// Event listener for delete element row button
 		$('.post-contents').on('click', '[name="delete-element-row"]', function() {
 			$(this).closest('.post-content').remove();
@@ -393,6 +441,71 @@
 		// Event listener for set-right element row button
 		$('.post-contents').on('click', '[name="set-right-row"]', function() {
 			$(this).closest('.post-content').find('.ctextarea').css("text-align", "right");
+		});
+		
+		//Text controiller
+		// --Font size
+		$('.post-contents').on('input', '.font-size-controller', function() {
+			var fontSize = $(this).val() + 'px';
+			$(this).closest('.post-text').find('.ctextarea').css('font-size', fontSize);
+		});
+		// --Font color
+		$('.post-contents').on('change', '.color-selector', function() {
+			var color = $(this).val();
+			var selection = window.getSelection();
+			if (selection.rangeCount) {
+				var range = selection.getRangeAt(0);
+				var span = document.createElement('span');
+				span.style.color = color;
+				
+				// Extract the contents of the selection
+				var contents = range.extractContents();
+				
+				// Remove any span elements within the contents
+				$(contents).find('span').contents().unwrap();
+				
+				// Append the cleaned contents to the new span
+				span.appendChild(contents);
+				
+				// Insert the new span into the range
+				range.insertNode(span);
+			}
+		});
+		// --Font-family
+		$('.post-contents').on('change', '.font-family-selector', function() {
+			var fontFamily = $(this).val();
+			$(this).closest('.post-text').find('.ctextarea').css('font-family', fontFamily);
+		});
+		
+		$('form').on('submit', function(e) {
+			e.preventDefault();
+			
+			// Get the title
+			var title = $('#title').val();
+			
+			// Get the contents of the div
+			var content = $('.post-contents').html();
+			
+			// Create a hidden input for the title
+			var titleInput = $('<input>', {
+				type: 'hidden',
+				name: 'title',
+				value: title
+			});
+			
+			// Create a hidden input for the content
+			var contentInput = $('<input>', {
+				type: 'hidden',
+				name: 'content',
+				value: content
+			});
+			
+			// Append the hidden inputs to the form
+			$(this).append(titleInput);
+			$(this).append(contentInput);
+			
+			// Continue with the form submission
+			this.submit();
 		});
 	});
 </script>

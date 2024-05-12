@@ -18,10 +18,10 @@
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-1.8",
-            "path": "C:\\Program Files (x86)\\Java\\jdk-1.8",
+            "path": "path/to/jsd1.8 or lower",
             "default": true
         }
     ],
-    "java.jdt.ls.java.home": "C:\\Program Files (x86)\\Java\\jdk-1.8",
-    "rsp-ui.rsp.java.home": "C:\\Program Files\\Java\\jdk-18.0.2.1"
+    "java.jdt.ls.java.home": "path/to/jsd1.8 or lower",
+    "rsp-ui.rsp.java.home": "path/to/jdk 17 or higher"
 }
