@@ -20,6 +20,7 @@
 		
 		<div class="message">
 			ERROR: No page found!
+			Redirect to <a href="${pageContext.request.contextPath}">Home</a> in 5 seconds!
 		</div>
 	</body>
 	
@@ -28,7 +29,7 @@
 	
 	<script>
 		setTimeout(function() {
-			window.location.href = '../';
+			window.location.href = `${pageContext.request.contextPath}`;
 		}, 5000);
 	</script>
 	

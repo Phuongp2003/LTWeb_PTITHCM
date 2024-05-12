@@ -4,9 +4,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="home.htm">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/home.htm">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm</li>
+                        <li class="breadcrumb-item active" aria-current="page">KINH DỊ</li>
                     </ol>
                 </nav>
             </div>
@@ -21,7 +21,7 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <c:forEach var="type" items="${types}">
-                                <a href=""><li class="list-group-item">${type.TENTL}</li></a>
+                                <a href="shop/typebook/${type.MATL}.htm"><li class="list-group-item">${type.TENTL}</li></a>
                             </c:forEach>
                         </ul>
                     </div>

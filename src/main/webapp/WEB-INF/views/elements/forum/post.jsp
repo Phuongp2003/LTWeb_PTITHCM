@@ -64,7 +64,7 @@
 								${post.title}
 							</a>
 						</div>
-						<div class="post-author fs-6">${post.author}</div>
+						<div class="post-author fs-6">${post.author.getFullname()}</div>
 					</div>
 					<div class="post-content fs-5">${post.description}</div>
 				</div>
