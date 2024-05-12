@@ -8,7 +8,7 @@ import java.util.*;
 public class Book {
 	@Id
 	@GeneratedValue
-	private String MASACH;// property
+	private int MASACH;// property
 	private String TENSACH;// property
 	private Integer LANTAIBAN;// property
 
@@ -19,7 +19,6 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "MATG")
 	private Author author;// property
-
 	@ManyToOne
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
@@ -39,17 +38,18 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String MASACH, String TENSACH, Integer LANTAIBAN) {
+	public Book(int MASACH, String TENSACH, Integer LANTAIBAN) {
 		this.MASACH = MASACH;
 		this.TENSACH = TENSACH;
 		this.LANTAIBAN = LANTAIBAN;
 	}
 
-	public String getMASACH() {
+	public int getMASACH() {
 		return MASACH;
 	}
 
-	public void setMASACH(String mASACH) {
+	public void setMASACH(int mASACH) {
+
 		MASACH = mASACH;
 	}
 

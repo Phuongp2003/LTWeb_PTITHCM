@@ -10,7 +10,7 @@ import java.util.*;
 public class Order {
     @Id
     @GeneratedValue
-    private String MADDH;// property
+    private int MADDH;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date NGAYLAP;// property
@@ -37,7 +37,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String MADDH, Date NGAYLAP, Supplier supplier, Employee employee, Houseware order_houseware) {
+    public Order(int MADDH, Date NGAYLAP, Supplier supplier, Employee employee, Houseware order_houseware) {
         this.MADDH = MADDH;
         this.NGAYLAP = NGAYLAP;
         this.supplier = supplier;
@@ -45,11 +45,11 @@ public class Order {
         this.order_houseware = order_houseware;
     }
 
-    public String getMADDH() {
+    public int getMADDH() {
         return MADDH;
     }
 
-    public void setMADDH(String mADDH) {
+    public void setMADDH(int mADDH) {
         MADDH = mADDH;
     }
 
