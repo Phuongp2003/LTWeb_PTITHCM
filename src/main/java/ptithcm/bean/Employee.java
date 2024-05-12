@@ -19,7 +19,7 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
-	@OneToMany(mappedBy = "post_employee", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
 
 	@OneToMany(mappedBy = "receivedbill_employee", fetch = FetchType.LAZY)

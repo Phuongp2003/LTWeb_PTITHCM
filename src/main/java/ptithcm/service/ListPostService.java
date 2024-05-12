@@ -23,7 +23,7 @@ public class ListPostService {
     @ModelAttribute("posts")
     public List<Post> getAllPosts() {
         Session session = factory.getCurrentSession();
-        String hql = "from Post";
+        String hql = "from post";
         System.out.println(hql);
         Query query = session.createQuery(hql);
         System.out.println(query.list());
