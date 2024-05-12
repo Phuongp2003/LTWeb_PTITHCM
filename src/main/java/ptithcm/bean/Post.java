@@ -8,24 +8,24 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private String id;
+    private Number id;
     @Column(name = "TIEUDE")
-    private String title;
+    private String title;// property
     @Column(name = "NOIDUNG")
-    private String content;
+    private String content;// property
     @Column(name = "MOTA")
-    private String desciption;
+    private String desciption;// property
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;
     @ManyToOne
     @JoinColumn(name = "MANV")
-    private Employee employee;
+    private Employee employee;// property
 
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Customer author, Employee employee) {
+    public Post(Number id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -34,11 +34,11 @@ public class Post {
         this.employee = employee;
     }
 
-    public String getId() {
+    public Number getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Number id) {
         this.id = id;
     }
 
@@ -74,17 +74,34 @@ public class Post {
         this.author = author;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getDesciption() {
+        return desciption;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
     }
 
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", author=" + author + ", employee=" + employee + "]";
+                + ", customer=" + author + ", employee=" + employee + "]";
     }
+
+    public Customer getPost_customer() {
+        return author;
+    }
+
+    public void setPost_customer(Customer post_customer) {
+        this.author = post_customer;
+    }
+
+    public Employee getPost_employee() {
+        return employee;
+    }
+
+    public void setPost_employee(Employee post_employee) {
+        this.employee = post_employee;
+    }
+    
 }

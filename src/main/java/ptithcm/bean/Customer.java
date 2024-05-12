@@ -11,17 +11,28 @@ import java.util.*;
 public class Customer {
 	@Id
 	@GeneratedValue
-	private String MAKH;
-	private String HO;
-	private String TEN;
-	private String EMAIL;
-	private String SDT;
-	private Boolean GIOITINH;
+	private String MAKH;// property
+	private String HO;// property
+	private String TEN;// property
+	private String EMAIL;// property
+	private String SDT;// property
+	private Boolean GIOITINH;// property
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	private Date NGAYSINH;
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	private Date NGAYSINH;// property
+	@OneToMany(mappedBy = "post_customer", fetch = FetchType.EAGER)
 	private Collection<Post> posts;
+
+	@OneToOne(mappedBy = "account_customer", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
+
+	@OneToOne(mappedBy = "cart_customer", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Cart cart;
+
+	@OneToMany(mappedBy = "bill_customer", fetch = FetchType.LAZY)
+	private Collection<Bill> bills;
 
 	public Customer() {
 	};
@@ -79,6 +90,7 @@ public class Customer {
 
 	public Boolean getGIOITINH() {
 		return GIOITINH;
+
 	}
 
 	public void setGIOITINH(Boolean GIOITINH) {
@@ -100,6 +112,26 @@ public class Customer {
 	public void setPosts(Collection<Post> posts) {
 		this.posts = posts;
 	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	// public Cart getCart() {
+	// return cart;
+	// }
+
+	// public void setCart(Cart cart) {
+	// this.cart = cart;
+	// }
+
+	// public Collection<Bill> getBills() {
+	// return bills;
+	// }
+
+	// public void setBills(Collection<Bill> bills) {
+	// this.bills = bills;
+	// }
 
 	public String getFullname() {
 		return HO + " " + TEN;

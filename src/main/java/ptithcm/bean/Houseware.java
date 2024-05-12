@@ -1,31 +1,35 @@
 package ptithcm.bean;
 
-// import java.util.Collection;
-
+import java.util.Collection;
+// import ptithcm.bean.*;
 import javax.persistence.*;
+
 @Entity
 @Table(name = "KhoMoi")
 public class Houseware {
-    @Id
+	@Id
 	@GeneratedValue
-	private String MAKHOMOI;
-	private String DIACHI;
-	private String TENKHOMOI;
+	private String MAKHOMOI;// property
+	private String DIACHI;// property
+	private String TENKHOMOI;// property
 
+	@OneToMany(mappedBy = "receivedbill_houseware", fetch = FetchType.LAZY)
+	private Collection<ReceivedBill> receivedbills;
 
-    // @OneToMany(mappedBy="author", fetch=FetchType.EAGER)
-	// private Collection<Book> books;
+	@OneToMany(mappedBy = "order_houseware", fetch = FetchType.LAZY)
+	private Collection<Order> orders;
 
+	public Houseware() {
+	};
 
-    public Houseware(){};
-    public Houseware(String MAKHOMOI, String DIACHI, String TENKHOMOI){
-        this.MAKHOMOI = MAKHOMOI;
-        this.DIACHI = DIACHI;
-        this.TENKHOMOI = TENKHOMOI;
+	public Houseware(String MAKHOMOI, String DIACHI, String TENKHOMOI) {
+		this.MAKHOMOI = MAKHOMOI;
+		this.DIACHI = DIACHI;
+		this.TENKHOMOI = TENKHOMOI;
 
-    }
+	}
 
-    public String getMAKHOMOI() {
+	public String getMAKHOMOI() {
 		return MAKHOMOI;
 	}
 
@@ -33,7 +37,7 @@ public class Houseware {
 		this.MAKHOMOI = MAKHOMOI;
 	}
 
-    public String getDIACHI() {
+	public String getDIACHI() {
 		return DIACHI;
 	}
 
@@ -41,7 +45,7 @@ public class Houseware {
 		this.DIACHI = DIACHI;
 	}
 
-    public String getTENKHOMOI() {
+	public String getTENKHOMOI() {
 		return TENKHOMOI;
 	}
 

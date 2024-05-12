@@ -18,9 +18,19 @@ public class Employee {
 	private Boolean GIOITINH;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	private Date NGAYSINH;
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	private Date NGAYSINH;// property
+	@OneToMany(mappedBy = "post_employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
+
+	@OneToMany(mappedBy = "receivedbill_employee", fetch = FetchType.LAZY)
+	private Collection<ReceivedBill> receivedbills;
+
+	@OneToOne(mappedBy = "account_employee", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
+
+	@OneToMany(mappedBy = "bill_employee", fetch = FetchType.LAZY)
+	private Collection<Bill> bills;
 
 	public Employee() {
 	};
