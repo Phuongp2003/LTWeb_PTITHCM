@@ -16,7 +16,7 @@ public class Customer {
 	private String TEN;// property
 	private String EMAIL;// property
 	private String SDT;// property
-	private Boolean GIOTINH;// property
+	private Boolean GIOITINH;// property
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
@@ -37,13 +37,13 @@ public class Customer {
 	public Customer() {
 	};
 
-	public Customer(String MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOTINH, Date NGAYSINH) {
+	public Customer(String MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
 		this.MAKH = MAKH;
 		this.HO = HO;
 		this.TEN = TEN;
 		this.SDT = SDT;
 		this.EMAIL = EMAIL;
-		this.GIOTINH = GIOTINH;
+		this.GIOITINH = GIOITINH;
 		this.NGAYSINH = NGAYSINH;
 
 	}
@@ -88,8 +88,8 @@ public class Customer {
 		this.EMAIL = EMAIL;
 	}
 
-	public Boolean getGIOTINH() {
-		return GIOTINH;
+	public Boolean getGIOITINH() {
+		return GIOITINH;
 
 	}
 
