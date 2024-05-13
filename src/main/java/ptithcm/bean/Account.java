@@ -1,5 +1,7 @@
 package ptithcm.bean;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,7 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue
-    private String ID;// property
+    private Integer ID;// property
     private String USERNAME;// property
     private String PASSWORD;// property
 
@@ -16,15 +18,15 @@ public class Account {
     @JoinColumn(name = "MANV")
     private Employee account_employee;// property
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "MAKH")
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private Collection<Account> accounts;
+
     private Customer account_customer;// property
 
     public Account() {
     };
 
-    public Account(String ID, String USERNAME, String PASSWORD, Employee account_employee, Customer account_customer) {
+    public Account(Integer ID, String USERNAME, String PASSWORD, Employee account_employee, Customer account_customer) {
         this.ID = ID;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
@@ -33,11 +35,11 @@ public class Account {
 
     }
 
-    public String getID() {
+    public Integer getID() {
         return ID;
     }
 
-    public void setID(String iD) {
+    public void setID(Integer iD) {
         ID = iD;
     }
 
@@ -57,8 +59,6 @@ public class Account {
         PASSWORD = pASSWORD;
     }
 
-
-
     public Customer getAccount_customer() {
         return account_customer;
     }
@@ -74,8 +74,5 @@ public class Account {
     public void setAccount_employee(Employee account_employee) {
         this.account_employee = account_employee;
     }
-    
-
-    
 
 }

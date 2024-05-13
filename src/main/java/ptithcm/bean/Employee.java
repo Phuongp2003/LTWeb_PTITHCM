@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee {
 	@Id
 	@GeneratedValue
-	private String MANV;
+	private Integer MANV;
 	private String HO;
 	private String TEN;
 	private String CCCD;
@@ -35,7 +35,7 @@ public class Employee {
 	public Employee() {
 	};
 
-	public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
+	public Employee(Integer MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
 		this.MANV = MANV;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -46,11 +46,11 @@ public class Employee {
 
 	}
 
-	public String getMANV() {
+	public Integer getMANV() {
 		return MANV;
 	}
 
-	public void setMANV(String MANV) {
+	public void setMANV(Integer MANV) {
 		this.MANV = MANV;
 	}
 

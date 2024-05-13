@@ -11,7 +11,7 @@ import java.util.*;
 public class Customer {
 	@Id
 	@GeneratedValue
-	private String MAKH;// property
+	private Integer MAKH;// property
 	private String HO;// property
 	private String TEN;// property
 	private String EMAIL;// property
@@ -37,7 +37,7 @@ public class Customer {
 	public Customer() {
 	};
 
-	public Customer(String MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
+	public Customer(Integer MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
 		this.MAKH = MAKH;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -48,11 +48,11 @@ public class Customer {
 
 	}
 
-	public String getMAKH() {
+	public Integer getMAKH() {
 		return MAKH;
 	}
 
-	public void setMAKH(String MAKH) {
+	public void setMAKH(Integer MAKH) {
 		this.MAKH = MAKH;
 	}
 

@@ -11,7 +11,7 @@ import java.util.*;
 public class ReceivedBill {
     @Id
     @GeneratedValue
-    private String MAPN;// property
+    private Integer MAPN;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date NGAYLAP;// property
@@ -35,7 +35,8 @@ public class ReceivedBill {
     public ReceivedBill() {
     }
 
-    public ReceivedBill(String MAPN, Date NGAYLAP, Houseware receivedbill_houseware, Employee receivedbill_employee, Order receivedbill_order) {
+    public ReceivedBill(
+            Integer MAPN, Date NGAYLAP, Houseware receivedbill_houseware, Employee receivedbill_employee, Order receivedbill_order) {
         this.MAPN = MAPN;
         this.NGAYLAP = NGAYLAP;
         this.receivedbill_houseware = receivedbill_houseware;
@@ -43,11 +44,11 @@ public class ReceivedBill {
         this.receivedbill_employee = receivedbill_employee;
     }
 
-    public String getMAPN() {
+    public Integer getMAPN() {
         return MAPN;
     }
 
-    public void setMAPN(String mAPN) {
+    public void setMAPN(Integer mAPN) {
         MAPN = mAPN;
     }
 

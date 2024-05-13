@@ -1,6 +1,10 @@
 package ptithcm.bean;
 
+import java.util.*;
+
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "BaiViet")
@@ -18,9 +22,21 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private Date THOIGIANLAP;// property
+
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee employee;// property
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    private Collection<Post> posts;
+
+    @ManyToOne
+    @JoinColumn(name = "MALT")
+    private Like post_like;// property
 
     public Post() {
     }
@@ -103,5 +119,5 @@ public class Post {
     public void setPost_employee(Employee post_employee) {
         this.employee = post_employee;
     }
-    
+
 }

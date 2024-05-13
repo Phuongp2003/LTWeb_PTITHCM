@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Houseware {
 	@Id
 	@GeneratedValue
-	private String MAKHOMOI;// property
+	private Integer MAKHOMOI;// property
 	private String DIACHI;// property
 	private String TENKHOMOI;// property
 
@@ -22,18 +22,18 @@ public class Houseware {
 	public Houseware() {
 	};
 
-	public Houseware(String MAKHOMOI, String DIACHI, String TENKHOMOI) {
+	public Houseware(Integer MAKHOMOI, String DIACHI, String TENKHOMOI) {
 		this.MAKHOMOI = MAKHOMOI;
 		this.DIACHI = DIACHI;
 		this.TENKHOMOI = TENKHOMOI;
 
 	}
 
-	public String getMAKHOMOI() {
+	public Integer getMAKHOMOI() {
 		return MAKHOMOI;
 	}
 
-	public void setMAKHOMOI(String MAKHOMOI) {
+	public void setMAKHOMOI(Integer MAKHOMOI) {
 		this.MAKHOMOI = MAKHOMOI;
 	}
 

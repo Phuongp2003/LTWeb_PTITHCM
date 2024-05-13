@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 public class TypeBook {
 	@Id
-	private String MATL;// property
+	private Integer MATL;// property
 	private String TENTL;// property
 
 	@OneToMany(mappedBy = "typebook", fetch = FetchType.EAGER)
@@ -17,16 +17,16 @@ public class TypeBook {
 	public TypeBook() {
 	};
 
-	public TypeBook(String MATL, String TENTL) {
+	public TypeBook(Integer MATL, String TENTL) {
 		this.MATL = MATL;
 		this.TENTL = TENTL;
 	}
 
-	public String getMATL() {
+	public Integer getMATL() {
 		return MATL;
 	}
 
-	public void setMATL(String MATL) {
+	public void setMATL(Integer MATL) {
 		this.MATL = MATL;
 	}
 

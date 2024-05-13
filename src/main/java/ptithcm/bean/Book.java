@@ -8,9 +8,11 @@ import java.util.*;
 public class Book {
 	@Id
 	@GeneratedValue
-	private String MASACH;// property
+	private Integer MASACH;// property
 	private String TENSACH;// property
 	private Integer LANTAIBAN;// property
+	private Float GIA;// property
+	private String ANH;// property
 
 	@ManyToOne
 	@JoinColumn(name = "MATL")
@@ -42,17 +44,19 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String MASACH, String TENSACH, Integer LANTAIBAN) {
+	public Book(Integer MASACH, String TENSACH, Integer LANTAIBAN, Float GIA, String ANH) {
 		this.MASACH = MASACH;
 		this.TENSACH = TENSACH;
 		this.LANTAIBAN = LANTAIBAN;
+		this.GIA = GIA;
+		this.ANH = ANH;
 	}
 
-	public String getMASACH() {
+	public Integer getMASACH() {
 		return MASACH;
 	}
 
-	public void setMASACH(String mASACH) {
+	public void setMASACH(Integer mASACH) {
 		MASACH = mASACH;
 	}
 
@@ -143,5 +147,21 @@ public class Book {
 				", TENSACH='" + TENSACH + '\'' +
 				", LANTAIBAN=" + LANTAIBAN +
 				'}';
+	}
+
+	public Float getGIA() {
+		return GIA;
+	}
+
+	public void setGIA(Float gIA) {
+		GIA = gIA;
+	}
+
+	public String getANH() {
+		return ANH;
+	}
+
+	public void setANH(String aNH) {
+		ANH = aNH;
 	}
 }

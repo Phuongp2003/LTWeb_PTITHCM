@@ -10,10 +10,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "HoaDon")
 public class Bill {
     @Id
-    private String MAHD;// property
+    private Integer MAHD;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date NGAYLAP;// property
+    private Float TONGTIEN;// property
 
     @ManyToOne
     @JoinColumn(name = "MANV")
@@ -33,7 +34,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(String MAHD, Date NGAYLAP, Employee bill_employee, Customer bill_customer, Cart bill_cart) {
+    public Bill(Integer MAHD, Date NGAYLAP, Employee bill_employee, Customer bill_customer, Cart bill_cart) {
         this.MAHD = MAHD;
         this.NGAYLAP = NGAYLAP;
         this.bill_customer = bill_customer;
@@ -41,11 +42,11 @@ public class Bill {
         this.bill_cart = bill_cart;
     }
 
-    public String getMAHD() {
+    public Integer getMAHD() {
         return MAHD;
     }
 
-    public void setMAHD(String mAHD) {
+    public void setMAHD(Integer mAHD) {
         MAHD = mAHD;
     }
 

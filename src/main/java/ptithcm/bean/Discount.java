@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "KhuyenMai")
 public class Discount {
     @Id
-    private String MAKM;// property
+    private Integer MAKM;// property
     private String TENKM;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -26,7 +26,7 @@ public class Discount {
     public Discount() {
     };
 
-    public Discount(String MAKM, String TENKM, Date NGAYBD,Date NGAYKT) {
+    public Discount(Integer MAKM, String TENKM, Date NGAYBD,Date NGAYKT) {
 		this.MAKM = MAKM;
 		this.TENKM = TENKM;
 		this.NGAYBD = NGAYBD;
@@ -34,11 +34,11 @@ public class Discount {
 
 	}
 
-    public String getMAKM() {
+    public Integer getMAKM() {
         return MAKM;
     }
 
-    public void setMAKM(String mAKM) {
+    public void setMAKM(Integer mAKM) {
         MAKM = mAKM;
     }
 
