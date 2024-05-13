@@ -29,7 +29,7 @@ public class TypeBookService {
         return list;
     }
 
-    public TypeBook getTypeBookByID(String MATL){
+    public TypeBook getTypeBookByID(int MATL){
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook where MATL = :MATL";
         Query query = session.createQuery(hql);

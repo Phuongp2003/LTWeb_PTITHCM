@@ -14,16 +14,14 @@ public class TypeBook {
 	@OneToMany(mappedBy = "typebook", fetch = FetchType.EAGER)
 	private Collection<Book> books;
 
-	public TypeBook() {
-	};
+    public TypeBook(){};
+    public TypeBook(int MATL, String TENTL){
+        this.MATL = MATL;
+        this.TENTL = TENTL;
+    }
 
-	public TypeBook(int MATL, String TENTL) {
-		this.MATL = MATL;
-		this.TENTL = TENTL;
-	}
-
-	public int getMATL() {
-		return MATL;
+    public int getMATL() {
+		  return MATL;
 	}
 
 	public void setMATL(int MATL) {
