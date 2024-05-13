@@ -42,27 +42,28 @@ public class CartDetailService {
 
     // return 0.0;
     // }
-    @Transactional
-    @ModelAttribute("cart")
-    public List<Book> getCartDetail(int userId) {
-        Session session = factory.getCurrentSession();
-        // String hql1 = "from Cart where IDGH = :userId";
-        // Query query1 = session.createQuery(hql1);
-        // query1.setParameter("id", userId);
-        // Cart cart = (Cart) query1.uniqueResult();
-        // System.out.println(cart.toString());
+    // @Transactional
+    // @ModelAttribute("cart")
+    // public List<Book> getCartDetail(int userId) {
+    // Session session = factory.getCurrentSession();
+    // // String hql1 = "from Cart where IDGH = :userId";
+    // // Query query1 = session.createQuery(hql1);
+    // // query1.setParameter("id", userId);
+    // // Cart cart = (Cart) query1.uniqueResult();
+    // // System.out.println(cart.toString());
+    // String hql = "select cd.cartdetail_book from CartDetail cd join cd.Cart c
+    // WHERE cd.cartdetail_.IDGH = :userId";
 
-        String hql = "select cartdetail_book from CartDetail c where c.cartdetail_cart.IDGH = :userId";
-        Query query = session.createQuery(hql);
+    // Query query = session.createQuery(hql);
 
-        // query.setParameter("cart", cart);
-        query.setParameter("id", userId);
+    // // query.setParameter("cart", cart);
+    // query.setParameter("userId", userId);
 
-        @SuppressWarnings("unchecked")
-        List<Book> list = query.list();
-        System.out.println("in list");
-        return list;
-    }
+    // @SuppressWarnings("unchecked")
+    // List<Book> list = query.list();
+    // System.out.println("in list");
+    // return list;
+    // }
 
     public long getTotalItem(int userId) {
         Session session = factory.getCurrentSession();
