@@ -7,7 +7,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptithcm.bean.Book;
 import ptithcm.bean.TypeBook;
+import ptithcm.service.BookService;
 import ptithcm.service.TypeBookService;
 
 import java.util.List;
@@ -18,12 +20,17 @@ public class ShopController {
     @Autowired
     private TypeBookService typeBookService;
 
+    @Autowired
+    private BookService bookService;
+
     @RequestMapping("")
     public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
         model.addAttribute("type", "shop");
         List<TypeBook> category = typeBookService.getAllTypeBooks();
+        List<Book> book = bookService.getAllBooks();
         model.addAttribute("categories", category);
+        model.addAttribute("books", book);
         return "shop";
     }
 

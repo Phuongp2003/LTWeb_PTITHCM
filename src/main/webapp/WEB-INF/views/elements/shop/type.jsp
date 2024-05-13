@@ -5,7 +5,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/home.htm">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+                        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/shop.htm">Danh mục</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tất cả sách</li>
                     </ol>
                 </nav>
@@ -57,23 +57,21 @@
                     </div>
                     <div class="collection-product">
                         <div class="row">
-                            <% for(int i=0; i < 12; i++) { %>
+                            <c:forEach var="book" items="${books}">
                                 <div class="col-md-4 col-sm-12 col-lg-4">
                                     <a href="">
                                         <div class="card">
                                             <img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp"
                                                 class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card title
-                                                    and make up the bulk of the card's
-                                                    content.</p>
-                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                <h5 class="card-title">${book.TENSACH}</h5>
+                                                <p class="card-text">${book.author.HO} ${book.author.TEN}</p>
+                                                <a href="#" class="btn btn-primary">Xem Chi Tiết</a>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                <%}%>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

@@ -28,6 +28,8 @@ public class BookService {
         return query.list();
     }
 
+    @Transactional
+    @ModelAttribute("books")
     public Book getBookByID(int MASACH) {
         Session session = factory.getCurrentSession();
 		String hql = "FROM Book WHERE MASACH = :MASACH";
