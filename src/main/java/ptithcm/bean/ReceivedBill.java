@@ -36,7 +36,8 @@ public class ReceivedBill {
     }
 
     public ReceivedBill(
-            Integer MAPN, Date NGAYLAP, Houseware receivedbill_houseware, Employee receivedbill_employee, Order receivedbill_order) {
+            Integer MAPN, Date NGAYLAP, Houseware receivedbill_houseware, Employee receivedbill_employee,
+            Order receivedbill_order) {
         this.MAPN = MAPN;
         this.NGAYLAP = NGAYLAP;
         this.receivedbill_houseware = receivedbill_houseware;
@@ -91,7 +92,5 @@ public class ReceivedBill {
     public void setReceivedbill_order(Order receivedbill_order) {
         this.receivedbill_order = receivedbill_order;
     }
-    
-    
 
 }

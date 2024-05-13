@@ -113,6 +113,22 @@ public class Customer {
 		this.posts = posts;
 	}
 
+	// public Cart getCart() {
+	// return cart;
+	// }
+
+	// public void setCart(Cart cart) {
+	// this.cart = cart;
+	// }
+
+	// public Collection<Bill> getBills() {
+	// return bills;
+	// }
+
+	// public void setBills(Collection<Bill> bills) {
+	// this.bills = bills;
+	// }
+
 	public void setAccount(Account account) {
 		this.account = account;
 	}
