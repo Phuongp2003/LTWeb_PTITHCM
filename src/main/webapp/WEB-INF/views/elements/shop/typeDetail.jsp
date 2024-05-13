@@ -66,6 +66,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title">${book.TENSACH}</h5>
                                                 <p class="card-text">${book.author.HO} ${book.author.TEN}</p>
+                                                <p class="card-text"><fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0"/></p>
                                                 <a href="#" class="btn btn-primary">Xem Chi Tiết</a>
                                             </div>
                                         </div>

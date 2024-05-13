@@ -28,6 +28,17 @@ public class BookService {
         return query.list();
     }
 
+	@Transactional
+    @ModelAttribute("books")
+    public List<Book> getBooksByCategory(int MATL) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM Book WHERE typebook.MATL = :MATL";
+        Query query = session.createQuery(hql);
+        query.setParameter("MATL", MATL);
+        List<Book> list = query.list();
+        return list;
+    }
+
     @Transactional
     @ModelAttribute("books")
     public Book getBookByID(int MASACH) {
