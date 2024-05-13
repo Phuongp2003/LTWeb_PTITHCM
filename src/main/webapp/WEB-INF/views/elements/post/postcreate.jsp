@@ -477,21 +477,17 @@
 			$(this).closest('.post-text').find('.ctextarea').css('font-family', fontFamily);
 		});
 		
+		// Disable enter to submit form
+		$('form input').on('keydown', function(e) {
+			if (e.which == 13) { // 13 is the keycode for Enter
+				e.preventDefault();
+			}
+		});
+		
 		$('form').on('submit', function(e) {
 			e.preventDefault();
-			
-			// Get the title
-			var title = $('#title').val();
-			
 			// Get the contents of the div
 			var content = $('.post-contents').html();
-			
-			// Create a hidden input for the title
-			var titleInput = $('<input>', {
-				type: 'hidden',
-				name: 'title',
-				value: title
-			});
 			
 			// Create a hidden input for the content
 			var contentInput = $('<input>', {
@@ -501,7 +497,6 @@
 			});
 			
 			// Append the hidden inputs to the form
-			$(this).append(titleInput);
 			$(this).append(contentInput);
 			
 			// Continue with the form submission

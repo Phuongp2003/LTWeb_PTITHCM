@@ -8,7 +8,7 @@
 </nav>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top fs-3">
 	<div class="container-fluid mx-auto w-75">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/home.htm">Navbar logo</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/home.htm"> <img src="${pageContext.request.contextPath}/resources/imgs/ptitlogo.png" alt="Navbar Brand" srcset=""> </a>
 		<button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>

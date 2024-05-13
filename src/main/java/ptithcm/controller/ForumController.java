@@ -72,9 +72,10 @@ public class ForumController {
     }
 
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
-    public String createPost(@RequestParam("title") String title, @RequestParam("description") String description,
-            @RequestParam("content") String content, Model model) {
-        System.out.println("Saving...");
+    public String createPost(@RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("content") String content,
+            Model model) {
         Customer user = new Customer();
         List<Customer> users = postService.getAllCustomers();
         System.out.println("User" + users);
@@ -84,10 +85,14 @@ public class ForumController {
                 break;
             }
         }
-        System.out.println("User" + user);
         Post post = new Post(34, title, content, description, user, null);
         postServices.createPost(post);
         model.addAttribute("title", "PTITHCM Forum");
-        return "home";
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", "001");
+        model.addAttribute("user_name", "Test User");
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Create post success");
+        return "post_action";
     }
 }
