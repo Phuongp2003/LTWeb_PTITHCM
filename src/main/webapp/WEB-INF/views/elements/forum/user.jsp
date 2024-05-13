@@ -1,5 +1,11 @@
 <%@ page pageEncoding="UTF-8"%>
 <style>
+	.navbar-brand {
+		align-items: center;
+		justify-content: center;
+		padding: 10px;
+	}
+	
 	.forum-user {
 		margin-top: 20px;
 		width: 100%;
@@ -101,7 +107,7 @@
 
 <div class="forum-user w-75 fs-4 d-flex">
 	<a class="navbar-brand" href="user/${user_id}">
-		<img class="user-img" src="resources/imgs/test1.png" class="userImg">
+		<img class="user-img" src="resources/imgs/test1.jpg" class="userImg">
 		<div class="user-name">${user_name}</div>
 	</a>
 	<div class="user-controller">

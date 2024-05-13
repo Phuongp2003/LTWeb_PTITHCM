@@ -54,15 +54,7 @@ public class ListPostService {
     @ModelAttribute("posts")
     public Post createPost(Post post) {
         Session session = factory.getCurrentSession();
-        Transaction t = session.beginTransaction();
-        try {
-            session.save(post);
-            t.commit();
-        } catch (Exception e) {
-            t.rollback();
-        } finally {
-            session.close();
-        }
+        session.save(post);
         return post;
     }
 
