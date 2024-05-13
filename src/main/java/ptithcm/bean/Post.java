@@ -12,7 +12,7 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private Number id;
+    private Integer id;
     @Column(name = "TIEUDE")
     private String title;// property
     @Column(name = "NOIDUNG")
@@ -38,20 +38,21 @@ public class Post {
     public Post() {
     }
 
-    public Post(Number id, String title, String content, String description, Customer author, Employee employee) {
+    public Post(Integer id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.desciption = description;
         this.author = author;
         this.post_employee = employee;
+        this.THOIGIANLAP = new Date();
     }
 
     public Number getId() {
         return id;
     }
 
-    public void setId(Number id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -107,6 +108,14 @@ public class Post {
 
     public void setPost_employee(Employee post_employee) {
         this.post_employee = post_employee;
+    }
+
+    public Date getTHOIGIANLAP() {
+        return THOIGIANLAP;
+    }
+
+    public void setTHOIGIANLAP(Date tHOIGIANLAP) {
+        THOIGIANLAP = tHOIGIANLAP;
     }
 
 }
