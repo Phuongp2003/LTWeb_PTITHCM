@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Account;
-import ptithcm.bean.Book;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -21,7 +20,7 @@ public class AccountService {
     SessionFactory factory;
 
     @Transactional
-    @ModelAttribute("books")
+    @ModelAttribute("accounts")
     public List<Account> getAllAccounts() {
         Session session = factory.getCurrentSession();
         String hql = "from Account";
@@ -29,15 +28,30 @@ public class AccountService {
         return query.list();
     }
 
-    public Book getAccountByID(int ID) {
+	@Transactional
+    @ModelAttribute("accounts")
+    public Account getAccountByID(int ID) {
         Session session = factory.getCurrentSession();
 		String hql = "FROM Account WHERE ID = :ID";
 		Query query = session.createQuery(hql);
 		query.setParameter("ID", ID);
-		Book list = (Book) query.list().get(0);
+		Account list = (Account) query.list().get(0);
 		return list;
     }
 
+	@Transactional
+    @ModelAttribute("account")
+	public Account getAccountByUsername(String username) {
+        Session session = factory.getCurrentSession();
+		String hql = "FROM Account WHERE USERNAME = :username";
+		Query query = session.createQuery(hql);
+		query.setParameter("username", username);
+		Account list = (Account) query.list().get(0);
+		return list;
+    }
+
+	@Transactional
+    @ModelAttribute("accounts")
     public int insertAccount(Account account) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -54,6 +68,8 @@ public class AccountService {
 		return 1;
 	}
 
+	@Transactional
+    @ModelAttribute("accounts")
     public int updateAccount(Account account) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -69,6 +85,8 @@ public class AccountService {
 		return 1;
 	}
 
+	@Transactional
+    @ModelAttribute("accounts")
     public int deleteAccount(Account account) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -86,6 +104,8 @@ public class AccountService {
 		return 1;
 	}
 
+	@Transactional
+    @ModelAttribute("accounts")
     public List<Account> searchAccount(String USERNAME) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Account WHERE USERNAME LIKE :USERNAME";
