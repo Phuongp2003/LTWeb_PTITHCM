@@ -20,7 +20,7 @@ public class TypeBookService {
     SessionFactory factory;
 
     @Transactional
-    @ModelAttribute("types")
+    @ModelAttribute("categories")
     public List<TypeBook> getAllTypeBooks() {
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook";
@@ -29,16 +29,19 @@ public class TypeBookService {
         return list;
     }
 
+    @Transactional
+    @ModelAttribute("categories")
     public TypeBook getTypeBookByID(int MATL){
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook where MATL = :MATL";
         Query query = session.createQuery(hql);
         query.setParameter("MATL", MATL);
 
-        TypeBook list = (TypeBook) query.list().get(0);
-        return list;
+        return (TypeBook) query.list().get(0);
     }
 
+    @Transactional
+    @ModelAttribute("categories")
     public TypeBook getTypeBookByName(String TENTL){
         TypeBook type;
         try{
@@ -55,6 +58,8 @@ public class TypeBookService {
 		return type;
     }
 
+    @Transactional
+    @ModelAttribute("categories")
     public List<TypeBook> searchTypeBook(String TENTL){
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook where TENTL like :TENTL";

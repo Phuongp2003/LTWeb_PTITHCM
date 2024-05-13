@@ -22,8 +22,8 @@ public class ShopController {
     public String shop(ModelMap model) {
         model.addAttribute("title", "PTITHCM All Books");
         model.addAttribute("type", "shop");
-        List<TypeBook> types = typeBookService.getAllTypeBooks();
-        model.addAttribute("types", types);
+        List<TypeBook> category = typeBookService.getAllTypeBooks();
+        model.addAttribute("categories", category);
         return "shop";
     }
 
@@ -31,8 +31,10 @@ public class ShopController {
     public String findType(ModelMap model, @PathVariable("MATL") int MATL) {
         model.addAttribute("title", "PTITHCM Types Book");
         model.addAttribute("type", "shop");
-        TypeBook types = typeBookService.getTypeBookByID(MATL);
-        model.addAttribute("types",  types);
+        List<TypeBook> categories = typeBookService.getAllTypeBooks();
+        TypeBook category = typeBookService.getTypeBookByID(MATL);
+        model.addAttribute("categories", categories);
+        model.addAttribute("category",  category);
         return "typebook";
     }
 }
