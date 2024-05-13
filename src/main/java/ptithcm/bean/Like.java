@@ -30,5 +30,4 @@ public class Like {
     public void setCAMXUC(String cAMXUC) {
         CAMXUC = cAMXUC;
     }
-
 }
