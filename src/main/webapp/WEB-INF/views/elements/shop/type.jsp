@@ -20,8 +20,8 @@
                             <!-- <i class="bi bi-dash h3"></i> -->
                         </div>
                         <ul class="list-group list-group-flush">
-                            <c:forEach var="type" items="${types}">
-                                <li class="list-group-item"><a href="shop/typebook/${type.MATL}.htm">${type.TENTL}</a></li>
+                            <c:forEach var="category" items="${categories}">
+                                <li class="list-group-item"><a href="shop/typebook/${category.MATL}.htm">${category.TENTL}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
