@@ -8,28 +8,31 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.*;
 
 @Repository
-@SuppressWarnings("unchecked")
+// @SuppressWarnings("unchecked")
 public class CartService {
 
 	@Autowired
 	SessionFactory factory;
 
-	public List<Cart> getCart(int userId) {
+	@Transactional
+	@ModelAttribute("cart")
+	public Cart getCart(int userId) {
 		Session session = factory.getCurrentSession();
 		String hql = "from Cart where cart_customer.MAKH = :id";
 		Query query = session.createQuery(hql);
 
 		query.setParameter("id", userId);
-		
-		List<Cart> list = query.list();
-		return list;
+
+		Cart cart = (Cart) query.list().get(0);
+
+		return cart;
 	}
-	
-	
 
 	public int insertCart(Cart cart) {
 		Session session = factory.openSession();
