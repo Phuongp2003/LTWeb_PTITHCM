@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Account;
+import ptithcm.bean.Customer;
 import ptithcm.service.AccountService;
 
 @Controller
@@ -28,5 +29,14 @@ public class AccountController {
         System.out.println(accountService.getAccountByUsername(username).getUSERNAME());
         
         return "home";
+    }
+
+    @RequestMapping("/register")
+    public String handleRegister(ModelMap model) {
+        Account account = new Account();
+        Customer customer = new Customer();
+        model.addAttribute("account", account);
+        model.addAttribute("customer",customer);
+        return "register";
     }
 }
