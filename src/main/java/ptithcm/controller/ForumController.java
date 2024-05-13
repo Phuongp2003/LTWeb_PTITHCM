@@ -79,7 +79,7 @@ public class ForumController {
         List<Customer> users = postService.getAllCustomers();
         System.out.println("User" + users);
         for (Customer customer : users) {
-            if (customer.getMAKH().equals("001")) {
+            if (customer.getMAKH() == 1) {
                 user = customer;
                 break;
             }
