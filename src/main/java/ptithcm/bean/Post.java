@@ -31,8 +31,8 @@ public class Post {
     @JoinColumn(name = "MANV")
     private Employee post_employee;// property
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
-    private Collection<Post> posts;
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private Collection<Comment> comments;
 
     @ManyToOne
     @JoinColumn(name = "MALT")
