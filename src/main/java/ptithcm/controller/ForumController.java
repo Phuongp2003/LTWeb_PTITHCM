@@ -37,7 +37,7 @@ public class ForumController {
     }
 
     @RequestMapping(value = "post/{id}")
-    public String post(Model model, @PathVariable("id") String id) {
+    public String post(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         Post post;
@@ -48,7 +48,7 @@ public class ForumController {
     }
 
     @RequestMapping(value = "post/{id}/edit")
-    public String editPost(Model model, @PathVariable("id") String id) {
+    public String editPost(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", "001");

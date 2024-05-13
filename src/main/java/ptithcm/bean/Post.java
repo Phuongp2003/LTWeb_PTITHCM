@@ -29,7 +29,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "MANV")
-    private Employee employee;// property
+    private Employee post_employee;// property
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private Collection<Post> posts;
@@ -47,7 +47,7 @@ public class Post {
         this.content = content;
         this.desciption = description;
         this.author = author;
-        this.employee = employee;
+        this.post_employee = employee;
     }
 
     public Number getId() {
@@ -82,14 +82,6 @@ public class Post {
         this.desciption = description;
     }
 
-    public Customer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Customer author) {
-        this.author = author;
-    }
-
     public String getDesciption() {
         return desciption;
     }
@@ -101,23 +93,23 @@ public class Post {
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", customer=" + author + ", employee=" + employee + "]";
+                + ", customer=" + author + ", employee=" + post_employee + "]";
     }
 
-    public Customer getPost_customer() {
+    public Customer getAuthor() {
         return author;
     }
 
-    public void setPost_customer(Customer post_customer) {
-        this.author = post_customer;
+    public void setAuthor(Customer author) {
+        this.author = author;
     }
 
     public Employee getPost_employee() {
-        return employee;
+        return post_employee;
     }
 
     public void setPost_employee(Employee post_employee) {
-        this.employee = post_employee;
+        this.post_employee = post_employee;
     }
 
 }

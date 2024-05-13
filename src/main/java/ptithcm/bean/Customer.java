@@ -20,7 +20,7 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
-	@OneToMany(mappedBy = "post_customer", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
 	private Collection<Post> posts;
 
 	@OneToOne(mappedBy = "account_customer", cascade = CascadeType.ALL)

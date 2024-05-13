@@ -18,9 +18,8 @@ public class Account {
     @JoinColumn(name = "MANV")
     private Employee account_employee;// property
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-    private Collection<Account> accounts;
-
+    @OneToOne
+    @JoinColumn(name = "MAKH")
     private Customer account_customer;// property
 
     public Account() {
