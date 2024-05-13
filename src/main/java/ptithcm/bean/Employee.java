@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee {
 	@Id
 	@GeneratedValue
-	private String MANV;
+	private int MANV;
 	private String HO;
 	private String TEN;
 	private String CCCD;
@@ -18,14 +18,25 @@ public class Employee {
 	private Boolean GIOITINH;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	private Date NGAYSINH;
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	private Date NGAYSINH;// property
+
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
+
+	@OneToMany(mappedBy = "receivedbill_employee", fetch = FetchType.LAZY)
+	private Collection<ReceivedBill> receivedbills;
+
+	@OneToOne(mappedBy = "account_employee", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
+
+	@OneToMany(mappedBy = "bill_employee", fetch = FetchType.LAZY)
+	private Collection<Bill> bills;
 
 	public Employee() {
 	};
 
-	public Employee(String MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
+	public Employee(int MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
 		this.MANV = MANV;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -36,11 +47,11 @@ public class Employee {
 
 	}
 
-	public String getMANV() {
+	public int getMANV() {
 		return MANV;
 	}
 
-	public void setMANV(String MANV) {
+	public void setMANV(int MANV) {
 		this.MANV = MANV;
 	}
 

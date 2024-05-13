@@ -1,16 +1,17 @@
 package ptithcm.bean;
+
 import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-@Table(name="TheLoai")
+@Table(name = "TheLoai")
 
 public class TypeBook {
-    @Id
-    private int MATL;
-    private String TENTL;
+	@Id
+	private int MATL;// property
+	private String TENTL;// property
 
-    @OneToMany(mappedBy="typebook", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "typebook", fetch = FetchType.EAGER)
 	private Collection<Book> books;
 
     public TypeBook(){};
@@ -20,7 +21,7 @@ public class TypeBook {
     }
 
     public int getMATL() {
-		return MATL;
+		  return MATL;
 	}
 
 	public void setMATL(int MATL) {
@@ -35,7 +36,7 @@ public class TypeBook {
 		this.TENTL = TENTL;
 	}
 
-    public Collection<Book> getBooks() {
+	public Collection<Book> getBooks() {
 		return books;
 	}
 

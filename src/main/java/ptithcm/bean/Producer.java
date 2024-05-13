@@ -3,36 +3,37 @@ package ptithcm.bean;
 import java.util.Collection;
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "NhaXuatBan")
 public class Producer {
-    @Id
+	@Id
 	@GeneratedValue
-	private String MANXB;
-	private String TENNXB;
-	private String EMAIL;
-    private String SDT;
-    private String DIACHI;
+	private int MANXB;// property
+	private String TENNXB;// property
+	private String EMAIL;// property
+	private String SDT;// property
+	private String DIACHI;// property
 
-	@OneToMany(mappedBy="producer", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "producer", fetch = FetchType.EAGER)
 	private Collection<Book> books;
 
-    public Producer(){};
-    public Producer(String MANXB, String TENNXB, String EMAIL, String SDT, String DIACHI){
-        this.MANXB = MANXB;
-        this.TENNXB = TENNXB;
-        this.EMAIL = EMAIL;
-        this.SDT = SDT;
-        this.DIACHI = DIACHI;
+	public Producer() {
+	};
 
-    }
+	public Producer(int MANXB, String TENNXB, String EMAIL, String SDT, String DIACHI) {
+		this.MANXB = MANXB;
+		this.TENNXB = TENNXB;
+		this.EMAIL = EMAIL;
+		this.SDT = SDT;
+		this.DIACHI = DIACHI;
 
-    public String getMANXB() {
+	}
+
+	public int getMANXB() {
 		return MANXB;
 	}
 
-	public void setMANXB(String MANXB) {
+	public void setMANXB(int MANXB) {
 		this.MANXB = MANXB;
 	}
 
@@ -44,7 +45,7 @@ public class Producer {
 		this.TENNXB = TENNXB;
 	}
 
-    public String getEMAIL() {
+	public String getEMAIL() {
 		return EMAIL;
 	}
 
@@ -52,7 +53,7 @@ public class Producer {
 		this.EMAIL = EMAIL;
 	}
 
-    public String getSDT() {
+	public String getSDT() {
 		return SDT;
 	}
 
@@ -60,7 +61,7 @@ public class Producer {
 		this.SDT = SDT;
 	}
 
-    public String getDIACHI() {
+	public String getDIACHI() {
 		return DIACHI;
 	}
 
@@ -68,7 +69,7 @@ public class Producer {
 		this.DIACHI = DIACHI;
 	}
 
-    public Collection<Book> getBooks() {
+	public Collection<Book> getBooks() {
 		return books;
 	}
 

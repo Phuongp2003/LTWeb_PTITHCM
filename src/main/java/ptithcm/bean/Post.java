@@ -8,24 +8,26 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "MABV")
-    private String id;
+    private int id;
     @Column(name = "TIEUDE")
-    private String title;
+    private String title;// property
     @Column(name = "NOIDUNG")
-    private String content;
+    private String content;// property
     @Column(name = "MOTA")
-    private String desciption;
+    private String desciption;// property
+
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;
+
     @ManyToOne
     @JoinColumn(name = "MANV")
-    private Employee employee;
+    private Employee employee;// property
 
     public Post() {
     }
 
-    public Post(String id, String title, String content, String description, Customer author, Employee employee) {
+    public Post(int id, String title, String content, String description, Customer author, Employee employee) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -34,11 +36,11 @@ public class Post {
         this.employee = employee;
     }
 
-    public String getId() {
+    public Number getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -85,6 +87,6 @@ public class Post {
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
-                + ", author=" + author + ", employee=" + employee + "]";
+                + ", customer=" + author + ", employee=" + employee + "]";
     }
 }
