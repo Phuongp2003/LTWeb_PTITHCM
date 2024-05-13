@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Supplier {
     @Id
 	@GeneratedValue
-	private int MANCC;// property
+	private Integer MANCC;// property
 	private String TENNCC;// property
 	private String EMAIL;// property
     private String SDT;// property
@@ -19,7 +19,7 @@ public class Supplier {
 	@OneToMany(mappedBy="producer", fetch=FetchType.EAGER)
 	private Collection<Book> books;
 
-    public Supplier(int MANCC, String TENNCC, String EMAIL, String SDT, String DIACHI, Collection<Book> books) {
+    public Supplier(Integer MANCC, String TENNCC, String EMAIL, String SDT, String DIACHI, Collection<Book> books) {
         this.MANCC = MANCC;
         this.TENNCC = TENNCC;
         this.EMAIL = EMAIL;
@@ -28,11 +28,11 @@ public class Supplier {
         this.books = books;
     }
 
-    public int getMANCC() {
+    public Integer getMANCC() {
         return MANCC;
     }
 
-    public void setMANCC(int mANCC) {
+    public void setMANCC(Integer mANCC) {
         MANCC = mANCC;
     }
 
@@ -78,3 +78,4 @@ public class Supplier {
 
     
 }
+
