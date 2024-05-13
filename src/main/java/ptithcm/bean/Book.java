@@ -8,9 +8,11 @@ import java.util.*;
 public class Book {
 	@Id
 	@GeneratedValue
-	private int MASACH;// property
+	private Integer MASACH;// property
 	private String TENSACH;// property
 	private Integer LANTAIBAN;// property
+	private Float GIA;// property
+	private String ANH;// property
 
 	@ManyToOne
 	@JoinColumn(name = "MATL")
@@ -19,6 +21,7 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "MATG")
 	private Author author;// property
+
 	@ManyToOne
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
@@ -35,21 +38,25 @@ public class Book {
 	@OneToMany(mappedBy = "cartdetail_book", fetch = FetchType.LAZY)
 	private Collection<CartDetail> cartdetails;
 
+	@OneToMany(mappedBy = "discountdetail_book", fetch = FetchType.LAZY)
+	private Collection<DiscountDetail> discountdetails;
+
 	public Book() {
 	}
 
-	public Book(int MASACH, String TENSACH, Integer LANTAIBAN) {
+	public Book(Integer MASACH, String TENSACH, Integer LANTAIBAN, Float GIA, String ANH) {
 		this.MASACH = MASACH;
 		this.TENSACH = TENSACH;
 		this.LANTAIBAN = LANTAIBAN;
+		this.GIA = GIA;
+		this.ANH = ANH;
 	}
 
-	public int getMASACH() {
+	public Integer getMASACH() {
 		return MASACH;
 	}
 
-	public void setMASACH(int mASACH) {
-
+	public void setMASACH(Integer mASACH) {
 		MASACH = mASACH;
 	}
 
@@ -118,11 +125,19 @@ public class Book {
 	}
 
 	public Collection<BillDetail> getBilldetails() {
-	return billdetails;
+		return billdetails;
 	}
 
 	public void setBilldetails(Collection<BillDetail> billdetails) {
-	this.billdetails = billdetails;
+		this.billdetails = billdetails;
+	}
+
+	public Collection<DiscountDetail> getDiscountdetails() {
+		return discountdetails;
+	}
+
+	public void setDiscountdetails(Collection<DiscountDetail> discountdetails) {
+		this.discountdetails = discountdetails;
 	}
 
 	@Override
@@ -132,5 +147,21 @@ public class Book {
 				", TENSACH='" + TENSACH + '\'' +
 				", LANTAIBAN=" + LANTAIBAN +
 				'}';
+	}
+
+	public Float getGIA() {
+		return GIA;
+	}
+
+	public void setGIA(Float gIA) {
+		GIA = gIA;
+	}
+
+	public String getANH() {
+		return ANH;
+	}
+
+	public void setANH(String aNH) {
+		ANH = aNH;
 	}
 }

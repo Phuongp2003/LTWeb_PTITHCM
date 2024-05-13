@@ -60,4 +60,25 @@ public class ListPostService {
         session.save(post);
         return post;
     }
+
+    @Transactional
+    @ModelAttribute("posts")
+    public Post getPostByID(String id) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Post where id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        return (Post) query.list().get(0);
+    }
+
+    @Transactional
+    @ModelAttribute("posts")
+    public Post getPostsByUserIDP(String id) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Post where user_id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        return (Post) query.list().get(0);
+    }
+
 }

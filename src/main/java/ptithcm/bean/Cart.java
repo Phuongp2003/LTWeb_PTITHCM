@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cart {
     @Id
     @GeneratedValue
-    private int IDGH;// property
+    private Integer IDGH;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date NGAYLAP;// property
@@ -29,17 +29,17 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int IDGH, Date NGAYLAP, Customer cart_customer) {
+    public Cart(Integer IDGH, Date NGAYLAP, Customer cart_customer) {
         this.IDGH = IDGH;
         this.NGAYLAP = NGAYLAP;
         this.cart_customer = cart_customer;
     }
 
-    public int getIDGH() {
+    public Integer getIDGH() {
         return IDGH;
     }
 
-    public void setIDGH(int iDGH) {
+    public void setIDGH(Integer iDGH) {
         IDGH = iDGH;
     }
 

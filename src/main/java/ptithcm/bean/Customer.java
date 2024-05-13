@@ -11,7 +11,7 @@ import java.util.*;
 public class Customer {
 	@Id
 	@GeneratedValue
-	private int MAKH;// property
+	private Integer MAKH;// property
 	private String HO;// property
 	private String TEN;// property
 	private String EMAIL;// property
@@ -20,7 +20,7 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "post_customer", fetch = FetchType.EAGER)
 	private Collection<Post> posts;
 
 	@OneToOne(mappedBy = "account_customer", cascade = CascadeType.ALL)
@@ -37,7 +37,7 @@ public class Customer {
 	public Customer() {
 	};
 
-	public Customer(int MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
+	public Customer(Integer MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
 		this.MAKH = MAKH;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -48,11 +48,11 @@ public class Customer {
 
 	}
 
-	public int getMAKH() {
+	public Integer getMAKH() {
 		return MAKH;
 	}
 
-	public void setMAKH(int MAKH) {
+	public void setMAKH(Integer MAKH) {
 		this.MAKH = MAKH;
 	}
 
@@ -112,6 +112,22 @@ public class Customer {
 	public void setPosts(Collection<Post> posts) {
 		this.posts = posts;
 	}
+
+	// public Cart getCart() {
+	// return cart;
+	// }
+
+	// public void setCart(Cart cart) {
+	// this.cart = cart;
+	// }
+
+	// public Collection<Bill> getBills() {
+	// return bills;
+	// }
+
+	// public void setBills(Collection<Bill> bills) {
+	// this.bills = bills;
+	// }
 
 	public void setAccount(Account account) {
 		this.account = account;

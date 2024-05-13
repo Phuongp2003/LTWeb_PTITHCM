@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee {
 	@Id
 	@GeneratedValue
-	private int MANV;
+	private Integer MANV;
 	private String HO;
 	private String TEN;
 	private String CCCD;
@@ -19,8 +19,7 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
-
-	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "post_employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
 
 	@OneToMany(mappedBy = "receivedbill_employee", fetch = FetchType.LAZY)
@@ -36,7 +35,7 @@ public class Employee {
 	public Employee() {
 	};
 
-	public Employee(int MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
+	public Employee(Integer MANV, String HO, String TEN, String CCCD, String SDT, String EMAIL, Boolean GIOITINH) {
 		this.MANV = MANV;
 		this.HO = HO;
 		this.TEN = TEN;
@@ -47,11 +46,11 @@ public class Employee {
 
 	}
 
-	public int getMANV() {
+	public Integer getMANV() {
 		return MANV;
 	}
 
-	public void setMANV(int MANV) {
+	public void setMANV(Integer MANV) {
 		this.MANV = MANV;
 	}
 
