@@ -27,10 +27,6 @@ public class Comment {
     @JoinColumn(name = "MATK")
     private Account account;// property
 
-    @ManyToOne
-    @JoinColumn(name = "MALT")
-    private Like comment_like;// property
-
     public Comment(int id, String title, Date tHOIGIANLAP, Post post, Account account, Like comment_like) {
         this.id = id;
         this.title = title;
@@ -78,14 +74,6 @@ public class Comment {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public Like getComment_like() {
-        return comment_like;
-    }
-
-    public void setComment_like(Like comment_like) {
-        this.comment_like = comment_like;
     }
 
 }
