@@ -27,13 +27,12 @@ public class Comment {
     @JoinColumn(name = "MATK")
     private Account account;// property
 
-    public Comment(int id, String title, Date tHOIGIANLAP, Post post, Account account, Like comment_like) {
+    public Comment(int id, String title, Date tHOIGIANLAP, Post post, Account account) {
         this.id = id;
         this.title = title;
         THOIGIANLAP = tHOIGIANLAP;
         this.post = post;
         this.account = account;
-        this.comment_like = comment_like;
     }
 
     public int getId() {
