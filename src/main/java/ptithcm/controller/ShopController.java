@@ -31,7 +31,7 @@ public class ShopController {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("categories", category);
         model.addAttribute("books", book);
-        return "shop";
+        return "pages/shop/shop";
     }
 
     @RequestMapping(value = "typebook/{MATL}")
@@ -44,6 +44,6 @@ public class ShopController {
         model.addAttribute("categories", categories);
         model.addAttribute("category", category);
         model.addAttribute("books", books);
-        return "typebook";
+        return "pages/shop/typebook";
     }
 }

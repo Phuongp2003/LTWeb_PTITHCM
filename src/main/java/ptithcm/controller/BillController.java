@@ -28,7 +28,7 @@ public class BillController {
         Bill bill = billService.getBill(1); // Giả định getBill trả về List<Bill>
         // model.addAttribute("userId", userId);
         model.addAttribute("bill", bill);
-        return "bill";
+        return "pages/bill/bill";
     }
 
 }

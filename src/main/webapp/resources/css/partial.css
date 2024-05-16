@@ -2,11 +2,6 @@ body {
     box-sizing: border-box;
 }
 
-nav .navbar-brand img {
-    max-width: 200px;
-    aspect-ratio: 4;
-}
-
 .footer {
     margin-top: 5rem;
     position: relative;

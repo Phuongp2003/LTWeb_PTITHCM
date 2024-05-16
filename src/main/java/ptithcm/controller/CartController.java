@@ -44,7 +44,7 @@ public class CartController {
         // Map<Integer, String> selects = new HashMap<>();
         // selects.put(0, "Chọn sản phẩm");
         // model.addAttribute("items", selects);
-        return "cart";
+        return "pages/cart/cart";
     }
 
     // @RequestMapping(value = "/bill", method = RequestMethod.POST)

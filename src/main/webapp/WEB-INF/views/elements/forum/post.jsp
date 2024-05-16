@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <style>
 	.forum-post {
 		border-top: brown;

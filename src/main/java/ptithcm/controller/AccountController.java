@@ -21,14 +21,14 @@ public class AccountController {
     public String handleLogin(ModelMap model){
         Account account = new Account();
         model.addAttribute("account", account);
-        return "login";
+        return "pages/user/login";
     }
 
     @RequestMapping(value="login-success", method=RequestMethod.POST)
     public String checkLogin(@RequestParam("USERNAME") String username, @RequestParam("PASSWORD") String password, ModelMap model) {
         System.out.println(accountService.getAccountByUsername(username).getUSERNAME());
         
-        return "home";
+        return "pages/home";
     }
 
     @RequestMapping("/register")
@@ -37,6 +37,6 @@ public class AccountController {
         Customer customer = new Customer();
         model.addAttribute("account", account);
         model.addAttribute("customer",customer);
-        return "register";
+        return "pages/user/register";
     }
 }

@@ -28,12 +28,12 @@ public class IndexController {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("categories", category);
         model.addAttribute("books", book);
-        return "home";
+        return "pages/home";
     }
 
     @RequestMapping("/error")
     public String error(Model model) {
         model.addAttribute("title", "Error");
-        return "error";
+        return "pages/error";
     }
 }

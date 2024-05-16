@@ -26,6 +26,6 @@ public class UserController {
         List<Post> post = postServices.getPostsByUserIDP(uid);
 
         model.addAttribute("posts", post);
-        return "userpost";
+        return "pages/post/userpost";
     }
 }

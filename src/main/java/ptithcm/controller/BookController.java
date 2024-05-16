@@ -22,13 +22,13 @@ public class BookController {
     public String book(ModelMap model, @PathVariable("MASACH") int MASACH) {
         Book book = bookService.getBookByID(MASACH);
         model.addAttribute("book", book);
-        return "product";
+        return "pages/product/product";
     }
 
     @RequestMapping("/admin")
     public String product(ModelMap model) {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("books", book);
-        return "book";
+        return "pages/admin/book";
     }
 }

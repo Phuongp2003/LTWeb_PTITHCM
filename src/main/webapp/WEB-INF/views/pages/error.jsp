@@ -1,14 +1,13 @@
 <%@ page pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-	
+	<jsp:include page="${initParam.viewsPath}/path.jsp" /> 
 	<head>
-		<%@ include file="partial/head.jsp" %>
+		<jsp:include page="partial/head.jsp" />
 	</head>
-	
+
 	<body>
-		<%@ include file="elements/navbar.jsp" %>
+		<jsp:include page="elements/navbar.jsp" />
 		<style>
 			.message {
 				width: 100%;
@@ -17,17 +16,20 @@
 				color: red;
 			}
 		</style>
-		
+
 		<div class="message">
 			ERROR: No page found!
 			Redirect to <a href="${pageContext.request.contextPath}">Home</a> in 5 seconds!
 		</div>
 	</body>
-	
-	
-	<%@ include file="partial/footer.jsp" %>
-	
+
+	<jsp:include page="partial/footer.jsp" />
+
 	<script>
+		setTimeout(function() {
+			window.location.href = `${pageContext.request.contextPath}`;
+		}, 5000);
+	</script>
 		setTimeout(function() {
 			window.location.href = `${pageContext.request.contextPath}`;
 		}, 5000);

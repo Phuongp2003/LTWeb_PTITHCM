@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
-    <style>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<style>
         .cart-detail .wrapper {
             margin-bottom: 0.5rem;
         }

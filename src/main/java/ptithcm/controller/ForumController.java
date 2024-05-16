@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Post;
 import ptithcm.service.ListPostService;
+import ptithcm.util.PostHelper;
 import ptithcm.service.CustomerService;
 
 @Controller
 @RequestMapping("/forum")
 public class ForumController {
+    PostHelper postHelper = new PostHelper();
     @Autowired
     private ListPostService postServices;
 
@@ -31,9 +33,8 @@ public class ForumController {
         model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         List<Post> post = postServices.getAllPosts();
-
         model.addAttribute("posts", post);
-        return "forum";
+        return "pages/forum/forum";
     }
 
     @RequestMapping(value = "post/{id}")
@@ -44,20 +45,7 @@ public class ForumController {
         post = postServices.getPostByID(id);
 
         model.addAttribute("post", post);
-        return "post";
-    }
-
-    @RequestMapping(value = "post/{id}/edit")
-    public String editPost(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("title", "PTITHCM Forum");
-        model.addAttribute("type", "forum");
-        model.addAttribute("user_id", 1);
-        model.addAttribute("user_name", "Test User");
-        Post post;
-        post = postServices.getPostByID(id);
-
-        model.addAttribute("post", post);
-        return "editpost";
+        return "pages/post/post";
     }
 
     @RequestMapping(value = "post/{id}/edit-success", method = RequestMethod.POST)
@@ -76,7 +64,7 @@ public class ForumController {
         model.addAttribute("user_name", "Test User");
         model.addAttribute("success", 200);
         model.addAttribute("message", "Update post success");
-        return "post_action";
+        return "pages/post/post_action";
     }
 
     @RequestMapping(value = "create-post")
@@ -87,7 +75,20 @@ public class ForumController {
         model.addAttribute("user_name", "Test User");
         Post post = new Post();
         model.addAttribute("post", post);
-        return "createpost";
+        return "pages/post/createpost";
+    }
+
+    @RequestMapping(value = "post/{id}/edit")
+    public String editPost(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        Post post;
+        post = postServices.getPostByID(id);
+
+        model.addAttribute("post", post);
+        return "pages/post/editpost";
     }
 
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
@@ -112,25 +113,7 @@ public class ForumController {
         model.addAttribute("user_name", "Test User");
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create post success");
-        return "post_action";
-
-    @RequestMapping(value = "post/{id}/remove")
-    public String removePost(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("title", "PTITHCM Forum");
-        model.addAttribute("type", "forum");
-        model.addAttribute("user_id", 1);
-        model.addAttribute("user_name", "Test User");
-        Post post;
-        post = postServices.getPostByID(id);
-
-        postServices.removePost(post);
-        model.addAttribute("title", "PTITHCM Forum");
-        model.addAttribute("type", "forum");
-        model.addAttribute("user_id", 1);
-        model.addAttribute("user_name", "Test User");
-        model.addAttribute("success", 200);
-        model.addAttribute("message", "Delete post success");
-        return "post_action";
+        return "pages/post/post_action";
     }
 
     @RequestMapping(value = "post/{id}/remove")
@@ -149,25 +132,6 @@ public class ForumController {
         model.addAttribute("user_name", "Test User");
         model.addAttribute("success", 200);
         model.addAttribute("message", "Delete post success");
-        return "post_action";
-    }
-
-    @RequestMapping(value = "post/{id}/remove")
-    public String removePost(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("title", "PTITHCM Forum");
-        model.addAttribute("type", "forum");
-        model.addAttribute("user_id", 1);
-        model.addAttribute("user_name", "Test User");
-        Post post;
-        post = postServices.getPostByID(id);
-
-        postServices.removePost(post);
-        model.addAttribute("title", "PTITHCM Forum");
-        model.addAttribute("type", "forum");
-        model.addAttribute("user_id", 1);
-        model.addAttribute("user_name", "Test User");
-        model.addAttribute("success", 200);
-        model.addAttribute("message", "Delete post success");
-        return "post_action";
+        return "pages/post/post_action";
     }
 }

@@ -1,7 +1,5 @@
 package ptithcm.bean;
 
-import java.util.Collection;
-
 import javax.persistence.*;
 
 @Entity

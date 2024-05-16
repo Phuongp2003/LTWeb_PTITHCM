@@ -26,6 +26,6 @@ public class CategoryController {
     public String categoryList(ModelMap model) {
         List<TypeBook> category = typeBookService.getAllTypeBooks();
         model.addAttribute("categories", category);
-        return "category";
+        return "pages/admin/category";
     }
 }

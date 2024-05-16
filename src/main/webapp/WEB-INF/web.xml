@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-	<display-name>LAB2_N21DCCN167_PHAMBUINAMPHUONG</display-name>
+	<display-name>LapTrinhWeb</display-name>
 	<!-- DispatcherServlet -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
@@ -33,6 +33,11 @@
 		<filter-name>utf8</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<context-param>
+		<param-name>viewsPath</param-name>
+		<param-value>/WEB-INF/views/</param-value>
+	</context-param>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

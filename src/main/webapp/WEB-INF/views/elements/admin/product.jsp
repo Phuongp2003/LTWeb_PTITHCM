@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <div class="container-fluid" style="width: 80%;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
