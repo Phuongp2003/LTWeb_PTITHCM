@@ -31,10 +31,6 @@ public class Post {
     @JoinColumn(name = "MANV")
     private Employee post_employee;// property
 
-    @ManyToOne
-    @JoinColumn(name = "MALT")
-    private Like post_like;// property
-
     public Post() {
     }
 
