@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light fs-3">
 	<!-- flex-row-reverse -> đặt từ phải qua -->
 	<div class="container-fluid flex-row-reverse mx-auto justify-content-start w-75">
-		<div class="d-flex me-3"><a href="#"><i class="bi bi-cart"></i></a></div>
+		<div class="d-flex me-3"><a href="${pageContext.request.contextPath}/cart.htm"><i class="bi bi-cart"></i></a></div>
 		<div class="d-flex me-3"><a href="#"><i class="bi bi-person"></i></a></div>
 		<div class="d-flex me-3"><a href="#"><i class="bi bi-search"></i></a></div>
 	</div>

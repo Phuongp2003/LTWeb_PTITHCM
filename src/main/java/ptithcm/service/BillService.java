@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.*;
 
@@ -17,27 +19,18 @@ public class BillService {
     @Autowired
     SessionFactory factory;
 
-    public List<Book> getBill(int userId) {
+    @Transactional
+    @ModelAttribute("bill")
+    public Bill getBill(int userId) {
         Session session = factory.getCurrentSession();
         String hql = "from Bill where bill_customer.MAKH = :id";
         Query query = session.createQuery(hql);
 
         query.setParameter("id", userId);
 
-        List<Book> list = query.list();
+        Bill list = (Bill)query.list().get(0);
         return list;
     }
-    
-    // public List<Cart> getBill(int userId) {
-    //     Session session = factory.getCurrentSession();
-    //     String hql = "from Bill where bill_customer.MAKH = :id";
-    //     Query query = session.createQuery(hql);
-
-    //     query.setParameter("id", userId);
-
-    //     List<Cart> list = query.list();
-    //     return list;
-    // }
 
     public float[] getMoneyInMonth(int year) {
         // Bắt đầu một phiên giao dịch
@@ -70,13 +63,13 @@ public class BillService {
 
         return monthlyTotals;
     }
-    
-    public int insertBill(Cart cart) {
+
+    public int insertBill(List<CartDetail> cartdetail) {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
         try {
-            session.save(cart);
+            session.save(cartdetail);
             t.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,5 +81,4 @@ public class BillService {
         return 1;
     }
 
-    
 }

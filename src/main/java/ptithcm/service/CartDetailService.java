@@ -1,5 +1,6 @@
 package ptithcm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -18,52 +19,47 @@ public class CartDetailService {
     @Autowired
     SessionFactory factory;
 
-    // public Cart getCartByProduct(int userId, int productId) {
-    // Session session = factory.getCurrentSession();
-    // String hql = "from Cart where cart_customer.MAKH = :userId and products.id =
-    // :productId";
-    // Query query = session.createQuery(hql);
+    @Transactional
+    @ModelAttribute("cartdetail")
+    public List<CartDetail> getCartDetail(int cartId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId";
+        Query query = session.createQuery(hql);
+        query.setParameter("cartId", cartId);
+        List<CartDetail> list = query.list();
+        return list;
+    }
 
-    // query.setParameter("userId", userId);
-    // query.setParameter("productId", productId);
-    // Cart list = (Cart) query.list().get(0);
-    // return list;
-    // }
-
-    // public double getTotalMoney(int userId) {
-    // Session session = factory.getCurrentSession();
-    // String hql = "select sum(quantity*(products.price -
-    // products.price*products.discount/100)) from Cart where users.id = :id";
-    // Query query = session.createQuery(hql);
-
-    // query.setParameter("id", userId);
-    // if (query.list().get(0) != null)
-    // return (double) query.list().get(0);
-
-    // return 0.0;
-    // }
-    // @Transactional
-    // @ModelAttribute("cart")
-    // public List<Book> getCartDetail(int userId) {
-    // Session session = factory.getCurrentSession();
-    // // String hql1 = "from Cart where IDGH = :userId";
-    // // Query query1 = session.createQuery(hql1);
-    // // query1.setParameter("id", userId);
-    // // Cart cart = (Cart) query1.uniqueResult();
-    // // System.out.println(cart.toString());
-    // String hql = "select cd.cartdetail_book from CartDetail cd join cd.Cart c
-    // WHERE cd.cartdetail_.IDGH = :userId";
-
-    // Query query = session.createQuery(hql);
-
-    // // query.setParameter("cart", cart);
-    // query.setParameter("userId", userId);
-
-    // @SuppressWarnings("unchecked")
-    // List<Book> list = query.list();
-    // System.out.println("in list");
-    // return list;
-    // }
+    @Transactional
+    @ModelAttribute("booksfromcart")
+    public List<Book> getBooks(List<CartDetail> cartdetail) {
+        List<Book> books = new ArrayList<>();
+        for (int i = 0; i < cartdetail.size(); i++) {
+            books.add(cartdetail.get(i).getCartdetail_book());
+        }
+        return books;
+    }
+    
+    @Transactional
+    @ModelAttribute("cartbyproduct")
+    public CartDetail getCartByProductId(int cartId, int productId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId and cd.cartdetail_book.MASACH = :productId";
+        Query query = session.createQuery(hql);
+        query.setParameter("cartId", cartId);
+        query.setParameter("productId", productId);
+        CartDetail product = (CartDetail)query.list().get(0);
+        return product;
+    }
+    
+    @Transactional
+    @ModelAttribute("items")
+    public List<Integer> getSelects() {
+        List<Integer> selects= new ArrayList<>();
+        selects.add(0);
+        return selects;
+    }
+    
 
     public long getTotalItem(int userId) {
         Session session = factory.getCurrentSession();
