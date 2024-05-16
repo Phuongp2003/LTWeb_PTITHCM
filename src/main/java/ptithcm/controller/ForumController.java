@@ -113,6 +113,43 @@ public class ForumController {
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create post success");
         return "post_action";
+
+    @RequestMapping(value = "post/{id}/remove")
+    public String removePost(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        Post post;
+        post = postServices.getPostByID(id);
+
+        postServices.removePost(post);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Delete post success");
+        return "post_action";
+    }
+
+    @RequestMapping(value = "post/{id}/remove")
+    public String removePost(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        Post post;
+        post = postServices.getPostByID(id);
+
+        postServices.removePost(post);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Delete post success");
+        return "post_action";
     }
 
     @RequestMapping(value = "post/{id}/remove")

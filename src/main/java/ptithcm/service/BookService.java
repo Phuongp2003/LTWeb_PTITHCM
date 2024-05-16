@@ -39,6 +39,22 @@ public class BookService {
         return list;
     }
 
+	@Transactional
+    @ModelAttribute("books")
+	public long getNumberBooksByCategory(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT count(b.MASACH) "
+				+ "FROM Typebook as t, "
+				+ "Book as b "
+				+ "WHERE t.MATL = b.typebook.MATL "
+				+ "AND t.MATL = " + MATL;
+		
+		Query query = session.createQuery(hql);
+	
+		long quantity = (long) query.uniqueResult();
+		return quantity;
+	}
+
     @Transactional
     @ModelAttribute("books")
     public Book getBookByID(int MASACH) {

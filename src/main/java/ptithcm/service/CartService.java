@@ -22,16 +22,13 @@ public class CartService {
 
 	@Transactional
 	@ModelAttribute("cart")
-	public Cart getCart(int userId) {
+	public Cart getCartById(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "from Cart where cart_customer.MAKH = :id";
+		String hql = "FROM Cart WHERE IDGH = :id";
 		Query query = session.createQuery(hql);
-
-		query.setParameter("id", userId);
-
-		Cart cart = (Cart) query.list().get(0);
-
-		return cart;
+		query.setParameter("id", id);
+		Cart list = (Cart) query.list().get(0);
+		return list;
 	}
 
 	public int insertCart(Cart cart) {
