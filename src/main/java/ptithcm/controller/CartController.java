@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptithcm.bean.Book;
+import ptithcm.bean.Cart;
 import ptithcm.service.BookService;
 import ptithcm.service.CartDetailService;
 import ptithcm.service.CartService;
@@ -17,12 +18,18 @@ import ptithcm.service.CartService;
 @RequestMapping("/cart")
 public class CartController {
     @Autowired
-    private CartDetailService cartDetailService;
+    private CartService cartService;
 
+    // @RequestMapping("")
+    // public String showCartDetail(ModelMap model) {
+    // List<Book> books = cartDetailService.getCartDetail(1);
+    // model.addAttribute("cart", books);
+    // return "cart";
+    // }
     @RequestMapping("")
-    public String showCartDetail(ModelMap model) {
-        List<Book> books = cartDetailService.getCartDetail(1);
-        model.addAttribute("cart", books);
+    public String showCart(ModelMap model) {
+        // Cart books = cartService.getCart(1);
+        // model.addAttribute("cart", books);
         return "cart";
     }
 }

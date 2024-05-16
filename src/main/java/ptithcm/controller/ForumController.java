@@ -113,7 +113,6 @@ public class ForumController {
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create post success");
         return "post_action";
-    }
 
     @RequestMapping(value = "post/{id}/remove")
     public String removePost(Model model, @PathVariable("id") Integer id) {

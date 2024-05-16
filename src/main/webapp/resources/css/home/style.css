@@ -19,6 +19,7 @@ a{
 }
 
 .favorite-types .card {
+    min-height: 8rem;
     margin-bottom: 1.5rem;
 }
 
