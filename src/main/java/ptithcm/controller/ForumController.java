@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Post;
 import ptithcm.service.ListPostService;
-import ptithcm.service.PostService;
+import ptithcm.service.CustomerService;
 
 @Controller
 @RequestMapping("/forum")
@@ -22,13 +22,13 @@ public class ForumController {
     private ListPostService postServices;
 
     @Autowired
-    private PostService postService;
+    private CustomerService customerService;
 
     @RequestMapping("")
     public String forum(Model model) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
-        model.addAttribute("user_id", "001");
+        model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         List<Post> post = postServices.getAllPosts();
 
@@ -51,20 +51,39 @@ public class ForumController {
     public String editPost(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
-        model.addAttribute("user_id", "001");
+        model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         Post post;
         post = postServices.getPostByID(id);
 
         model.addAttribute("post", post);
-        return "editPost";
+        return "editpost";
+    }
+
+    @RequestMapping(value = "post/{id}/edit-success", method = RequestMethod.POST)
+    public String saveEditedPost(
+            @PathVariable("id") Integer id,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("content") String content,
+            Model model) {
+        Post oPost = postServices.getPostByID(id);
+        Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
+        postServices.editPost(post);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Update post success");
+        return "post_action";
     }
 
     @RequestMapping(value = "create-post")
     public String createPost(Model model) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
-        model.addAttribute("user_id", "001");
+        model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         Post post = new Post();
         model.addAttribute("post", post);
@@ -72,12 +91,12 @@ public class ForumController {
     }
 
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
-    public String createPost(@RequestParam("title") String title,
+    public String saveNewPost(@RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("content") String content,
             Model model) {
         Customer user = new Customer();
-        List<Customer> users = postService.getAllCustomers();
+        List<Customer> users = customerService.getAllCustomers();
         System.out.println("User" + users);
         for (Customer customer : users) {
             if (customer.getMAKH() == 1) {
@@ -89,10 +108,29 @@ public class ForumController {
         postServices.createPost(post);
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
-        model.addAttribute("user_id", "001");
+        model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create post success");
+        return "post_action";
+    }
+
+    @RequestMapping(value = "post/{id}/remove")
+    public String removePost(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        Post post;
+        post = postServices.getPostByID(id);
+
+        postServices.removePost(post);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", 1);
+        model.addAttribute("user_name", "Test User");
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Delete post success");
         return "post_action";
     }
 }
