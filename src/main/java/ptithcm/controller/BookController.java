@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ptithcm.bean.Book;
+import ptithcm.bean.TypeBook;
 import ptithcm.service.BookService;
 
 import java.util.List;
@@ -22,5 +23,12 @@ public class BookController {
         Book book = bookService.getBookByID(MASACH);
         model.addAttribute("book", book);
         return "product";
+    }
+
+    @RequestMapping("/admin")
+    public String product(ModelMap model) {
+        List<Book> book = bookService.getAllBooks();
+        model.addAttribute("books", book);
+        return "book";
     }
 }
