@@ -42,28 +42,60 @@ public class ListPostService {
 
     @Transactional
     @ModelAttribute("posts")
-    public Post getPostsByUserIDP(int id) {
+    public List<Post> getPostsByUserIDP(int id) {
         Session session = factory.getCurrentSession();
-        String hql = "from Post where user_id = :id";
+        String hql = "from Post where author.MAKH = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
-        return (Post) query.list().get(0);
+        List<Post> res = query.list();
+        return res;
     }
 
     @Transactional
     @ModelAttribute("posts")
     public Post createPost(Post post) {
-        Session session = factory.getCurrentSession();
-        Transaction t = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
         try {
             session.save(post);
-            t.commit();
+            transaction.commit();
         } catch (Exception e) {
-            t.rollback();
+            transaction.rollback();
         } finally {
             session.close();
         }
         return post;
     }
 
+    @Transactional
+    @ModelAttribute("posts")
+    public Post editPost(Post post) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.update(post);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return post;
+    }
+
+    @Transactional
+    @ModelAttribute("posts")
+    public Post removePost(Post post) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.delete(post);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return post;
+    }
 }

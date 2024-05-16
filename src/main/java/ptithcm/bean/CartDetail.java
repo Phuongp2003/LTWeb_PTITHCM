@@ -20,6 +20,7 @@ public class CartDetail {
 
     private int SOLUONG;// property
     private Float DONGIA;// property
+    private int CHON;// property
 
     public CartDetail() {
     }
@@ -37,7 +38,6 @@ public class CartDetail {
     public void setId(CartDetailPrimary id) {
         this.id = id;
     }
-
 
     public int getSOLUONG() {
         return SOLUONG;
@@ -71,6 +71,4 @@ public class CartDetail {
         this.cartdetail_cart = cartdetail_cart;
     }
 
-    
-    
 }

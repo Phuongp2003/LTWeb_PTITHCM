@@ -40,8 +40,10 @@ public class ShopController {
         model.addAttribute("type", "shop");
         List<TypeBook> categories = typeBookService.getAllTypeBooks();
         TypeBook category = typeBookService.getTypeBookByID(MATL);
+        List<Book> books = bookService.getBooksByCategory(MATL);
         model.addAttribute("categories", categories);
-        model.addAttribute("category",  category);
+        model.addAttribute("category", category);
+        model.addAttribute("books", books);
         return "typebook";
     }
 }

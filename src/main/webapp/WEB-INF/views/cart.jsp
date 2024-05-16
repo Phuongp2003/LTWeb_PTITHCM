@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 	
@@ -10,12 +10,13 @@
 	
 	<body>
 		<%@ include file="elements/navbar.jsp" %>
-		<%@ include file="elements/shop/banner.jsp" %>
-		<%@ include file="elements/shop/type.jsp" %>
+	
+		<%@ include file="elements/cart/showcast.jsp" %> 
+		
+
 	</body>
 	
 	
 	<%@ include file="partial/footer.jsp" %>
 	
 </html>
-

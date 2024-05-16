@@ -9,13 +9,8 @@
 	</head>
 	
 	<body>
-		<%@ include file="elements/navbar.jsp" %>
-		<%@ include file="elements/shop/banner.jsp" %>
-		<%@ include file="elements/shop/type.jsp" %>
+		<%@ include file="elements/admin/navbar.jsp" %>
 	</body>
 	
 	
-	<%@ include file="partial/footer.jsp" %>
-	
 </html>
-

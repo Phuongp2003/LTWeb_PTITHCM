@@ -15,7 +15,7 @@ import ptithcm.bean.Customer;
 // There is Customer services test for post
 @Service
 @SuppressWarnings("unchecked")
-public class PostService {
+public class CustomerService {
     @Autowired
     SessionFactory factory;
 
