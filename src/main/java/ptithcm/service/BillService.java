@@ -28,7 +28,7 @@ public class BillService {
 
         query.setParameter("id", userId);
 
-        Bill list = (Bill)query.list().get(0);
+        Bill list = (Bill) query.list().get(0);
         return list;
     }
 

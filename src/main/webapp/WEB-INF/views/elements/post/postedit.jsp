@@ -121,7 +121,7 @@
 
 
 <div class="forum-post-create container-fluid w-75">
-	<form:form method="POST" action="/webapp/forum/post/${post.id}/edit-success.htm" modelAttribute="post">
+	<form:form method="POST" action="forum/post/${post.id}/edit-success.htm" modelAttribute="post">
 		<div class="port-title">
 			<form:label path="title">Title: </form:label>
 			<form:input path="title" />

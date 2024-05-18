@@ -76,15 +76,15 @@
 						<div class="post-status fs-5 d-inline">
 							<c:choose>
 								<c:when test="${not empty post.post_employee}">
-									<img src="<c:url value='/resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
+									<img src="<c:url value='resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
 								</c:when>
 								<c:otherwise>
-									<img src="<c:url value='/resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status OK">
+									<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status OK">
 								</c:otherwise>
 							</c:choose>
 						</div> |
-						<a href="/webapp/forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
-						<a href="/webapp/forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
+						<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
+						<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
 					</div>
 				</div>
 			</c:forEach>

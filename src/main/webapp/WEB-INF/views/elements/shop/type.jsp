@@ -5,8 +5,8 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/home.htm">Trang chủ</a></li>
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/shop.htm">Danh mục</a></li>
+					<li class="breadcrumb-item"><a href="home.htm">Trang chủ</a></li>
+					<li class="breadcrumb-item"><a href="shop.htm">Danh mục</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Tất cả sách</li>
 				</ol>
 			</nav>
@@ -58,7 +58,7 @@
 					<div class="row">
 						<c:forEach var="book" items="${books}">
 							<div class="col-md-4 col-sm-12 col-lg-4">
-								<a href="${pageContext.request.contextPath}/book/${book.MASACH}.htm">
+								<a href="book/${book.MASACH}.htm">
 									<div class="card">
 										<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
 										<div class="card-body">
