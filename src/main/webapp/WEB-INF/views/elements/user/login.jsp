@@ -81,16 +81,14 @@
 			<form:input type="text" class="username-input" path="USERNAME" placeholder="Username" />
 		</div>
 		
-		
 		<div class="input-box">
 			<form:label path="PASSWORD"></form:label>
 			<form:input type="password" class="password-input" path="PASSWORD" placeholder="Password" />
 		</div>
 		
-		
 		<button type="submit" class="login-btn">Login</button>
 		<div class="sign-up">
-			<p>Don't have an account? <a href="#">Sign-up</a></p>
+			<p>Don't have an account? <a href="user/register.htm">Sign-up</a></p>
 		</div>
 	</form:form>
 </div>

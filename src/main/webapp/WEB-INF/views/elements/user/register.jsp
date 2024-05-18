@@ -62,7 +62,7 @@
 </style>
 <div class="user-register container-fluid w-25 fs-4 m-auto">
 	<h1 class="h3 mb-3 fw-normal">REGISTER</h1>
-	<form:form method="POST" action="user/login-success.htm" modelAttribute="account">
+	<form:form method="POST" action="user/register-success.htm" modelAttribute="registrationForm">
 		
 		<div class="input-box">
 			<form:label path="USERNAME"></form:label>
@@ -74,6 +74,7 @@
 			<form:input type="password" path="PASSWORD" placeholder="Password" />
 		</div>
 		
+		<!-- attribute customer -->
 		<div class="input-box">
 			<form:label path="HO"></form:label>
 			<form:input type="text" path="HO" placeholder="Họ" />
@@ -96,7 +97,15 @@
 		
 		<div class="input-box">
 			<form:label path="GIOITINH"></form:label>
-			<form:input type="text" path="GIOITINH" placeholder="Giới tính" />
+			<form:select path="GIOITINH">
+				<form:option value="true">Nam</form:option>
+				<form:option value="false">Nữ</form:option>
+			</form:select>
+		</div>
+		
+		<div class="input-box">
+			<form:label path="NGAYSINH"> </form:label>
+			<form:input type="date" path="NGAYSINH" placeholder="Ngày sinh" />
 		</div>
 		
 		<button type="submit" class="register-btn">Register</button>

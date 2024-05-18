@@ -6,4 +6,4 @@
 <c:set var="elements" value="${initParam.viewsPath}/elements" scope="application" />
 <c:set var="partial" value="${initParam.viewsPath}/partial" scope="application" />
 <c:set var="pages" value="${initParam.viewsPath}/pages" scope="application" />
-<c:set var="basePath" value="${pageContext.request.contextPath}" />
+<c:set var="basePath" value="${pageContext.request.contextPath}" scope="application" />
