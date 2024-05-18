@@ -41,6 +41,7 @@ public class ForumController {
     public String post(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        model.addAttribute("type_2", "post/show");
         Post post;
         post = postServices.getPostByID(id);
 
@@ -71,6 +72,7 @@ public class ForumController {
     public String createPost(Model model) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        model.addAttribute("type_2", "post/edit");
         model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         Post post = new Post();
@@ -82,6 +84,7 @@ public class ForumController {
     public String editPost(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        model.addAttribute("type_2", "post/edit");
         model.addAttribute("user_id", 1);
         model.addAttribute("user_name", "Test User");
         Post post;

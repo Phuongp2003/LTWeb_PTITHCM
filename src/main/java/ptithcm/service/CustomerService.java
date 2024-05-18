@@ -30,9 +30,9 @@ public class CustomerService {
 
     @Transactional
     @ModelAttribute("customers")
-    public Customer getCustomerByID(String id) {
+    public Customer getCustomerByID(Integer id) {
         Session session = factory.getCurrentSession();
-        String hql = "from Customer where id = :id";
+        String hql = "from Customer where MAKH = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         return (Customer) query.list().get(0);

@@ -1,11 +1,12 @@
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-	<jsp:include page="${initParam.viewsPath}/path.jsp" /> 
+	<jsp:include page="${initParam.viewsPath}/path.jsp" />
+	
 	<head>
 		<jsp:include page="partial/head.jsp" />
 	</head>
-
+	
 	<body>
 		<jsp:include page="elements/navbar.jsp" />
 		<style>
@@ -16,23 +17,23 @@
 				color: red;
 			}
 		</style>
-
+		
 		<div class="message">
 			ERROR: No page found!
-			Redirect to <a href="${pageContext.request.contextPath}">Home</a> in 5 seconds!
+			Redirect to <a href="">Home</a> in 5 seconds!
 		</div>
 	</body>
-
+	
 	<jsp:include page="partial/footer.jsp" />
-
+	
 	<script>
 		setTimeout(function() {
-			window.location.href = `${pageContext.request.contextPath}`;
+			window.location.href = ``;
 		}, 5000);
 	</script>
-		setTimeout(function() {
-			window.location.href = `${pageContext.request.contextPath}`;
-		}, 5000);
+	setTimeout(function() {
+	window.location.href = ``;
+	}, 5000);
 	</script>
 	
 </html>

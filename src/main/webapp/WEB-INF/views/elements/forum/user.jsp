@@ -106,7 +106,7 @@
 </style>
 
 <div class="forum-user w-75 fs-4 d-flex">
-	<a class="navbar-brand" href="user/${user_id}">
+	<a class="navbar-brand" href="user/${user_id}.htm">
 		<img class="user-img" src="resources/imgs/test1.jpg" class="userImg">
 		<div class="user-name">${user_name}</div>
 	</a>
@@ -126,7 +126,7 @@
 				</a>
 			</div>
 			<div class="user-postcontrol">
-				<a class="nav-link" href="#">Quản lý bài viết</a>
+				<a class="nav-link" href="user/1/posts.htm">Quản lý bài viết</a>
 			</div>
 		</div>
 	</div>

@@ -7,3 +7,51 @@ body {
 a {
     text-decoration: none !important;
 }
+
+.forum-post {
+    border-top: brown;
+    border-top-style: solid;
+    border-top-width: 2px;
+    padding-top: 20px;
+}
+
+.forum-post .post-list {
+    border: brown;
+    border-style: solid;
+    border-width: .5px;
+    padding: 20px 10px;
+}
+
+.forum-post .post {
+    width: 220px;
+    min-width: 220px;
+    margin: 3px calc(20px / 3);
+    border: brown;
+    border-style: solid;
+    border-width: .5px;
+    padding-top: 20px;
+}
+
+.forum-post .post .post-head {
+    margin-bottom: 10px;
+    border-bottom: .3px brown solid;
+}
+
+@media (max-width: 400px) {
+    .forum-post .post-list {
+        padding: 0;
+    }
+
+    .forum-post .post {
+        margin: 0 0;
+        margin-bottom: 10px;
+        border: none;
+        border-top: solid .5px brown;
+
+    }
+
+    .forum-post .post:last-child {
+        margin-bottom: 0;
+    }
+
+}
