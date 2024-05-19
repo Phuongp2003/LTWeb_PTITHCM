@@ -15,7 +15,7 @@
 				</form>
 			</div>
 			<div class="col-md-2 col-sm-6 col-lg-2">
-				<button type="button" class="btn btn-outline-primary">Thêm thể loại</button>
+				<a href="admin/category/add-category.htm"><button type="button" class="btn btn-outline-primary">Thêm thể loại</button></a>
 			</div>
 		</div>
 		<thead>

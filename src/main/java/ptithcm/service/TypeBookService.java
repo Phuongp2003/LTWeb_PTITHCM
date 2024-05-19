@@ -70,7 +70,9 @@ public class TypeBookService {
 		return list;
     }
 
-    public int insertTypeBook(TypeBook type) {
+    @Transactional
+    @ModelAttribute("categories")
+    public TypeBook addTypeBook(TypeBook type) {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
@@ -79,13 +81,14 @@ public class TypeBookService {
             t.commit();
         } catch (Exception e) {
             t.rollback();
-            return 0;
         } finally {
             session.close();
         }
-        return 1;
+        return type;
     }
 
+    @Transactional
+    @ModelAttribute("categories")
     public int updateTypeBook(TypeBook type){
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
@@ -102,6 +105,8 @@ public class TypeBookService {
 		return 1;
     }
 
+    @Transactional
+    @ModelAttribute("categories")
     public int deleteTypeBook(TypeBook type) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
