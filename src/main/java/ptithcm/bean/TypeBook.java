@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 public class TypeBook {
 	@Id
-
+	@GeneratedValue
 	private Integer MATL;// property
 	private String TENTL;// property
 
