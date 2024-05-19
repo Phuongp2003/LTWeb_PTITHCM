@@ -1,8 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <nav class="navbar navbar-light bg-light fs-3">
 	<!-- flex-row-reverse -> đặt từ phải qua -->
 	<div class="container-fluid flex-row-reverse mx-auto justify-content-start w-75">
-		<div class="d-flex me-3"><a href="/cart.htm"><i class="bi bi-cart"></i></a></div>
-		<div class="d-flex me-3"><a href="#"><i class="bi bi-person"></i></a></div>
+		<div class="d-flex me-3"><a href="cart.htm"><i class="bi bi-cart"></i></a></div>
+		<c:if test="${not empty cookie.uid}">
+			<div class="d-flex me-3"><a href="user/${cookie.uid.value}.htm"><i class="bi bi-person"></i></a></div>
+		</c:if>
+		<c:if test="${empty cookie.uid}">
+			<div class="d-flex me-3"><a href="user/login.htm"><i class="bi bi-person"></i></a></div>
+		</c:if>
 		<div class="d-flex me-3"><a href="#"><i class="bi bi-search"></i></a></div>
 	</div>
 </nav>

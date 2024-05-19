@@ -37,8 +37,7 @@ public class Customer {
 	public Customer() {
 	};
 
-	public Customer(Integer MAKH, String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
-		this.MAKH = MAKH;
+	public Customer(String HO, String TEN, String EMAIL, String SDT, Boolean GIOITINH, Date NGAYSINH) {
 		this.HO = HO;
 		this.TEN = TEN;
 		this.SDT = SDT;

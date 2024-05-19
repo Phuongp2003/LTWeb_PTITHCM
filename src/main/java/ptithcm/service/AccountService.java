@@ -9,6 +9,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Account;
@@ -18,6 +20,17 @@ import ptithcm.bean.Account;
 public class AccountService {
 	@Autowired
 	SessionFactory factory;
+
+	public String isLogin(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+			AccountService accountService) {
+		if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+			model.addAttribute("message", "You are already logged in!");
+			return "redirect:/home.htm";
+		} else {
+			model.addAttribute("message", "Login session error! Please login again!");
+		}
+		return "";
+	}
 
 	@Transactional
 	@ModelAttribute("accounts")
@@ -114,4 +127,34 @@ public class AccountService {
 		List<Account> list = query.list();
 		return list;
 	}
+
+	@Transactional
+	@ModelAttribute("accounts")
+	public Boolean checkLogin(String username, String password) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Account WHERE USERNAME = :username AND PASSWORD = :password";
+		Query query = session.createQuery(hql);
+		query.setParameter("username", username);
+		query.setParameter("password", password);
+		List<Account> list = query.list();
+		if (list.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional
+	@ModelAttribute("accounts")
+	public Boolean isUnregistedEmail(String email) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Account WHERE account_customer.EMAIL = :email";
+		Query query = session.createQuery(hql);
+		query.setParameter("email", email);
+		List<Account> list = query.list();
+		if (list.size() > 0) {
+			return false;
+		}
+		return true;
+	}
+
 }

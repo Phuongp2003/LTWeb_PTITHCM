@@ -12,7 +12,6 @@ public class Account {
     private String PASSWORD;// property
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "MANV")
     private Employee account_employee;// property
 
@@ -23,11 +22,10 @@ public class Account {
     public Account() {
     };
 
-    public Account(Integer ID, String USERNAME, String PASSWORD, Employee account_employee, Customer account_customer) {
+    public Account(Integer ID, String USERNAME, String PASSWORD, Customer account_customer) {
         this.ID = ID;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
-        this.account_employee = account_employee;
         this.account_customer = account_customer;
 
     }
