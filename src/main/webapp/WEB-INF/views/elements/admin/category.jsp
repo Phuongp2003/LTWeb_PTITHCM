@@ -33,8 +33,8 @@
 					<td>3</td>
 					<td>100.000</td>
 					<td>
-						<button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button>
-						<button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button>
+						<a href="admin/category/${category.MATL}/delete.htm"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
+						<a href="admin/category/${category.MATL}/update.htm"><button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
 					</td>
 				</tr>
 			</c:forEach>
