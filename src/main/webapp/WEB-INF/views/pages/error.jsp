@@ -4,11 +4,11 @@
 	<jsp:include page="${initParam.viewsPath}/path.jsp" />
 	
 	<head>
-		<jsp:include page="partial/head.jsp" />
+		<jsp:include page="${partial}/head.jsp" />
 	</head>
 	
 	<body>
-		<jsp:include page="elements/navbar.jsp" />
+		<jsp:include page="${elements}/navbar.jsp" />
 		<style>
 			.message {
 				width: 100%;
@@ -24,7 +24,7 @@
 		</div>
 	</body>
 	
-	<jsp:include page="partial/footer.jsp" />
+	<jsp:include page="${partial}/footer.jsp" />
 	
 	<script>
 		setTimeout(function() {

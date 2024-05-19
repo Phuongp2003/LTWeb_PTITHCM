@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <style>
 	.navbar-brand {
 		align-items: center;
@@ -105,40 +106,45 @@
 	}
 </style>
 
-<div class="forum-user w-75 fs-4 d-flex">
-	<a class="navbar-brand" href="user/${user_id}.htm">
-		<img class="user-img" src="resources/imgs/test1.jpg" class="userImg">
-		<div class="user-name">${user_name}</div>
-	</a>
-	<div class="user-controller">
-		<button class="user-func-toggler" type="button" aria-label="Toggle navigation" onclick="toggleNavItems()">
-			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-compact-down nav-dropdown" viewBox="0 0 16 16">
-				<path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"></path>
-			</svg>
-			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-up nav-close-dropdown" viewBox="0 0 16 16">
-				<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z" />
-			</svg>
-		</button>
-		<div class="nav-item">
-			<div class="user-createpost">
-				<a class="nav-link" href="forum/create-post.htm">
-					Tạo bài viết
-				</a>
-			</div>
-			<div class="user-postcontrol">
-				<a class="nav-link" href="user/1/posts.htm">Quản lý bài viết</a>
-			</div>
+<c:if test="${user_id != null}">
+	
+	<div class="forum-user w-75 fs-4 d-flex">
+		<a class="navbar-brand" href="user/${user_id}.htm">
+			<img class="user-img" src="resources/imgs/test1.jpg" class="userImg">
+			<div class="user-name">${user_name}</div>
+		</a>
+		<div class="user-controller">
+			<button class="user-func-toggler" type="button" aria-label="Toggle navigation" onclick="toggleNavItems()">
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-compact-down nav-dropdown" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67"></path>
+				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-up nav-close-dropdown" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z" />
+				</svg>
+			</button>
+			<c:if test="${owner != null && owner}">
+				<div class="nav-item">
+					<div class="user-createpost">
+						<a class="nav-link" href="forum/create-post.htm">
+							Tạo bài viết
+						</a>
+					</div>
+					<div class="user-postcontrol">
+						<a class="nav-link" href="user/${user_id}/posts.htm">Quản lý bài viết</a>
+					</div>
+				</div>
+			</c:if>
 		</div>
 	</div>
-</div>
-
-<script>
-	function toggleNavItems() {
-		var navItems = document.querySelectorAll('.user-controller .nav-item');
-		navItems.forEach(function(item) {
-			item.classList.toggle('show');
-		});
-		var button = document.querySelector('.user-func-toggler');
-		button.classList.toggle('active');
-	}
-</script>
+	
+	<script>
+		function toggleNavItems() {
+			var navItems = document.querySelectorAll('.user-controller .nav-item');
+			navItems.forEach(function(item) {
+				item.classList.toggle('show');
+			});
+			var button = document.querySelector('.user-func-toggler');
+			button.classList.toggle('active');
+		}
+	</script>
+</c:if>
