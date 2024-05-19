@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,29 @@ public class CategoryController {
     public String saveNewCategory(ModelMap model, @RequestParam("TENTL") String TENTL) {
         TypeBook typebook = new TypeBook(null, TENTL);
         typeBookService.addTypeBook(typebook);
+        model.addAttribute("category", typebook);
+        return "redirect:/admin/category.htm";
+    }
+
+    @RequestMapping(value = "{MATL}/update")
+    public String editCategory(ModelMap model, @PathVariable("MATL") int MATL) {
+        TypeBook typebook = typeBookService.getTypeBookByID(MATL);
+        model.addAttribute("category", typebook);
+        return "pages/admin/editcategory";
+    }
+
+    @RequestMapping(value = "{MATL}/update/edit-category", method = RequestMethod.POST)
+    public String saveEditCategory(ModelMap model, @PathVariable("MATL") int MATL, @RequestParam("TENTL") String TENTL) {
+        TypeBook typebook = new TypeBook(MATL, TENTL);
+        typeBookService.updateTypeBook(typebook);
+        model.addAttribute("category", typebook);
+        return "redirect:/admin/category.htm";
+    }
+
+    @RequestMapping(value = "{MATL}/delete")
+    public String deleteCategory(ModelMap model, @PathVariable("MATL") int MATL) {
+        TypeBook typebook = typeBookService.getTypeBookByID(MATL);
+        typeBookService.deleteTypeBook(typebook);
         model.addAttribute("category", typebook);
         return "redirect:/admin/category.htm";
     }
