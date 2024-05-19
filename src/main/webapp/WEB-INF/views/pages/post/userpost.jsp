@@ -9,6 +9,7 @@
 	
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
+		<jsp:include page="${elements}/forum/user.jsp" />
 		<jsp:include page="${elements}/forum/userpost.jsp" />
 	</body>
 	

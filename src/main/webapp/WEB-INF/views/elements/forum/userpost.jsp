@@ -82,9 +82,12 @@
 									<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status OK">
 								</c:otherwise>
 							</c:choose>
-						</div> |
-						<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
-						<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
+						</div>
+						<c:if test="${owner != null && owner}">
+							|
+							<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
+							<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
