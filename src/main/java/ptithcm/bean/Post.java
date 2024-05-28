@@ -19,6 +19,8 @@ public class Post {
     private String content;// property
     @Column(name = "MOTA")
     private String desciption;// property
+    // @Column(name = "FORMAT")
+    // private String format;// property
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;

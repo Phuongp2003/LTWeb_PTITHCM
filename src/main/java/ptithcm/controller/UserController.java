@@ -58,13 +58,14 @@ public class UserController {
             model.addAttribute("user_id", Integer.parseInt(cookie_uid));
             model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
             model.addAttribute("owner", true);
-            post = postServices.getPostsByUserIDP(Integer.parseInt(cookie_uid));
+            post = postServices.getPostsByUserIDP(
+                    accountService.getAccountByID(Integer.parseInt(cookie_uid)).getAccount_customer().getMAKH());
         } else {
             model.addAttribute("user_name", accountService.getAccountByID(uid).getAccount_customer().getHO() + " "
                     + accountService.getAccountByID(uid).getAccount_customer().getTEN());
             model.addAttribute("user_id", uid);
             model.addAttribute("owner", false);
-            post = postServices.getPostsByUserIDP(uid);
+            post = postServices.getPostsByUserIDP(accountService.getAccountByID(uid).getAccount_customer().getMAKH());
         }
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");

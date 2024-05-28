@@ -41,6 +41,7 @@ public class ForumController {
 
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        model.addAttribute("owner", true);
         List<Post> post = postServices.getAllPosts();
         model.addAttribute("posts", post);
         return "pages/forum/forum";
@@ -120,6 +121,7 @@ public class ForumController {
             model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
+            model.addAttribute("owner", true);
             model.addAttribute("error", 401);
             model.addAttribute("message", "You must login to edit post");
             return "pages/post/post_action";

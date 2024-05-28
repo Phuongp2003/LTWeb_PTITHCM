@@ -36,12 +36,7 @@
     display: flex;
     justify-content: center;
     min-height: 20px;
-    border: rgba(17, 0, 250, 0.25) solid 1px;
     position: relative;
-}
-
-.content-row:hover {
-    border: blue solid 1px;
 }
 
 .post-content {
@@ -66,15 +61,6 @@
 
 .post-text .ctextarea {
     width: 100%;
-    border: rgba(17, 0, 250, 0.25) solid 1px;
-}
-
-.post-text .ctextarea:hover {
-    border: rgba(blue) solid 1px;
-}
-
-.post-text .ctextarea:active {
-    border: rgba(blue) solid 1px;
 }
 
 .post-image .img-size-controller input {
