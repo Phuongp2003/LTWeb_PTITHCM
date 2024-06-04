@@ -43,14 +43,14 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "{MATL}/update")
-    public String editCategory(ModelMap model, @PathVariable("MATL") int MATL) {
+    public String editCategory(ModelMap model, @PathVariable("MATL") Integer MATL) {
         TypeBook typebook = typeBookService.getTypeBookByID(MATL);
         model.addAttribute("category", typebook);
         return "pages/admin/editcategory";
     }
 
     @RequestMapping(value = "{MATL}/update/edit-category", method = RequestMethod.POST)
-    public String saveEditCategory(ModelMap model, @PathVariable("MATL") int MATL, @RequestParam("TENTL") String TENTL) {
+    public String saveEditCategory(ModelMap model, @PathVariable("MATL") Integer MATL, @RequestParam("TENTL") String TENTL) {
         TypeBook typebook = new TypeBook(MATL, TENTL);
         typeBookService.updateTypeBook(typebook);
         model.addAttribute("category", typebook);
@@ -58,7 +58,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "{MATL}/delete")
-    public String deleteCategory(ModelMap model, @PathVariable("MATL") int MATL) {
+    public String deleteCategory(ModelMap model, @PathVariable("MATL") Integer MATL) {
         TypeBook typebook = typeBookService.getTypeBookByID(MATL);
         typeBookService.deleteTypeBook(typebook);
         model.addAttribute("category", typebook);

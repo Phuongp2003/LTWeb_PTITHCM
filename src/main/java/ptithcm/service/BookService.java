@@ -66,7 +66,9 @@ public class BookService {
 		return list;
     }
 
-    public int insertBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+    public Book addBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -75,14 +77,15 @@ public class BookService {
 		} catch (Exception e) {
 			System.out.println(e);
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
 
-	public int updateBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+	public Book updateBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -90,14 +93,15 @@ public class BookService {
 			t.commit();
 		} catch (Exception e) {
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
 
-	public int deleteBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+	public Book deleteBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
@@ -107,11 +111,10 @@ public class BookService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
 	
 	public List<Book> searchBook(String TENSACH) {

@@ -35,7 +35,7 @@ public class ShopController {
     }
 
     @RequestMapping(value = "typebook/{MATL}")
-    public String findType(ModelMap model, @PathVariable("MATL") int MATL) {
+    public String findType(ModelMap model, @PathVariable("MATL") Integer MATL) {
         model.addAttribute("title", "PTITHCM Types Book");
         model.addAttribute("type", "shop");
         List<TypeBook> categories = typeBookService.getAllTypeBooks();
