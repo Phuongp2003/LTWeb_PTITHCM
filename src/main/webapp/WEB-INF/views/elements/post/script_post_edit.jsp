@@ -1,14 +1,25 @@
+<%@ page pageEncoding="UTF-8"%>
 <script>
 	$(document).ready(function() {
+		window.onbeforeunload = function() {
+			return '';
+		}
 		// Counter for content rows
-		var elementCounter = $(".post-number-e").text().split(' ').slice(1).map(Number);
-		var currentElementPoiter = Number($(".post-number-e").text().split(' ')[0]);
+		var elementCounter = [];
+		
+		$('.content-row').each(function() {
+			var numPostContent = $(this).find('.post-content').length;
+			elementCounter.push(numPostContent);
+		});
+		
+		var currentElementPointer = elementCounter.length - 1;
 		var currentEvent;
-		elementCounter[1] = 0;
 		
 		// Function to add a new element block
-		function addTextBlock() {
-			var id = elementCounter[currentElementPoiter++] = 0;
+		function addElementBlock() {
+			elementCounter.push(0);
+			currentElementPointer++;
+			var id = elementCounter.length - 1;
 			var elementBlock = '<div class="content-row" id="content-row-' + id + '">' +
 				'<div class="post-element-controller" id="e-controller-' + id + '">' +
 				'<div class="pec-row1">' +
@@ -43,7 +54,7 @@
 		
 		// Event listener for add-element button
 		$('[name="add-element-row"]').click(function() {
-			addTextBlock();
+			addElementBlock();
 			checkAndDisableButtons();
 		});
 		
@@ -64,19 +75,16 @@
 					var imageUrl = event.target.result;
 					var parentId = $(currentEvent).closest('.content-row').attr('id').split('-')[2];
 					let id = elementCounter[parentId];
-					var imageBlock = '<div class="post-image post-content" id="image-' + id + ' container-' + id + '-' + parentId + '">' +
-						'<img class="dragbar-' + id + '-' + parentId + '" src="' + imageUrl + '" alt="Image" width="200" height="200">' +
-						'<div class="handle EE "></div>' +
-						'<div class="handle SS "></div>' +
-						'<div class="handle SE "></div>' +
+					var imageBlock = '<div class="post-image post-content " id="image-' + id + ' container-' + id + '-' + parentId + '">' +
+						'<div class="dragbar dragbarb" style="width: 200px; height: 200px;" >' +
+						'<img src="' + imageUrl + '" alt="Image">' +
+						'</div>' +
 						'</img>' +
 						'<div class="row-element-controller">' +
 						'<div class="text-controller">' +
 						'<button type="button" name="delete-element-row" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
 						'</div>' +
 						'<div class="size-controller">' +
-						'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="200"> x ' +
-						'<input class="eh-controller size-controller" type="number" name="eheight" placeholder="Height" value="200">' +
 						'</div>' +
 						'</div>';
 					contentRow.append(imageBlock);
@@ -116,8 +124,6 @@
 							});
 						}
 					});
-					
-					makeResizable();
 					elementCounter[parentId]++;
 					checkAndDisableButtons();
 				};
@@ -139,9 +145,8 @@
 			let id = elementCounter[parentId];
 			var textBlock =
 				'<div class="post-text post-content" id="container-' + id + '-' + parentId + ' text-' + id + '">' +
-				'<div class="dragbar-' + id + '-' + parentId + '" style="width: 500px;">' +
+				'<div class="dragbar" style="width: 825px;">' +
 				'<div class="content-' + id + ' ctextarea" id="content-' + id + '" contenteditable="true" style="width: 100%; min-height: 30px;"> </div>' +
-				'<div class="handle EE "></div>' +
 				'</div>' +
 				'<div class="row-element-controller">' +
 				'<div class="text-controller">' +
@@ -168,10 +173,11 @@
 				'<option value="Courier New">Courier New</option>' +
 				'</select>' +
 				'</div>' +
-				'<div class="size-controller">' +
-				'<input class="ew-controller size-controller" type="number" name="ewidth" placeholder="Width" value="500"> x ' +
-				'<input class="eh-controller size-controller" type="text" name="eheight" placeholder="Height" value="auto" disabled>' +
-				'</div>' +
+				// '<select class="size-controller">' +
+				// '<option value="small">Small</option>' +
+				// '<option value="medium" selected>Medium</option>' +
+				// '<option value="large">Large</option>' +
+				// '</select>' +
 				'</div>';
 			contentRow.append(textBlock);
 			$('input').on('input', 'keypress', function(e) {
@@ -181,7 +187,7 @@
 			});
 			$('#text-' + id + ' size-controller').on('keyup', function(e) {
 				if (e.keyCode === 13) { // Check if Enter key is pressed
-					var maxWidth = $(this).closest('.content-row').width(); // Get width of content row
+					var maxWidth = 1100; // Get width of content row
 					var totalWidth = 0;
 					
 					// Calculate total width of all post-text and post-image elements in the content row
@@ -201,7 +207,6 @@
 					} else {
 						width = $(this).closest('.post-text').find('input[name="ewidth"]').val(maxImageWidth);
 					}
-					console.log("🚀 ~ $ ~ $(this).closest('.post-text').find('input[name=\"ewidth\"]').val(maxImageWidth):", $(this).closest('.post-text').find('input[name="ewidth"]').val(maxImageWidth))
 					
 					// Apply width and height to the image
 					$(this).closest('.post-text').css({
@@ -220,7 +225,6 @@
 				}
 			});
 			checkAndDisableButtons(id);
-			makeResizable();
 			elementCounter[parentId]++;
 		});
 		
@@ -239,26 +243,31 @@
 		// Event listener for set-left button
 		$('.post-contents').on('click', '[name="set-left"]', function() {
 			$(this).closest('.content-row').css('justify-content', 'flex-start');
+			$(this).closest('.content-row').find('.dragbar').css("direction", "ltr");
 		});
 		
 		// Event listener for set-right button
 		$('.post-contents').on('click', '[name="set-right"]', function() {
 			$(this).closest('.content-row').css('justify-content', 'flex-end');
+			$(this).closest('.content-row').find('.dragbar').css("direction", "rtl");
 		});
 		
 		// Event listener for set-left button
 		$('.post-contents').on('click', '[name="set-top"]', function() {
 			$(this).closest('.content-row').css('align-items', 'start');
+			$(this).closest('.content-row').find('.dragbar').css("direction", "ltr");
 		});
 		
 		// Event listener for set-right button
 		$('.post-contents').on('click', '[name="set-middle"]', function() {
 			$(this).closest('.content-row').css('align-items', 'center');
+			$(this).closest('.content-row').find('.dragbar').css("direction", "ltr");
 		});
 		
 		// Event listener for set-left button
 		$('.post-contents').on('click', '[name="set-bottom"]', function() {
 			$(this).closest('.content-row').css('align-items', 'end');
+			$(this).closest('.content-row').find('.dragbar').css("direction", "ltr");
 		});
 		
 		// Event listener for center-element buttons
@@ -279,6 +288,7 @@
 					break;
 			}
 			$(this).closest('.content-row').css('justify-content', justifyValue);
+			$(this).closest('.content-row').find('.dragbar').css("direction", "ltr");
 		});
 		
 		// Disable align/justify
@@ -306,20 +316,22 @@
 		});
 		// Event listener for set-left element row button
 		$('.post-contents').on('click', '[name="set-left-row"]', function() {
+			$(this).closest('.post-content').find('.dragbar').css("direction", "ltr");
 			$(this).closest('.post-content').find('.ctextarea').css("text-align", "left");
 		});
 		
 		// Event listener for set-center element row button
 		$('.post-contents').on('click', '[name="set-center-row"]', function() {
+			$(this).closest('.post-content').find('.dragbar').css("direction", "ltr");
 			$(this).closest('.post-content').find('.ctextarea').css("text-align", "center");
 		});
 		
 		// Event listener for set-right element row button
 		$('.post-contents').on('click', '[name="set-right-row"]', function() {
+			
 			$(this).closest('.post-content').find('.ctextarea').css("text-align", "right");
 		});
 		
-		//Text controiller
 		// --Font size
 		$('.post-contents').on('input', '.font-size-controller', function() {
 			var fontSize = $(this).val() + 'px';
@@ -353,9 +365,66 @@
 			$(this).closest('.post-text').find('.ctextarea').css('font-family', fontFamily);
 		});
 		
+		// $(window).keydown(function(event) {
+		// 	if (event.keyCode == 13) { // Enter key
+		// 		console.log("🚀 ~ $ ~ !$(event.target).hasClass('ctextarea'):", !$(event.target).hasClass('ctextarea'))
+		// 		if (!$(event.target).hasClass('ctextarea')) {
+		// 			event.preventDefault(); // Prevent form submission
+		// 		}
+		// 		return false;
+		// 	}
+		// });
 		
+		// $('.ctextarea').on('keydown', function(e) {
+		// 	if (e.ctrlKey && e.keyCode == 13) {
+		// 		document.execCommand('insertHTML', false, '<br>');
+		// 		return false;
+		// 	}
+		// });
 		
 		$('form').on('submit', function(e) {
+			// Check if any input field is empty
+			var isEmptyField = $(this).find('input').is(function() {
+				return $(this).val() === '';
+			});
+			
+			var isEmptyTextField = $(this).find('ctextarea, .post-text').is(function() {
+				return $(this).text().trim() === '';
+			});
+			
+			// Check if any .content-row has no .post-content
+			var isMissingPostContent = $('.content-row').is(function() {
+				return $(this).find('.post-content').length === 0;
+			});
+			
+			// Check if there are no .content-row elements
+			var isMissingContentRow = $('.content-row').length === 0;
+			
+			if (isEmptyField || isEmptyTextField || isMissingPostContent || isMissingContentRow) {
+				e.preventDefault();
+				alert('Bạn chưa hoàn thành bài viết, vui lòng hoàn thành trước khi đăng!');
+			}
+			
+			if (isEmptyField) {
+				alert("Có tiêu đề/tóm tắt trống!");
+				return false;
+			}
+			
+			if (isEmptyTextField) {
+				alert("Có đoạn văn trống!");
+				return false;
+			}
+			
+			if (isMissingPostContent) {
+				alert("Có khu vực bài viết được tạo ra nhưng để trống!");
+				return false;
+			}
+			
+			if (isMissingContentRow) {
+				alert("Bài viết chưa có nội dung!");
+				return false;
+			}
+			
 			// Get the contents of the div
 			var content = $('.post-contents').html();
 			// Create a hidden input for the content
@@ -368,91 +437,7 @@
 			// Append the hidden inputs to the form
 			$(this).append(contentInput);
 			$('.post-number-e').text(currentElementPointer + ' ' + elementCounter.join(' '));
+			this.submit();
 		});
 	});
-	
-	function makeResizable(id, parentId) {
-		var startPos, startRect, rectDiv = $(".dragbar-" + id + "-" + parentId);
-		
-		function update() {
-			console.log("🚀 ~ update ~ this:", this)
-			var handle = $(this),
-				dir = handle.attr("class").split(" ")[1],
-				delta;
-			
-			if (dir[1] === "E") {
-				rectDiv.width(startRect.width + handle.position().left - startPos.left);
-			}
-			if (dir[1] === "W") {
-				delta = handle.position().left - startPos.left;
-				rectDiv.css({
-					left: startRect.left + delta,
-					width: startRect.width - delta
-				});
-			}
-			if (dir[0] === "S") {
-				rectDiv.height(startRect.height + handle.position().top - startPos.top);
-			}
-			if (dir[0] === "N") {
-				delta = handle.position().top - startPos.top;
-				rectDiv.css({
-					top: startRect.top + delta,
-					height: startRect.height - delta
-				});
-			}
-			resetHandles();
-		}
-		
-		function resetHandles() {
-			$(".EE, .SE").css({
-				left: "auto",
-				right: -4
-			});
-			$(".SS, .SE").css({
-				top: "auto",
-				bottom: -4
-			});
-			$(" .SS").css({
-				left: "50%",
-				marginLeft: -4
-			});
-			$(".EE").css({
-				top: "50%",
-				marginTop: -4
-			});
-		}
-		
-		$('.handle').draggable({
-			snap: "#container-" + id + "-" + parentId,
-			start: function() {
-				startPos = $(this).position();
-				startRect = {
-					top: rectDiv.position().top,
-					left: rectDiv.position().left,
-					width: rectDiv.width(),
-					height: rectDiv.height()
-				};
-			}
-		});
-		
-		$('.SS').on('mousedown', function(e) {
-			$(this).draggable({
-				axis: "y",
-				stop: update
-			});
-		});
-		
-		$('.EE').on('mousedown', function(e) {
-			$(this).draggable({
-				axis: "x",
-				stop: update
-			});
-		});
-		
-		$('.SE').on('mousedown', function(e) {
-			$(this).draggable({
-				stop: update
-			});
-		});
-	}
 </script>

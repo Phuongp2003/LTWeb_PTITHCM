@@ -30,6 +30,36 @@
     position: absolute;
 }
 
+.post-text {
+    width: max-content;
+}
+
+.post-text .dragbar {
+    width: 550px;
+}
+
+.dragbar {
+    resize: horizontal;
+    direction: ltr;
+    overflow: hidden;
+    -webkit-user-select: none;
+    /* Chrome, Safari, Opera */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+}
+
+.dragbarb {
+    resize: both !important;
+}
+
+.dragbarb img {
+    width: 100%;
+    height: 100%;
+}
+
 .post-text .ctextarea {
     width: 100%;
     border: rgba(17, 0, 250, 0.25) solid 1px;
@@ -80,7 +110,8 @@
     border-radius: 5px;
     z-index: 50;
     flex-direction: column;
-    top: -80px;
+    top: 0;
+    transform: translateY(-100%);
 }
 
 .post-text .row-element-controller {
@@ -92,7 +123,8 @@
     border-radius: 5px;
     z-index: 50;
     flex-direction: column;
-    top: -110px;
+    top: 0;
+    transform: translateY(-100%);
 }
 
 .row-element-controller button,

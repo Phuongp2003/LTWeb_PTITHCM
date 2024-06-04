@@ -41,10 +41,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- <form:input class="post-number-e" path="format" style="display:  none;">1 0</form:input> -->
 		<button type="submit">Save</button>
 	</form:form>
 	<input type="file" id="imageInput" style="display: none;" accept="image/*">
-	</div>
-	
-	<jsp:include page="script_post_edit.jsp" />
+</div>
+
+<jsp:include page="script_post_edit.jsp" />
