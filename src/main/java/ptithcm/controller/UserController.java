@@ -35,7 +35,7 @@ public class UserController {
         String username = employee != null ? employee.getHO() + " " + employee.getTEN()
                 : customer.getHO() + " " + customer.getTEN();
 
-        model.addAttribute("title", username + " profile");
+        model.addAttribute("title", "Trang cá nhân của " + username);
         model.addAttribute("type", "user");
         model.addAttribute("user_id", uid);
         model.addAttribute("user_name", username);
@@ -43,6 +43,7 @@ public class UserController {
         model.addAttribute("account", account);
         model.addAttribute("model", employee != null ? employee : customer);
         if (cookie_uid.equals(uid.toString())) {
+            model.addAttribute("title", "Trang cá nhân");
             return "pages/user/dashboard";
         }
         return "pages/user/profile";
@@ -58,15 +59,16 @@ public class UserController {
             model.addAttribute("user_id", Integer.parseInt(cookie_uid));
             model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
             model.addAttribute("owner", true);
-            post = postServices.getPostsByUserIDP(Integer.parseInt(cookie_uid));
+            post = postServices.getPostsByUserIDP(
+                    accountService.getAccountByID(Integer.parseInt(cookie_uid)).getAccount_customer().getMAKH());
         } else {
             model.addAttribute("user_name", accountService.getAccountByID(uid).getAccount_customer().getHO() + " "
                     + accountService.getAccountByID(uid).getAccount_customer().getTEN());
             model.addAttribute("user_id", uid);
             model.addAttribute("owner", false);
-            post = postServices.getPostsByUserIDP(uid);
+            post = postServices.getPostsByUserIDP(accountService.getAccountByID(uid).getAccount_customer().getMAKH());
         }
-        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("title", "Danh sách bài viết");
         model.addAttribute("type", "forum");
 
         model.addAttribute("posts", post);

@@ -65,7 +65,7 @@
 								${post.title}
 							</a>
 						</div>
-						<a href="user/${post.author.MAKH}.htm" class="post-author fs-6">${post.author.getFullname()}</a>
+						<a href="user/${post.author.getAccount().getID()}.htm" class="post-author fs-6">${post.author.getFullname()}</a>
 					</div>
 					<div class="post-content fs-5">${post.description}</div>
 				</div>

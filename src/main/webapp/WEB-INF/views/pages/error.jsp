@@ -29,11 +29,7 @@
 	<script>
 		setTimeout(function() {
 			window.location.href = ``;
-		}, 5000);
-	</script>
-	setTimeout(function() {
-	window.location.href = ``;
-	}, 5000);
+		}, 500000);
 	</script>
 	
 </html>

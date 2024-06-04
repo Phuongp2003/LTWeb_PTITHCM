@@ -88,7 +88,10 @@
 		
 		<button type="submit" class="login-btn">Login</button>
 		<div class="sign-up">
-			<p>Don't have an account? <a href="user/register.htm">Sign-up</a></p>
+			<p>Chưa có tài khoản ư? <a href="user/register.htm">Đăng ký ngay!</a></p>
+		</div>
+		<div class="sign-up">
+			<p><a href="user/forgot-password.htm">Quên mật khẩu</a></p>
 		</div>
 	</form:form>
 </div>
