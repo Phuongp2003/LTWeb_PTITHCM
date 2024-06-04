@@ -86,7 +86,7 @@ public class ForumController {
     public String createPost(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
+            model.addAttribute("title", "Tạo bài viết");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -117,8 +117,8 @@ public class ForumController {
     public String editPost(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
+        model.addAttribute("title", "Chỉnh sửa bài viết " + id);
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("owner", true);
@@ -130,15 +130,12 @@ public class ForumController {
         post = postServices.getPostByID(id);
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         if (post.getAuthor().getMAKH() != user.getMAKH()) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
             model.addAttribute("message", "You don't have permission to edit this post");
             return "pages/error";
         }
-
-        model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/edit");
         model.addAttribute("user_id", Integer.parseInt(uid));
@@ -179,8 +176,8 @@ public class ForumController {
     public String removePost(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
+        model.addAttribute("title", "Xóa bài viết " + id);
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -192,7 +189,6 @@ public class ForumController {
         post = postServices.getPostByID(id);
         if (post.getAuthor().getMAKH() != accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer()
                 .getMAKH()) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -203,7 +199,6 @@ public class ForumController {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
 
         postServices.removePost(post);
-        model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
