@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 	<jsp:include page="${initParam.viewsPath}/path.jsp" /> 
@@ -8,7 +9,8 @@
 
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
-		<jsp:include page="${elements}/bill/showbill.jsp" />
+		<!-- <jsp:include page="${elements}/bill/showbill.jsp" /> -->
+		<jsp:include page="${elements}/bill/addbill.jsp" />
 	</body>
 
 	<jsp:include page="${partial}/footer.jsp" />

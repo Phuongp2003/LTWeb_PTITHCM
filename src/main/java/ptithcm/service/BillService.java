@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ptithcm.bean.*;
 
@@ -64,21 +66,22 @@ public class BillService {
         return monthlyTotals;
     }
 
-    public int insertBill(List<CartDetail> cartdetail) {
+    @Transactional
+    @ModelAttribute("bill")
+    public Bill insertBill(Bill bill) {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
         try {
-            session.save(cartdetail);
+            session.save(bill);
             t.commit();
         } catch (Exception e) {
             e.printStackTrace();
             t.rollback();
-            return 0;
         } finally {
             session.close();
         }
-        return 1;
+        return bill;
     }
 
 }

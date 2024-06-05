@@ -17,18 +17,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Object> handleException(Exception e) {
         logger.error("Unhandled exception: ", e);
-        return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Internal server error",
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = HibernateException.class)
     public ResponseEntity<Object> handleHibernateException(HibernateException e) {
         logger.error("Hibernate exception: ", e);
-        return new ResponseEntity<>("Database error", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Database error",
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException e) {
         logger.error("Hibernate constraint violation exception: ", e);
-        return new ResponseEntity<>("A database constraint has been violated", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("A database constraint has been violated",
+                HttpStatus.BAD_REQUEST);
     }
 }

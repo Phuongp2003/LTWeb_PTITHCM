@@ -7,33 +7,34 @@ import javax.persistence.*;
 @Embeddable
 public class CartDetailPrimary implements Serializable {
     @Column(name = "IDGH")
-    String IDGH;
+    int IDGH;
 
     @Column(name = "MASACH")
-    String MASACH;
+    int MASACH;
 
     public CartDetailPrimary() {
     }
 
-    public CartDetailPrimary(String IDGH, String MASACH) {
+    public CartDetailPrimary(int IDGH, int MASACH) {
         this.IDGH = IDGH;
         this.MASACH = MASACH;
 
     }
 
-    public String getIDGH() {
+    public int getIDGH() {
         return IDGH;
     }
 
-    public void setIDGH(String iDGH) {
+    public void setIDGH(int iDGH) {
         IDGH = iDGH;
     }
 
-    public String getMASACH() {
+    public int getMASACH() {
         return MASACH;
     }
 
-    public void setMASACH(String mASACH) {
+    public void setMASACH(int mASACH) {
         MASACH = mASACH;
     }
+
 }

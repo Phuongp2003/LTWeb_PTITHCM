@@ -31,7 +31,7 @@ public class TypeBookService {
 
     @Transactional
     @ModelAttribute("categories")
-    public TypeBook getTypeBookByID(int MATL){
+    public TypeBook getTypeBookByID(int MATL) {
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook where MATL = :MATL";
         Query query = session.createQuery(hql);
@@ -42,9 +42,9 @@ public class TypeBookService {
 
     @Transactional
     @ModelAttribute("categories")
-    public TypeBook getTypeBookByName(String TENTL){
+    public TypeBook getTypeBookByName(String TENTL) {
         TypeBook type;
-        try{
+        try {
             Session session = factory.getCurrentSession();
             String hql = "from TypeBook where TENTL = :TENTL";
             Query query = session.createQuery(hql);
@@ -53,21 +53,21 @@ public class TypeBookService {
             TypeBook list = (TypeBook) query.list().get(0);
             return list;
         } catch (Exception e) {
-			type = null;
-		}
-		return type;
+            type = null;
+        }
+        return type;
     }
 
     @Transactional
     @ModelAttribute("categories")
-    public List<TypeBook> searchTypeBook(String TENTL){
+    public List<TypeBook> searchTypeBook(String TENTL) {
         Session session = factory.getCurrentSession();
         String hql = "from TypeBook where TENTL like :TENTL";
         Query query = session.createQuery(hql);
         query.setParameter("TENTL", "%" + TENTL + "%");
 
         List<TypeBook> list = query.list();
-		return list;
+        return list;
     }
 
     @Transactional
@@ -76,7 +76,7 @@ public class TypeBookService {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
-        try{
+        try {
             session.save(type);
             t.commit();
         } catch (Exception e) {
@@ -89,36 +89,36 @@ public class TypeBookService {
 
     @Transactional
     @ModelAttribute("categories")
-    public TypeBook updateTypeBook(TypeBook type){
+    public TypeBook updateTypeBook(TypeBook type) {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
-        try{
+        try {
             session.update(type);
             t.commit();
         } catch (Exception e) {
-			t.rollback();
+            t.rollback();
         } finally {
-			session.close();
-		}
-		return type;
+            session.close();
+        }
+        return type;
     }
 
     @Transactional
     @ModelAttribute("categories")
     public TypeBook deleteTypeBook(TypeBook type) {
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
 
-		try {
-			session.delete(type);
-			t.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			t.rollback();
-		} finally {
-			session.close();
-		}
-		return type;
-	}
+        try {
+            session.delete(type);
+            t.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            t.rollback();
+        } finally {
+            session.close();
+        }
+        return type;
+    }
 }

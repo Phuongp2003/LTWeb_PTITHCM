@@ -10,7 +10,8 @@
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
 	
-		<jsp:include page="${elements}/cart/showcast.jsp" /> 
+		
+		<jsp:include page="${elements}/cart/showcart.jsp" />  
 		
 
 	</body>
