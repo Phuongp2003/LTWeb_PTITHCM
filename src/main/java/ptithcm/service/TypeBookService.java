@@ -60,11 +60,11 @@ public class TypeBookService {
 
     @Transactional
     @ModelAttribute("categories")
-    public List<TypeBook> searchTypeBook(String TENTL){
+    public List<TypeBook> searchTypeBook(String keywords){
         Session session = factory.getCurrentSession();
-        String hql = "from TypeBook where TENTL like :TENTL";
+        String hql = "from TypeBook where TENTL like :keywords";
         Query query = session.createQuery(hql);
-        query.setParameter("TENTL", "%" + TENTL + "%");
+        query.setParameter("keywords", "%" + keywords + "%");
 
         List<TypeBook> list = query.list();
 		return list;

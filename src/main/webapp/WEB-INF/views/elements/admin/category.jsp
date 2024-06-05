@@ -10,8 +10,8 @@
 	<table class="category-list table">
 		<div class="filter-wrapper row">
 			<div class="col-md-10 col-sm-12 col-lg-10">
-				<form role="search">
-					<input class="form-control" type="search" placeholder="Tìm thể loại" aria-label="Search" style="width: 50%;">
+				<form class="d-flex" role="search" action="/admin/category/search.htm">
+					<input name="searchInput" class="form-control" type="search" placeholder="Tìm thể loại" aria-label="Search" style="width: 50%;">
 				</form>
 			</div>
 			<div class="col-md-2 col-sm-6 col-lg-2">

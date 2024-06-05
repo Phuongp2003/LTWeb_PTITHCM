@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ptithcm.bean.Book;
 import ptithcm.bean.TypeBook;
 import ptithcm.service.TypeBookService;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/admin/category")
@@ -63,5 +66,14 @@ public class CategoryController {
         typeBookService.deleteTypeBook(typebook);
         model.addAttribute("category", typebook);
         return "redirect:/admin/category.htm";
+    }
+
+    @RequestMapping(value = "search")
+    public String searchType(HttpServletRequest request, ModelMap model) {
+        // List<TypeBook> category = typeBookService.getAllTypeBooks();
+        List<TypeBook> categoryByName = typeBookService.searchTypeBook(request.getParameter("searchInput"));
+        // model.addAttribute("categories", category);
+        model.addAttribute("categories", categoryByName);
+        return "pages/admin/category";
     }
 }

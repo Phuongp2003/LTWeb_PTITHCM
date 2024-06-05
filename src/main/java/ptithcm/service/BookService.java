@@ -116,12 +116,54 @@ public class BookService {
 		}
 		return b;
 	}
-	
-	public List<Book> searchBook(String TENSACH) {
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceDesc() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Book WHERE TENSACH LIKE :TENSACH";
+		String hql = "FROM Book b ORDER BY b.GIA DESC";
 		Query query = session.createQuery(hql);
-		query.setParameter("name", "%" + TENSACH + "%");
+		return query.list();
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceAsc() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b ORDER BY b.GIA ASC";
+		Query query = session.createQuery(hql);
+		return query.list();
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceDescAndType(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA DESC";
+		Query query = session.createQuery(hql);
+        query.setParameter("MATL", MATL);
+        List<Book> list = query.list();
+        return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceAscAndType(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA ASC";
+		Query query = session.createQuery(hql);
+        query.setParameter("MATL", MATL);
+        List<Book> list = query.list();
+        return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> searchBook(String keywords) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book WHERE TENSACH LIKE :keywords";
+		Query query = session.createQuery(hql);
+		query.setParameter("keywords", "%" + keywords + "%");
 		List<Book> list = query.list();
 		return list;
 	}
