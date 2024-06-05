@@ -13,7 +13,7 @@ public class Comment {
     @Column(name = "MABL")
     private int id;// property
     @Column(name = "NOIDUNG")
-    private String title;// property
+    private String content;// property
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -27,10 +27,12 @@ public class Comment {
     @JoinColumn(name = "MATK")
     private Account account;// property
 
-    public Comment(int id, String title, Date tHOIGIANLAP, Post post, Account account) {
-        this.id = id;
-        this.title = title;
-        THOIGIANLAP = tHOIGIANLAP;
+    public Comment() {}
+
+    public Comment(String title, Post post, Account account) {
+        this.id = 0;
+        this.content = title;
+        this.THOIGIANLAP = new Date();
         this.post = post;
         this.account = account;
     }
@@ -43,12 +45,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getContent() {
+        return content;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getTHOIGIANLAP() {

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page pageEncoding="UTF-8"%>
+
 <style>
 	.forum-post {
 		border-top: brown;
@@ -54,21 +55,20 @@
 	<div class="post-group">
 		<div class="post-group-name fs-2">
 			<div class="post-group-name-text">
-				<p>Group 1</p>
+				<p>Bình luận</p>
 			</div>
 		</div>
 		<div class="post-list row">
-			<c:forEach var="post" items="${posts}">
+			<c:forEach var="post" items="${comments}">
 				<div class="post col">
 					<div class="post-head">
 						<div class="post-title fs-4">
 							<a href="forum/post/${post.id}.htm">
-								${post.title}
+								${post.content}
 							</a>
 						</div>
-						<a href="user/${post.author.MAKH}.htm" class="post-author fs-6">${post.author.getFullname()}</a>
 					</div>
-					<div class="post-content fs-5">${post.description}</div>
+					
 				</div>
 			</c:forEach>
 		</div>
