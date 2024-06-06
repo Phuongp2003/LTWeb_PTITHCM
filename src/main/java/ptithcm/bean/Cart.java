@@ -17,14 +17,12 @@ public class Cart {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "IDGH")
+    @JoinColumn(name = "MAKH")
     private Customer cart_customer;// property
 
     @OneToMany(mappedBy = "cartdetail_cart", fetch = FetchType.LAZY)
     private Collection<CartDetail> cartdetails;
 
-    @OneToMany(mappedBy = "bill_cart", fetch = FetchType.LAZY)
-    private Collection<Bill> bills;
 
     public Cart() {
     }
@@ -59,13 +57,13 @@ public class Cart {
         this.cartdetails = cartdetails;
     }
 
-    public Collection<Bill> getBills() {
-        return bills;
-    }
+    // public Collection<Bill> getBills() {
+    // return bills;
+    // }
 
-    public void setBills(Collection<Bill> bills) {
-        this.bills = bills;
-    }
+    // public void setBills(Collection<Bill> bills) {
+    // this.bills = bills;
+    // }
 
     public Customer getCart_customer() {
         return cart_customer;

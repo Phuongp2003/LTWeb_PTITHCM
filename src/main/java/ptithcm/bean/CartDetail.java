@@ -25,10 +25,12 @@ public class CartDetail {
     public CartDetail() {
     }
 
-    public CartDetail(CartDetailPrimary id, int SOLUONG, float DONGIA) {
+    public CartDetail(CartDetailPrimary id, int SOLUONG, float DONGIA, int CHON) {
+
         this.id = id;
         this.SOLUONG = SOLUONG;
         this.DONGIA = DONGIA;
+        this.CHON = CHON;
     }
 
     public CartDetailPrimary getId() {
@@ -69,6 +71,14 @@ public class CartDetail {
 
     public void setCartdetail_cart(Cart cartdetail_cart) {
         this.cartdetail_cart = cartdetail_cart;
+    }
+
+    public int getCHON() {
+        return CHON;
+    }
+
+    public void setCHON(int cHON) {
+        CHON = cHON;
     }
 
 }

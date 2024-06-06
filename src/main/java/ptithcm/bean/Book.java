@@ -8,9 +8,9 @@ import java.util.*;
 public class Book {
 	@Id
 	@GeneratedValue
-	private Integer MASACH;// property
+	private int MASACH;// property
 	private String TENSACH;// property
-	private Integer LANTAIBAN;// property
+	private int LANTAIBAN;// property
 	private Float GIA;// property
 	private String ANH;// property
 

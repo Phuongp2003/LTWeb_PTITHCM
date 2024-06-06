@@ -10,12 +10,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "HoaDon")
 public class Bill {
     @Id
+    @GeneratedValue
     private Integer MAHD;// property
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date NGAYLAP;// property
     private Float TONGTIEN;// property
-
+    private String HOTENNN;// property
+    private String DIACHINN;// property
+    private String SDTNN; // property
+    private String GHICHU;// property
+    private String EMAILNN;// property
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee bill_employee;// property
@@ -24,22 +29,25 @@ public class Bill {
     @JoinColumn(name = "MAKH")
     private Customer bill_customer;// property
 
-    @ManyToOne
-    @JoinColumn(name = "IDGH")
-    private Cart bill_cart;// property
-
     @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
     private Collection<BillDetail> billdetails;
 
     public Bill() {
     }
 
-    public Bill(Integer MAHD, Date NGAYLAP, Employee bill_employee, Customer bill_customer, Cart bill_cart) {
-        this.MAHD = MAHD;
-        this.NGAYLAP = NGAYLAP;
-        this.bill_customer = bill_customer;
+    public Bill(Integer mAHD, Date nGAYLAP, Float tONGTIEN, String hOTENNN, String dIACHINN, String sDTNN,
+            String gHICHU, String eMAILNN, Employee bill_employee, Customer bill_customer) {
+        MAHD = mAHD;
+        NGAYLAP = nGAYLAP;
+        TONGTIEN = tONGTIEN;
+        HOTENNN = hOTENNN;
+        DIACHINN = dIACHINN;
+        SDTNN = sDTNN;
+        GHICHU = gHICHU;
+        EMAILNN = eMAILNN;
         this.bill_employee = bill_employee;
-        this.bill_cart = bill_cart;
+        this.bill_customer = bill_customer;
+
     }
 
     public Integer getMAHD() {
@@ -66,14 +74,6 @@ public class Bill {
         this.bill_customer = bill_customer;
     }
 
-    public Cart getBill_cart() {
-        return bill_cart;
-    }
-
-    public void setBill_cart(Cart bill_cart) {
-        this.bill_cart = bill_cart;
-    }
-
     public Collection<BillDetail> getBilldetails() {
         return billdetails;
     }
@@ -88,6 +88,54 @@ public class Bill {
 
     public void setBill_employee(Employee bill_employee) {
         this.bill_employee = bill_employee;
+    }
+
+    public Float getTONGTIEN() {
+        return TONGTIEN;
+    }
+
+    public void setTONGTIEN(Float tONGTIEN) {
+        TONGTIEN = tONGTIEN;
+    }
+
+    public String getHOTENNN() {
+        return HOTENNN;
+    }
+
+    public void setHOTENNN(String hOTENNN) {
+        HOTENNN = hOTENNN;
+    }
+
+    public String getDIACHINN() {
+        return DIACHINN;
+    }
+
+    public void setDIACHINN(String dIACHINN) {
+        DIACHINN = dIACHINN;
+    }
+
+    public String getSDTNN() {
+        return SDTNN;
+    }
+
+    public void setSDTNN(String sDTNN) {
+        SDTNN = sDTNN;
+    }
+
+    public String getGHICHU() {
+        return GHICHU;
+    }
+
+    public void setGHICHU(String gHICHU) {
+        GHICHU = gHICHU;
+    }
+
+    public String getEMAILNN() {
+        return EMAILNN;
+    }
+
+    public void setEMAILNN(String eMAILNN) {
+        EMAILNN = eMAILNN;
     }
 
 }

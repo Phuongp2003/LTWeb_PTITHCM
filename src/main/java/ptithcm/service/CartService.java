@@ -31,6 +31,17 @@ public class CartService {
 		return list;
 	}
 
+	@Transactional
+	@ModelAttribute("cartbyuserid")
+	public Cart getCartByIdCustomer(int userId) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Cart WHERE cart_customer.MAKH = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", userId);
+		Cart list = (Cart) query.list().get(0);
+		return list;
+	}
+
 	public int insertCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();

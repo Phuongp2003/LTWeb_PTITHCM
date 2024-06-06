@@ -12,7 +12,7 @@ public class Author {
 	private Integer MATG;// property
 	private String HO;// property
 	private String TEN;// property
-    private String EMAIL;// property
+	private String EMAIL;// property
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
 	private Collection<Book> books;
