@@ -1,24 +1,28 @@
 <%@ page pageEncoding="UTF-8" %>
-	<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-		<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
-			<style>
-				.product-detail .wrapper {
-					margin-bottom: 0.5rem;
-				}
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
+	<style>
+		.product-detail .wrapper {
+			margin-bottom: 0.5rem;
+		}
 
-				.product-detail .group-input {
-					display: flex;
-				}
+		.product-detail .group-input {
+			display: flex;
+		}
 
-				.product-detail .input {
-					height: 2.5rem;
-					width: 4rem;
-					color: black;
-					background-color: white;
-					border: 1px solid rgb(166, 166, 176);
-					border-radius: 4px;
-				}
-			</style>
+		.product-detail .input {
+			height: 2.5rem;
+			width: 4rem;
+			color: black;
+			background-color: white;
+			border: 1px solid rgb(166, 166, 176);
+			border-radius: 4px;
+		}
+		.feedback-card{
+			margin-top: 1rem;
+		}
+	</style>
+
 			<div class="product-detail container-fluid" style="width: 80%;">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
@@ -71,16 +75,52 @@
 									</form:form>
 
 								</div>
-								<!-- <a href="#" id="add-to-cart-link" class="btn btn-primary">Thêm vào giỏ</a> -->
 
 
 							</div>
 
+		<div class="feedback-card card mb-3">
+			<div class="row g-0">
+				<div class="col-md-4">
+					<h5 class="card-title">Khách Hàng Đánh Giá</h5>
+					<p class="general-VOTE card-text">Tổng quan: 4.5 <i class="bi bi-star-fill" style = "color:#FFDB00;"></i></p>
+				</div>
+				<div class="col-md-8">
+					<h5 class="card-title">Chi Tiết</h5>
+					<c:forEach var="f" items="${feedback}">
+						<div class="card-body">
+							<h5 class="card-title">${f.customer.HO} ${f.customer.TEN}</h5>
+							<p class="card-text"><small class="text-body-secondary">Đánh giá vào: ${f.THOIGIAN}</small></p>
+							<div class="star-detail">
+								<c:choose>
+									<c:when test="${f.VOTE == 1}">
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+									</c:when>
+									<c:when test="${f.VOTE == 2}">
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+									</c:when>
+									<c:when test="${f.VOTE == 3}">
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+									</c:when>
+									<c:when test="${f.VOTE == 4}">
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+									</c:when>
+									<c:when test="${f.VOTE == 5}">
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+										<i class="bi bi-star-fill" style = "color:#FFDB00;"></i><i class="bi bi-star-fill" style = "color:#FFDB00;"></i>
+									</c:when>
+								</c:choose>
+							</div>
+							<p class="card-text">${f.NOIDUNG}</p>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
-			<script>
+		</div>
+	</div>
+              
+<script>
 				function adjustQuantity(increment) {
 					var quantityInput = document.getElementById('quantity-input');
 					var currentQuantity = parseInt(quantityInput.value);
@@ -97,4 +137,4 @@
 					formQuantityInput.value = quantityInput.value; // Gán giá trị từ quantity-input cho form-quantity
 				}
 
-			</script>
+	</script>

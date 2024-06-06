@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page pageEncoding="UTF-8"%>
+
 <style>
 	.forum-post {
 		border-top: brown;
@@ -23,10 +24,6 @@
 		border-style: solid;
 		border-width: .5px;
 		padding-top: 20px;
-	}
-	
-	.post-content {
-		padding-bottom: 50px;
 	}
 	
 	.forum-post .post .post-head {
@@ -58,38 +55,20 @@
 	<div class="post-group">
 		<div class="post-group-name fs-2">
 			<div class="post-group-name-text">
-				<p>Group 1</p>
+				<p>Bình luận</p>
 			</div>
 		</div>
 		<div class="post-list row">
-			<c:forEach var="post" items="${posts}">
-				<div class="post col position-relative">
+			<c:forEach var="post" items="${comments}">
+				<div class="post col">
 					<div class="post-head">
 						<div class="post-title fs-4">
 							<a href="forum/post/${post.id}.htm">
-								${post.title}
+								${post.content}
 							</a>
 						</div>
-						<div class="post-author fs-6">${post.author.getFullname()}</div>
 					</div>
-					<div class="post-content fs-5">${post.description}</div>
-					<div class="post-action position-absolute bottom-0 left-0">
-						<div class="post-status fs-5 d-inline">
-							<c:choose>
-								<c:when test="${not empty post.post_employee}">
-									<img src="<c:url value='resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
-								</c:when>
-								<c:otherwise>
-									<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status OK">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<c:if test="${owner != null && owner}">
-							|
-							<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
-							<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
-						</c:if>
-					</div>
+					
 				</div>
 			</c:forEach>
 		</div>

@@ -3,19 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 	
-	<jsp:include page="${initParam.viewsPath}/path.jsp" />
-	
+	<jsp:include page="${initParam.viewsPath}/path.jsp" /> 
 	<head>
 		<jsp:include page="${partial}/head.jsp" />
 	</head>
 	
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
-		<jsp:include page="${elements}/forum/user.jsp" />
-		<jsp:include page="${elements}/post/post.jsp" />
-		<jsp:include page="${elements}/comment/show.jsp" />
+		<jsp:include page="${elements}/user/change_password.jsp" />
+		
 	</body>
 	
 	<jsp:include page="${partial}/footer.jsp" />
-	
+</html>
 </html>

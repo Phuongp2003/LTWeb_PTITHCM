@@ -113,5 +113,4 @@ public class Post {
     public void setTHOIGIANLAP(Date tHOIGIANLAP) {
         THOIGIANLAP = tHOIGIANLAP;
     }
-
 }

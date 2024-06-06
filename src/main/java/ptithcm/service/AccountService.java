@@ -53,12 +53,23 @@ public class AccountService {
 	}
 
 	@Transactional
-	@ModelAttribute("account")
+	@ModelAttribute("accounts")
 	public Account getAccountByUsername(String username) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Account WHERE USERNAME = :username";
 		Query query = session.createQuery(hql);
 		query.setParameter("username", username);
+		Account list = (Account) query.list().get(0);
+		return list;
+	}
+
+	@Transactional
+	@ModelAttribute("accounts")
+	public Account getAccountByEmail(String email) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Account WHERE account_customer.EMAIL = :email";
+		Query query = session.createQuery(hql);
+		query.setParameter("email", email);
 		Account list = (Account) query.list().get(0);
 		return list;
 	}
@@ -155,6 +166,16 @@ public class AccountService {
 			return false;
 		}
 		return true;
+	}
+
+	public String generateRandomPassword() {
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		String pass = "";
+		for (int x = 0; x < 8; x++) {
+			int i = (int) Math.floor(Math.random() * 62);
+			pass += chars.charAt(i);
+		}
+		return pass;
 	}
 
 }

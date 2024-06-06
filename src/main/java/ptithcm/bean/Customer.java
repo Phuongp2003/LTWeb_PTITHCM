@@ -132,6 +132,10 @@ public class Customer {
 		this.account = account;
 	}
 
+	public Account getAccount() {
+		return account;
+	}
+
 	// public Cart getCart() {
 	// return cart;
 	// }

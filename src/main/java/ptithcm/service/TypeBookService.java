@@ -60,11 +60,26 @@ public class TypeBookService {
 
     @Transactional
     @ModelAttribute("categories")
-    public List<TypeBook> searchTypeBook(String TENTL) {
+	public long getNumberBooksByCategory(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT count(b.MASACH) " 
+					+ "FROM TypeBook t, Book b "
+					+ "WHERE t.MATL = b.typebook.MATL AND t.MATL = :MATL" ;
+		
+		Query query = session.createQuery(hql);
+		query.setParameter("MATL", MATL);
+		long quantity = (long) query.uniqueResult();
+		return quantity;
+	}
+
+
+    @Transactional
+    @ModelAttribute("categories")
+    public List<TypeBook> searchTypeBook(String keywords){
         Session session = factory.getCurrentSession();
-        String hql = "from TypeBook where TENTL like :TENTL";
+        String hql = "from TypeBook where TENTL like :keywords";
         Query query = session.createQuery(hql);
-        query.setParameter("TENTL", "%" + TENTL + "%");
+        query.setParameter("keywords", "%" + keywords + "%");
 
         List<TypeBook> list = query.list();
         return list;

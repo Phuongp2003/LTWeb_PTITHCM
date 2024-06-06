@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ptithcm.bean.Comment;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Employee;
 import ptithcm.bean.Post;
 import ptithcm.service.ListPostService;
 import ptithcm.util.PostHelper;
 import ptithcm.service.AccountService;
+import ptithcm.service.CommentService;
 import ptithcm.service.CustomerService;
 
 @Controller
@@ -41,6 +43,7 @@ public class ForumController {
 
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
+        model.addAttribute("owner", true);
         List<Post> post = postServices.getAllPosts();
         model.addAttribute("posts", post);
         return "pages/forum/forum";
@@ -54,8 +57,10 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/show");
-
+        
+        List<Comment> comments = commentService.getCommentsByIDPost(id);
         model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
         return "pages/post/post";
     }
 
@@ -85,7 +90,7 @@ public class ForumController {
     public String createPost(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
+            model.addAttribute("title", "Tạo bài viết");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -116,10 +121,11 @@ public class ForumController {
     public String editPost(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
+        model.addAttribute("title", "Chỉnh sửa bài viết " + id);
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
+            model.addAttribute("owner", true);
             model.addAttribute("error", 401);
             model.addAttribute("message", "You must login to edit post");
             return "pages/post/post_action";
@@ -128,15 +134,12 @@ public class ForumController {
         post = postServices.getPostByID(id);
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         if (post.getAuthor().getMAKH() != user.getMAKH()) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
             model.addAttribute("message", "You don't have permission to edit this post");
             return "pages/error";
         }
-
-        model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/edit");
         model.addAttribute("user_id", Integer.parseInt(uid));
@@ -177,8 +180,8 @@ public class ForumController {
     public String removePost(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
+        model.addAttribute("title", "Xóa bài viết " + id);
         if (uid.equals("") || accountService.getAccountByID(Integer.parseInt(uid)) == null) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -190,7 +193,6 @@ public class ForumController {
         post = postServices.getPostByID(id);
         if (post.getAuthor().getMAKH() != accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer()
                 .getMAKH()) {
-            model.addAttribute("title", "PTITHCM Forum");
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
@@ -201,7 +203,6 @@ public class ForumController {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
 
         postServices.removePost(post);
-        model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
@@ -209,4 +210,29 @@ public class ForumController {
         model.addAttribute("message", "Delete post success");
         return "pages/post/post_action";
     }
+        @Autowired
+        private CommentService commentService;
+
+        @RequestMapping(value = "post/{id}/comment/create-success", method = RequestMethod.POST)
+        public String saveNewComment(
+                @RequestParam("content") String content, 
+                @PathVariable("id") Integer id,
+                Model model,
+                @CookieValue(value = "uid", defaultValue = "") String uid,
+                @CookieValue(value = "role", defaultValue = "") String role) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            Employee employee;
+            Comment comment = new Comment(content,postServices.getPostByID(id), accountService.getAccountByID(Integer.parseInt(uid)));
+
+            commentService.createComment(comment);
+            model.addAttribute("title", "PTITHCM Forum");
+            model.addAttribute("type", "forum");
+            model.addAttribute("user_id", Integer.parseInt(uid));
+            model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+            model.addAttribute("success", 200);
+            model.addAttribute("message", "Create comment success");
+            return "pages/post/post_action";        
+        }
+
+        
 }

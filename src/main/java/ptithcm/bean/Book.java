@@ -26,6 +26,9 @@ public class Book {
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
 
+	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+	private Collection<Feedback> feedback;
+
 	@OneToMany(mappedBy = "receivedbilldetail_book", fetch = FetchType.LAZY)
 	private Collection<ReceivedBillDetail> receivedbilldetails;
 
@@ -44,12 +47,16 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(Integer MASACH, String TENSACH, Integer LANTAIBAN, Float GIA, String ANH) {
-		this.MASACH = MASACH;
-		this.TENSACH = TENSACH;
-		this.LANTAIBAN = LANTAIBAN;
-		this.GIA = GIA;
-		this.ANH = ANH;
+	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH, 
+	TypeBook typebook, Author author, Producer producer) {
+		MASACH = mASACH;
+		TENSACH = tENSACH;
+		LANTAIBAN = lANTAIBAN;
+		GIA = gIA;
+		ANH = aNH;
+		this.typebook = typebook;
+		this.author = author;
+		this.producer = producer;
 	}
 
 	public Integer getMASACH() {
@@ -98,6 +105,14 @@ public class Book {
 
 	public void setProducer(Producer producer) {
 		this.producer = producer;
+	}
+
+	public Collection<Feedback> getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Collection<Feedback> feedback) {
+		this.feedback = feedback;
 	}
 
 	public Collection<CartDetail> getCartdetails() {

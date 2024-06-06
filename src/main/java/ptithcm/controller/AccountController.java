@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Account;
 import ptithcm.bean.Customer;
-import ptithcm.bean.Employee;
 import ptithcm.bean.RegistrationForm;
 import ptithcm.service.AccountService;
 import ptithcm.service.CustomerService;
+import ptithcm.service.EmailService;
 
 @Controller
 @RequestMapping("/user/")
@@ -30,8 +30,12 @@ public class AccountController {
     @Autowired
     CustomerService customerService;
 
+    @Autowired(required = false)
+    EmailService emailService;
+
     @RequestMapping("/login")
     public String handleLogin(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+        model.addAttribute("title", "Đăng nhập");
         // Check if user is already logged in
         String isLogin = accountService.isLogin(model, uid, accountService);
         if (isLogin != "") {
@@ -47,6 +51,7 @@ public class AccountController {
     public String checkLogin(@RequestParam("USERNAME") String username, @RequestParam("PASSWORD") String password,
             ModelMap model,
             HttpServletResponse response) {
+        model.addAttribute("title", "Đăng nhập thành công!");
         try {
             Account account = accountService.getAccountByUsername(username);
             if (account != null) {
@@ -61,10 +66,10 @@ public class AccountController {
                     response.addCookie(cookie);
                     response.addCookie(cookie2);
                 } else {
-                    model.addAttribute("message", "Login failed! Password is incorrect!");
+                    model.addAttribute("message", "Đăng nhập thất bại! Mật khẩu sai!");
                 }
             } else {
-                model.addAttribute("message", "Login failed! Username is incorrect!");
+                model.addAttribute("message", "Đăng nhập thất bại! Tên đăng nhập không tồn tại!");
             }
         } catch (Exception e) {
             model.addAttribute("message", "Login failed! Error: " + e);
@@ -75,6 +80,7 @@ public class AccountController {
 
     @RequestMapping("/register")
     public String handleRegister(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+        model.addAttribute("title", "Đăng ký tài khoản");
         // Check if user is already logged in
         String isLogin = accountService.isLogin(model, uid, accountService);
         if (isLogin != "") {
@@ -106,15 +112,54 @@ public class AccountController {
             account.setAccount_employee(null);
 
             if (accountService.insertAccount(account) == 1) {
-                model.addAttribute("message", "Register successfully!");
+                model.addAttribute("message", "Đắng ký thành công!");
+                emailService.sendEmail(email,
+                        "Bạn đã đăng ký thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!",
+                        "Chúc mừng bạn đã đăng ký thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!");
             } else {
-                model.addAttribute("message", "Register failed!");
+                model.addAttribute("message", "Đăng ký thất bại!");
             }
         } catch (Exception e) {
             model.addAttribute("message", "Register failed! Error: " + e);
-            account.setAccount_customer(customerService.getCustomerByEmail(email));
-            System.out.println(e);
             return "redirect:/user/register.htm";
+        }
+        return "redirect:/home.htm";
+    }
+
+    @RequestMapping("/change-password")
+    public String changePassword(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+        model.addAttribute("title", "Thay đổi mật khẩu");
+        return "pages/user/change_password";
+    }
+
+    @RequestMapping(value = "change-password", method = RequestMethod.POST)
+    public String changePasswordPost(@RequestParam("opassword") String password,
+            @RequestParam("npassword") String newPassword,
+            @RequestParam("rtnpassword") String retypedPassword,
+            @CookieValue(value = "uid", defaultValue = "") String uid, ModelMap model) {
+        try {
+            Account account = accountService.getAccountByID(Integer.parseInt(uid));
+            if (account != null) {
+                if (accountService.checkLogin(account.getUSERNAME(), password)) {
+                    account.setPASSWORD(newPassword);
+                    if (accountService.updateAccount(account) == 1) {
+                        model.addAttribute("message", "Đổi mật khẩu thành công!");
+                        emailService.sendEmail(account.getAccount_customer().getEMAIL(),
+                                "Bạn đã thay đổi mật khẩu thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!",
+                                "Bạn đã thay đổi mật khẩu thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!");
+                    } else {
+                        model.addAttribute("message", "Đổi mật khẩu thất bại!");
+                    }
+                } else {
+                    model.addAttribute("message", "Đổi mật khẩu thất bại! Mật khẩu cũ không đúng!");
+                }
+            } else {
+                model.addAttribute("message",
+                        "Đổi mật khẩu thất bại! Thông tin tài khoản lỗi hoặc thông tin đăng nhập bị chỉnh sửa!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("message", "Change password failed! Error: " + e);
+            return "redirect:/user/login.htm";
         }
         return "redirect:/home.htm";
     }
@@ -129,8 +174,39 @@ public class AccountController {
         cookie2.setPath("/");
         response.addCookie(cookie);
         response.addCookie(cookie2);
-        model.addAttribute("message", "Logout successfully!");
-        return "pages/home";
+        model.addAttribute("message", "Đăng xuất thành công!");
+        return "redirect:/home.htm";
     }
 
+    @RequestMapping(value = "forgot-password", method = RequestMethod.GET)
+    public String forgotPassword(ModelMap model) {
+        model.addAttribute("title", "Quên mật khẩu");
+        return "pages/user/forgot_password";
+    }
+
+    @RequestMapping(value = "forgot-password", method = RequestMethod.POST)
+    public String forgotPasswordPost(@RequestParam("email") String email, ModelMap model) {
+        try {
+            Account account = accountService.getAccountByEmail(email);
+            if (account != null) {
+                String newPassword = accountService.generateRandomPassword();
+                account.setPASSWORD(newPassword);
+                if (accountService.updateAccount(account) == 1) {
+                    model.addAttribute("message", "Mật khẩu mới đã được gửi đến email của bạn!");
+                    emailService.sendEmail(email,
+                            "Mật khẩu mới của bạn vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!",
+                            "Mật khẩu mới của bạn vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021 là: "
+                                    + newPassword);
+                } else {
+                    model.addAttribute("message", "Không thể gửi mật khẩu mới! Vui lòng thử lại sau!");
+                }
+            } else {
+                model.addAttribute("message", "Email không tồn tại trong hệ thống!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("message", "Forgot password failed! Error: " + e);
+            return "redirect:/user/forgot-password.htm";
+        }
+        return "redirect:/home.htm";
+    }
 }

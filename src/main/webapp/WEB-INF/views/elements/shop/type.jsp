@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <div class="container-fluid shop" style="width: 80%;">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5">
@@ -32,9 +33,9 @@
 					<nav class="navbar bg-body-tertiary">
 						<div class="container-fluid">
 							<h4>Tất cả sản phẩm</h4>
-							<form class="d-flex" role="search">
-								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Search</button>
+							<form class="d-flex" role="search" action="shop/search.htm">
+								<input name="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+								<button name="btn-seach" class="btn btn-outline-success" type="submit">Search</button>
 							</form>
 							<div class="dropdown d-flex">
 								<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,12 +43,8 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item active" href="#">Sản phẩm nổi bật</a></li>
-									<li><a class="dropdown-item" href="#">Giá: tăng dần</a></li>
-									<li><a class="dropdown-item" href="#">Giá: giảm dần</a></li>
-									<li><a class="dropdown-item" href="#">Tên: A->Z</a></li>
-									<li><a class="dropdown-item" href="#">Tên: Z->A</a></li>
-									<li><a class="dropdown-item" href="#">Cũ nhất</a></li>
-									<li><a class="dropdown-item" href="#">Mới nhất</a></li>
+									<li><a class="dropdown-item" href="shop/sort-asc.htm">Giá: tăng dần</a></li>
+									<li><a class="dropdown-item" href="shop/sort-desc.htm">Giá: giảm dần</a></li>
 									<li><a class="dropdown-item" href="#">Bán chạy nhất</a></li>
 								</ul>
 							</div>

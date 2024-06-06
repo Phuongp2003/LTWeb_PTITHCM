@@ -52,6 +52,10 @@ public class Author {
 		this.TEN = TEN;
 	}
 
+	public String getFullname() {
+		return HO + " " + TEN;
+	}
+
 	public String getEMAIL() {
 		return EMAIL;
 	}

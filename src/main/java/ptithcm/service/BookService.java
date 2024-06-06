@@ -39,22 +39,6 @@ public class BookService {
         return list;
     }
 
-	@Transactional
-    @ModelAttribute("books")
-	public long getNumberBooksByCategory(int MATL) {
-		Session session = factory.getCurrentSession();
-		String hql = "SELECT count(b.MASACH) "
-				+ "FROM Typebook as t, "
-				+ "Book as b "
-				+ "WHERE t.MATL = b.typebook.MATL "
-				+ "AND t.MATL = " + MATL;
-		
-		Query query = session.createQuery(hql);
-	
-		long quantity = (long) query.uniqueResult();
-		return quantity;
-	}
-
     @Transactional
     @ModelAttribute("books")
     public Book getBookByID(int MASACH) {
@@ -66,7 +50,9 @@ public class BookService {
 		return list;
     }
 
-    public int insertBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+    public Book addBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -75,14 +61,15 @@ public class BookService {
 		} catch (Exception e) {
 			System.out.println(e);
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
 
-	public int updateBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+	public Book updateBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -90,14 +77,15 @@ public class BookService {
 			t.commit();
 		} catch (Exception e) {
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
 
-	public int deleteBook(Book b) {
+	@Transactional
+	@ModelAttribute("books")
+	public Book deleteBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
@@ -107,18 +95,59 @@ public class BookService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			t.rollback();
-			return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return b;
 	}
-	
-	public List<Book> searchBook(String TENSACH) {
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceDesc() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Book WHERE TENSACH LIKE :TENSACH";
+		String hql = "FROM Book b ORDER BY b.GIA DESC";
 		Query query = session.createQuery(hql);
-		query.setParameter("name", "%" + TENSACH + "%");
+		return query.list();
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceAsc() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b ORDER BY b.GIA ASC";
+		Query query = session.createQuery(hql);
+		return query.list();
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceDescAndType(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA DESC";
+		Query query = session.createQuery(hql);
+        query.setParameter("MATL", MATL);
+        List<Book> list = query.list();
+        return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByPriceAscAndType(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA ASC";
+		Query query = session.createQuery(hql);
+        query.setParameter("MATL", MATL);
+        List<Book> list = query.list();
+        return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> searchBook(String keywords) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book WHERE TENSACH LIKE :keywords";
+		Query query = session.createQuery(hql);
+		query.setParameter("keywords", "%" + keywords + "%");
 		List<Book> list = query.list();
 		return list;
 	}

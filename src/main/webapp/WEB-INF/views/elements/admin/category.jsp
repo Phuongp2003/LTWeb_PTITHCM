@@ -10,8 +10,8 @@
 	<table class="category-list table">
 		<div class="filter-wrapper row">
 			<div class="col-md-10 col-sm-12 col-lg-10">
-				<form role="search">
-					<input class="form-control" type="search" placeholder="Tìm thể loại" aria-label="Search" style="width: 50%;">
+				<form role="search" action="admin/category/search.htm">
+					<input name="searchInput" class="form-control" type="search" placeholder="Tìm thể loại" aria-label="Search" style="width: 50%;">
 				</form>
 			</div>
 			<div class="col-md-2 col-sm-6 col-lg-2">
@@ -30,10 +30,10 @@
 			<c:forEach var="category" items="${categories}">
 				<tr>
 					<td>${category.TENTL}</td>
-					<td>3</td>
+					<td>${category.getBooks().size()}</td>
 					<td>100.000</td>
 					<td>
-						<a href="admin/category/${category.MATL}/delete.htm"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
+						<a href="admin/category/${category.MATL}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa thể loại ${category.TENTL}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
 						<a href="admin/category/${category.MATL}/update.htm"><button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
 					</td>
 				</tr>
