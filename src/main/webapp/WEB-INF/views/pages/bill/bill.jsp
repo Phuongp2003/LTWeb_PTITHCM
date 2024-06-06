@@ -9,8 +9,8 @@
 
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
-		<!-- <jsp:include page="${elements}/bill/showbill.jsp" /> -->
-		<jsp:include page="${elements}/bill/addbill.jsp" />
+		<jsp:include page="${elements}/bill/showbill.jsp" />
+		
 	</body>
 
 	<jsp:include page="${partial}/footer.jsp" />

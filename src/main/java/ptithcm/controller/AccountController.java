@@ -1,6 +1,8 @@
 package ptithcm.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Account;
+import ptithcm.bean.Cart;
 import ptithcm.bean.Customer;
 import ptithcm.bean.RegistrationForm;
 import ptithcm.service.AccountService;
+import ptithcm.service.CartService;
 import ptithcm.service.CustomerService;
 import ptithcm.service.EmailService;
 
@@ -29,6 +33,9 @@ public class AccountController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    CartService cartService;
 
     @Autowired(required = false)
     EmailService emailService;
@@ -110,9 +117,14 @@ public class AccountController {
             customerService.insertCustomer(new Customer(ho, ten, email, phone, gt, ns));
             account.setAccount_customer(customerService.getCustomerByEmail(email));
             account.setAccount_employee(null);
-
-            if (accountService.insertAccount(account) == 1) {
-                model.addAttribute("message", "Đắng ký thành công!");
+            LocalDateTime current = LocalDateTime.now();
+            Date currentDate = Date.from(current.atZone(ZoneId.systemDefault()).toInstant());
+            Customer user = account.getAccount_customer();
+            Cart cart = new Cart(null, currentDate, user);
+            cart.setCart_customer(user);
+            cart.setNGAYLAP(currentDate);
+            if ((accountService.insertAccount(account) == 1) && (cartService.insertCart(cart) == 1)) {
+                model.addAttribute("message", "Đăng ký thành công!");
                 emailService.sendEmail(email,
                         "Bạn đã đăng ký thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!",
                         "Chúc mừng bạn đã đăng ký thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!");

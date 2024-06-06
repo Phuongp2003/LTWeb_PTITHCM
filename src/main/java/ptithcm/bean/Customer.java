@@ -11,7 +11,7 @@ import java.util.*;
 public class Customer {
 	@Id
 	@GeneratedValue
-	private Integer MAKH;// property
+	private int MAKH;// property
 	private String HO;// property
 	private String TEN;// property
 	private String EMAIL;// property
@@ -20,7 +20,7 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYSINH;// property
-	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
 
 	@OneToOne(mappedBy = "account_customer", cascade = CascadeType.ALL)
@@ -47,7 +47,7 @@ public class Customer {
 
 	}
 
-	public Integer getMAKH() {
+	public int getMAKH() {
 		return MAKH;
 	}
 

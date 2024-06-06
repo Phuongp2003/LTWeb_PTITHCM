@@ -81,4 +81,10 @@ public class CartDetail {
         CHON = cHON;
     }
 
+    @Override
+    public String toString() {
+        return "CartDetail [id=" + id + ", cartdetail_cart=" + cartdetail_cart + ", cartdetail_book=" + cartdetail_book
+                + ", SOLUONG=" + SOLUONG + ", DONGIA=" + DONGIA + ", CHON=" + CHON + "]";
+    }
+
 }

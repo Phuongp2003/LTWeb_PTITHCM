@@ -24,7 +24,7 @@ public class CartService {
 	@ModelAttribute("cart")
 	public Cart getCartById(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Cart WHERE IDGH = :id";
+		String hql = "FROM Cart c WHERE c.IDGH = :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 		Cart list = (Cart) query.list().get(0);
@@ -35,13 +35,35 @@ public class CartService {
 	@ModelAttribute("cartbyuserid")
 	public Cart getCartByIdCustomer(int userId) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Cart WHERE cart_customer.MAKH = :id";
+		String hql = "FROM Cart c WHERE c.cart_customer.MAKH = :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", userId);
 		Cart list = (Cart) query.list().get(0);
 		return list;
 	}
 
+	@Transactional
+	@ModelAttribute("cartidbyuserid")
+	public Integer getCartIdByIdCustomer(int userId) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT c.IDGH FROM Cart c " +
+				"WHERE c.cart_customer.MAKH = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", userId);
+
+		// Sử dụng uniqueResult() trực tiếp
+		Integer cartId = (Integer) query.uniqueResult();
+
+		// Kiểm tra xem kết quả trả về có null không
+		if (cartId != null) {
+			return cartId;
+		} else {
+			// Trả về giá trị mặc định hoặc null tùy thuộc vào logic của bạn
+			return null;
+		}
+	}
+
+	@Transactional
 	public int insertCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -59,6 +81,7 @@ public class CartService {
 		return 1;
 	}
 
+	@Transactional
 	public int updateCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -76,6 +99,7 @@ public class CartService {
 		return 1;
 	}
 
+	@Transactional
 	public int deleteCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();

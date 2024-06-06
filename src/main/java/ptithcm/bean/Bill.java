@@ -21,6 +21,11 @@ public class Bill {
     private String SDTNN; // property
     private String GHICHU;// property
     private String EMAILNN;// property
+
+    @ManyToOne
+    @JoinColumn(name = "TRANGTHAI")
+    private Status status;// property
+
     @ManyToOne
     @JoinColumn(name = "MANV")
     private Employee bill_employee;// property
@@ -33,6 +38,21 @@ public class Bill {
     private Collection<BillDetail> billdetails;
 
     public Bill() {
+    }
+
+    public Bill(Integer mAHD, Date nGAYLAP, Float tONGTIEN, String hOTENNN, String dIACHINN, String sDTNN,
+            String gHICHU, String eMAILNN, Status status, Employee bill_employee, Customer bill_customer) {
+        MAHD = mAHD;
+        NGAYLAP = nGAYLAP;
+        TONGTIEN = tONGTIEN;
+        HOTENNN = hOTENNN;
+        DIACHINN = dIACHINN;
+        SDTNN = sDTNN;
+        GHICHU = gHICHU;
+        EMAILNN = eMAILNN;
+        this.status = status;
+        this.bill_employee = bill_employee;
+        this.bill_customer = bill_customer;
     }
 
     public Bill(Integer mAHD, Date nGAYLAP, Float tONGTIEN, String hOTENNN, String dIACHINN, String sDTNN,
@@ -136,6 +156,14 @@ public class Bill {
 
     public void setEMAILNN(String eMAILNN) {
         EMAILNN = eMAILNN;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
 }

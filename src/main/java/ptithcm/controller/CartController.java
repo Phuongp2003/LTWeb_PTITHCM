@@ -9,21 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ptithcm.bean.Author;
-import ptithcm.bean.Book;
-import ptithcm.bean.Cart;
-import ptithcm.bean.CartDetail;
-import ptithcm.bean.CartDetailPrimary;
-import ptithcm.bean.TypeBook;
-import ptithcm.service.BookService;
-import ptithcm.service.CartDetailService;
-import ptithcm.service.CartService;
+import ptithcm.bean.*;
+import ptithcm.service.*;
 
 @Controller
 @RequestMapping("/cart")
@@ -35,53 +29,35 @@ public class CartController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private AccountService accountService;
 
-    @RequestMapping(value = "{userId}")
-    public String showCartDetail(ModelMap model, @PathVariable("userId") int userId) {
-        Cart cart = cartService.getCartById(1);
-        int cart_id = cart.getIDGH();
-        model.addAttribute("cart", cart);
-        List<CartDetail> cartdetail = cartDetailService.getCartDetail(cart_id);
+    @RequestMapping(value = "")
+    public String showCartDetail(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            int userId = user.getMAKH();
+            Cart cart = cartService.getCartByIdCustomer(userId);
+            // System.out.println("uid" + cartService.getCartIdByIdCustomer(userId));
+            model.addAttribute("cart", cart);
+            List<CartDetail> cartdetail = cartDetailService.getCartDetail(cart.getIDGH());
 
-        if (cartdetail == null || cartdetail.isEmpty()) {
-            model.addAttribute("cartdetail", new ArrayList<CartDetail>());
-            model.addAttribute("totalitem", 0);
-            model.addAttribute("totalmoney", 0.0);
-        } else {
-            int number = cartDetailService.getTotalItem(userId);
-            double money = cartDetailService.getTotalMoney(userId);
-            model.addAttribute("cartdetail", cartdetail);
-            model.addAttribute("totalitem", number);
-            model.addAttribute("totalmoney", money);
+            if (cartdetail == null || cartdetail.isEmpty()) {
+                model.addAttribute("cartdetail", new ArrayList<CartDetail>());
+                model.addAttribute("totalitem", 0);
+                model.addAttribute("totalmoney", 0.0);
+            } else {
+                int number = cartDetailService.getTotalItem(userId);
+                double money = cartDetailService.getTotalMoney(userId);
+                model.addAttribute("cartdetail", cartdetail);
+                model.addAttribute("totalitem", number);
+                model.addAttribute("totalmoney", money);
+            }
+            return "pages/cart/cart";
+
         }
-
-        return "pages/cart/cart";
+        return "redirect:/user/login.htm";
     }
-
-    // @RequestMapping(value = "{userId}")
-    // public String showCartDetail(ModelMap model, @PathVariable("userId") int
-    // userId) {
-    // Cart cart = cartService.getCartById(1);
-    // int cart_id = cart.getIDGH();
-    // model.addAttribute("cart", cart);
-    // List<CartDetail> cartdetail = cartDetailService.getCartDetail(cart_id);
-    // int number = cartDetailService.getTotalItem(userId);
-    // double money = cartDetailService.getTotalMoney(userId);
-    // // List<Book> books = new Arra.yList<>();
-    // model.addAttribute("detail", cartdetail.get(0));
-    // model.addAttribute("cartdetail", cartdetail);
-    // model.addAttribute("totalitem", number);
-    // model.addAttribute("totalmoney", money);
-    // // for (int i = 0; i < cartdetail.size(); i++) {
-    // // books.add(cartdetail.get(i).getCartdetail_book());
-    // // }
-    // // model.addAttribute("booksfromcart", books);
-    // // Map<Integer, String> selects = new HashMap<>();
-    // // selects.put(0, "Chọn sản phẩm");
-    // // model.addAttribute("items", selects);
-
-    // return "pages/cart/cart";
-    // }
 
     @RequestMapping(value = "/cart-detail", method = RequestMethod.POST)
     public String updateProduct(@ModelAttribute("cartdetail") CartDetail cartdetail) {
@@ -101,92 +77,94 @@ public class CartController {
     }
 
     @RequestMapping(value = "add-cart-detail")
-    public String addCartDetail(ModelMap model) {
-        CartDetail detail = new CartDetail();
-        model.addAttribute("detail", detail);
-        return "pages/product/product";
+    public String addCartDetail(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            CartDetail detail = new CartDetail();
+            model.addAttribute("detail", detail);
+            return "pages/product/product";
+        }
+        return "redirect:/user/login.htm";
     }
 
     @RequestMapping(value = "add-cart-detail", method = RequestMethod.POST)
-    public String saveNewCartDetail(ModelMap model, @RequestParam("MASACH") int MASACH,
+    public String saveNewCartDetail(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @RequestParam("MASACH") int MASACH,
             @RequestParam("SOLUONG") int SOLUONG, @RequestParam("DONGIA") float DONGIA) {
-        CartDetailPrimary key = new CartDetailPrimary(1, MASACH);
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            int userId = user.getMAKH();
+            Cart cart = cartService.getCartByIdCustomer(userId);
 
-        CartDetail detail = new CartDetail(key, SOLUONG,
-                DONGIA, 0);
-        detail.setCartdetail_book(bookService.getBookByID(MASACH));
-        detail.setCartdetail_cart(cartService.getCartById(1));
-        // System.out.println(" -- " + MASACH);
-        cartDetailService.addDetail(detail);
-        model.addAttribute("detail", detail);
-        // System.out.println("đã ghi" + MASACH);
-        return "redirect:/cart/1.htm";
+            CartDetailPrimary key = new CartDetailPrimary(cart.getIDGH(), MASACH);
+            key.setIDGH(cart.getIDGH());
+            key.setMASACH(MASACH);
+            CartDetail detail = new CartDetail(key, SOLUONG, DONGIA, 0);
+            detail.setCartdetail_book(bookService.getBookByID(MASACH));
+            detail.setCartdetail_cart(cart);
+            detail.setCartdetail_book(bookService.getBookByID(MASACH));
+            detail.setId(key);
+            detail.setCHON(0);
+            detail.setDONGIA(DONGIA);
+            detail.setSOLUONG(SOLUONG);
+            // System.out.println(" -- " + MASACH);
+            cartDetailService.addDetail(detail);
+            model.addAttribute("detail", detail);
+            // System.out.println("đã ghi" + MASACH);
+            return "redirect:/cart.htm";
+        }
+        return "redirect:/user/login.htm";
+
     }
-    // @RequestMapping(value = "add-cart-detail", method = RequestMethod.POST)
-    // public String saveNewCartDetail(ModelMap model, @ModelAttribute("detail")
-    // CartDetail detail) {
-    // // CartDetailPrimary key = new CartDetailPrimary(1, MASACH);
 
-    // // CartDetail detail = new CartDetail(key, SOLUONG,
-    // // DONGIA, 0);
-    // detail.setCartdetail_book(bookService.getBookByID(detail.getCartdetail_book().getMASACH()));
-    // //
-    // detail.setCartdetail_cart(cartService.getCartById(detail.getCartdetail_cart().getIDGH()));
-    // detail.setCartdetail_cart(cartService.getCartById(1));
-    // // System.out.println(" -- " + MASACH);
-    // cartDetailService.addDetail(detail);
-    // model.addAttribute("detail", detail);
-    // // System.out.println("đã ghi" + MASACH);
-    // return "redirect:/shop.htm";
-    // }
-
-    // @RequestParam("IDGH") int IDGH
     @RequestMapping(value = "/update-cart-detail")
     public String editCartDetail(ModelMap model) {
         CartDetail detail = new CartDetail();
-        // List<CartDetail> list = new ArrayList<>();
-        // CartDetail detail = new CartDetail();
         model.addAttribute("cartdetail", detail);
         return "pages/cart/cart";
     }
 
     @RequestMapping(value = "/update-cart-detail", method = RequestMethod.POST)
-    public String saveEditCartDetail(ModelMap model, @RequestParam("MASACH") int MASACH,
+    public String saveEditCartDetail(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @RequestParam("MASACH") int MASACH,
             @RequestParam("SOLUONG") int SOLUONG,
             @RequestParam("DONGIA") float DONGIA, @RequestParam("CHON") int CHON) {
-        CartDetailPrimary key = new CartDetailPrimary(1, MASACH);
-        CartDetail detail = new CartDetail(key, SOLUONG, DONGIA, CHON);
-        detail.setCartdetail_book(bookService.getBookByID(MASACH));
-        detail.setCartdetail_cart(cartService.getCartById(1));
-        cartDetailService.updateDetail(detail);
-        model.addAttribute("detail", detail);
-        return "redirect:/cart/1.htm";
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            int userId = user.getMAKH();
+            Cart cart = cartService.getCartByIdCustomer(user.getMAKH());
+            int cart_id = cart.getIDGH();
+            CartDetailPrimary key = new CartDetailPrimary(cart_id, MASACH);
+            key.setIDGH(cart.getIDGH());
+            key.setMASACH(MASACH);
+            CartDetail detail = new CartDetail(key, SOLUONG, DONGIA, CHON);
+            detail.setCartdetail_book(bookService.getBookByID(MASACH));
+            detail.setCartdetail_cart(cart);
+            detail.setCartdetail_book(bookService.getBookByID(MASACH));
+            detail.setId(key);
+            detail.setCHON(CHON);
+            detail.setDONGIA(DONGIA);
+            detail.setSOLUONG(SOLUONG);
+            cartDetailService.updateDetail(detail);
+            model.addAttribute("detail", detail);
+            return "redirect:/cart.htm";
+        }
+        return "redirect:/user/login.htm";
     }
 
-    // @RequestMapping(value = "/update-cart-detail", method = RequestMethod.POST)
-    // public String saveEditCartDetail(ModelMap model, @RequestParam("MASACH")
-    // int[] MASACH,
-    // @RequestParam("SOLUONG") int[] SOLUONG,
-    // @RequestParam("DONGIA") float[] DONGIA,
-    // @RequestParam("CHON") int[] CHON) {
-    // List<CartDetail> list = cartDetailService.getCartDetail(0);
-    // for (int i = 0; i < MASACH.length; i++) {
-    // CartDetailPrimary key = new CartDetailPrimary(1, MASACH[i]);
-    // CartDetail detail = new CartDetail(key, SOLUONG[i], DONGIA[i], CHON[i]);
-    // detail.setCartdetail_book(bookService.getBookByID(MASACH[i]));
-    // detail.setCartdetail_cart(cartService.getCartById(1));
-    // cartDetailService.updateDetail(detail);
-    // }
-    // model.addAttribute("cartdetail", list);
-    // return "redirect:/shop.htm";
-    // }
-
     @RequestMapping(value = "/delete-cart-detail/{MASACH}.htm")
-    public String deleteCategory(ModelMap model, @PathVariable("MASACH") int MASACH) {
-        CartDetail detail = cartDetailService.getCartDetailByProductId(1, MASACH);
-        cartDetailService.deleteDetail(detail);
-        model.addAttribute("detail", detail);
-        return "redirect:/cart/1.htm";
+    public String deleteCategory(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @PathVariable("MASACH") int MASACH) {
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            int userId = user.getMAKH();
+            Cart cart = cartService.getCartByIdCustomer(user.getMAKH());
+            int cart_id = cart.getIDGH();
+            CartDetail detail = cartDetailService.getCartDetailByProductId(cart_id, MASACH);
+            cartDetailService.deleteDetail(detail);
+            model.addAttribute("detail", detail);
+            return "redirect:/cart.htm";
+        }
+        return "redirect:/user/login.htm";
     }
 
 }

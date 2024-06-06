@@ -24,7 +24,7 @@
 			<!-- <div class="d-flex me-3"><a href="cart/1.htm"><i class="bi bi-cart cart-icon"></i><span
 						class="cart-count">1</span></a></div> -->
 			<div class="d-flex me-3">
-				<a href="cart/1.htm" class="cart-icon">
+				<a href="cart.htm" class="cart-icon">
 					<i class="bi bi-cart"></i>
 					
 					<span class="cart-count">${totalitem}</span>

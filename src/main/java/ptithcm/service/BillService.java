@@ -18,11 +18,34 @@ import ptithcm.bean.*;
 @Repository
 @SuppressWarnings("unchecked")
 public class BillService {
+    public static final int List = 0;
     @Autowired
     SessionFactory factory;
 
     @Transactional
     @ModelAttribute("bill")
+    public Bill getBillByID(int MAHD) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM Bill  WHERE MAHD = :MAHD";
+        Query query = session.createQuery(hql);
+        query.setParameter("MAHD", MAHD);
+        Bill list = (Bill) query.list().get(0);
+        return list;
+    }
+
+    @Transactional
+    @ModelAttribute("billdetail")
+    public List<BillDetail> getBillDetail(int MAHD) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM BillDetail  WHERE bill.MAHD = :MAHD";
+        Query query = session.createQuery(hql);
+        query.setParameter("MAHD", MAHD);
+        List<BillDetail> list = query.list();
+        return list;
+    }
+
+    @Transactional
+    @ModelAttribute("billByUserId")
     public Bill getBill(int userId) {
         Session session = factory.getCurrentSession();
         String hql = "from Bill where bill_customer.MAKH = :id";
@@ -82,6 +105,51 @@ public class BillService {
             session.close();
         }
         return bill;
+    }
+
+    @Transactional
+    @ModelAttribute("bill")
+    public BillDetail addDetail(BillDetail detail) {
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+
+        try {
+            session.save(detail);
+            t.commit();
+        } catch (Exception e) {
+            t.rollback();
+        } finally {
+            session.close();
+        }
+        return detail;
+    }
+
+    @Transactional
+    @ModelAttribute("bill")
+    public int addBillDetail(List<CartDetail> list, int MAHD) {
+        BillDetail detail = new BillDetail();
+        BillDetailPrimary key = new BillDetailPrimary();
+        int count = 0;
+        for (CartDetail c : list) {
+            Integer MASACH = c.getId().getMASACH();
+            Integer SOLUONG = c.getSOLUONG();
+            Float DONGIA = c.getDONGIA();
+            if (MASACH != null && SOLUONG != null && DONGIA != null) {
+                key.setMASACH(c.getId().getMASACH());
+                key.setMAHD(MAHD);
+                detail.setId(key);
+                detail.setDONGIA(c.getDONGIA());
+                detail.setSOLUONG(c.getSOLUONG());
+                addDetail(detail);
+                count += 1;
+            }
+
+        }
+        if (count < list.size()) {
+            return 0;
+        }
+        return 1;
+
     }
 
 }

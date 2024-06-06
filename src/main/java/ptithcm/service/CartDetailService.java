@@ -25,6 +25,16 @@ public class CartDetailService {
     SessionFactory factory;
 
     @Transactional
+    public List<CartDetail> getBill(int userId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId AND cd.CHON = 1";
+        Query query = session.createQuery(hql);
+        query.setParameter("cartId", userId);
+        List<CartDetail> list = query.list();
+        return list;
+    }
+
+    @Transactional
     @ModelAttribute("cartdetail")
     public List<CartDetail> getCartDetail(int cartId) {
         Session session = factory.getCurrentSession();
@@ -84,26 +94,6 @@ public class CartDetailService {
     @Transactional
     @ModelAttribute("totalmoney")
     public double getTotalMoney(int userId) {
-        // Session session = factory.getCurrentSession();
-        // String hql = "select sum(cd.SOLUONG*(cd.cartdetail_book.GIA)) from CartDetail
-        // cd where cd.cartdetail_cart.IDGH = :userId";
-        // Query query = session.createQuery(hql);
-
-        // query.setParameter("id", userId);
-        // if (query.list().get(0) != null)
-        // return (double) query.list().get(0);
-
-        ///////////////
-        // List<CartDetail> list = getCartDetail(userId);
-        // int money = 0;
-        // for (CartDetail detail : list) {
-        // if (detail.getCHON() == 1) {
-        // money += (detail.getSOLUONG() * detail.getCartdetail_book().getGIA());
-        // }
-
-        // }
-        // return money;
-        ////////////////////
         Session session = factory.getCurrentSession();
         String hql = "SELECT sum(cd.SOLUONG * cd.DONGIA) " +
                 "FROM CartDetail cd " +
@@ -120,6 +110,18 @@ public class CartDetailService {
         return 0.0;
 
     }
+
+    // @Transactional
+    // @ModelAttribute("deletedetail")
+    // public int removeDetail(int userId) {
+    //     Session session = factory.getCurrentSession();
+    //     String hql = "DELETE FROM CartDetail " +
+    //             "WHERE chon = 1 AND cartdetail_cart.idgh = :userId";
+    //     Query query = session.createQuery(hql);
+    //     query.setParameter("userId", userId);
+
+    //     return 1; // Phương thức này sẽ trả về số lượng entities đã xóa.
+    // }
 
     @Transactional
     @ModelAttribute("detail")

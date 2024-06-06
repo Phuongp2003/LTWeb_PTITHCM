@@ -23,7 +23,6 @@ public class Cart {
     @OneToMany(mappedBy = "cartdetail_cart", fetch = FetchType.LAZY)
     private Collection<CartDetail> cartdetails;
 
-
     public Cart() {
     }
 
