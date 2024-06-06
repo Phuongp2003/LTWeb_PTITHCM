@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import ptithcm.bean.Book;
+import ptithcm.bean.Feedback;
 import ptithcm.bean.TypeBook;
 import ptithcm.bean.Author;
 import ptithcm.bean.Producer;
@@ -19,6 +20,7 @@ import ptithcm.service.BookService;
 import ptithcm.service.TypeBookService;
 import ptithcm.service.AuthorService;
 import ptithcm.service.ProducerService;
+import ptithcm.service.FeedbackService;
 
 import java.io.File;
 import java.util.List;
@@ -40,12 +42,17 @@ public class BookController {
     private ProducerService producerService;
 
     @Autowired
+    private FeedbackService feedbackService;
+
+    @Autowired
 	ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
     public String book(ModelMap model, @PathVariable("MASACH") int MASACH) {
         Book book = bookService.getBookByID(MASACH);
+        List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         model.addAttribute("book", book);
+        model.addAttribute("feedback", feedback);
         return "pages/product/product";
     }
 
