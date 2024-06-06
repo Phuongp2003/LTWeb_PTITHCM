@@ -11,8 +11,8 @@
     <table class="category-list table">
         <div class="filter-wrapper row">
             <div class="col-md-10 col-sm-12 col-lg-10">
-                <form role="search">
-                    <input class="form-control" type="search" placeholder="Tìm sách" aria-label="Search" style="width: 50%;">
+                <form role="search" action="admin/product/search.htm">
+                    <input name="searchInput" class="form-control" type="search" placeholder="Tìm sách" aria-label="Search" style="width: 50%;">
                 </form>
             </div>
             <div class="col-md-2 col-sm-6 col-lg-2">
@@ -36,7 +36,7 @@
                     <td>${book.TENSACH}</td>
                     <td>${book.LANTAIBAN}</td>
                     <td><fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0"/></td>
-                    <td><img src="files/${book.ANH}" style="width: 200px; height: 230px;"></td>
+                    <td><img src="resources/imgs/products/${book.ANH}" style="width: 200px; height: 230px;"></td>
                     <td>${book.typebook.TENTL}</td>
                     <td>${book.author.HO} ${book.author.TEN}</td>
                     <td>${book.producer.TENNXB}</td>

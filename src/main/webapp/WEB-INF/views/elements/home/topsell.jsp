@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <div class="container-fluid text-center top-sell" style="width:80%; margin-top: 2rem;">
 	<h2 class="title align-middle">Top Sách Bán Chạy - Best Seller</h2>
 	<div class="row">
