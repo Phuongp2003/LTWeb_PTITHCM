@@ -57,7 +57,7 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/show");
-        
+
         List<Comment> comments = commentService.getCommentsByIDPost(id);
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
@@ -210,29 +210,30 @@ public class ForumController {
         model.addAttribute("message", "Delete post success");
         return "pages/post/post_action";
     }
-        @Autowired
-        private CommentService commentService;
 
-        @RequestMapping(value = "post/{id}/comment/create-success", method = RequestMethod.POST)
-        public String saveNewComment(
-                @RequestParam("content") String content, 
-                @PathVariable("id") Integer id,
-                Model model,
-                @CookieValue(value = "uid", defaultValue = "") String uid,
-                @CookieValue(value = "role", defaultValue = "") String role) {
-            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
-            Employee employee;
-            Comment comment = new Comment(content,postServices.getPostByID(id), accountService.getAccountByID(Integer.parseInt(uid)));
+    @Autowired
+    private CommentService commentService;
 
-            commentService.createComment(comment);
-            model.addAttribute("title", "PTITHCM Forum");
-            model.addAttribute("type", "forum");
-            model.addAttribute("user_id", Integer.parseInt(uid));
-            model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
-            model.addAttribute("success", 200);
-            model.addAttribute("message", "Create comment success");
-            return "pages/post/post_action";        
-        }
+    @RequestMapping(value = "post/{id}/comment/create-success", method = RequestMethod.POST)
+    public String saveNewComment(
+            @RequestParam("content") String content,
+            @PathVariable("id") Integer id,
+            Model model,
+            @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+        Employee employee;
+        Comment comment = new Comment(content, postServices.getPostByID(id),
+                accountService.getAccountByID(Integer.parseInt(uid)));
 
-        
+        commentService.createComment(comment);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", Integer.parseInt(uid));
+        model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Create comment success");
+        return "pages/post/post_action";
+    }
+
 }
