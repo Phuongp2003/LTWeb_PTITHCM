@@ -125,7 +125,7 @@ public class DiscountService {
 
     @Transactional
     @ModelAttribute("discounts")
-    public void removeDiscount(Discount discount, Book book) {
+    public void deactiveDiscount(Discount discount, Book book) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
