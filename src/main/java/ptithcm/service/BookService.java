@@ -1,5 +1,6 @@
 package ptithcm.service;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,49 +11,50 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Book;
+import ptithcm.bean.Discount;
 
 import java.util.List;
 
 @Service
 @SuppressWarnings("unchecked")
 public class BookService {
-    @Autowired
-    SessionFactory factory;
-
-    @Transactional
-    @ModelAttribute("books")
-    public List<Book> getAllBooks() {
-        Session session = factory.getCurrentSession();
-        String hql = "from Book";
-        Query query = session.createQuery(hql);
-        return query.list();
-    }
+	@Autowired
+	SessionFactory factory;
 
 	@Transactional
-    @ModelAttribute("books")
-    public List<Book> getBooksByCategory(int MATL) {
-        Session session = factory.getCurrentSession();
-        String hql = "FROM Book WHERE typebook.MATL = :MATL";
-        Query query = session.createQuery(hql);
-        query.setParameter("MATL", MATL);
-        List<Book> list = query.list();
-        return list;
-    }
+	@ModelAttribute("books")
+	public List<Book> getAllBooks() {
+		Session session = factory.getCurrentSession();
+		String hql = "from Book";
+		Query query = session.createQuery(hql);
+		return query.list();
+	}
 
-    @Transactional
-    @ModelAttribute("books")
-    public Book getBookByID(int MASACH) {
-        Session session = factory.getCurrentSession();
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByCategory(int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book WHERE typebook.MATL = :MATL";
+		Query query = session.createQuery(hql);
+		query.setParameter("MATL", MATL);
+		List<Book> list = query.list();
+		return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public Book getBookByID(int MASACH) {
+		Session session = factory.getCurrentSession();
 		String hql = "FROM Book WHERE MASACH = :MASACH";
 		Query query = session.createQuery(hql);
 		query.setParameter("MASACH", MASACH);
 		Book list = (Book) query.list().get(0);
 		return list;
-    }
+	}
 
 	@Transactional
 	@ModelAttribute("books")
-    public Book addBook(Book b) {
+	public Book addBook(Book b) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -125,9 +127,9 @@ public class BookService {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA DESC";
 		Query query = session.createQuery(hql);
-        query.setParameter("MATL", MATL);
-        List<Book> list = query.list();
-        return list;
+		query.setParameter("MATL", MATL);
+		List<Book> list = query.list();
+		return list;
 	}
 
 	@Transactional
@@ -136,9 +138,9 @@ public class BookService {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Book b WHERE typebook.MATL = :MATL ORDER BY b.GIA ASC";
 		Query query = session.createQuery(hql);
-        query.setParameter("MATL", MATL);
-        List<Book> list = query.list();
-        return list;
+		query.setParameter("MATL", MATL);
+		List<Book> list = query.list();
+		return list;
 	}
 
 	@Transactional
@@ -148,6 +150,24 @@ public class BookService {
 		String hql = "FROM Book WHERE TENSACH LIKE :keywords";
 		Query query = session.createQuery(hql);
 		query.setParameter("keywords", "%" + keywords + "%");
+		List<Book> list = query.list();
+		return list;
+	}
+
+	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksHaveDiscount(Discount discount) {
+		Session session;
+		try {
+			session = factory.getCurrentSession();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session = factory.openSession();
+		}
+		String hql = "SELECT b FROM Book b JOIN b.discountdetails d WHERE d.discountdetail_discount = :discount";
+		Query query = session.createQuery(hql);
+		query.setParameter("discount", discount);
 		List<Book> list = query.list();
 		return list;
 	}

@@ -1,4 +1,3 @@
-<%@ page pageEncoding="UTF-8" %>
 	<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 		<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 			<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
@@ -74,11 +73,11 @@
 											<button type="submit" class="btn btn-primary">Thêm vào giỏ</button>
 										</form:form>
 									</div>
+									<p class="card-text">${f.NOIDUNG}</p>
 								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="feedback-card card mb-3">
 						<div class="row g-0">
 							<div class="col-md-4 border-end border-secondary-subtle">

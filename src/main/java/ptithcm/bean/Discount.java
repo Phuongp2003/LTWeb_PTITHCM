@@ -10,14 +10,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "KhuyenMai")
 public class Discount {
     @Id
+    @GeneratedValue
     private Integer MAKM;// property
     private String TENKM;// property
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date NGAYBD;// property
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date NGAYKT;// property
 
     @OneToMany(mappedBy = "discountdetail_discount", fetch = FetchType.LAZY)
@@ -26,13 +27,18 @@ public class Discount {
     public Discount() {
     };
 
-    public Discount(Integer MAKM, String TENKM, Date NGAYBD,Date NGAYKT) {
-		this.MAKM = MAKM;
-		this.TENKM = TENKM;
-		this.NGAYBD = NGAYBD;
-		this.NGAYKT = NGAYKT;
+    public Discount(String TENKM, Date NGAYBD, Date NGAYKT) {
+        this.TENKM = TENKM;
+        this.NGAYBD = NGAYBD;
+        this.NGAYKT = NGAYKT;
+    }
 
-	}
+    public Discount(Integer id, String TENKM, Date NGAYBD, Date NGAYKT) {
+        this.MAKM = id;
+        this.TENKM = TENKM;
+        this.NGAYBD = NGAYBD;
+        this.NGAYKT = NGAYKT;
+    }
 
     public Integer getMAKM() {
         return MAKM;
@@ -78,8 +84,5 @@ public class Discount {
     public String toString() {
         return "Discount [MAKM=" + MAKM + ", TENKM=" + TENKM + ", NGAYBD=" + NGAYBD + ", NGAYKT=" + NGAYKT + "]";
     }
-
-    
-    
 
 }
