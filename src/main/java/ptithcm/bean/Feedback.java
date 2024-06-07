@@ -10,13 +10,16 @@ import java.util.*;
 @Entity
 @Table(name="CT_DanhGia")
 public class Feedback implements Serializable{
-    @Id
+    @EmbeddedId
+    private FeedbackPrimary id;// property
+
     @ManyToOne
+    @MapsId("MAKH")
     @JoinColumn(name = "MAKH")
     private Customer customer;
 
-    @Id
     @ManyToOne
+    @MapsId("MASACH")
     @JoinColumn(name = "MASACH")
     private Book book;
 
@@ -25,8 +28,27 @@ public class Feedback implements Serializable{
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
     private Date THOIGIAN;
+
     private Integer VOTE;
+
+    public Feedback(){}
+
+    public Feedback(Customer customer, Book book, String nOIDUNG, Date tHOIGIAN, Integer vOTE) {
+        this.customer = customer;
+        this.book = book;
+        NOIDUNG = nOIDUNG;
+        THOIGIAN = tHOIGIAN;
+        VOTE = vOTE;
+    }
     
+    public FeedbackPrimary getId() {
+        return id;
+    }
+
+    public void setId(FeedbackPrimary id) {
+        this.id = id;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -39,6 +61,7 @@ public class Feedback implements Serializable{
     public void setBook(Book book) {
         this.book = book;
     }
+
     public String getNOIDUNG() {
         return NOIDUNG;
     }
@@ -57,6 +80,5 @@ public class Feedback implements Serializable{
     public void setVOTE(Integer vOTE) {
         VOTE = vOTE;
     }
-
     
 }

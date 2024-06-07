@@ -26,8 +26,8 @@ public class Book {
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
 
-	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
-	private Collection<Feedback> feedback;
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	private Collection<Feedback> feedbacks;
 
 	@OneToMany(mappedBy = "receivedbilldetail_book", fetch = FetchType.LAZY)
 	private Collection<ReceivedBillDetail> receivedbilldetails;
@@ -108,11 +108,11 @@ public class Book {
 	}
 
 	public Collection<Feedback> getFeedback() {
-		return feedback;
+		return feedbacks;
 	}
 
-	public void setFeedback(Collection<Feedback> feedback) {
-		this.feedback = feedback;
+	public void setFeedback(Collection<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
 	}
 
 	public Collection<CartDetail> getCartdetails() {
