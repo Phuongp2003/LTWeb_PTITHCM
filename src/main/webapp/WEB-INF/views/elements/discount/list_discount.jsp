@@ -58,8 +58,8 @@
 			<c:forEach var="discount" items="${discounts}">
 				<div class="admin-action d-flex">
 					<a href="discount/${discount.MAKM}/remove.htm" class="delete-discount">Delete</a>
-					<a href="discount/${discount.MAKM}/edit.htm" class="edit-discount">Edit
-					</a>
+					<a href="discount/${discount.MAKM}/edit.htm" class="edit-discount">Edit </a>
+					<a href="discount/${discount.MAKM}/apply.htm" class="edit-discount">Apply </a>
 				</div>
 				<div class="discount col">
 					<div class="discount-head">
@@ -75,10 +75,6 @@
 						</p>
 					</div>
 					<div class="discount-book"></div>
-					<div class="discount-action">
-						<a href="/">Use</a>
-						<a href="/">Check</a>
-					</div>
 				</div>
 			</c:forEach>
 		</div>

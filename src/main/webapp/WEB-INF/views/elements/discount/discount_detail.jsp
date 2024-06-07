@@ -56,11 +56,6 @@
 
 <div class="discount-list container-fluid w-75">
 	<div class="discount-group">
-		<div class="discount-group-name fs-2">
-			<div class="discount-group-name-text">
-				<p>Group 1</p>
-			</div>
-		</div>
 		<div class="discount-list row">
 			<div class="discount col">
 				<div class="discount-head">
