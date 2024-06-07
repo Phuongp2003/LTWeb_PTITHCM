@@ -105,7 +105,7 @@ public class AccountController {
             account.setUSERNAME(username);
             account.setPASSWORD(password);
             Boolean gt = Boolean.parseBoolean(gioitinh);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date ns = dateFormat.parse(ngaysinh);
             customerService.insertCustomer(new Customer(ho, ten, email, phone, gt, ns));
             account.setAccount_customer(customerService.getCustomerByEmail(email));

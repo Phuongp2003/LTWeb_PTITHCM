@@ -29,4 +29,21 @@ public class EmployeeService {
         query.setParameter("id", id);
         return (Employee) query.list().get(0);
     }
+
+    @Transactional
+    @ModelAttribute("employee")
+    public Employee updateEmployee(Employee employee) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.update(employee);
+            transaction.commit();
+            return employee;
+        } catch (Exception e) {
+            transaction.rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

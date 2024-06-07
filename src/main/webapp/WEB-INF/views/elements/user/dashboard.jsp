@@ -41,6 +41,7 @@
 				<div class="ace-cccd">CCCD: ${model.CCCD}</div>
 			</c:if>
 			<div class="ace-cccd">EMAIL: ${model.EMAIL}</div>
+			<div class="ace-birthday">Ngày sinh: ${birthday}</div>
 			<div class="ace-cccd">Giới tính:
 				<c:if test="${model.GIOITINH}">
 					Nam

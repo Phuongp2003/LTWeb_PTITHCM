@@ -70,9 +70,15 @@ public class ForumController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("content") String content,
-            Model model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+            Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
+        Employee employee;
+        if (role.equals("employee")) {
+            employee = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee();
+            post.setPost_employee(employee);
+        }
         postServices.editPost(post);
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
 

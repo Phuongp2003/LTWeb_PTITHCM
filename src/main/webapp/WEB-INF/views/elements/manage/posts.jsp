@@ -68,10 +68,6 @@
 						<div class="post-author fs-6">${post.author.getFullname()}</div>
 					</div>
 					<div class="post-content fs-5">${post.description}</div>
-					<div class="post-action position-absolute bottom-0 left-0">
-						<a href="manage/posts/${post.id}/approve.htm" class="post-approve fs-5"><i class="bi bi-check2-square"></i></a> |
-						<a href="manage/posts/${post.id}/reject.htm" class="post-reject fs-5"><i class="bi bi-x-square"></i></a>
-					</div>
 				</div>
 			</c:forEach>
 		</div>
