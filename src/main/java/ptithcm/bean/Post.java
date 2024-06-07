@@ -19,6 +19,8 @@ public class Post {
     private String content;// property
     @Column(name = "MOTA")
     private String desciption;// property
+    @Column(name = "LYDOTUCHOI")
+    private String rejectReason;// property
     @ManyToOne
     @JoinColumn(name = "MAKH")
     private Customer author;
@@ -82,6 +84,14 @@ public class Post {
 
     public void setDesciption(String desciption) {
         this.desciption = desciption;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
     }
 
     @Override

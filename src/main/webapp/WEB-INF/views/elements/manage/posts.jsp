@@ -61,37 +61,13 @@
 				<div class="post col position-relative">
 					<div class="post-head">
 						<div class="post-title fs-4">
-							<a href="forum/post/${post.id}.htm">
+							<a href="manage/posts/${post.id}.htm">
 								${post.title}
 							</a>
 						</div>
 						<div class="post-author fs-6">${post.author.getFullname()}</div>
 					</div>
 					<div class="post-content fs-5">${post.description}</div>
-					<div class="post-action position-absolute bottom-0 left-0">
-						<div class="post-status fs-5 d-inline">
-							<c:choose>
-								<c:when test="${not empty post.post_employee}">
-									<c:choose>
-										<c:when test="${not empty post.rejectReason}">
-											<img src="<c:url value='resources/imgs/status-error.svg'/>" width="16" height="16" alt="Status Deny">
-										</c:when>
-										<c:otherwise>
-											<img src="<c:url value='resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
-										</c:otherwise>
-									</c:choose>
-								</c:when>
-								<c:otherwise>
-									<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status Waiting">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<c:if test="${owner != null && owner}">
-							|
-							<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
-							<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
-						</c:if>
-					</div>
 				</div>
 			</c:forEach>
 		</div>

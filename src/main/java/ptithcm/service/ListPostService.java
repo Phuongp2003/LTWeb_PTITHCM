@@ -98,4 +98,26 @@ public class ListPostService {
         }
         return post;
     }
+
+    @Transactional
+    @ModelAttribute("posts")
+    public List<Post> getPostsNeedApprove() {
+        Session session = factory.getCurrentSession();
+        String hql = "from Post where post_employee is null";
+        Query query = session.createQuery(hql);
+        List<Post> res = query.list();
+
+        return res;
+    }
+
+    @Transactional
+    @ModelAttribute("posts")
+    public List<Post> getPostsApproved() {
+        Session session = factory.getCurrentSession();
+        String hql = "from Post where post_employee is not null and rejectReason is null";
+        Query query = session.createQuery(hql);
+        List<Post> res = query.list();
+
+        return res;
+    }
 }

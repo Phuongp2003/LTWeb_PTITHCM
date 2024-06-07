@@ -44,7 +44,7 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("owner", true);
-        List<Post> post = postServices.getAllPosts();
+        List<Post> post = postServices.getPostsApproved();
         model.addAttribute("posts", post);
         return "pages/forum/forum";
     }
@@ -70,9 +70,15 @@ public class ForumController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("content") String content,
-            Model model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+            Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
+        Employee employee;
+        if (role.equals("employee")) {
+            employee = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee();
+            post.setPost_employee(employee);
+        }
         postServices.editPost(post);
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
 
