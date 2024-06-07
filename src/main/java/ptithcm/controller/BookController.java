@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,14 @@ import ptithcm.bean.Feedback;
 import ptithcm.bean.TypeBook;
 import ptithcm.bean.Author;
 import ptithcm.bean.Producer;
+import ptithcm.bean.Customer;
 import ptithcm.service.BookService;
+import ptithcm.service.CustomerService;
 import ptithcm.service.TypeBookService;
 import ptithcm.service.AuthorService;
 import ptithcm.service.ProducerService;
 import ptithcm.service.FeedbackService;
+import ptithcm.service.AccountService;
 
 
 import java.io.BufferedOutputStream;
@@ -28,6 +32,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.FileOutputStream;
@@ -59,14 +64,31 @@ public class BookController {
     private FeedbackService feedbackService;
 
     @Autowired
+    private AccountService accountService;
+
+    @Autowired
 	ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
-    public String book(ModelMap model, @PathVariable("MASACH") int MASACH) {
+    public String book(ModelMap model, @PathVariable("MASACH") int MASACH, 
+    @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
+        Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
+        
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            Feedback checkCustomer = feedbackService.getFeedbackById(user.getMAKH(), MASACH);
+            if(checkCustomer != null){
+                model.addAttribute("message", 1);
+            } else {
+                model.addAttribute("message", 2);
+            }
+        }
+
         model.addAttribute("book", book);
         model.addAttribute("feedback", feedback);
+        model.addAttribute("avgVote", avgVote);
         return "pages/product/product";
     }
 
