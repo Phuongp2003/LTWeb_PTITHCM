@@ -44,7 +44,7 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("owner", true);
-        List<Post> post = postServices.getAllPosts();
+        List<Post> post = postServices.getPostsApproved();
         model.addAttribute("posts", post);
         return "pages/forum/forum";
     }
