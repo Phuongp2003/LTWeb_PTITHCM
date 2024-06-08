@@ -9,13 +9,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "GioHang")
 public class Cart {
     @Id
-    private int IDGH;// property
+    @GeneratedValue
+    private int IDGH;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date NGAYLAP;// property
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "MAKH")
     private Customer cart_customer;// property
 

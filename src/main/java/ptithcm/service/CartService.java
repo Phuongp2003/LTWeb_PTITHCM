@@ -32,7 +32,7 @@ public class CartService {
 	}
 
 	@Transactional
-	@ModelAttribute("cartbyuserid")
+	@ModelAttribute("cart")
 	public Cart getCartByIdCustomer(int userId) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Cart c " + "WHERE c.cart_customer.MAKH = :userId";
@@ -43,7 +43,7 @@ public class CartService {
 	}
 
 	@Transactional
-	@ModelAttribute("cartlist")
+	@ModelAttribute("cart")
 	public List<Cart> getCart() {
 		Session session = factory.openSession();
 		String hql = "FROM Cart";
@@ -53,7 +53,7 @@ public class CartService {
 	}
 
 	@Transactional
-	@ModelAttribute("cartidbyuserid")
+	@ModelAttribute("cart")
 	public Integer getCartIdByIdCustomer(int userId) {
 		Session session = factory.getCurrentSession();
 		String hql = "SELECT c.IDGH FROM Cart c " +
