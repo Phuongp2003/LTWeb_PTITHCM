@@ -24,6 +24,18 @@ public class CommentService {
 
     @Transactional
     @ModelAttribute("comments")
+    public Comment getCommentByID(int cid) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Comment where id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", cid);
+
+        Comment cmt = (Comment) query.list().get(0);
+        return cmt;
+    }
+
+    @Transactional
+    @ModelAttribute("comments")
     public List<Comment> getCommentsByIDPost(int id) {
         Session session = factory.getCurrentSession();
         String hql = "from Comment where post.id = :id";
