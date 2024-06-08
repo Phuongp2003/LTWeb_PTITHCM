@@ -35,37 +35,32 @@
 		border-bottom: .3px brown solid;
 	}
 
-	.forum-comment .forum-user .port-content {
-		width: 100%;
+	.user-comment-action {
+		display: grid;
+		grid-template-rows: 1fr 1fr;
 	}
 
 	.user-info {
+		display: grid;
+		grid-template-columns: 50px 1fr;
 		width: 15%;
 	}
 
-	.user-comment {
-		width: 85%;
-	}
-
 	.user-comment form {
+		display: flex;
 		width: 100%;
 		position: relative;
+		justify-content: space-between;
 	}
 
 	.comment-content {
-		width: 85%;
+		width: 75%;
+		height: 100%;
+		border-radius: 2px;		
 	}
 
 	.comment-submit {
-		width: 100px;
-		position: absolute;
-		top: 50%;
-		right: 0;
-		transform: translateY(-50%);
-	}
-
-	#content, .comment-submit {
-		height: 100%;
+		width: 10%;
 	}
 
 	@media (max-width: 400px) {
@@ -95,32 +90,27 @@
 				<p>Bình luận</p>
 			</div>
 		</div>
-		<div class="user-comment-action container-fluid w-100 fs-4 d-flex">
-			<a href="user/${user_id}" class="user-info col-2 d-flex">
-			<img class="user-img" src="resources/imgs/test1.jsp" class="userImg">
-			<div class="user-name">${user_name}</div>
-			</a><div class="user-comment">
-			<c:if test="${empty comment.id or comment.id == 0}">
-				
-			<form:form method="POST" action="forum/post/${id}/comment/create-success.htm" modelAttribute="comment">
-				<div class="comment-content">
-					<form:label path="content">Nội dung: </form:label>
-					<form:input path="content" />
-				</div>
-				<button class="comment-submit" type="submit">Đăng</button>
-			</form:form>
-			</c:if>
-			<c:if test="${not empty comment.id and comment.id != 0}">
-			
-			<form:form method="POST" action="forum/post/${id}/comment/${comment.id}/edit-success.htm" modelAttribute="comment">
-				
-				<div class="port-content">
-					<form:label path="content">Nội dung: </form:label>
-					<form:input path="content" />
-				</div>
-				<button type="submit">Chỉnh sửa</button>
-			</form:form>
-			</c:if></div>
+		<div class="user-comment-action container-fluid w-100 fs-4">
+			<a href="user/${user_id}" class="user-info">
+				<img class="user-img" src="resources/imgs/test1.jsp" class="userImg">
+				<div class="user-name">${user_name}</div>
+			</a>
+			<div class="user-comment">
+				<c:if test="${empty comment.id or comment.id == 0}">				
+					<form:form method="POST" action="forum/post/${id}/comment/create-success.htm" modelAttribute="comment">						
+						<form:label path="content">Nội dung: </form:label>
+						<form:input class="comment-content" path="content"/>						
+						<button class="comment-submit" type="submit">Gửi</button>
+					</form:form>
+				</c:if>
+				<c:if test="${not empty comment.id and comment.id != 0}">				
+					<form:form method="POST" action="forum/post/${id}/comment/${comment.id}/edit-success.htm" modelAttribute="comment">
+						<form:label path="content">Nội dung: </form:label>
+						<form:input class="comment-content" path="content" />
+						<button class="comment-submit" type="submit">Chỉnh sửa</button>
+					</form:form>
+				</c:if>
+			</div>
 		</div>
 		
 		<div class="comment-list row">
