@@ -41,7 +41,8 @@ public class CartController {
             // System.out.println("uid" + cartService.getCartIdByIdCustomer(userId));
             model.addAttribute("cart", cart);
             List<CartDetail> cartdetail = cartDetailService.getCartDetail(cart.getIDGH());
-
+            // List<Cart> l = cartService.getCart();
+            // int idgh = l.get(2).getIDGH();
             if (cartdetail == null || cartdetail.isEmpty()) {
                 model.addAttribute("cartdetail", new ArrayList<CartDetail>());
                 model.addAttribute("totalitem", 0);
@@ -116,14 +117,14 @@ public class CartController {
 
     }
 
-    @RequestMapping(value = "/update-cart-detail")
+    @RequestMapping(value = "update-cart-detail")
     public String editCartDetail(ModelMap model) {
         CartDetail detail = new CartDetail();
         model.addAttribute("cartdetail", detail);
         return "pages/cart/cart";
     }
 
-    @RequestMapping(value = "/update-cart-detail", method = RequestMethod.POST)
+    @RequestMapping(value = "update-cart-detail", method = RequestMethod.POST)
     public String saveEditCartDetail(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @RequestParam("MASACH") int MASACH,
             @RequestParam("SOLUONG") int SOLUONG,
@@ -133,17 +134,22 @@ public class CartController {
             int userId = user.getMAKH();
             Cart cart = cartService.getCartByIdCustomer(user.getMAKH());
             int cart_id = cart.getIDGH();
+            ///////////////////////////////
+            CartDetail old = cartDetailService.getCartDetailByProductId(cart_id, MASACH);
+            int oldSL = old.getSOLUONG();
+            int SL = SOLUONG + oldSL;
+            //////////////////////////
             CartDetailPrimary key = new CartDetailPrimary(cart_id, MASACH);
             key.setIDGH(cart.getIDGH());
             key.setMASACH(MASACH);
-            CartDetail detail = new CartDetail(key, SOLUONG, DONGIA, CHON);
+            CartDetail detail = new CartDetail(key, SOLUONG, SL, CHON);
             detail.setCartdetail_book(bookService.getBookByID(MASACH));
             detail.setCartdetail_cart(cart);
             detail.setCartdetail_book(bookService.getBookByID(MASACH));
             detail.setId(key);
             detail.setCHON(CHON);
             detail.setDONGIA(DONGIA);
-            detail.setSOLUONG(SOLUONG);
+            detail.setSOLUONG(SL);
             cartDetailService.updateDetail(detail);
             model.addAttribute("detail", detail);
             return "redirect:/cart.htm";

@@ -23,6 +23,17 @@ public class BillService {
     SessionFactory factory;
 
     @Transactional
+    @ModelAttribute("billlist")
+    public Bill getBillList(int MAHD) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM Bill  WHERE MAHD = :MAHD";
+        Query query = session.createQuery(hql);
+        query.setParameter("MAHD", MAHD);
+        Bill list = (Bill) query.list().get(0);
+        return list;
+    }
+
+    @Transactional
     @ModelAttribute("bill")
     public Bill getBillByID(int MAHD) {
         Session session = factory.getCurrentSession();
@@ -54,6 +65,29 @@ public class BillService {
         query.setParameter("id", userId);
 
         Bill list = (Bill) query.list().get(0);
+        return list;
+    }
+
+    @Transactional
+    @ModelAttribute("billsbytatus")
+    public List<Bill> getBillByStatus(String Status) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Bill where status.MATT = :Status";
+        Query query = session.createQuery(hql);
+
+        query.setParameter("Status", Status);
+
+        List<Bill> list = query.list();
+        return list;
+    }
+
+    @Transactional
+    @ModelAttribute("allbill")
+    public List<Bill> getAllBill() {
+        Session session = factory.getCurrentSession();
+        String hql = "from Bill";
+        Query query = session.createQuery(hql);
+        List<Bill> list = query.list();
         return list;
     }
 

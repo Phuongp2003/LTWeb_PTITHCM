@@ -114,16 +114,22 @@ public class AccountController {
             Boolean gt = Boolean.parseBoolean(gioitinh);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date ns = dateFormat.parse(ngaysinh);
-            customerService.insertCustomer(new Customer(ho, ten, email, phone, gt, ns));
+            Customer user = new Customer(ho, ten, email, phone, gt, ns);
+
+            customerService.insertCustomer(user);
             account.setAccount_customer(customerService.getCustomerByEmail(email));
             account.setAccount_employee(null);
             LocalDateTime current = LocalDateTime.now();
             Date currentDate = Date.from(current.atZone(ZoneId.systemDefault()).toInstant());
-            Customer user = account.getAccount_customer();
-            Cart cart = new Cart(null, currentDate, user);
+            user.setAccount(account);
+
+            Cart cart = new Cart(8, currentDate, user);
             cart.setCart_customer(user);
+            cart.setIDGH(8);
             cart.setNGAYLAP(currentDate);
-            if ((accountService.insertAccount(account) == 1) && (cartService.insertCart(cart) == 1)) {
+            user.setCart(cart);
+            if ((accountService.insertAccount(account) == 1)) {
+                cartService.insertCart(cart);
                 model.addAttribute("message", "Đăng ký thành công!");
                 emailService.sendEmail(email,
                         "Bạn đã đăng ký thành công vào dịch vụ sách PTITHCM - đồ án BOOKSHOP khóa 2021!",

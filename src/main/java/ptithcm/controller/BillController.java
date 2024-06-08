@@ -24,7 +24,7 @@ import java.util.List;
 import java.io.*;
 
 @Controller
-@RequestMapping("/bill")
+// @RequestMapping("/bill")
 public class BillController {
     @Autowired
     private BillService billService;
@@ -38,9 +38,11 @@ public class BillController {
     private CartDetailService cartDetailService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private StatusService statusService;
 
     // @RequestMapping("")
-    @RequestMapping(value = "/{MAHD}")
+    @RequestMapping(value = "bill/{MAHD}")
     public String showBill(ModelMap model, @PathVariable("MAHD") int MAHD) {
 
         // if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid))
@@ -55,7 +57,41 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "check-out")
+    @RequestMapping(value = "admin/bill/{Status}")
+    public String showBillByStatus(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @PathVariable("Status") String Status) {
+
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            List<Bill> allbill = billService.getAllBill();
+            List<Bill> billlist = billService.getBillByStatus(Status);
+            List<Status> statuslist = statusService.getAllStatus();
+            model.addAttribute("billlist", billlist);
+            model.addAttribute("statuslist", statuslist);
+            model.addAttribute("allbill", allbill);
+
+            return "pages/admin/bill";
+        }
+        return "redirect:/user/login.htm";
+
+    }
+
+    @RequestMapping(value = "admin/bill")
+    public String showStatus(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            List<Status> statuslist = statusService.getAllStatus();
+            // model.addAttribute("billlist", billlist);
+            List<Bill> allbill = billService.getAllBill();
+            model.addAttribute("statuslist", statuslist);
+            model.addAttribute("allbill", allbill);
+
+            return "pages/admin/billbystatus";
+        }
+        return "redirect:/user/login.htm";
+
+    }
+
+    @RequestMapping(value = "bill/check-out")
     public String addBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
             Bill bill = new Bill();
@@ -66,7 +102,7 @@ public class BillController {
         return "redirect:/user/login.htm";
     }
 
-    @RequestMapping(value = "check-out", method = RequestMethod.POST)
+    @RequestMapping(value = "bill/check-out", method = RequestMethod.POST)
     public String saveBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @RequestParam("HOTENNN") String HOTENNN,
             @RequestParam("DIACHINN") String DIACHINN,

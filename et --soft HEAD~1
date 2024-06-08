@@ -1,0 +1,286 @@
+[33mcommit ac89e3dcc37b1444b632fd4d4084bae6d50cc995[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: ThuongPhan662003 <thuong5so55555@gmail.com>
+Date:   Fri Jun 7 06:08:33 2024 +0700
+
+    chức năng bill -- đang fix cart
+
+[33mcommit b50e5d9560392e6c90764db338a3b30c56e9e76e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Thu Jun 6 13:56:14 2024 +0700
+
+    add hibernate config example
+
+[33mcommit 5cc5fb2bf1d4ff3139ffab28325bf9b290d51788[m[33m ([m[1;32mthuong-bill[m[33m)[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Thu Jun 6 13:23:56 2024 +0700
+
+    chức năng cart (#37)
+    
+    * chức năng cart
+    
+    * Delete src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
+    
+    ---------
+    
+    Co-authored-by: ThuongPhan662003 <thuong5so55555@gmail.com>
+    Co-authored-by: PhuongY <phambuinamphuong@gmail.com>
+
+[33mcommit 432cca72abf04027a60a16d4d1d17b6bf57e9f6b[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Thu Jun 6 12:55:26 2024 +0700
+
+    Filter book by price, search book (#38)
+    
+    * filter book by price, search book
+    
+    * fix display number books of each type
+
+[33mcommit 6b413ca82733442b9acda2da3c6d3304cf17e6f4[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Thu Jun 6 12:54:03 2024 +0700
+
+    add feedback of book (đổ dữ liệu thành công) (#39)
+
+[33mcommit 129a6cdf6d76e00551bf31922f62ed30d602850e[m
+Merge: 0a6d358 93b7028
+Author: MinhKhang <125955111+NguyenPhucMinhKhang@users.noreply.github.com>
+Date:   Wed Jun 5 16:31:29 2024 +0700
+
+    Merge pull request #36 from Phuongp2003/comment_khang
+    
+    show comments _ khang Phuong
+
+[33mcommit 93b7028c88ea98f75040089537c4e1ad69f40efc[m
+Author: Nguyen Khang <nguyenkhangnt2412@gmail.com>
+Date:   Wed Jun 5 16:28:06 2024 +0700
+
+    show comments _ khang Phuong
+
+[33mcommit 0a6d358c858ebfa70e9094aa0fbef1d2ccb4bd6a[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Wed Jun 5 04:57:01 2024 +0700
+
+    Account (#35)
+    
+    * Continue fix forum:
+    + Fix wrong user link in /forum
+    + Add change size (still bug when edit)
+    
+    * Hoàn thành phần thêm/sửa nội dung bài viết
+    
+    * demo - thay đổi mật khẩu, quên mật khẩu
+
+[33mcommit 08a529ae84007cc878c115e9a0fe8f25e0c3f8f2[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Tue Jun 4 09:40:56 2024 +0700
+
+    CRUD of book (#34)
+
+[33mcommit 07e826d10ee161dbbbdd991a2de2cf0354a9dba4[m[33m ([m[1;31morigin/account[m[33m)[m
+Merge: 29701fd 3c84d26
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Mon May 20 01:52:46 2024 +0700
+
+    Merge remote-tracking branch 'origin/TypeBook-CRUD-finish'
+
+[33mcommit 29701fd19321f67b9dc86637df8d76cae3b2af12[m
+Merge: 0dc3f95 d0af6f6
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Mon May 20 01:51:28 2024 +0700
+
+    Merge branch 'account'
+
+[33mcommit d0af6f62fba90b5a6e145217416394a0f0eb0520[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Mon May 20 01:50:43 2024 +0700
+
+    dumplicate!
+
+[33mcommit 0dc3f95636d9cda6bf3f79daeb562ba6abf81d3f[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Sun May 19 19:01:43 2024 +0700
+
+    finish CRUD of typebook (#33)
+
+[33mcommit 3c84d26ca4687f8696f3b8df0a42cba7c3c53a26[m
+Author: Phi Long <nguyenphilong.it.123@gmail.com>
+Date:   Sun May 19 16:50:57 2024 +0700
+
+    finish CRUD of typebook
+
+[33mcommit 24a332db0e3dcd0f37ccb3105a16ba856e79d56e[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sun May 19 16:01:36 2024 +0700
+
+    user and forum - secure
+
+[33mcommit 64286d900a62a48809e02b977904cd003d0560c7[m
+Author: Nguyễn Phi Long <126060676+NguyenPhiLongIT@users.noreply.github.com>
+Date:   Sun May 19 14:21:10 2024 +0700
+
+    create typebook and change RequestMapping(admin/category.htm) (#32)
+
+[33mcommit 98bf0cace6f0e2249f9424cc3fcc1c899148e9c2[m
+Merge: d90ca05 74316a8
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sun May 19 14:13:54 2024 +0700
+
+    Merge branch 'account'
+
+[33mcommit d90ca0577c3fec66d4afb1a0020b0b2a6070affd[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Sun May 19 14:10:13 2024 +0700
+
+    login with cookie/register (#31)
+
+[33mcommit 65aa7346f5c3780df4f5c3fe67732e0b6bd00552[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Sun May 19 14:09:08 2024 +0700
+
+    login with cookie/register (#30)
+
+[33mcommit 74316a8c39daaf31a92e21dcc46b153964ab196a[m
+Merge: 2b50140 c226676
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sun May 19 14:08:13 2024 +0700
+
+    Merge branch 'main' into account
+
+[33mcommit 2b5014098528db94d9eeb7be490b8477671c0c0c[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sun May 19 05:08:34 2024 +0700
+
+    login with cookie/register
+
+[33mcommit c2266760fce489c740761111cef24e3b081ad696[m
+Merge: b45807e ac526de
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sat May 18 16:49:52 2024 +0700
+
+    Merge branch 'account'
+
+[33mcommit b45807e980aa35fcb391e8fba2874b3da6c8dc3e[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Sat May 18 16:41:02 2024 +0700
+
+    Add test user-dashboard, fix href (#29)
+
+[33mcommit ac526deab49f27f0e0fb2cd4701a923808ee3d3d[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Sat May 18 16:37:34 2024 +0700
+
+    Add test user-dashboard, fix href
+
+[33mcommit 14337e5b246990b8013c572f8c006a52011a9b92[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Fri May 17 02:18:58 2024 +0700
+
+    change file-tree, fix c tag
+
+[33mcommit bce2fce4ea2879c24bfbce3862a7abef1caabe09[m
+Merge: 28b9ce3 3534b47
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:29:57 2024 +0700
+
+    Merge branch 'main' into forum
+
+[33mcommit 28b9ce39a976c15e20f2735c58a32ed32eb84363[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:29:36 2024 +0700
+
+    fix
+
+[33mcommit 3534b47db3250cef1cc4375801004b18de3e399c[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:24:53 2024 +0700
+
+    Forum (#28)
+    
+    * fix create post
+    
+    * rm Like
+    
+    * fix comment
+    
+    * compelete Post-crud
+    
+    * fix wrong href req for edit
+
+[33mcommit d2d2031a7ebddb013ae0aba2e1c9bba504b2ea14[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:22:41 2024 +0700
+
+    Account khang (#27)
+    
+    * add
+    
+    * login-form
+    
+    ---------
+    
+    Co-authored-by: Nguyen Khang <nguyenkhangnt2412@gmail.com>
+
+[33mcommit a483c5f688de13f28f2c47cf15d743c9a0edcd19[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:16:12 2024 +0700
+
+    add admin dashboard of typebook and book (#26)
+    
+    Co-authored-by: Phi Long <nguyenphilong.it.123@gmail.com>
+
+[33mcommit afddccab440ba397256434510f31a9dcb83d6800[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:15:45 2024 +0700
+
+    show cart (#25)
+    
+    Co-authored-by: ThuongPhan662003 <thuong5so55555@gmail.com>
+
+[33mcommit 7d1d94c42c0a62da97cc1d3ab12deac11a23b507[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:13:11 2024 +0700
+
+    Post-CRUD compelete (#24)
+    
+    * fix create post
+    
+    * rm Like
+    
+    * fix comment
+    
+    * compelete Post-crud
+    
+    * fix wrong href req for edit
+
+[33mcommit d330250f07dc34804705c05b54a452e938683e79[m
+Merge: 121d32b b1e23f3
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:12:55 2024 +0700
+
+    Merge branch 'main' into forum
+
+[33mcommit 121d32bbf1cc0d7f4397a453a14b3b0f7eb1a59a[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:07:09 2024 +0700
+
+    fix wrong href req for edit
+
+[33mcommit 2cb7ebef91b835e7e572f1ede2a9d4124f6497b7[m
+Author: Phuong <phambuinamphuong@gmail.com>
+Date:   Fri May 17 00:01:13 2024 +0700
+
+    compelete Post-crud
+
+[33mcommit b1e23f37f28e6ab8335b58d354a6bfa2d08f99d6[m
+Author: PhuongY <phambuinamphuong@gmail.com>
+Date:   Wed May 15 01:40:08 2024 +0700
+
+    Forum (#23)
+    
+    * fix create post
+    
+    * rm Like
+    
+    * fix comment
+
+[33mcommit 31

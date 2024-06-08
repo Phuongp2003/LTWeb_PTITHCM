@@ -35,10 +35,20 @@ public class CartService {
 	@ModelAttribute("cartbyuserid")
 	public Cart getCartByIdCustomer(int userId) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Cart c WHERE c.cart_customer.MAKH = :id";
+		String hql = "FROM Cart c " + "WHERE c.cart_customer.MAKH = :userId";
 		Query query = session.createQuery(hql);
-		query.setParameter("id", userId);
+		query.setParameter("userId", userId);
 		Cart list = (Cart) query.list().get(0);
+		return list;
+	}
+
+	@Transactional
+	@ModelAttribute("cartlist")
+	public List<Cart> getCart() {
+		Session session = factory.openSession();
+		String hql = "FROM Cart";
+		Query query = session.createQuery(hql);
+		List<Cart> list = query.list();
 		return list;
 	}
 
@@ -64,6 +74,7 @@ public class CartService {
 	}
 
 	@Transactional
+	@ModelAttribute("cart")
 	public int insertCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -82,6 +93,7 @@ public class CartService {
 	}
 
 	@Transactional
+	@ModelAttribute("cart")
 	public int updateCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -100,6 +112,7 @@ public class CartService {
 	}
 
 	@Transactional
+	@ModelAttribute("cart")
 	public int deleteCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();

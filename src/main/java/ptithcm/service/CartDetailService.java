@@ -3,6 +3,8 @@ package ptithcm.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,6 +57,18 @@ public class CartDetailService {
         return books;
     }
 
+    // @Transactional
+    // @ModelAttribute("cartbyproduct")
+    // public CartDetail getCartDetailByProductId(int cartId, int productId) {
+    // Session session = factory.getCurrentSession();
+    // String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId and
+    // cd.cartdetail_book.MASACH = :productId";
+    // Query query = session.createQuery(hql);
+    // query.setParameter("cartId", cartId);
+    // query.setParameter("productId", productId);
+    // CartDetail product = (CartDetail) query.list().get(0);
+    // return product;
+    // }
     @Transactional
     @ModelAttribute("cartbyproduct")
     public CartDetail getCartDetailByProductId(int cartId, int productId) {
@@ -63,8 +77,15 @@ public class CartDetailService {
         Query query = session.createQuery(hql);
         query.setParameter("cartId", cartId);
         query.setParameter("productId", productId);
-        CartDetail product = (CartDetail) query.list().get(0);
-        return product;
+
+        try {
+            CartDetail product = (CartDetail) query.uniqueResult();
+            return product;
+        } catch (NoResultException | IndexOutOfBoundsException e) {
+            // Log the exception (optional)
+            System.out.println("No result found for cartId: " + cartId + " and productId: " + productId);
+            return null;
+        }
     }
 
     @Transactional
@@ -114,13 +135,13 @@ public class CartDetailService {
     // @Transactional
     // @ModelAttribute("deletedetail")
     // public int removeDetail(int userId) {
-    //     Session session = factory.getCurrentSession();
-    //     String hql = "DELETE FROM CartDetail " +
-    //             "WHERE chon = 1 AND cartdetail_cart.idgh = :userId";
-    //     Query query = session.createQuery(hql);
-    //     query.setParameter("userId", userId);
+    // Session session = factory.getCurrentSession();
+    // String hql = "DELETE FROM CartDetail " +
+    // "WHERE chon = 1 AND cartdetail_cart.idgh = :userId";
+    // Query query = session.createQuery(hql);
+    // query.setParameter("userId", userId);
 
-    //     return 1; // Phương thức này sẽ trả về số lượng entities đã xóa.
+    // return 1; // Phương thức này sẽ trả về số lượng entities đã xóa.
     // }
 
     @Transactional
