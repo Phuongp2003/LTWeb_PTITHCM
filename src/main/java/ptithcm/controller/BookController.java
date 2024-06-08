@@ -12,19 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import ptithcm.bean.Book;
-import ptithcm.bean.Feedback;
-import ptithcm.bean.TypeBook;
-import ptithcm.bean.Author;
-import ptithcm.bean.Producer;
-import ptithcm.bean.Customer;
-import ptithcm.service.BookService;
-import ptithcm.service.CustomerService;
-import ptithcm.service.TypeBookService;
-import ptithcm.service.AuthorService;
-import ptithcm.service.ProducerService;
-import ptithcm.service.FeedbackService;
-import ptithcm.service.AccountService;
+import ptithcm.bean.*;
+import ptithcm.service.*;
 
 
 import java.io.BufferedOutputStream;
@@ -56,6 +45,9 @@ public class BookController {
 
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private SupplierService supplierService;
 
     @Autowired
     private ProducerService producerService;
@@ -104,6 +96,12 @@ public class BookController {
 		return list;
 	}
 
+    @ModelAttribute("supplierPick")
+	public List<Supplier> getSuppliers() {
+		List<Supplier> list = supplierService.getAllSuppliers();
+		return list;
+	}
+
     @ModelAttribute("producerPick")
 	public List<Producer> getProducers() {
 		List<Producer> list = producerService.getAllProducers();
@@ -125,7 +123,7 @@ public class BookController {
     }
     
     @RequestMapping(value = "/admin/product/add-product", method = RequestMethod.POST)
-    public String saveNewProduct(ModelMap model, @ModelAttribute("book") Book book, 
+    public String saveNewProduct(ModelMap model, @ModelAttribute("book") Book book, @ModelAttribute("category") TypeBook category,
     @RequestParam("file") MultipartFile file) {
         // if (file.isEmpty()) {
         //     model.addAttribute("message", "Vui lòng chọn file!");
@@ -224,113 +222,29 @@ public class BookController {
         return "pages/admin/product";
     }
 
-    // private String saveFile(MultipartFile file) {
-    //     if(file != null && !file.isEmpty()) {
-    //         try{
-    //             byte[] bytes = file.getBytes();
-    //             String rootPath = System.getProperty("catalina.home");
-    //             File dir = new File(rootPath+File.separator+"resources/imgs/products");
-    //             if(!dir.exists()){
-    //                 dir.mkdir();
-    //             }
+    @RequestMapping(value = "/admin/product/add-category", method = RequestMethod.POST)
+    public String saveNewCategory(ModelMap model, @ModelAttribute("category") TypeBook category) {
+        typeBookService.addTypeBook(category);
+        return "redirect:/admin/product/add-product.htm";
+    }
 
-    //             String name = String.valueOf(new Date().getTime()+".jpg");
-    //             File serverFile = new File(dir.getAbsolutePath()+File.separator+name);
-    //             System.out.println(serverFile.getPath());
-    //             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-    //             stream.write(bytes);
-    //             stream.close();
-    //             return name;
-    //         } catch (IOException e){
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     else{
-    //         System.out.println("File not exists!");
-    //     }
-    //     return null;
-    // }
+    @RequestMapping(value = "/admin/product/add-author", method = RequestMethod.POST)
+    public String saveNewAuthor(ModelMap model, @ModelAttribute("author") Author author) {
+        authorService.addAuthor(author);
+        return "redirect:/admin/product/add-product.htm";
+    }
 
-    // private String saveFile(MultipartFile file) {
-    //     if (file != null && !file.isEmpty()) {
-    //         try {
-    //             byte[] bytes = file.getBytes();
-    //             String realPath = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-    //             System.out.println(realPath);
-    //             File dir = new File(realPath);
-    //             if (!dir.exists()) {
-    //                 dir.mkdirs(); // Use mkdirs() to create parent directories if they do not exist
-    //             }
-    
-    //             String name = new Date().getTime() + ".jpg"; // Generate unique file name
-    //             File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
-    //             System.out.println("Saving file to: " + serverFile.getPath());
-    //             file.transferTo(serverFile);
-    
-    //             try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
-    //                 stream.write(bytes);
-    //             }
-    
-    //             return name;
-    //         } catch (IOException e) {
-    //             e.printStackTrace();
-    //         }
-    //     } else {
-    //         System.out.println("File not exists or is empty!");
-    //     }
-    //     return null;
-    // }
+    @RequestMapping(value = "/admin/product/add-supplier", method = RequestMethod.POST)
+    public String saveNewSupplier(ModelMap model, @ModelAttribute("supplier") Supplier supplier) {
+        supplierService.addSupplier(supplier);
+        return "redirect:/admin/product/add-product.htm";
+    }
 
-    // public String saveFile(MultipartFile file) {
-    //     if (file.isEmpty()) {
-    //         return null;
-    //     }
-
-    //     try {
-    //         // Generate a unique file name using the current timestamp
-    //         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
-    //         String fileName = date + "_" + file.getOriginalFilename();
-
-    //         // Define the directory where you want to save the uploaded images
-    //         String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-    //         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
-    //         Path uploadPath = Paths.get(uploadDir);
-
-    //         // Create the directory if it doesn't exist
-    //         if (!Files.exists(uploadPath)) {
-    //             Files.createDirectories(uploadPath);
-    //         }
-
-    //         // Save the file to the upload directory
-    //         Path filePath = uploadPath.resolve(fileName);
-    //         try (InputStream inputStream = file.getInputStream();
-    //              OutputStream outputStream = new FileOutputStream(filePath.toFile())) {
-    //             byte[] buffer = new byte[1024];
-    //             int bytesRead;
-    //             while ((bytesRead = inputStream.read(buffer)) != -1) {
-    //                 outputStream.write(buffer, 0, bytesRead);
-    //             }
-    //         }
-
-    //         // Return the file name to store in the database
-    //         return fileName;
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-    // }
-
-    // public String saveFile(MultipartFile file){
-    //     Path path = Paths.get("/resources/imgs/products/");
-    //     try{
-    //         InputStream inputStream = file.getInputStream();
-    //         Files.copy(inputStream, path.resolve(file.getOriginalFilename()), 
-    //             StandardCopyOption.REPLACE_EXISTING);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return "success";
-    // }
+    @RequestMapping(value = "/admin/product/add-nxb", method = RequestMethod.POST)
+    public String saveNewNXB(ModelMap model, @ModelAttribute("nxb") Producer nxb) {
+        producerService.addNXB(nxb);
+        return "redirect:/admin/product/add-product.htm";
+    }
 
     public String saveFile(MultipartFile file) {
         String directory = "src/main/webapp/resources/imgs/products/";

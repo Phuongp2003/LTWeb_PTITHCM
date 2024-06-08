@@ -27,6 +27,7 @@
                 <th scope="col">Ảnh</th>
                 <th scope="col">Thể loại</th>
                 <th scope="col">Tác giả</th>
+                <th scope="col">Nhà cung cấp</th>
                 <th scope="col">Nhà xuất bản</th>
             </tr>
         </thead>
@@ -36,9 +37,10 @@
                     <td>${book.TENSACH}</td>
                     <td>${book.LANTAIBAN}</td>
                     <td><fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0"/></td>
-                    <td><img src="resources/imgs/products/${book.ANH}" style="width: 200px; height: 230px;"></td>
+                    <td><img src="resources/imgs/products/${book.ANH}" style="width: 150px; height: 160px;"></td>
                     <td>${book.typebook.TENTL}</td>
                     <td>${book.author.HO} ${book.author.TEN}</td>
+                    <td>${book.supplier.TENNCC}</td>
                     <td>${book.producer.TENNXB}</td>
                     <td>
                         <a href="admin/product/${book.MASACH}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa sách ${book.TENSACH}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>

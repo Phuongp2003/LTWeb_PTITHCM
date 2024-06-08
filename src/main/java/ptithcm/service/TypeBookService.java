@@ -43,19 +43,13 @@ public class TypeBookService {
     @Transactional
     @ModelAttribute("categories")
     public TypeBook getTypeBookByName(String TENTL) {
-        TypeBook type;
-        try {
-            Session session = factory.getCurrentSession();
-            String hql = "from TypeBook where TENTL = :TENTL";
-            Query query = session.createQuery(hql);
-            query.setParameter("TENTL", TENTL);
+        Session session = factory.getCurrentSession();
+        String hql = "from TypeBook where TENTL = :TENTL";
+        Query query = session.createQuery(hql);
+        query.setParameter("TENTL", TENTL);
 
-            TypeBook list = (TypeBook) query.list().get(0);
-            return list;
-        } catch (Exception e) {
-            type = null;
-        }
-        return type;
+        TypeBook list = (TypeBook) query.list().get(0);
+        return list;
     }
 
     @Transactional

@@ -56,10 +56,10 @@
 						<c:forEach var="book" items="${books}">
 							<div class="col-md-4 col-sm-12 col-lg-4">
 								<a href="book/${book.MASACH}.htm">
-									<div class="card">
+									<div class="card mb-4">
 										<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
 										<div class="card-body">
-											<h5 class="card-title">${book.TENSACH}</h5>
+											<h6 class="card-title" style="min-height: 2.5;">${book.TENSACH}</h6>
 											<p class="card-text">${book.author.HO} ${book.author.TEN}</p>
 											<p class="card-text">
 												<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />

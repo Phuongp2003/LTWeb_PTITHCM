@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,11 +41,21 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "add-category", method = RequestMethod.POST)
-    public String saveNewCategory(ModelMap model, @RequestParam("TENTL") String TENTL) {
-        TypeBook typebook = new TypeBook(null, TENTL);
-        typeBookService.addTypeBook(typebook);
-        model.addAttribute("category", typebook);
-        return "redirect:/admin/category.htm";
+    public String saveNewCategory(ModelMap model, @ModelAttribute("category") TypeBook category, BindingResult errors) {
+        // if(category.getTENTL().trim().length() == 0){
+        //     errors.rejectValue("TENTL", "category", "Nhập tên thể loại!");
+        // }
+        // if(typeBookService.getTypeBookByName(category.getTENTL()) != null){
+        //     errors.rejectValue("TENTL", "category", "Thể loại sách đã có!");
+        // } 
+        // if(errors.hasErrors()){
+        //     model.addAttribute("message", "Vui lòng nhập hợp lệ!");
+        // }
+        // else {
+            typeBookService.addTypeBook(category);
+            return "redirect:/admin/category.htm";
+        // }
+        // return "pages/admin/addcategory";
     }
 
     @RequestMapping(value = "{MATL}/update")

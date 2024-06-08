@@ -7,40 +7,38 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import ptithcm.bean.Producer;
+import ptithcm.bean.Supplier;
 import java.util.List;
 
 @Service
 @Transactional
 @SuppressWarnings("unchecked")
-public class ProducerService {
+public class SupplierService {
     @Autowired
     SessionFactory factory;
-
-    @ModelAttribute("producers")
-    public List<Producer> getAllProducers() {
+    
+    public List<Supplier> getAllSuppliers() {
         Session session = factory.getCurrentSession();
-        String hql = "from Producer";
+        String hql = "from Supplier";
         Query query = session.createQuery(hql);
         return query.list();
     }
 
-    public Producer getProducerByID(int MANXB) {
+    public Supplier getSupplierByID(int MANCC) {
         Session session = factory.getCurrentSession();
-		String hql = "FROM Producer WHERE MANXB = :MANXB";
+		String hql = "FROM Supplier WHERE MANCC = :MANCC";
 		Query query = session.createQuery(hql);
-		query.setParameter("MANXB", MANXB);
-		Producer list = (Producer) query.list().get(0);
+		query.setParameter("MANCC", MANCC);
+		Supplier list = (Supplier) query.list().get(0);
 		return list;
     }
 
-    public Producer addNXB(Producer nxb) {
+    public Supplier addSupplier(Supplier s) {
         Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(nxb);
+			session.save(s);
 			t.commit();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -48,6 +46,6 @@ public class ProducerService {
 		} finally {
 			session.close();
 		}
-		return nxb;
+		return s;
     }
 }
