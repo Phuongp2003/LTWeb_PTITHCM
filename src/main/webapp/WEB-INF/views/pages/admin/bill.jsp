@@ -10,7 +10,7 @@
 	</head>
 	
 	<body>
-		<jsp:include page="${elements}/navbar.jsp" />
+		<!-- <jsp:include page="${elements}/navbar.jsp" /> -->
 		<jsp:include page="${elements}/admin/bill.jsp" />
 		
 	</body>

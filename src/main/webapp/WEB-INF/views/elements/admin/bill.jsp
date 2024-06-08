@@ -18,7 +18,7 @@
                 <select id="statusFilter" class="statusFilter">
                     <option value="-1">Tất cả</option>
                     <c:forEach var="status" items="${statuslist}">
-                        <option value="${status.index}">${status.TENTT}</option>
+                        <option value="${status.MATT}">${status.TENTT}</option>
                     </c:forEach>
                 </select>
                 <div id="selectedStatus"></div>
@@ -41,8 +41,9 @@
                         </tr>
                     </thead>
                     <tbody id="billTableBody">
-                        <c:forEach var="bill" items="${billlist}">
+                        <c:forEach var="bill" items="${allbill}">
                             <tr>
+                                <!-- <c:if test="${allbill[bill.index].status.MATT == status.MATT}"> ${allbill[bill.index].status.MATT}</c:if> -->
                                 <td>${bill.MAHD}</td>
                                 <td>
                                     <fmt:formatDate value="${bill.NGAYLAP}" pattern="dd/MM/yyyy" />
@@ -62,7 +63,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         var statusFilters = document.querySelectorAll('.statusFilter');
         function updateSelectedStatus(selectedStatus) {
             var selectedStatusElement = document.getElementById('selectedStatus');
@@ -91,7 +92,7 @@
 
             });
         }
-    </script>
+    </script> -->
 </body>
 
 </html>

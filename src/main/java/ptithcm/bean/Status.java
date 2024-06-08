@@ -12,17 +12,17 @@ public class Status {
     @Id
     @GeneratedValue
     @Column(name = "MATT") // property
-    private String MATT;
+    private int MATT;
     @Column(name = "TENTT")
     private String TENTT;// property
     @OneToMany(mappedBy = "status", fetch = FetchType.EAGER)
     private Collection<Bill> bills;
 
-    public String getMATT() {
+    public int getMATT() {
         return MATT;
     }
 
-    public void setMATT(String mATT) {
+    public void setMATT(int mATT) {
         MATT = mATT;
     }
 
@@ -45,7 +45,7 @@ public class Status {
     public Status() {
     }
 
-    public Status(String mATT, String tENTT) {
+    public Status(int mATT, String tENTT) {
         MATT = mATT;
         TENTT = tENTT;
     }

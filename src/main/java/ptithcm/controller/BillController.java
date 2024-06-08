@@ -57,39 +57,79 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "admin/bill/{Status}")
+    @RequestMapping(value = "admin/bill/{status}")
     public String showBillByStatus(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
-            @PathVariable("Status") String Status) {
+            @PathVariable("status") int status) {
 
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
-            List<Bill> allbill = billService.getAllBill();
-            List<Bill> billlist = billService.getBillByStatus(Status);
+            List<Bill> bills;
+            if (status == -1) {
+                bills = billService.getAllBill();
+            } else {
+                bills = billService.getBillByStatus(status);
+            }
             List<Status> statuslist = statusService.getAllStatus();
-            model.addAttribute("billlist", billlist);
+            model.addAttribute("billlist", bills);
             model.addAttribute("statuslist", statuslist);
-            model.addAttribute("allbill", allbill);
-
-            return "pages/admin/bill";
-        }
-        return "redirect:/user/login.htm";
-
-    }
-
-    @RequestMapping(value = "admin/bill")
-    public String showStatus(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
-
-        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
-            List<Status> statuslist = statusService.getAllStatus();
-            // model.addAttribute("billlist", billlist);
-            List<Bill> allbill = billService.getAllBill();
-            model.addAttribute("statuslist", statuslist);
-            model.addAttribute("allbill", allbill);
 
             return "pages/admin/billbystatus";
         }
         return "redirect:/user/login.htm";
 
     }
+
+    // @RequestMapping(value = "admin/bill/edit")
+    // public String editBill(ModelMap model) {
+    // Bill bill = new Bill();
+    // model.addAttribute("bill", bill);
+    // return "pages/admin/billbystatus";
+    // }
+
+    @RequestMapping(value = "admin/bill/edit")
+    public String checkBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role,
+            @RequestParam("MAHD") int MAHD, @RequestParam("status") int status) {
+
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null
+                && role.equals("employee")) {
+            Employee e = employeeService.getEmployeeById(
+                    accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee().getMANV());
+            Bill bill = billService.getBillByID(MAHD);
+
+            List<Status> statuss = statusService.getAllStatus();
+            int old_status_id = bill.getStatus().getMATT();
+            if (status + 1 < statuss.size()) {
+                bill.setStatus((Status) statuss.get(status + 1));
+
+                bill.setBill_employee(e);
+                billService.updateBill(bill);
+                model.addAttribute("billupdate", bill);
+            }
+            int tt = status + 1;
+
+            return "redirect:admin/bill/-1.htm";
+        }
+        return "redirect:/user/login.htm";
+
+    }
+
+    // @RequestMapping(value = "admin/bill")
+    // public String showStatus(ModelMap model, @CookieValue(value = "uid",
+    // defaultValue = "") String uid) {
+
+    // if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid))
+    // != null) {
+    // List<Status> statuslist = statusService.getAllStatus();
+    // // model.addAttribute("billlist", billlist);
+    // List<Bill> allbill = billService.getAllBill();
+    // model.addAttribute("statuslist", statuslist);
+    // model.addAttribute("allbill", allbill);
+
+    // return "pages/admin/billbystatus";
+    // }
+    // return "redirect:/user/login.htm";
+
+    // }
 
     @RequestMapping(value = "bill/check-out")
     public String addBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
@@ -117,7 +157,7 @@ public class BillController {
             // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             // Date date = dateFormat.parse(currentDate);
             Float TONGTIEN = (float) cartDetailService.getTotalMoney(user.getMAKH());
-            Status status = new Status("CD", "Chưa duyệt");
+            Status status = new Status(1, "Chưa duyệt");
             bill = new Bill(null, currentDate, TONGTIEN, HOTENNN, DIACHINN, SDTNN, GHICHU,
                     EMAILNN, status, e, user);
             bill.setStatus(status);

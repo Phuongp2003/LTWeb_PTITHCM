@@ -22,16 +22,16 @@ public class BillService {
     @Autowired
     SessionFactory factory;
 
-    @Transactional
-    @ModelAttribute("billlist")
-    public Bill getBillList(int MAHD) {
-        Session session = factory.getCurrentSession();
-        String hql = "FROM Bill  WHERE MAHD = :MAHD";
-        Query query = session.createQuery(hql);
-        query.setParameter("MAHD", MAHD);
-        Bill list = (Bill) query.list().get(0);
-        return list;
-    }
+    // @Transactional
+    // @ModelAttribute("billlist")
+    // public Bill getBillList(int MAHD) {
+    // Session session = factory.getCurrentSession();
+    // String hql = "FROM Bill WHERE MAHD = :MAHD";
+    // Query query = session.createQuery(hql);
+    // query.setParameter("MAHD", MAHD);
+    // Bill list = (Bill) query.list().get(0);
+    // return list;
+    // }
 
     @Transactional
     @ModelAttribute("bill")
@@ -69,13 +69,14 @@ public class BillService {
     }
 
     @Transactional
-    @ModelAttribute("billsbytatus")
-    public List<Bill> getBillByStatus(String Status) {
+    @ModelAttribute("billlist")
+    public List<Bill> getBillByStatus(int status) {
         Session session = factory.getCurrentSession();
-        String hql = "from Bill where status.MATT = :Status";
+        String hql = "FROM Bill b " +
+                "WHERE b.status.MATT = :status";
         Query query = session.createQuery(hql);
 
-        query.setParameter("Status", Status);
+        query.setParameter("status", status);
 
         List<Bill> list = query.list();
         return list;
@@ -121,6 +122,25 @@ public class BillService {
         session.getTransaction().commit();
 
         return monthlyTotals;
+    }
+
+    @Transactional
+    @ModelAttribute("billupdate")
+    public Bill updateBill(Bill bill) {
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+
+        try {
+            session.update(bill);
+            t.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            t.rollback();
+            // return 0;
+        } finally {
+            session.close();
+        }
+        return bill;
     }
 
     @Transactional

@@ -19,7 +19,7 @@ public class StatusService {
     SessionFactory factory;
 
     @Transactional
-    @ModelAttribute("status")
+    @ModelAttribute("statuslist")
     public List<Status> getAllStatus() {
         Session session = factory.getCurrentSession();
         String hql = "FROM Status";

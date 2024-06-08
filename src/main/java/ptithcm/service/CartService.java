@@ -75,7 +75,7 @@ public class CartService {
 
 	@Transactional
 	@ModelAttribute("cart")
-	public int insertCart(Cart cart) {
+	public Cart insertCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
@@ -83,13 +83,13 @@ public class CartService {
 			session.save(cart);
 			t.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			t.rollback();
-			return 0;
+			// return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return cart;
 	}
 
 	@Transactional

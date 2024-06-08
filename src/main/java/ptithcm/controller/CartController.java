@@ -142,7 +142,7 @@ public class CartController {
             CartDetailPrimary key = new CartDetailPrimary(cart_id, MASACH);
             key.setIDGH(cart.getIDGH());
             key.setMASACH(MASACH);
-            CartDetail detail = new CartDetail(key, SOLUONG, SL, CHON);
+            CartDetail detail = new CartDetail(key, SL, DONGIA, CHON);
             detail.setCartdetail_book(bookService.getBookByID(MASACH));
             detail.setCartdetail_cart(cart);
             detail.setCartdetail_book(bookService.getBookByID(MASACH));

@@ -124,6 +124,15 @@
                                                                         <input type="hidden"
                                                                             id="hiddencheckbox${status.index}"
                                                                             name="CHON" value="${detail.CHON}">
+                                                                            <input type="hidden"
+                                                                            id="hiddencheckbox${status.index}"
+                                                                            name="CHON" value="${detail.CHON}">
+                                                                            <input type="hidden"
+                                                                            id="hiddencheckbox${status.index}"
+                                                                            name="CHON" value="${detail.CHON}">
+                                                                            <input type="hidden"
+                                                                            id="hiddencheckbox${status.index}"
+                                                                            name="CHON" value="${detail.CHON}">
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Chỉnh sửa</button>
                                                                     </form:form>
@@ -194,7 +203,8 @@
                                 if (!formQuantityInput) {
                                     throw new Error("Không thể tìm thấy phần tử với id 'formquantity" + index + "'");
                                 }
-                                formQuantityInput.value = currentQuantity;
+                                var newformQuantityInput=formQuantityInput.value;
+                                formQuantityInput.value = currentQuantity-newformQuantityInput;
                             } catch (error) {
                                 console.error(error.message);
                             }

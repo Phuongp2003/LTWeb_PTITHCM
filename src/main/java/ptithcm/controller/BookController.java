@@ -61,6 +61,8 @@ public class BookController {
     @Autowired
     private AccountService accountService;
     @Autowired
+    private CartService cartService;
+    @Autowired
     ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
@@ -70,17 +72,41 @@ public class BookController {
             Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
             Book book = bookService.getBookByID(MASACH);
             List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
-            CartDetail detail = CartDetailService.getCartDetailByProductId(28, MASACH);
+            CartDetail detail = CartDetailService.getCartDetailByProductId(cartService.getCartIdByIdCustomer(
+                    user.getMAKH()), MASACH);
             String cmd = (detail != null) ? "update" : "add";
             model.addAttribute("cmd", cmd);
             model.addAttribute("book", book);
             model.addAttribute("feedback", feedback);
 
             return "pages/product/product";
+        } else {
+            Book book = bookService.getBookByID(MASACH);
+            List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
+            model.addAttribute("book", book);
+            model.addAttribute("feedback", feedback);
+            return "pages/product/product";
         }
-        return "redirect:/user/login.htm";
 
     }
+
+    // @RequestMapping(value = "/book/{MASACH}")
+    // public String book(ModelMap model,
+    // @PathVariable("MASACH") int MASACH) {
+
+    // Book book = bookService.getBookByID(MASACH);
+    // List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
+    // CartDetail detail =
+    // CartDetailService.getCartDetailByProductId(cartService.getCartIdByIdCustomer(
+    // user.getMAKH()), MASACH);
+    // String cmd = (detail != null) ? "update" : "add";
+    // model.addAttribute("cmd", cmd);
+    // model.addAttribute("book", book);
+    // model.addAttribute("feedback", feedback);
+
+    // return "pages/product/product";
+
+    // }
 
     // @RequestMapping(value = "/book/{MASACH}")
     // public String book(ModelMap model, @PathVariable("MASACH") int MASACH) {
