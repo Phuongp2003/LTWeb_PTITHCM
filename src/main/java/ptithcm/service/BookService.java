@@ -50,11 +50,11 @@ public class BookService {
 		return list;
 	}
 
-	public List<Book> getBooksByRating(int rating) {
+	@ModelAttribute("books")
+	public List<Book> getBooksByRating(double rating) {
 		Session session = factory.getCurrentSession();
-        String hql = "SELECT f.book FROM Feedback f " +
-                	"GROUP BY f.book " +
-                	"HAVING f.VOTE >= rating";
+        // String hql = "select f.book FROM Feedback f where avg(f.VOTE) >= :rating";
+		String hql = "SELECT b FROM Book b WHERE (SELECT AVG(f.VOTE) FROM Feedback f WHERE f.book = b) >= :rating";
 		Query query = session.createQuery(hql);
 		query.setParameter("rating", rating);
 		List<Book> list = query.list();

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Producer;
+import ptithcm.bean.Supplier;
+
 import java.util.List;
 
 @Service
@@ -34,6 +36,16 @@ public class ProducerService {
 		query.setParameter("MANXB", MANXB);
 		Producer list = (Producer) query.list().get(0);
 		return list;
+    }
+
+	public Producer getProducerByName(String TENNXB) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Producer where TENNXB = :TENNXB";
+        Query query = session.createQuery(hql);
+        query.setParameter("TENNXB", TENNXB);
+
+        Producer list = (Producer) query.uniqueResult();
+        return list;
     }
 
     public Producer addNXB(Producer nxb) {

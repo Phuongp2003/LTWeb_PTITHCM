@@ -112,7 +112,7 @@
 			<div class="col-md-8">
 				<h5 class="card-title">Chi Tiết</h5>
 				<c:choose>
-					<c:when test="${message == 1}">
+					<c:when test="${feedback.size() != 0}">
 						<c:forEach var="f" items="${feedback}">
 							<div class="card-body border-bottom border-secondary-subtle">
 								<h5 class="card-title">${f.customer.HO} ${f.customer.TEN}</h5>

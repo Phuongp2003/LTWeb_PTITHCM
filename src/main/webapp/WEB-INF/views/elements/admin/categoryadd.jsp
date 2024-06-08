@@ -10,8 +10,7 @@
         <div class="category-name d-flex gap-5">
 			<form:label path="TENTL">Tên: </form:label>
 			<form:input path="TENTL" class="form-control" required="required"/>
-            <form:errors path="TENTL"/>
-            ${message}
+            <form:errors path="TENTL" class="fst-italic text-danger"/>
 		</div>
         <button class="btn btn-primary" type="submit">Save</button>
     </form:form>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ptithcm.bean.Author;
 import ptithcm.bean.Supplier;
 import java.util.List;
 
@@ -32,6 +33,16 @@ public class SupplierService {
 		query.setParameter("MANCC", MANCC);
 		Supplier list = (Supplier) query.list().get(0);
 		return list;
+    }
+
+	public Supplier getSupplierByName(String TENNC) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Supplier where TENNC = :TENNC";
+        Query query = session.createQuery(hql);
+        query.setParameter("TENNC", TENNC);
+
+        Supplier list = (Supplier) query.uniqueResult();
+        return list;
     }
 
     public Supplier addSupplier(Supplier s) {

@@ -50,8 +50,8 @@ public class ShopController {
         return "pages/shop/typebook";
     }
 
-    @RequestMapping("/rating-4")
-    public String rating(ModelMap model, @RequestParam(value = "rating") int rating) {
+    @RequestMapping("/rating")
+    public String rating(ModelMap model, @RequestParam(value = "rating") double rating) {
         model.addAttribute("type", "shop");
         List<TypeBook> categories = typeBookService.getAllTypeBooks();
         List<Book> book = bookService.getBooksByRating(rating);

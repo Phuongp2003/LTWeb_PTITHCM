@@ -42,20 +42,17 @@ public class CategoryController {
 
     @RequestMapping(value = "add-category", method = RequestMethod.POST)
     public String saveNewCategory(ModelMap model, @ModelAttribute("category") TypeBook category, BindingResult errors) {
-        // if(category.getTENTL().trim().length() == 0){
-        //     errors.rejectValue("TENTL", "category", "Nhập tên thể loại!");
-        // }
-        // if(typeBookService.getTypeBookByName(category.getTENTL()) != null){
-        //     errors.rejectValue("TENTL", "category", "Thể loại sách đã có!");
-        // } 
-        // if(errors.hasErrors()){
-        //     model.addAttribute("message", "Vui lòng nhập hợp lệ!");
-        // }
-        // else {
+        if(category.getTENTL().trim().length() == 0){
+            errors.rejectValue("TENTL", "category", "Vui lòng nhập tên thể loại!");
+        }
+        if(typeBookService.getTypeBookByName(category.getTENTL()) != null){
+            errors.rejectValue("TENTL", "category", "Thể loại sách đã có!");
+        }
+        else {
             typeBookService.addTypeBook(category);
             return "redirect:/admin/category.htm";
-        // }
-        // return "pages/admin/addcategory";
+        }
+        return "pages/admin/addcategory";
     }
 
     @RequestMapping(value = "{MATL}/update")

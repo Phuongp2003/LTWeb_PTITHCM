@@ -32,7 +32,7 @@
 					<nav class="navbar bg-body-tertiary">
 						<div class="container-fluid">
 							<h5 class="card-title">Tất cả sản phẩm</h5>
-							<form class="form-check" action="shop/rating-4.htm">
+							<form id="ratingForm" class="form-check" action="shop/rating.htm">
 								<input name="rating" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault">
 								<label class="form-check-label" for="rating4">
 									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
@@ -85,3 +85,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	document.getElementById('flexCheckDefault').addEventListener('change', function() {
+		if (this.checked) {
+			document.getElementById('ratingForm').submit();
+		}
+	});
+</script>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Author;
+import ptithcm.bean.TypeBook;
 
 import java.util.List;
 

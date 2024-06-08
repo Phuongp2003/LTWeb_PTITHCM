@@ -48,7 +48,7 @@ public class TypeBookService {
         Query query = session.createQuery(hql);
         query.setParameter("TENTL", TENTL);
 
-        TypeBook list = (TypeBook) query.list().get(0);
+        TypeBook list = (TypeBook) query.uniqueResult();
         return list;
     }
 

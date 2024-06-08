@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,21 +17,7 @@ import ptithcm.bean.*;
 import ptithcm.service.*;
 
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.text.DecimalFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +46,9 @@ public class BookController {
     private AccountService accountService;
 
     @Autowired
+    private UploadService uploadService;
+
+    @Autowired
 	ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
@@ -81,6 +71,7 @@ public class BookController {
         model.addAttribute("book", book);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
+        uploadService.getImage(book);
         return "pages/product/product";
     }
 
@@ -112,6 +103,7 @@ public class BookController {
     public String product(ModelMap model) {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("books", book);
+        uploadService.getImage(book);
         return "pages/admin/product";
     }
 
@@ -121,33 +113,19 @@ public class BookController {
         model.addAttribute("product", book);
         return "pages/admin/addproduct";
     }
-    
+
     @RequestMapping(value = "/admin/product/add-product", method = RequestMethod.POST)
-    public String saveNewProduct(ModelMap model, @ModelAttribute("book") Book book, @ModelAttribute("category") TypeBook category,
-    @RequestParam("file") MultipartFile file) {
-        // if (file.isEmpty()) {
-        //     model.addAttribute("message", "Vui lòng chọn file!");
-        //     return "admin/product/add-product";
-        // } else {
-        //     try {
-        //         String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-        //         // InputStream inputStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
-        //         File uploadDirFile = new File(uploadDir);
-        //         if (!uploadDirFile.exists()) {
-        //             uploadDirFile.mkdirs();
-        //         }
-        //         String fileName = file.getOriginalFilename();
-        //         String filePath = uploadDir + File.separator + fileName;
-                
-        //         file.transferTo(new File(filePath));
-        //         System.out.println(filePath);
-        //         book.setANH(fileName);
-        //     } catch (Exception e) {
-        //         model.addAttribute("message", "Lỗi lưu file!");
-        //         return "admin/product/add-product";
-        //     }
-        // }
-        String fileName = saveFile(file);
+    public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book book, @ModelAttribute("category") TypeBook category,
+    @RequestParam("file") MultipartFile file, BindingResult errors) {
+
+        if(book.getLANTAIBAN() <= 0) {
+            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
+        }
+        if(book.getGIA() <= 0) {
+			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
+		}
+
+        String fileName = uploadService.saveFile(file);
         if(fileName == null) {
             model.addAttribute("message", "File upload failed. Please try again.");
             return "admin/product/addproduct";
@@ -167,35 +145,29 @@ public class BookController {
 
     @RequestMapping(value = "/admin/product/{MASACH}/update")
     public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
-        Book book = bookService.getBookByID(MASACH);
+        Book book = new Book();
+        uploadService.getImage(book);
         model.addAttribute("product", book);
         return "pages/admin/editproduct";
     }
 
-    @RequestMapping(value = "/admin/product/{MASACH}/update/edit-product", method = RequestMethod.POST)
-    public String saveEditProduct(ModelMap model, @ModelAttribute("book") Book book, 
-    @RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Vui lòng chọn file!");
-            return "admin/product/editproduct";
-        } else {
-            try {
-                String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-                File uploadDirFile = new File(uploadDir);
-                if (!uploadDirFile.exists()) {
-                    uploadDirFile.mkdirs();
-                }
-                String fileName = file.getOriginalFilename();
-                String filePath = uploadDir + File.separator + fileName;
-                
-                file.transferTo(new File(filePath));
-                book.setANH(fileName);
-            } catch (Exception e) {
-                model.addAttribute("message", "Lỗi lưu file!");
-                return "admin/product/editproduct";
-            }
+    @RequestMapping(value = "/admin/product/{MASACH}/update", method = RequestMethod.POST)
+    public String saveEditProduct(ModelMap model, @ModelAttribute("book") Book book,
+    @RequestParam("file") MultipartFile file, BindingResult errors) {
+        if(book.getLANTAIBAN() <= 0) {
+            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
         }
+        if(book.getGIA() <= 0) {
+			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
+		}
 
+        String fileName = uploadService.saveFile(file);
+        if(fileName == null) {
+            model.addAttribute("message", "File upload failed. Please try again.");
+            return "admin/product/addproduct";
+        }
+        book.setANH(fileName);
+        
         TypeBook type = typeBookService.getTypeBookByID(book.getTypebook().getMATL());
         Author author = authorService.getAuthorByID(book.getAuthor().getMATG());
         Producer producer = producerService.getProducerByID(book.getProducer().getMANXB());
@@ -220,51 +192,5 @@ public class BookController {
         List<Book> book = bookService.searchBook(request.getParameter("searchInput"));
         model.addAttribute("books", book);
         return "pages/admin/product";
-    }
-
-    @RequestMapping(value = "/admin/product/add-category", method = RequestMethod.POST)
-    public String saveNewCategory(ModelMap model, @ModelAttribute("category") TypeBook category) {
-        typeBookService.addTypeBook(category);
-        return "redirect:/admin/product/add-product.htm";
-    }
-
-    @RequestMapping(value = "/admin/product/add-author", method = RequestMethod.POST)
-    public String saveNewAuthor(ModelMap model, @ModelAttribute("author") Author author) {
-        authorService.addAuthor(author);
-        return "redirect:/admin/product/add-product.htm";
-    }
-
-    @RequestMapping(value = "/admin/product/add-supplier", method = RequestMethod.POST)
-    public String saveNewSupplier(ModelMap model, @ModelAttribute("supplier") Supplier supplier) {
-        supplierService.addSupplier(supplier);
-        return "redirect:/admin/product/add-product.htm";
-    }
-
-    @RequestMapping(value = "/admin/product/add-nxb", method = RequestMethod.POST)
-    public String saveNewNXB(ModelMap model, @ModelAttribute("nxb") Producer nxb) {
-        producerService.addNXB(nxb);
-        return "redirect:/admin/product/add-product.htm";
-    }
-
-    public String saveFile(MultipartFile file) {
-        String directory = "src/main/webapp/resources/imgs/products/";
-        Path path = Paths.get(directory);
-    
-        try {
-            // Ensure directory exists
-            if (!Files.exists(path)) {
-                Files.createDirectories(path);
-            }
-    
-            // Get input stream and save file
-            InputStream inputStream = file.getInputStream();
-            Path filePath = path.resolve(file.getOriginalFilename());
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-    
-            return file.getOriginalFilename();  // Return the file name to be set in the book object
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;  // Return null to indicate failure
-        }
     }
 }
