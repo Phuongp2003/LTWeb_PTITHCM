@@ -23,6 +23,10 @@ public class Book {
 	private Author author;// property
 
 	@ManyToOne
+	@JoinColumn(name = "MANCC")
+	private Supplier supplier;//property
+
+	@ManyToOne
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
 
@@ -48,7 +52,7 @@ public class Book {
 	}
 
 	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH, 
-	TypeBook typebook, Author author, Producer producer) {
+	TypeBook typebook, Author author, Supplier supplier, Producer producer) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		LANTAIBAN = lANTAIBAN;
@@ -56,6 +60,7 @@ public class Book {
 		ANH = aNH;
 		this.typebook = typebook;
 		this.author = author;
+		this.supplier = supplier;
 		this.producer = producer;
 	}
 
@@ -105,6 +110,14 @@ public class Book {
 
 	public void setProducer(Producer producer) {
 		this.producer = producer;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	public Collection<Feedback> getFeedback() {

@@ -16,8 +16,10 @@ public class Supplier {
     private String SDT;// property
     private String DIACHI;// property
 
-	@OneToMany(mappedBy="producer", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="supplier", fetch=FetchType.EAGER)
 	private Collection<Book> books;
+
+    public Supplier() {}
 
     public Supplier(Integer MANCC, String TENNCC, String EMAIL, String SDT, String DIACHI, Collection<Book> books) {
         this.MANCC = MANCC;

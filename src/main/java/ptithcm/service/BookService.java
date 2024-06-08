@@ -16,12 +16,12 @@ import ptithcm.bean.Discount;
 import java.util.List;
 
 @Service
+@Transactional
 @SuppressWarnings("unchecked")
 public class BookService {
 	@Autowired
 	SessionFactory factory;
-
-	@Transactional
+	
 	@ModelAttribute("books")
 	public List<Book> getAllBooks() {
 		Session session = factory.getCurrentSession();
@@ -30,7 +30,6 @@ public class BookService {
 		return query.list();
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksByCategory(int MATL) {
 		Session session = factory.getCurrentSession();
@@ -41,7 +40,6 @@ public class BookService {
 		return list;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public Book getBookByID(int MASACH) {
 		Session session = factory.getCurrentSession();
@@ -52,7 +50,17 @@ public class BookService {
 		return list;
 	}
 
-	@Transactional
+	@ModelAttribute("books")
+	public List<Book> getBooksByRating(double rating) {
+		Session session = factory.getCurrentSession();
+        // String hql = "select f.book FROM Feedback f where avg(f.VOTE) >= :rating";
+		String hql = "SELECT b FROM Book b WHERE (SELECT AVG(f.VOTE) FROM Feedback f WHERE f.book = b) >= :rating";
+		Query query = session.createQuery(hql);
+		query.setParameter("rating", rating);
+		List<Book> list = query.list();
+		return list;
+    }
+
 	@ModelAttribute("books")
 	public Book addBook(Book b) {
 		Session session = factory.openSession();
@@ -69,7 +77,6 @@ public class BookService {
 		return b;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public Book updateBook(Book b) {
 		Session session = factory.openSession();
@@ -85,7 +92,6 @@ public class BookService {
 		return b;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public Book deleteBook(Book b) {
 		Session session = factory.openSession();
@@ -103,7 +109,6 @@ public class BookService {
 		return b;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksByPriceDesc() {
 		Session session = factory.getCurrentSession();
@@ -112,7 +117,6 @@ public class BookService {
 		return query.list();
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksByPriceAsc() {
 		Session session = factory.getCurrentSession();
@@ -121,7 +125,6 @@ public class BookService {
 		return query.list();
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksByPriceDescAndType(int MATL) {
 		Session session = factory.getCurrentSession();
@@ -132,7 +135,6 @@ public class BookService {
 		return list;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksByPriceAscAndType(int MATL) {
 		Session session = factory.getCurrentSession();
@@ -143,7 +145,6 @@ public class BookService {
 		return list;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> searchBook(String keywords) {
 		Session session = factory.getCurrentSession();
@@ -154,7 +155,6 @@ public class BookService {
 		return list;
 	}
 
-	@Transactional
 	@ModelAttribute("books")
 	public List<Book> getBooksHaveDiscount(Discount discount) {
 		Session session;

@@ -31,7 +31,7 @@ public class FeedbackService {
 
     public Double getAverageVote(int MASACH) {
         Session session = factory.getCurrentSession();
-        String hql = "SELECT avg(f.VOTE) FROM Feedback f WHERE f.book.MASACH = :MASACH";
+        String hql = "SELECT CAST(avg(f.VOTE) AS double) FROM Feedback f WHERE f.book.MASACH = :MASACH";
         Query query = session.createQuery(hql);
         query.setParameter("MASACH", MASACH);
         Double averageVote = (Double) query.uniqueResult();

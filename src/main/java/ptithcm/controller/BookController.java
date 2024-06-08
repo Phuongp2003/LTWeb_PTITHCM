@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,36 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import ptithcm.bean.Book;
-import ptithcm.bean.Feedback;
-import ptithcm.bean.TypeBook;
-import ptithcm.bean.Author;
-import ptithcm.bean.Producer;
-import ptithcm.bean.Customer;
-import ptithcm.service.BookService;
-import ptithcm.service.CustomerService;
-import ptithcm.service.TypeBookService;
-import ptithcm.service.AuthorService;
-import ptithcm.service.ProducerService;
-import ptithcm.service.FeedbackService;
-import ptithcm.service.AccountService;
+import ptithcm.bean.*;
+import ptithcm.service.*;
 
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.text.DecimalFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +34,9 @@ public class BookController {
     private AuthorService authorService;
 
     @Autowired
+    private SupplierService supplierService;
+
+    @Autowired
     private ProducerService producerService;
 
     @Autowired
@@ -65,6 +44,9 @@ public class BookController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private UploadService uploadService;
 
     @Autowired
 	ServletContext context;
@@ -89,6 +71,7 @@ public class BookController {
         model.addAttribute("book", book);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
+        uploadService.getImage(book);
         return "pages/product/product";
     }
 
@@ -104,6 +87,12 @@ public class BookController {
 		return list;
 	}
 
+    @ModelAttribute("supplierPick")
+	public List<Supplier> getSuppliers() {
+		List<Supplier> list = supplierService.getAllSuppliers();
+		return list;
+	}
+
     @ModelAttribute("producerPick")
 	public List<Producer> getProducers() {
 		List<Producer> list = producerService.getAllProducers();
@@ -114,6 +103,7 @@ public class BookController {
     public String product(ModelMap model) {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("books", book);
+        uploadService.getImage(book);
         return "pages/admin/product";
     }
 
@@ -123,33 +113,19 @@ public class BookController {
         model.addAttribute("product", book);
         return "pages/admin/addproduct";
     }
-    
+
     @RequestMapping(value = "/admin/product/add-product", method = RequestMethod.POST)
-    public String saveNewProduct(ModelMap model, @ModelAttribute("book") Book book, 
-    @RequestParam("file") MultipartFile file) {
-        // if (file.isEmpty()) {
-        //     model.addAttribute("message", "Vui lòng chọn file!");
-        //     return "admin/product/add-product";
-        // } else {
-        //     try {
-        //         String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-        //         // InputStream inputStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
-        //         File uploadDirFile = new File(uploadDir);
-        //         if (!uploadDirFile.exists()) {
-        //             uploadDirFile.mkdirs();
-        //         }
-        //         String fileName = file.getOriginalFilename();
-        //         String filePath = uploadDir + File.separator + fileName;
-                
-        //         file.transferTo(new File(filePath));
-        //         System.out.println(filePath);
-        //         book.setANH(fileName);
-        //     } catch (Exception e) {
-        //         model.addAttribute("message", "Lỗi lưu file!");
-        //         return "admin/product/add-product";
-        //     }
-        // }
-        String fileName = saveFile(file);
+    public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book book, @ModelAttribute("category") TypeBook category,
+    @RequestParam("file") MultipartFile file, BindingResult errors) {
+
+        if(book.getLANTAIBAN() <= 0) {
+            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
+        }
+        if(book.getGIA() <= 0) {
+			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
+		}
+
+        String fileName = uploadService.saveFile(file);
         if(fileName == null) {
             model.addAttribute("message", "File upload failed. Please try again.");
             return "admin/product/addproduct";
@@ -169,35 +145,29 @@ public class BookController {
 
     @RequestMapping(value = "/admin/product/{MASACH}/update")
     public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
-        Book book = bookService.getBookByID(MASACH);
+        Book book = new Book();
+        uploadService.getImage(book);
         model.addAttribute("product", book);
         return "pages/admin/editproduct";
     }
 
-    @RequestMapping(value = "/admin/product/{MASACH}/update/edit-product", method = RequestMethod.POST)
-    public String saveEditProduct(ModelMap model, @ModelAttribute("book") Book book, 
-    @RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Vui lòng chọn file!");
-            return "admin/product/editproduct";
-        } else {
-            try {
-                String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-                File uploadDirFile = new File(uploadDir);
-                if (!uploadDirFile.exists()) {
-                    uploadDirFile.mkdirs();
-                }
-                String fileName = file.getOriginalFilename();
-                String filePath = uploadDir + File.separator + fileName;
-                
-                file.transferTo(new File(filePath));
-                book.setANH(fileName);
-            } catch (Exception e) {
-                model.addAttribute("message", "Lỗi lưu file!");
-                return "admin/product/editproduct";
-            }
+    @RequestMapping(value = "/admin/product/{MASACH}/update", method = RequestMethod.POST)
+    public String saveEditProduct(ModelMap model, @ModelAttribute("book") Book book,
+    @RequestParam("file") MultipartFile file, BindingResult errors) {
+        if(book.getLANTAIBAN() <= 0) {
+            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
         }
+        if(book.getGIA() <= 0) {
+			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
+		}
 
+        String fileName = uploadService.saveFile(file);
+        if(fileName == null) {
+            model.addAttribute("message", "File upload failed. Please try again.");
+            return "admin/product/addproduct";
+        }
+        book.setANH(fileName);
+        
         TypeBook type = typeBookService.getTypeBookByID(book.getTypebook().getMATL());
         Author author = authorService.getAuthorByID(book.getAuthor().getMATG());
         Producer producer = producerService.getProducerByID(book.getProducer().getMANXB());
@@ -222,135 +192,5 @@ public class BookController {
         List<Book> book = bookService.searchBook(request.getParameter("searchInput"));
         model.addAttribute("books", book);
         return "pages/admin/product";
-    }
-
-    // private String saveFile(MultipartFile file) {
-    //     if(file != null && !file.isEmpty()) {
-    //         try{
-    //             byte[] bytes = file.getBytes();
-    //             String rootPath = System.getProperty("catalina.home");
-    //             File dir = new File(rootPath+File.separator+"resources/imgs/products");
-    //             if(!dir.exists()){
-    //                 dir.mkdir();
-    //             }
-
-    //             String name = String.valueOf(new Date().getTime()+".jpg");
-    //             File serverFile = new File(dir.getAbsolutePath()+File.separator+name);
-    //             System.out.println(serverFile.getPath());
-    //             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-    //             stream.write(bytes);
-    //             stream.close();
-    //             return name;
-    //         } catch (IOException e){
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     else{
-    //         System.out.println("File not exists!");
-    //     }
-    //     return null;
-    // }
-
-    // private String saveFile(MultipartFile file) {
-    //     if (file != null && !file.isEmpty()) {
-    //         try {
-    //             byte[] bytes = file.getBytes();
-    //             String realPath = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-    //             System.out.println(realPath);
-    //             File dir = new File(realPath);
-    //             if (!dir.exists()) {
-    //                 dir.mkdirs(); // Use mkdirs() to create parent directories if they do not exist
-    //             }
-    
-    //             String name = new Date().getTime() + ".jpg"; // Generate unique file name
-    //             File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
-    //             System.out.println("Saving file to: " + serverFile.getPath());
-    //             file.transferTo(serverFile);
-    
-    //             try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
-    //                 stream.write(bytes);
-    //             }
-    
-    //             return name;
-    //         } catch (IOException e) {
-    //             e.printStackTrace();
-    //         }
-    //     } else {
-    //         System.out.println("File not exists or is empty!");
-    //     }
-    //     return null;
-    // }
-
-    // public String saveFile(MultipartFile file) {
-    //     if (file.isEmpty()) {
-    //         return null;
-    //     }
-
-    //     try {
-    //         // Generate a unique file name using the current timestamp
-    //         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
-    //         String fileName = date + "_" + file.getOriginalFilename();
-
-    //         // Define the directory where you want to save the uploaded images
-    //         String uploadDir = context.getRealPath("/") + "resources" + File.separator+"imgs" + File.separator+"products";
-    //         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
-    //         Path uploadPath = Paths.get(uploadDir);
-
-    //         // Create the directory if it doesn't exist
-    //         if (!Files.exists(uploadPath)) {
-    //             Files.createDirectories(uploadPath);
-    //         }
-
-    //         // Save the file to the upload directory
-    //         Path filePath = uploadPath.resolve(fileName);
-    //         try (InputStream inputStream = file.getInputStream();
-    //              OutputStream outputStream = new FileOutputStream(filePath.toFile())) {
-    //             byte[] buffer = new byte[1024];
-    //             int bytesRead;
-    //             while ((bytesRead = inputStream.read(buffer)) != -1) {
-    //                 outputStream.write(buffer, 0, bytesRead);
-    //             }
-    //         }
-
-    //         // Return the file name to store in the database
-    //         return fileName;
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-    // }
-
-    // public String saveFile(MultipartFile file){
-    //     Path path = Paths.get("/resources/imgs/products/");
-    //     try{
-    //         InputStream inputStream = file.getInputStream();
-    //         Files.copy(inputStream, path.resolve(file.getOriginalFilename()), 
-    //             StandardCopyOption.REPLACE_EXISTING);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return "success";
-    // }
-
-    public String saveFile(MultipartFile file) {
-        String directory = "src/main/webapp/resources/imgs/products/";
-        Path path = Paths.get(directory);
-    
-        try {
-            // Ensure directory exists
-            if (!Files.exists(path)) {
-                Files.createDirectories(path);
-            }
-    
-            // Get input stream and save file
-            InputStream inputStream = file.getInputStream();
-            Path filePath = path.resolve(file.getOriginalFilename());
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-    
-            return file.getOriginalFilename();  // Return the file name to be set in the book object
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;  // Return null to indicate failure
-        }
     }
 }

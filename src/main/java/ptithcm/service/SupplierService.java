@@ -7,42 +7,49 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Author;
-import ptithcm.bean.TypeBook;
-
+import ptithcm.bean.Supplier;
 import java.util.List;
 
 @Service
 @Transactional
 @SuppressWarnings("unchecked")
-public class AuthorService {
+public class SupplierService {
     @Autowired
     SessionFactory factory;
-
-    @ModelAttribute("authors")
-    public List<Author> getAllAuthors() {
+    
+    public List<Supplier> getAllSuppliers() {
         Session session = factory.getCurrentSession();
-        String hql = "from Author";
+        String hql = "from Supplier";
         Query query = session.createQuery(hql);
         return query.list();
     }
 
-    public Author getAuthorByID(int MATG) {
+    public Supplier getSupplierByID(int MANCC) {
         Session session = factory.getCurrentSession();
-		String hql = "FROM Author WHERE MATG = :MATG";
+		String hql = "FROM Supplier WHERE MANCC = :MANCC";
 		Query query = session.createQuery(hql);
-		query.setParameter("MATG", MATG);
-		Author list = (Author) query.list().get(0);
+		query.setParameter("MANCC", MANCC);
+		Supplier list = (Supplier) query.list().get(0);
 		return list;
     }
 
-    public Author addAuthor(Author a) {
+	public Supplier getSupplierByName(String TENNC) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Supplier where TENNC = :TENNC";
+        Query query = session.createQuery(hql);
+        query.setParameter("TENNC", TENNC);
+
+        Supplier list = (Supplier) query.uniqueResult();
+        return list;
+    }
+
+    public Supplier addSupplier(Supplier s) {
         Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(a);
+			session.save(s);
 			t.commit();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -50,6 +57,6 @@ public class AuthorService {
 		} finally {
 			session.close();
 		}
-		return a;
+		return s;
     }
 }
