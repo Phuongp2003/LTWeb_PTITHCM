@@ -45,8 +45,8 @@ public class CommentService {
     }
 
     @Transactional
-    @ModelAttribute("posts")
-    public List<Comment> getPostsByUserID(int id) {
+    @ModelAttribute("comments")
+    public List<Comment> getCommentsByUserID(int id) {
         Session session = factory.getCurrentSession();
         String hql = "from Comment where account.ID = :id";
         Query query = session.createQuery(hql);
@@ -72,7 +72,7 @@ public class CommentService {
     }
 
     @Transactional
-    @ModelAttribute("comment")
+    @ModelAttribute("comments")
     public Comment editComment(Comment comment) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
