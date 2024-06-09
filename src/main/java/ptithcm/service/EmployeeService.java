@@ -1,7 +1,5 @@
 package ptithcm.service;
 
-import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import ptithcm.bean.Customer;
 import ptithcm.bean.Employee;
 
 @Service
-@SuppressWarnings("unchecked")
 public class EmployeeService {
     @Autowired
     SessionFactory factory;
@@ -28,5 +24,22 @@ public class EmployeeService {
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         return (Employee) query.list().get(0);
+    }
+
+    @Transactional
+    @ModelAttribute("employee")
+    public Employee updateEmployee(Employee employee) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.update(employee);
+            transaction.commit();
+            return employee;
+        } catch (Exception e) {
+            transaction.rollback();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 }

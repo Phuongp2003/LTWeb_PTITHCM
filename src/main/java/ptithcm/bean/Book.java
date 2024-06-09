@@ -23,11 +23,15 @@ public class Book {
 	private Author author;// property
 
 	@ManyToOne
+	@JoinColumn(name = "MANCC")
+	private Supplier supplier;//property
+
+	@ManyToOne
 	@JoinColumn(name = "MANXB")
 	private Producer producer;// property
 
-	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
-	private Collection<Feedback> feedback;
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	private Collection<Feedback> feedbacks;
 
 	@OneToMany(mappedBy = "receivedbilldetail_book", fetch = FetchType.LAZY)
 	private Collection<ReceivedBillDetail> receivedbilldetails;
@@ -48,7 +52,7 @@ public class Book {
 	}
 
 	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH, 
-	TypeBook typebook, Author author, Producer producer) {
+	TypeBook typebook, Author author, Supplier supplier, Producer producer) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		LANTAIBAN = lANTAIBAN;
@@ -56,6 +60,7 @@ public class Book {
 		ANH = aNH;
 		this.typebook = typebook;
 		this.author = author;
+		this.supplier = supplier;
 		this.producer = producer;
 	}
 
@@ -107,12 +112,20 @@ public class Book {
 		this.producer = producer;
 	}
 
-	public Collection<Feedback> getFeedback() {
-		return feedback;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setFeedback(Collection<Feedback> feedback) {
-		this.feedback = feedback;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Collection<Feedback> getFeedback() {
+		return feedbacks;
+	}
+
+	public void setFeedback(Collection<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
 	}
 
 	public Collection<CartDetail> getCartdetails() {

@@ -2,10 +2,8 @@ package ptithcm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.io.*;
 
+
 @Controller
-// @RequestMapping("/bill")
 public class BillController {
     @Autowired
     private BillService billService;
@@ -41,7 +39,6 @@ public class BillController {
     @Autowired
     private StatusService statusService;
 
-    // @RequestMapping("")
     @RequestMapping(value = "bill/{MAHD}")
     public String showBill(ModelMap model, @PathVariable("MAHD") int MAHD) {
 

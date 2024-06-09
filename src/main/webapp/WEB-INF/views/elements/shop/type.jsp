@@ -18,8 +18,7 @@
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 				<div class="card">
 					<div class="card-header">
-						<h4>Danh mục nhóm</h4>
-						<!-- <i class="bi bi-dash h3"></i> -->
+						<h5 class="card-title">Khám phá theo danh mục</h5>
 					</div>
 					<ul class="list-group list-group-flush">
 						<c:forEach var="category" items="${categories}">
@@ -32,17 +31,28 @@
 				<div class="row">
 					<nav class="navbar bg-body-tertiary">
 						<div class="container-fluid">
-							<h4>Tất cả sản phẩm</h4>
+							<h5 class="card-title">Tất cả sản phẩm</h5>
+							<form id="ratingForm" class="form-check" action="shop/rating.htm">
+								<input name="rating" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault">
+								<label class="form-check-label" for="rating4">
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star" style="color:gainsboro;"></i>
+									<span>từ 4 sao</span>
+								</label>
+							</form>
 							<form class="d-flex" role="search" action="shop/search.htm">
-								<input name="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-								<button name="btn-seach" class="btn btn-outline-success" type="submit">Search</button>
+								<input name="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm sách" aria-label="Search">
+								<button name="btn-seach" class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
 							</form>
 							<div class="dropdown d-flex">
 								<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Sắp xếp theo
 								</button>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item active" href="#">Sản phẩm nổi bật</a></li>
+									<li><a class="dropdown-item" href="#">Sản phẩm nổi bật</a></li>
 									<li><a class="dropdown-item" href="shop/sort-asc.htm">Giá: tăng dần</a></li>
 									<li><a class="dropdown-item" href="shop/sort-desc.htm">Giá: giảm dần</a></li>
 									<li><a class="dropdown-item" href="#">Bán chạy nhất</a></li>
@@ -56,14 +66,14 @@
 						<c:forEach var="book" items="${books}">
 							<div class="col-md-4 col-sm-12 col-lg-4">
 								<a href="book/${book.MASACH}.htm">
-									<div class="card">
+									<div class="card mb-4">
 										<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
 										<div class="card-body">
-											<h5 class="card-title">${book.TENSACH}</h5>
+											<h6 class="card-title" style="min-height: 2.5;">${book.TENSACH}</h6>
 											<p class="card-text">${book.author.HO} ${book.author.TEN}</p>
-											<p class="card-text">
+											<h5 class="card-text">
 												<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
-											</p>
+											</h5>
 										</div>
 									</div>
 								</a>
@@ -75,3 +85,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	document.getElementById('flexCheckDefault').addEventListener('change', function() {
+		if (this.checked) {
+			document.getElementById('ratingForm').submit();
+		}
+	});
+</script>

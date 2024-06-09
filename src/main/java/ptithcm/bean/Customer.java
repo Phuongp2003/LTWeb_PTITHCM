@@ -18,7 +18,7 @@ public class Customer {
 	private String SDT;// property
 	private Boolean GIOITINH;// property
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date NGAYSINH;// property
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
 	private Collection<Post> posts;
@@ -33,6 +33,9 @@ public class Customer {
 
 	@OneToMany(mappedBy = "bill_customer", fetch = FetchType.LAZY)
 	private Collection<Bill> bills;
+
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+	private Collection<Feedback> feedbacks;
 
 	public Customer() {
 	};

@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Comment;
-import ptithcm.bean.Post;
-
 import java.util.List;
 
 
@@ -21,6 +19,18 @@ import java.util.List;
 public class CommentService {
     @Autowired
     SessionFactory factory;
+
+    @Transactional
+    @ModelAttribute("comments")
+    public Comment getCommentByID(int cid) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Comment where id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", cid);
+
+        Comment cmt = (Comment) query.list().get(0);
+        return cmt;
+    }
 
     @Transactional
     @ModelAttribute("comments")

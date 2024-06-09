@@ -112,7 +112,7 @@ public class AccountController {
             account.setUSERNAME(username);
             account.setPASSWORD(password);
             Boolean gt = Boolean.parseBoolean(gioitinh);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date ns = dateFormat.parse(ngaysinh);
             Customer user = new Customer(ho, ten, email, phone, gt, ns);
 
@@ -154,7 +154,7 @@ public class AccountController {
     public String changePasswordPost(@RequestParam("opassword") String password,
             @RequestParam("npassword") String newPassword,
             @RequestParam("rtnpassword") String retypedPassword,
-            @CookieValue(value = "uid", defaultValue = "") String uid, ModelMap model) {
+            @CookieValue(value = "uid", defaultValue = "") String uid, HttpServletResponse response, ModelMap model) {
         try {
             Account account = accountService.getAccountByID(Integer.parseInt(uid));
             if (account != null) {

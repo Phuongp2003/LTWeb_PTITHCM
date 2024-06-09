@@ -32,6 +32,7 @@
 			<div class="acc-role">Vai trò: ${user_type}</div>
 			<div class="ace-name">Họ và Tên: ${user_name}</div>
 			<div class="ace-cccd">EMAIL: ${model.EMAIL}</div>
+			<div class="ace-birthday">Ngày sinh: ${birthday}</div>
 			<div class="ace-cccd">Giới tính:
 				<c:if test="${model.GIOITINH}">
 					Nam

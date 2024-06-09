@@ -26,8 +26,10 @@
 		<a href="user/${account.ID}/edit-info.htm" class="c-info fw-bold">Thay đổi thông tin</a>
 		<a href="user/${account.ID}/posts.htm" class="post-manage fw-bold">Quản lý bài viết</a>
 		<c:if test="${user_type == 'employee'}">
-			<a href="admin/posts-list.htm" class="check-post fw-bold">Kiểm duyệt bài viết</a>
-			<a href="admin/books-list.htm" class="check-book fw-bold">Kiểm duyệt sách</a>
+			<a href="manage/discount.htm" class="check-book fw-bold">Quản lý khuyến mãi</a>
+			<a href="manage/posts.htm" class="check-post fw-bold">Kiểm duyệt bài viết</a>
+			<a href="manage/category.htm" class="check-book fw-bold">Kiểm duyệt thể loại sách</a>
+			<a href="manage/product.htm" class="check-book fw-bold">Kiểm duyệt sách</a>
 		</c:if>
 		<a href="user/change-password.htm" class="c-password fw-bold">Thay đổi mật khẩu</a>
 		<a href="user/logout.htm" class="logout fw-bold">Đăng xuất</a>
@@ -41,6 +43,7 @@
 				<div class="ace-cccd">CCCD: ${model.CCCD}</div>
 			</c:if>
 			<div class="ace-cccd">EMAIL: ${model.EMAIL}</div>
+			<div class="ace-birthday">Ngày sinh: ${birthday}</div>
 			<div class="ace-cccd">Giới tính:
 				<c:if test="${model.GIOITINH}">
 					Nam

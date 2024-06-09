@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Book;
 import ptithcm.bean.TypeBook;
@@ -47,6 +48,16 @@ public class ShopController {
         model.addAttribute("category", category);
         model.addAttribute("books", books);
         return "pages/shop/typebook";
+    }
+
+    @RequestMapping("/rating")
+    public String rating(ModelMap model, @RequestParam(value = "rating") double rating) {
+        model.addAttribute("type", "shop");
+        List<TypeBook> categories = typeBookService.getAllTypeBooks();
+        List<Book> book = bookService.getBooksByRating(rating);
+        model.addAttribute("categories", categories);
+        model.addAttribute("books", book);
+        return "pages/shop/shop";
     }
 
     @RequestMapping("/sort-desc")

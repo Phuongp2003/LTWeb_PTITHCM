@@ -17,7 +17,7 @@ public class Employee {
 	private String EMAIL;
 	private Boolean GIOITINH;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date NGAYSINH;// property
 	@OneToMany(mappedBy = "post_employee", fetch = FetchType.LAZY)
 	private Collection<Post> posts;

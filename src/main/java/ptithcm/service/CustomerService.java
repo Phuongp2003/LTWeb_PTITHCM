@@ -65,4 +65,22 @@ public class CustomerService {
         }
         return 0;
     }
+
+    @Transactional
+    @ModelAttribute("customers")
+    public int updateCustomer(Customer customer) {
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.update(customer);
+            t.commit();
+            return 1;
+        } catch (Exception e) {
+            t.rollback();
+            System.out.println(e);
+        } finally {
+            session.close();
+        }
+        return 0;
+    }
 }

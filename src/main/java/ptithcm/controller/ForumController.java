@@ -2,11 +2,10 @@ package ptithcm.controller;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,6 @@ import ptithcm.service.ListPostService;
 import ptithcm.util.PostHelper;
 import ptithcm.service.AccountService;
 import ptithcm.service.CommentService;
-import ptithcm.service.CustomerService;
 
 @Controller
 @RequestMapping("/forum")
@@ -44,7 +42,7 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("owner", true);
-        List<Post> post = postServices.getAllPosts();
+        List<Post> post = postServices.getPostsApproved();
         model.addAttribute("posts", post);
         return "pages/forum/forum";
     }
@@ -52,15 +50,22 @@ public class ForumController {
     @RequestMapping(value = "post/{id}")
     public String post(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid) {
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            model.addAttribute("user_id", Integer.parseInt(uid));
+            model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        }
         Post post;
         post = postServices.getPostByID(id);
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/show");
-        
+
         List<Comment> comments = commentService.getCommentsByIDPost(id);
+        Comment cmt = new Comment();
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
+        model.addAttribute("comment", cmt);
         return "pages/post/post";
     }
 
@@ -70,9 +75,29 @@ public class ForumController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("content") String content,
-            Model model, @CookieValue(value = "uid", defaultValue = "") String uid) {
+            Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role,
+            BindingResult errors) {
+        // if(title.trim().length() == 0){
+        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // }
+        // if(description.trim().length() == 0){
+        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // }
+        // if(content.trim().length() == 0){
+        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // }
+        // if(errors.hasErrors()){
+        //     model.addAttribute("message", -1);
+        //     return "pages/post/editpost";
+        // }
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
+        Employee employee;
+        if (role.equals("employee")) {
+            employee = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee();
+            post.setPost_employee(employee);
+        }
         postServices.editPost(post);
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
 
@@ -155,7 +180,21 @@ public class ForumController {
             @RequestParam("content") String content,
             Model model,
             @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role) {
+            @CookieValue(value = "role", defaultValue = "") String role, 
+            BindingResult errors) {
+        // if(title.trim().length() == 0){
+        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // }
+        // if(description.trim().length() == 0){
+        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // }
+        // if(content.trim().length() == 0){
+        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // }
+        // if(errors.hasErrors()){
+        //     model.addAttribute("errorMessage", -1);
+        //     return "pages/post/createpost";
+        // }
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         Employee employee;
         Post post;
@@ -210,29 +249,70 @@ public class ForumController {
         model.addAttribute("message", "Delete post success");
         return "pages/post/post_action";
     }
-        @Autowired
-        private CommentService commentService;
 
-        @RequestMapping(value = "post/{id}/comment/create-success", method = RequestMethod.POST)
-        public String saveNewComment(
-                @RequestParam("content") String content, 
-                @PathVariable("id") Integer id,
-                Model model,
-                @CookieValue(value = "uid", defaultValue = "") String uid,
-                @CookieValue(value = "role", defaultValue = "") String role) {
-            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
-            Employee employee;
-            Comment comment = new Comment(content,postServices.getPostByID(id), accountService.getAccountByID(Integer.parseInt(uid)));
+    @Autowired
+    private CommentService commentService;
 
-            commentService.createComment(comment);
-            model.addAttribute("title", "PTITHCM Forum");
-            model.addAttribute("type", "forum");
-            model.addAttribute("user_id", Integer.parseInt(uid));
-            model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
-            model.addAttribute("success", 200);
-            model.addAttribute("message", "Create comment success");
-            return "pages/post/post_action";        
+    @RequestMapping(value = "post/{id}/comment/create-success", method = RequestMethod.POST)
+    public String saveNewComment(
+            @RequestParam("content") String content,
+            @PathVariable("id") Integer id,
+            Model model,
+            @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+        Comment comment = new Comment(content, postServices.getPostByID(id),
+                accountService.getAccountByID(Integer.parseInt(uid)));
+
+        commentService.createComment(comment);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", Integer.parseInt(uid));
+        model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Đăng bình luận thành công");
+        model.addAttribute("comment", comment);
+        return "pages/post/post_action";
         }
+    @RequestMapping(value = "post/{id}/comment/{cid}/edit-comment")
+    public String createComment(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @PathVariable("id") Integer id,
+            @PathVariable("cid") Integer cid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Post post;
+        post = postServices.getPostByID(id);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("type_2", "post/show");
 
-        
+        List<Comment> comments = commentService.getCommentsByIDPost(id);
+        Comment cmt = commentService.getCommentByID(cid);
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        model.addAttribute("comment", cmt);
+        return "pages/post/post";
+    }
+
+    @RequestMapping(value = "post/{id}/comment/{cid}/edit-success", method = RequestMethod.POST)
+    public String saveEditedComment(
+            @RequestParam("content") String content,
+            @PathVariable("id") Integer id,
+            @PathVariable("cid") Integer cid,
+            Model model,
+            @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+        Comment cmt = commentService.getCommentByID(cid);
+        cmt.setContent(content);
+
+        commentService.editComment(cmt);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", Integer.parseInt(uid));
+        model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Chỉnh sửa thành công");
+        model.addAttribute("comment", cmt);
+        return "pages/post/post_action";
+        }
 }

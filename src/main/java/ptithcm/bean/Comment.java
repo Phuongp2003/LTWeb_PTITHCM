@@ -29,8 +29,15 @@ public class Comment {
 
     public Comment() {}
 
+    public Comment(int id, String title, Post post, Account account) {
+        this.id = id;
+        this.content = title;
+        this.THOIGIANLAP = new Date();
+        this.post = post;
+        this.account = account;
+    }
+
     public Comment(String title, Post post, Account account) {
-        this.id = 0;
         this.content = title;
         this.THOIGIANLAP = new Date();
         this.post = post;
