@@ -76,17 +76,19 @@ public class Book {
 		SOLUONGBAN = sOLUONGBAN;
 	}
 
-	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH,
-			TypeBook typebook, Author author, Supplier supplier, Producer producer) {
-		MASACH = mASACH;
-		TENSACH = tENSACH;
-		LANTAIBAN = lANTAIBAN;
-		GIA = gIA;
-		ANH = aNH;
+	public Book(Integer MASACH, String TENSACH, Integer LANTAIBAN, Float GIA, String ANH,
+			TypeBook typebook, Author author, Supplier supplier, Producer producer, Integer SOLUONGTON, Integer SOLUONGBAN) {
+		this.MASACH = MASACH;
+		this.TENSACH = TENSACH;
+		this.LANTAIBAN = LANTAIBAN;
+		this.GIA = GIA;
+		this.ANH = ANH;
 		this.typebook = typebook;
 		this.author = author;
 		this.supplier = supplier;
 		this.producer = producer;
+		this.SOLUONGTON = SOLUONGTON;
+		this.SOLUONGBAN = SOLUONGBAN;
 	}
 
 	public Integer getMASACH() {

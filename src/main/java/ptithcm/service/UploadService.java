@@ -21,10 +21,10 @@ import ptithcm.bean.Book;
 @Transactional
 public class UploadService {
     @Autowired
-	ServletContext context;
+    ServletContext context;
 
     public String saveFile(MultipartFile file) {
-        String directory = System.getenv("APPDATA") + "\\PTITWEB\\imgs\\products\\";  // <-- Entry
+        String directory = System.getenv("APPDATA") + "\\PTITWEB\\imgs\\products\\"; // <-- Entry
         Path path = Paths.get(directory);
 
         try {
@@ -50,12 +50,12 @@ public class UploadService {
                 + "products"
                 + File.separator;
         String imgPath = book.getANH();
-    
+
         if (imgPath == null) {
             System.out.println("No image found");
             return;
         }
-    
+
         try {
             // move image from project directory to appdata directory
             Path source = Paths.get(directory + imgPath);
@@ -64,13 +64,12 @@ public class UploadService {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error getting image");
-            }
-        System.out.println("image" + directory + imgPath);
-        System.out.println("image" + prijectDir + imgPath);
+        }
     }
+
     public void getImage(List<Book> books) {
-      for (Book book : books) {
-        getImage(book);
-      }
+        for (Book book : books) {
+            getImage(book);
+        }
     }
 }
