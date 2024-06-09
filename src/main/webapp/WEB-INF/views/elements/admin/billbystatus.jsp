@@ -5,13 +5,14 @@
 <script>
 	function updateStatusFilter() {
 		const status = document.getElementById("statusFilter").value;
-		const basePath = '<c:url value="/admin/bill/" />';
+		const basePath = '<c:url value="/manage/bill/" />';
 		window.location.href = basePath + status + ".htm";
 	}
 </script>
 
 <div class="container mt-5">
-	<h2 class="mb-4">Danh sách hóa đơn</h2>
+	<h2 class="mb-4">Danh sách đơn hàng</h2>
+	
 	<div class="row mb-3">
 		<div class="col-md-6">
 			<div class="custom-select-container">

@@ -55,7 +55,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "admin/bill/{status}")
+    @RequestMapping(value = "manage/bill/{status}")
     public String showBillByStatus(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @PathVariable("status") int status) {
 
