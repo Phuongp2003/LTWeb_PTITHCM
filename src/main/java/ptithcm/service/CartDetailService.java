@@ -22,11 +22,11 @@ public class CartDetailService {
     SessionFactory factory;
 
     @Transactional
-    public List<CartDetail> getBill(int userId) {
+    public List<CartDetail> getBill(int cartId) {
         Session session = factory.getCurrentSession();
         String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId AND cd.CHON = 1";
         Query query = session.createQuery(hql);
-        query.setParameter("cartId", userId);
+        query.setParameter("cartId", cartId);
         List<CartDetail> list = query.list();
         return list;
     }
@@ -38,6 +38,16 @@ public class CartDetailService {
         String hql = "FROM CartDetail cd WHERE cd.cartdetail_cart.IDGH = :cartId";
         Query query = session.createQuery(hql);
         query.setParameter("cartId", cartId);
+        List<CartDetail> list = query.list();
+        return list;
+    }
+
+    @Transactional
+    @ModelAttribute("cartdetail")
+    public List<CartDetail> getAllCartDetail() {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartDetail";
+        Query query = session.createQuery(hql);
         List<CartDetail> list = query.list();
         return list;
     }
