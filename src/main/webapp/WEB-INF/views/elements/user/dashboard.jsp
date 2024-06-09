@@ -33,6 +33,7 @@
 				<a href="manage/posts.htm" class="fw-bold">Duyệt bài viết</a>
 				<a href="manage/category.htm" class="fw-bold">Quản lý thể loại sách</a>
 				<a href="manage/product.htm" class="fw-bold">Quản lý sản phẩm</a>
+				<a href="manage/bill/-1.htm" class="fw-bold">Quản lý đơn hàng</a>
 			</c:if>
 			<a href="user/change-password.htm" class="c-password fw-bold">Thay đổi mật khẩu</a>
 			<a href="user/logout.htm" class="logout fw-bold">Đăng xuất</a>

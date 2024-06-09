@@ -27,6 +27,10 @@
 					<li class="nav-item">
 						<a href="manage/product.htm" class="nav-link">Kiểm duyệt sách</a>
 					</li>
+					<li class="nav-item">
+						<a href="manage/bill/-1.htm" class="nav-link">Kiểm duyệt đơn hàng</a>
+					</li>
+					
 				</ul>
 			</div>
 		</div>
