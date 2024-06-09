@@ -186,7 +186,8 @@ public class BillController {
                         bookService.updateBook(book);
                         List<CartDetail> alllist = cartDetailService.getAllCartDetail();
                         for (CartDetail cd : alllist) {
-                            if (cd.getCartdetail_book().getSOLUONGTON() < cd.getSOLUONG()) {
+                            Book b = bookService.getBookByID(cd.getCartdetail_book().getMASACH());
+                            if (b.getSOLUONGTON() < cd.getSOLUONG()) {
                                 cartDetailService.deleteDetail(cd);
                             }
                         }
