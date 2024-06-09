@@ -28,4 +28,18 @@ public class StatusService {
         List<Status> list = query.list();
         return list;
     }
+
+    @Transactional
+    @ModelAttribute("status")
+    public Status getStatusById(int statusId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM Status WHERE MATT = :statusId";
+
+        Query query = session.createQuery(hql);
+        query.setParameter("statusId", statusId);
+
+        Status list = (Status) query.list().get(0);
+        return list;
+    }
+
 }

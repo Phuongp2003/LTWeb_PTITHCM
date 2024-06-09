@@ -26,8 +26,9 @@
 			<div class="d-flex me-3">
 				<a href="cart.htm" class="cart-icon">
 					<i class="bi bi-cart"></i>
-					
-					<span class="cart-count">${totalitem}</span>
+					<c:if test="${not empty cookie.uid && not empty totalitem}">
+						<span class="cart-count">${totalitem}</span>
+					</c:if>	
 				</a>
 			</div>
 			<c:if test="${not empty cookie.uid}">

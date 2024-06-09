@@ -6,11 +6,11 @@
 	.product-detail .wrapper {
 		margin-bottom: 0.5rem;
 	}
-
+	
 	.product-detail .group-input {
 		display: flex;
 	}
-
+	
 	.product-detail .input {
 		height: 2.5rem;
 		width: 4rem;
@@ -19,6 +19,7 @@
 		border: 1px solid rgb(166, 166, 176);
 		border-radius: 4px;
 	}
+
 	.product-img .card{
 		width: 25.2rem;
 	}
@@ -176,22 +177,18 @@
 					<p>Chia sẻ cảm nghĩ của bạn với mọi người</p>
 					<c:choose>
 						<c:when test="${message == 1}">
-							<a href="feedback/${MASACH}/edit-feedback.htm"><button
-									class="btn btn-secondary">Chỉnh sửa đánh giá</button></a>
-							<a href="feedback/${MASACH}/delete-feedback.htm"
-								onclick="return confirm('Bạn có chắc muốn xóa đánh giá ?')">
+							<a href="feedback/${MASACH}/edit-feedback.htm"><button class="btn btn-secondary">Chỉnh sửa đánh giá</button></a>
+							<a href="feedback/${MASACH}/delete-feedback.htm" onclick="return confirm('Bạn có chắc muốn xóa đánh giá ?')">
 								<button class="btn btn-danger">Xóa đánh giá</button></a>
 						</c:when>
 						<c:when test="${message == 2}">
-							<a href="feedback/${MASACH}/add-feedback.htm"><button
-									class="btn btn-secondary">Đánh giá ngay</button></a>
+							<a href="feedback/${MASACH}/add-feedback.htm"><button class="btn btn-secondary">Đánh giá ngay</button></a>
 						</c:when>
 						<c:otherwise>
-							<a href="feedback/${MASACH}/add-feedback.htm"><button
-									class="btn btn-secondary">Đánh giá ngay</button></a>
+							<a href="feedback/${MASACH}/add-feedback.htm"><button class="btn btn-secondary">Đánh giá ngay</button></a>
 						</c:otherwise>
 					</c:choose>
-
+					
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -209,26 +206,16 @@
 											<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
 										</c:when>
 										<c:when test="${f.VOTE == 2}">
-											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i>
+											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
 										</c:when>
 										<c:when test="${f.VOTE == 3}">
-											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i>
+											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
 										</c:when>
 										<c:when test="${f.VOTE == 4}">
-											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i>
+											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
 										</c:when>
 										<c:when test="${f.VOTE == 5}">
-											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i><i
-												class="bi bi-star-fill" style="color:#FFDB00;"></i>
+											<i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
 										</c:when>
 									</c:choose>
 								</div>
@@ -243,7 +230,6 @@
 			</div>
 		</div>
 	</div>
-  
   <div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog"
 		aria-labelledby="addToCartModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -267,36 +253,37 @@
 
 </div>
 <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
-    <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-    <script>
-      function showAddToCartPopup(event) {
-        event.preventDefault();
-        $.ajax({
-          type: $(event.target).attr('method'),
-          url: $(event.target).attr('action'),
-          data: $(event.target).serialize(),
-          success: function (response) {
-            $('#addToCartModal').modal('show');
-          },
-          error: function (response) {
-            alert('Có lỗi xảy ra. Vui lòng thử lại.');
-          }
-        });
-      }
-      function adjustQuantity(increment) {
-        var quantityInput = document.getElementById('quantity-input');
-        var currentQuantity = parseInt(quantityInput.value);
-        if (increment) {
-          quantityInput.value = currentQuantity + 1;
-        } else if (currentQuantity > 1) { // Prevents quantity from going below 1
-          quantityInput.value = currentQuantity - 1;
-        }
-        updateCart();
-      }
-      function updateCart() {
-        var quantityInput = document.getElementById('quantity-input');
-        var formQuantityInput = document.getElementById('form-quantity'); // Lấy thẻ input form-quantity
-        formQuantityInput.value = quantityInput.value; // Gán giá trị từ quantity-input cho form-quantity
-      }
-
-    </script>
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+<script>
+	function showAddToCartPopup(event) {
+		event.preventDefault();
+		$.ajax({
+			type: $(event.target).attr('method'),
+			url: $(event.target).attr('action'),
+			data: $(event.target).serialize(),
+			success: function(response) {
+				$('#addToCartModal').modal('show');
+			},
+			error: function(response) {
+				alert('Có lỗi xảy ra. Vui lòng thử lại.');
+			}
+		});
+	}
+	
+	function adjustQuantity(increment) {
+		var quantityInput = document.getElementById('quantity-input');
+		var currentQuantity = parseInt(quantityInput.value);
+		if (increment) {
+			quantityInput.value = currentQuantity + 1;
+		} else if (currentQuantity > 1) { // Prevents quantity from going below 1
+			quantityInput.value = currentQuantity - 1;
+		}
+		updateCart();
+	}
+	
+	function updateCart() {
+		var quantityInput = document.getElementById('quantity-input');
+		var formQuantityInput = document.getElementById('form-quantity'); // Lấy thẻ input form-quantity
+		formQuantityInput.value = quantityInput.value; // Gán giá trị từ quantity-input cho form-quantity
+	}
+</script>

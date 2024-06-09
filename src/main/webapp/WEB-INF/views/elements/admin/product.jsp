@@ -1,13 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<div class="container-fluid" style="width: 80%;">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Danh Mục Sách</li>
-        </ol>
-    </nav>
+<div class="container-fluid" style="width: 80%;border: Black solid 1px; border-radius: 5px;">
     <table class="category-list table">
         <div class="filter-wrapper row">
             <div class="col-md-10 col-sm-12 col-lg-10">
@@ -28,6 +22,8 @@
                 <th scope="col">Thể loại</th>
                 <th scope="col">Tác giả</th>
                 <th scope="col">Nhà cung cấp</th>
+                <th scope="col">Số lượng tồn</th>
+                <th scope="col">Số lượng bán</th>
                 <th scope="col">Nhà xuất bản</th>
             </tr>
         </thead>
@@ -41,6 +37,8 @@
                     <td>${book.typebook.TENTL}</td>
                     <td>${book.author.HO} ${book.author.TEN}</td>
                     <td>${book.supplier.TENNCC}</td>
+                    <td>${book.SOLUONGTON} </td>
+                    <td>${book.SOLUONGBAN} </td>
                     <td>${book.producer.TENNXB}</td>
                     <td>
                         <a href="manage/product/${book.MASACH}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa sách ${book.TENSACH}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>

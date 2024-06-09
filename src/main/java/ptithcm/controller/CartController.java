@@ -51,8 +51,8 @@ public class CartController {
                 model.addAttribute("totalitem", 0);
                 model.addAttribute("totalmoney", 0.0);
             } else {
-                int number = cartDetailService.getTotalItem(userId);
-                double money = cartDetailService.getTotalMoney(userId);
+                int number = cartDetailService.getTotalItem(cart.getIDGH());
+                double money = cartDetailService.getTotalMoney(cart.getIDGH());
                 model.addAttribute("cartdetail", cartdetail);
                 model.addAttribute("totalitem", number);
                 model.addAttribute("totalmoney", money);
@@ -65,19 +65,7 @@ public class CartController {
 
     @RequestMapping(value = "/cart-detail", method = RequestMethod.POST)
     public String updateProduct(@ModelAttribute("cartdetail") CartDetail cartdetail) {
-        // int cartId = cartDetail.getCartdetail_cart().getIDGH();
-        // int productId = cartDetail.getCartdetail_book().getMASACH();
-        // CartDetail cartdetail = cartDetailService.getCartByProductId(1, 1);
         return "cartdetail";
-        // int soLuong = cartDetail.getSOLUONG();
-        // CartDetail detail = cartDetailService.getCartByProductId(cartId,
-        // productId);
-        // detail.setSOLUONG(soLuong);
-        // System.out.println("-----------------------" + detail.getSOLUONG());
-        // System.out.println("dsdsdsđ");
-        // model.addAttribute("cartbyproduct", detail);
-
-        // return "test";
     }
 
     @RequestMapping(value = "add-cart-detail")
@@ -139,8 +127,9 @@ public class CartController {
             int cart_id = cart.getIDGH();
             ///////////////////////////////
             CartDetail old = cartDetailService.getCartDetailByProductId(cart_id, MASACH);
+
             int oldSL = old.getSOLUONG();
-            int SL = SOLUONG + oldSL;
+            int SL = oldSL + SOLUONG;
             //////////////////////////
             CartDetailPrimary key = new CartDetailPrimary(cart_id, MASACH);
             key.setIDGH(cart.getIDGH());

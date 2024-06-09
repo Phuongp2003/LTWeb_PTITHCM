@@ -52,7 +52,7 @@
 </style>
 
 <div class="discount-list container-fluid w-75">
-	<form:form method="POST" action="discount/add-success.htm" modelAttribute="discount">
+	<form:form method="POST" action="manage/discount/add-success.htm" modelAttribute="discount">
 		<div class="port-title">
 			<form:label path="TENKM">Title: </form:label>
 			<form:input path="TENKM" />
@@ -65,6 +65,6 @@
 			<form:label path="NGAYKT">Title: </form:label>
 			<form:input path="NGAYKT" type="date" />
 		</div>
-		<button type="submit">OK</button>
+		<button type="submit" title="Thêm khuyến mãi mới!">OK</button>
 	</form:form>
 </div>

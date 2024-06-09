@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.io.*;
 
-
 @Controller
 public class BillController {
     @Autowired
@@ -38,6 +37,8 @@ public class BillController {
     private BookService bookService;
     @Autowired
     private StatusService statusService;
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(value = "bill/{MAHD}")
     public String showBill(ModelMap model, @PathVariable("MAHD") int MAHD) {
@@ -163,10 +164,13 @@ public class BillController {
             Date currentDate = Date.from(current.atZone(ZoneId.systemDefault()).toInstant());
             // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             // Date date = dateFormat.parse(currentDate);
-            Float TONGTIEN = (float) cartDetailService.getTotalMoney(user.getMAKH());
-            Status status = new Status(1, "Chưa duyệt");
+            Float TONGTIEN = (float) cartDetailService
+                    .getTotalMoney(cartService.getCartByIdCustomer(user.getMAKH()).getIDGH());
+            Status status = statusService.getStatusById(1);
+            Book book = new Book();
             bill = new Bill(null, currentDate, TONGTIEN, HOTENNN, DIACHINN, SDTNN, GHICHU,
                     EMAILNN, status, e, user);
+
             bill.setStatus(status);
             bill.setBill_employee(e);
             bill.setBill_customer(user);
@@ -174,6 +178,7 @@ public class BillController {
             bill.setDIACHINN(DIACHINN);
             bill.setEMAILNN(EMAILNN);
             bill.setHOTENNN(HOTENNN);
+            bill.setStatus(status);
             bill.setSDTNN(SDTNN);
             bill.setGHICHU(GHICHU);
             bill.setTONGTIEN(TONGTIEN);
@@ -189,11 +194,15 @@ public class BillController {
                 List<CartDetail> list = cartDetailService.getBill(user.getMAKH());
 
                 for (CartDetail c : list) {
+
                     BillDetail detail = new BillDetail();
                     BillDetailPrimary key = new BillDetailPrimary();
                     Integer MASACH = c.getId().getMASACH();
                     Integer SOLUONG = c.getSOLUONG();
                     Float DONGIA = c.getDONGIA();
+                    book = bookService.getBookByID(MASACH);
+                    book.setSOLUONGBAN(book.getSOLUONGBAN() + SOLUONG);
+                    book.setSOLUONGTON(book.getSOLUONGTON() - SOLUONG);
                     if (MASACH != null && SOLUONG != null && DONGIA != null) {
                         key.setMASACH(c.getId().getMASACH());
                         key.setMAHD(MAHD);
@@ -205,6 +214,12 @@ public class BillController {
                         detail.setBill(billService.getBillByID(MAHD));
 
                         billService.addDetail(detail);
+                        bookService.updateBook(book);
+                        emailService.sendEmail(user.getEMAIL(),
+                                "Đặt hàng thành công từ Đồ án D21CQCN02-N",
+                                "MAHD:" + bill.getMAHD() +
+                                        "MAKH:" + user.getMAKH() +
+                                        "Họ tên khách hàng:" + user.getFullname());
                         count += 1;
                         System.out.println("in:" + detail.toString());
 
@@ -217,6 +232,7 @@ public class BillController {
                 }
                 for (CartDetail c : list) {
                     cartDetailService.deleteDetail(c);
+
                 }
 
                 // if (count != num) {
@@ -230,6 +246,6 @@ public class BillController {
 
             // model.addAttribute("bill", bill);
         }
-        return "redirect:/cart.htm";
+        return "redirect:/user/login.htm";
     }
 }
