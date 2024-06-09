@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="container-fluid" style="width: 80%; border: Black solid 1px; border-radius: 5px;">
 	<table class="category-list table">
 		<div class="filter-wrapper row">
@@ -44,6 +45,7 @@
 					<td>${book.producer.TENNXB}</td>
 					<td>
 						<a href="manage/product/${book.MASACH}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa sách ${book.TENSACH}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
+
 						<a href="manage/product/${book.MASACH}/update.htm"><button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
 					</td>
 				</tr>

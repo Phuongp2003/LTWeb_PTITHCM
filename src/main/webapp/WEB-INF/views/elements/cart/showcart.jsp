@@ -186,7 +186,139 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
+
                     </div>
+                  </div>
+                </div>
+              </c:forEach>
+              <div class="row justify-content-center">
+                <div class="col-md-6 d-flex justify-content-start">
+                  <!-- Sử dụng lớp justify-content-start để căn trái -->
+                  <a href="shop.htm" class="btn btn-primary">Quay lại cửa hàng</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body d-flex flex-column h-100">
+                  <h5 class="card-title">Đơn hàng</h5>
+                  <p class="card-text">Tổng tiền</p>
+                  <p class="card-text">
+                    <fmt:formatNumber value="${totalmoney}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
+                  </p>
+                  <div>
+                    <c:choose>
+                      <c:when test="${hasSelectedProduct == 'true'}">
+                        <a href="bill/check-out.htm" class="btn btn-primary">Thanh toán</a>
+                      </c:when>
+                      <c:otherwise>
+                        <button href="bill/check-out.htm" class="btn btn-primary" disabled>Thanh toán</button>
+                      </c:otherwise>
+                    </c:choose>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </c:otherwise>
+      </c:choose>
+    </div>
+  </div>
+
+  <script>
+    // Lưu trữ giá trị SOLUONG ban đầu
+    var originalQuantities = [];
+
+    function adjustQuantity(index, increment) {
+      try {
+        var quantityInput = document.getElementById('quantity-' + index);
+        if (!quantityInput) {
+          throw new Error("Không thể tìm thấy phần tử với id 'quantity-" + index + "'");
+        }
+        var currentQuantity = parseInt(quantityInput.value);
+        if (isNaN(currentQuantity)) {
+          throw new Error("Giá trị của quantityInput không phải là một số hợp lệ");
+        }
+        if (increment) {
+          quantityInput.value = currentQuantity + 1;
+        } else if (currentQuantity > 1) { // Prevents quantity from going below 1
+          quantityInput.value = currentQuantity - 1;
+        }
+        // updateCart(index); // Gọi hàm để cập nhật SOLUONG của form
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    function updateCart(index) {
+      try {
+        var quantityInput = document.getElementById('quantity-' + index);
+        if (!quantityInput) {
+          throw new Error("Không thể tìm thấy phần tử với id 'quantity-" + index + "'");
+        }
+        var currentQuantity = parseInt(quantityInput.value);
+        if (isNaN(currentQuantity)) {
+          throw new Error("Giá trị của quantityInput không phải là một số hợp lệ");
+        }
+        var originalQuantity = originalQuantities[index]; // Lấy giá trị SOLUONG ban đầu
+        var newQuantity = currentQuantity - originalQuantity; // Số lượng mới
+        var formQuantityInput = document.getElementById('formquantity' + index);
+        // Kiểm tra nếu không có tác động lên form-control
+        if (newQuantity === 0) {
+          formQuantityInput.value = 0;
+        } else {
+          formQuantityInput.value = newQuantity; // Cập nhật giá trị SOLUONG của form
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    function updateHasSelectedProduct(index) {
+      var checkbox = document.getElementById("flexCheckChecked-" + index);
+      var hasSelectedProduct = document.getElementById("hasSelectedProduct");
+      if (checkbox.checked) {
+        hasSelectedProduct.value = "true";
+      } else {
+        hasSelectedProduct.value = "false";
+      }
+    }
+
+
+    function updateHiddenInput(index) {
+      try {
+        var checkbox = document.getElementById("flexCheckChecked-" + index);
+        if (!checkbox) {
+          throw new Error("Không thể tìm thấy phần tử với id 'flexCheckChecked-" + index + "'");
+        }
+        var hiddenInput = document.getElementById('hiddencheckbox' + index);
+        if (!hiddenInput) {
+          throw new Error("Không thể tìm thấy phần tử với id 'hiddencheckbox-" + index + "'");
+        }
+        var number = checkbox.checked ? 1 : 0;
+        hiddenInput.value = number;
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    // Hàm này được gọi khi trang tải xong để lấy giá trị SOLUONG ban đầu và lưu trữ chúng
+    window.onload = function() {
+      var quantityInputs = document.querySelectorAll('[id^="quantity-"]');
+      quantityInputs.forEach(function(input, index) {
+        originalQuantities[index] = parseInt(input.getAttribute('data-soluong'));
+      });
+    };
+
+    console.log("hi")
+  </script>
+
+</body>
+
+
 
                     <script>
     // Lưu trữ giá trị SOLUONG ban đầu
@@ -270,3 +402,4 @@
                 </body>
 
                 </html>
+

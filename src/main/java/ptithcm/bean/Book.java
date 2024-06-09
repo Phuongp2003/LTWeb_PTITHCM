@@ -53,6 +53,7 @@ public class Book {
 	}
 
 	public void setMASACH(int mASACH) {
+
 		MASACH = mASACH;
 	}
 
