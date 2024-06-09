@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Book;
 import ptithcm.bean.Discount;
+import ptithcm.bean.TypeBook;
 
 import java.util.List;
 
@@ -49,6 +50,16 @@ public class BookService {
 		Book list = (Book) query.list().get(0);
 		return list;
 	}
+
+	public Book getBookByName(String TENSACH) {
+        Session session = factory.getCurrentSession();
+        String hql = "from Book where TENSACH = :TENSACH";
+        Query query = session.createQuery(hql);
+        query.setParameter("TENSACH", TENSACH);
+
+        Book list = (Book) query.uniqueResult();
+        return list;
+    }
 
 	@ModelAttribute("books")
 	public List<Book> getBooksByRating(double rating) {

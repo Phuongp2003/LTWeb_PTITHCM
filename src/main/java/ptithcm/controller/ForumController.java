@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,7 +72,21 @@ public class ForumController {
             @RequestParam("description") String description,
             @RequestParam("content") String content,
             Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role) {
+            @CookieValue(value = "role", defaultValue = "") String role,
+            BindingResult errors) {
+        // if(title.trim().length() == 0){
+        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // }
+        // if(description.trim().length() == 0){
+        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // }
+        // if(content.trim().length() == 0){
+        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // }
+        // if(errors.hasErrors()){
+        //     model.addAttribute("message", -1);
+        //     return "pages/post/editpost";
+        // }
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
         Employee employee;
@@ -161,7 +176,21 @@ public class ForumController {
             @RequestParam("content") String content,
             Model model,
             @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role) {
+            @CookieValue(value = "role", defaultValue = "") String role, 
+            BindingResult errors) {
+        // if(title.trim().length() == 0){
+        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // }
+        // if(description.trim().length() == 0){
+        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // }
+        // if(content.trim().length() == 0){
+        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // }
+        // if(errors.hasErrors()){
+        //     model.addAttribute("errorMessage", -1);
+        //     return "pages/post/createpost";
+        // }
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         Employee employee;
         Post post;

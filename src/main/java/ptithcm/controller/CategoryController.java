@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.TypeBook;
 import ptithcm.service.TypeBookService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,11 +40,14 @@ public class CategoryController {
     @RequestMapping(value = "add-category", method = RequestMethod.POST)
     public String saveNewCategory(ModelMap model, @ModelAttribute("category") TypeBook category, BindingResult errors) {
         if(category.getTENTL().trim().length() == 0){
-            errors.rejectValue("TENTL", "category", "Vui lòng nhập tên thể loại!");
+            errors.rejectValue("TENTL", "category", "Vui lòng nhập thể loại sách!");
         }
         if(typeBookService.getTypeBookByName(category.getTENTL()) != null){
             errors.rejectValue("TENTL", "category", "Thể loại sách đã có!");
         }
+        if(errors.hasErrors()){
+			model.addAttribute("message", -1);
+		}
         else {
             typeBookService.addTypeBook(category);
             return "redirect:/admin/category.htm";
@@ -62,12 +62,22 @@ public class CategoryController {
         return "pages/admin/editcategory";
     }
 
-    @RequestMapping(value = "{MATL}/update/edit-category", method = RequestMethod.POST)
-    public String saveEditCategory(ModelMap model, @PathVariable("MATL") Integer MATL, @RequestParam("TENTL") String TENTL) {
-        TypeBook typebook = new TypeBook(MATL, TENTL);
-        typeBookService.updateTypeBook(typebook);
-        model.addAttribute("category", typebook);
-        return "redirect:/admin/category.htm";
+    @RequestMapping(value = "{MATL}/update", method = RequestMethod.POST)
+    public String saveEditCategory(ModelMap model, @ModelAttribute("category") TypeBook category, BindingResult errors) {
+        if(category.getTENTL().trim().length() == 0){
+            errors.rejectValue("TENTL", "category", "Vui lòng nhập thể loại sách!");
+        }
+        if(typeBookService.getTypeBookByName(category.getTENTL()) != null){
+            errors.rejectValue("TENTL", "category", "Thể loại sách đã có!");
+        }
+        if(errors.hasErrors()){
+			model.addAttribute("message", -1);
+		}
+        else {
+            typeBookService.updateTypeBook(category);
+            return "redirect:/admin/category.htm";
+        }
+        return "pages/admin/editcategory";
     }
 
     @RequestMapping(value = "{MATL}/delete")

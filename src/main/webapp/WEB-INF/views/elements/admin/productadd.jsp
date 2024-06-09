@@ -11,17 +11,17 @@
     <form:form method="POST" action="admin/product/add-product.htm" modelAttribute="product" enctype="multipart/form-data">
         <div class="product-name d-flex gap-5 mb-2">
             <form:label path="TENSACH">Tên: </form:label>
-            <form:input path="TENSACH" class="form-control" required="required"/>
+            <form:input path="TENSACH" class="form-control" />
             <form:errors path="TENSACH" class="fst-italic text-danger"/>
         </div>
         <div class="product-republish d-flex gap-5 mb-2">
             <form:label path="LANTAIBAN">Lần tái bản: </form:label>
-            <form:input path="LANTAIBAN" type="number" min="1" class="form-control" required="required"/>
+            <form:input path="LANTAIBAN" type="number" min="1" class="form-control"/>
             <form:errors path="LANTAIBAN" class="fst-italic text-danger"/>
         </div>
         <div class="product-price d-flex gap-5 mb-2">
             <form:label path="GIA">Giá: </form:label>
-            <form:input path="GIA" type="number" step="1" min="0" class="form-control" required="required"/>
+            <form:input path="GIA" type="number" step="1000" min="0" class="form-control"/>
             <form:errors path="GIA" class="fst-italic text-danger"/>
         </div>
         <div class="product-type d-flex gap-5 mb-2">
@@ -59,8 +59,18 @@
         </div>
         <div class="product-img d-flex gap-5 mb-2">
             <form:label path="ANH">Ảnh: </form:label>
-            <input type="file" name="file" placeholder="Upload image" class="form-control" accept=".jpg,.gif,.png,.pdf" required="required" />
+            <input type="file" name="file" placeholder="Upload image" class="form-control" accept=".jpg,.gif,.png,.pdf" />
         </div>
         <button class="btn btn-primary" type="submit">Save</button>
     </form:form>
+    <a href="admin/product.htm"><button class="btn btn-secondary mt-2">Quay trở về</button></a>
+    <div class="mt-2">
+        <c:if test="${message == -1}">
+            <div class="col-sm-8 alert alert-danger" role="alert">
+                Thêm thất bại!
+                <button type="button" class="rem" data-dismiss="alert"
+                    aria-label="Close">&times;</button>
+            </div>
+        </c:if>
+    </div>
 </div>
