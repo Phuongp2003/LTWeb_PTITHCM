@@ -160,7 +160,7 @@ public class BillController {
             // int flag = 0;
             if (check != null) {
                 int MAHD = check.getMAHD();
-                List<CartDetail> list = cartDetailService.getBill(user.getMAKH());
+                List<CartDetail> list = cartDetailService.getBill(cartService.getCartIdByIdCustomer(user.getMAKH()));
 
                 for (CartDetail c : list) {
 
@@ -184,6 +184,12 @@ public class BillController {
 
                         billService.addDetail(detail);
                         bookService.updateBook(book);
+                        List<CartDetail> alllist = cartDetailService.getAllCartDetail();
+                        for (CartDetail cd : alllist) {
+                            if (cd.getCartdetail_book().getSOLUONGTON() < cd.getSOLUONG()) {
+                                cartDetailService.deleteDetail(cd);
+                            }
+                        }
 
                         emailService.sendEmail(user.getEMAIL(),
                                 "Đặt hàng thành công từ Đồ án D21CQCN02-N",

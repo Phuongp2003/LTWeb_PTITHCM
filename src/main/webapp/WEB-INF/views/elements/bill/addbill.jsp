@@ -69,7 +69,7 @@
 				<form:label path="GHICHU">Ghi chú: </form:label>
 			</div>
 			<div class="bill-info-textbox">
-				<form:input path="GHICHU" required="required" />
+				<form:input path="GHICHU" />
 			</div>
 		</div>
 		<button type="submit">Thanh toán</button>

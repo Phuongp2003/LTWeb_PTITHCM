@@ -97,7 +97,7 @@
 													</c:choose>
 												</div>
 												<div class="d-flex gap-3">
-													<div class="sold">Đã bán 10</div>
+													<div class="sold">Đã bán ${book.SOLUONGBAN}/${book.SOLUONGTON}</div>
 												</div>
 											</div>
 										</div>
