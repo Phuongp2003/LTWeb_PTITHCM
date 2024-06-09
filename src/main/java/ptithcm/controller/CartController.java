@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ptithcm.bean.Cart;
 import ptithcm.bean.CartDetail;
 import ptithcm.bean.CartDetailPrimary;
+import ptithcm.bean.Customer;
 import ptithcm.service.BookService;
 import ptithcm.service.CartDetailService;
 import ptithcm.service.CartService;
+import ptithcm.service.AccountService;
 
 @Controller
 @RequestMapping("/cart")
@@ -29,6 +31,7 @@ public class CartController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private AccountService accountService;
 

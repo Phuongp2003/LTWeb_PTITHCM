@@ -51,23 +51,24 @@ public class BookController {
     ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
-    public String book(ModelMap model, @PathVariable("MASACH") int MASACH, 
-    @CookieValue(value = "uid", defaultValue = "") String uid) {
+    public String book(ModelMap model, @PathVariable("MASACH") int MASACH,
+            @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
-        
+
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
             Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
             Feedback checkCustomer = feedbackService.getFeedbackById(user.getMAKH(), MASACH);
-            
-            if(checkCustomer != null){
+
+            if (checkCustomer != null) {
                 model.addAttribute("message", 1);
             } else {
                 model.addAttribute("message", 2);
             }
-          
-            CartDetail detail = CartDetailService.getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
+
+            CartDetail detail = CartDetailService
+                    .getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
             String cmd = (detail != null) ? "update" : "add";
             model.addAttribute("cmd", cmd);
         }
@@ -91,10 +92,10 @@ public class BookController {
     }
 
     @ModelAttribute("supplierPick")
-	public List<Supplier> getSuppliers() {
-		List<Supplier> list = supplierService.getAllSuppliers();
-		return list;
-	}
+    public List<Supplier> getSuppliers() {
+        List<Supplier> list = supplierService.getAllSuppliers();
+        return list;
+    }
 
     @ModelAttribute("producerPick")
     public List<Producer> getProducers() {
@@ -119,22 +120,22 @@ public class BookController {
 
     @RequestMapping(value = "/manage/product/add-product", method = RequestMethod.POST)
     public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book product, BindingResult errors,
-    @ModelAttribute("category") TypeBook category, @RequestParam("file") MultipartFile file) {
+            @ModelAttribute("category") TypeBook category, @RequestParam("file") MultipartFile file) {
         String fileName = uploadService.saveFile(file);
-        if(fileName == null) {
+        if (fileName == null) {
             // errors.rejectValue("file", "product", "Vui lòng chọn ảnh !");
             model.addAttribute("message", -1);
         }
         product.setANH(fileName);
 
-        if(product.getTENSACH().trim().length() == 0){
+        if (product.getTENSACH().trim().length() == 0) {
             errors.rejectValue("TENSACH", "product", "Vui lòng nhập tên sách !");
         }
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("message", -1);
             return "pages/admin/addproduct";
         }
-        
+
         TypeBook type = typeBookService.getTypeBookByID(product.getTypebook().getMATL());
         Author author = authorService.getAuthorByID(product.getAuthor().getMATG());
         Producer producer = producerService.getProducerByID(product.getProducer().getMANXB());
@@ -156,22 +157,22 @@ public class BookController {
 
     @RequestMapping(value = "/manage/product/{MASACH}/update", method = RequestMethod.POST)
     public String saveEditProduct(ModelMap model, @ModelAttribute("product") Book product,
-    @RequestParam("file") MultipartFile file, BindingResult errors) {
-        if(product.getTENSACH().trim().length() == 0){
+            @RequestParam("file") MultipartFile file, BindingResult errors) {
+        if (product.getTENSACH().trim().length() == 0) {
             errors.rejectValue("TENSACH", "product", "Vui lòng nhập tên sách !");
         }
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("message", -1);
             return "redirect:/manage/product/{MASACH}/update";
         }
 
         String fileName = uploadService.saveFile(file);
-        if(fileName == null) {
+        if (fileName == null) {
             product.setANH(product.getANH());
         } else {
             product.setANH(fileName);
-        } 
-        
+        }
+
         TypeBook type = typeBookService.getTypeBookByID(product.getTypebook().getMATL());
         Author author = authorService.getAuthorByID(product.getAuthor().getMATG());
         Producer producer = producerService.getProducerByID(product.getProducer().getMANXB());
@@ -197,3 +198,4 @@ public class BookController {
         model.addAttribute("books", book);
         return "pages/admin/product";
     }
+}

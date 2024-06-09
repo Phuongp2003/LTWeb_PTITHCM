@@ -79,17 +79,17 @@ public class ForumController {
             @CookieValue(value = "role", defaultValue = "") String role,
             BindingResult errors) {
         // if(title.trim().length() == 0){
-        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
         // }
         // if(description.trim().length() == 0){
-        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
         // }
         // if(content.trim().length() == 0){
-        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
         // }
         // if(errors.hasErrors()){
-        //     model.addAttribute("message", -1);
-        //     return "pages/post/editpost";
+        // model.addAttribute("message", -1);
+        // return "pages/post/editpost";
         // }
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
@@ -125,6 +125,7 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/edit");
+        // model.addAttribute("message", "null");
         model.addAttribute("user_id", Integer.parseInt(uid));
 
         String username = "";
@@ -180,20 +181,20 @@ public class ForumController {
             @RequestParam("content") String content,
             Model model,
             @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role, 
+            @CookieValue(value = "role", defaultValue = "") String role,
             BindingResult errors) {
         // if(title.trim().length() == 0){
-        //     errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
+        // errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
         // }
         // if(description.trim().length() == 0){
-        //     errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
+        // errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
         // }
         // if(content.trim().length() == 0){
-        //     errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
+        // errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
         // }
         // if(errors.hasErrors()){
-        //     model.addAttribute("errorMessage", -1);
-        //     return "pages/post/createpost";
+        // model.addAttribute("errorMessage", -1);
+        // return "pages/post/createpost";
         // }
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         Employee employee;
@@ -273,7 +274,8 @@ public class ForumController {
         model.addAttribute("message", "Đăng bình luận thành công");
         model.addAttribute("comment", comment);
         return "pages/post/post_action";
-        }
+    }
+
     @RequestMapping(value = "post/{id}/comment/{cid}/edit-comment")
     public String createComment(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @PathVariable("id") Integer id,
@@ -314,5 +316,5 @@ public class ForumController {
         model.addAttribute("message", "Chỉnh sửa thành công");
         model.addAttribute("comment", cmt);
         return "pages/post/post_action";
-        }
+    }
 }

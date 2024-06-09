@@ -40,3 +40,15 @@ nav .navbar-brand img {
     color: white;
     background-color: gray;
 }
+
+.message-box {
+    width: 100%;
+}
+
+.message-box--button {
+    border: none;
+    background: initial;
+    backdrop-filter: contrast(0.7);
+    position: absolute;
+    right: 10px;
+}

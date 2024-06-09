@@ -402,26 +402,10 @@
 			
 			if (isEmptyField || isEmptyTextField || isMissingPostContent || isMissingContentRow) {
 				e.preventDefault();
-				alert('Bạn chưa hoàn thành bài viết, vui lòng hoàn thành trước khi đăng!');
-			}
-			
-			if (isEmptyField) {
-				alert("Có tiêu đề/tóm tắt trống!");
-				return false;
-			}
-			
-			if (isEmptyTextField) {
-				alert("Có đoạn văn trống!");
-				return false;
-			}
-			
-			if (isMissingPostContent) {
-				alert("Có khu vực bài viết được tạo ra nhưng để trống!");
-				return false;
-			}
-			
-			if (isMissingContentRow) {
-				alert("Bài viết chưa có nội dung!");
+				sendMessage(isEmptyField, "Có tiêu đề/tóm tắt trống!", "error");
+				sendMessage(isEmptyTextField, "Có đoạn văn trống!", "error");
+				sendMessage(isMissingPostContent, "Có khu vực bài viết được tạo ra nhưng để trống!", "error");
+				sendMessage(isMissingContentRow, "Bài viết chưa có nội dung!", "error");
 				return false;
 			}
 			
