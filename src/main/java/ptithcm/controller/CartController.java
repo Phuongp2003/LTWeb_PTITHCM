@@ -65,19 +65,7 @@ public class CartController {
 
     @RequestMapping(value = "/cart-detail", method = RequestMethod.POST)
     public String updateProduct(@ModelAttribute("cartdetail") CartDetail cartdetail) {
-        // int cartId = cartDetail.getCartdetail_cart().getIDGH();
-        // int productId = cartDetail.getCartdetail_book().getMASACH();
-        // CartDetail cartdetail = cartDetailService.getCartByProductId(1, 1);
         return "cartdetail";
-        // int soLuong = cartDetail.getSOLUONG();
-        // CartDetail detail = cartDetailService.getCartByProductId(cartId,
-        // productId);
-        // detail.setSOLUONG(soLuong);
-        // System.out.println("-----------------------" + detail.getSOLUONG());
-        // System.out.println("dsdsdsđ");
-        // model.addAttribute("cartbyproduct", detail);
-
-        // return "test";
     }
 
     @RequestMapping(value = "add-cart-detail")
