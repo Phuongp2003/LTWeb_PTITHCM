@@ -36,6 +36,19 @@
 		font-size: 16px;
 	}
 	
+	.input-box select {
+		width: 100%;
+		height: 100%;
+		border: 2px solid;
+		border-radius: 40px;
+		padding-left: 17px;
+		font-size: 16px;
+	}
+	
+	.input-box label {
+		font-size: 20px;
+	}
+	
 	.input-box input::placeholder {
 		color: black;
 	}
@@ -65,38 +78,38 @@
 	<form:form method="POST" action="user/register-success.htm" modelAttribute="registrationForm">
 		
 		<div class="input-box">
-			<form:label path="USERNAME"></form:label>
+			<form:label path="USERNAME">Tên người dùng</form:label>
 			<form:input type="text" path="USERNAME" placeholder="Username" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="PASSWORD"></form:label>
+			<form:label path="PASSWORD">Mật khẩu</form:label>
 			<form:input type="password" path="PASSWORD" placeholder="Password" />
 		</div>
 		
 		<!-- attribute customer -->
 		<div class="input-box">
-			<form:label path="HO"></form:label>
+			<form:label path="HO">Họ và tên đệm</form:label>
 			<form:input type="text" path="HO" placeholder="Họ" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="TEN"></form:label>
+			<form:label path="TEN">Tên</form:label>
 			<form:input type="text" path="TEN" placeholder="Tên" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="EMAIL"></form:label>
+			<form:label path="EMAIL">Địa chỉ email</form:label>
 			<form:input type="text" path="EMAIL" placeholder="Email" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="SDT"></form:label>
+			<form:label path="SDT">Số điện thoại</form:label>
 			<form:input type="text" path="SDT" placeholder="Số điện thoại" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="GIOITINH"></form:label>
+			<form:label path="GIOITINH">Giới tính</form:label>
 			<form:select path="GIOITINH">
 				<form:option value="true">Nam</form:option>
 				<form:option value="false">Nữ</form:option>
@@ -104,7 +117,7 @@
 		</div>
 		
 		<div class="input-box">
-			<form:label path="NGAYSINH"> </form:label>
+			<form:label path="NGAYSINH">Ngày sinh</form:label>
 			<form:input type="date" path="NGAYSINH" placeholder="Ngày sinh" />
 		</div>
 		

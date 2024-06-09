@@ -7,6 +7,10 @@
 		
 	}
 	
+	.input-box label {
+		font-size: 20px;
+	}
+	
 	.user-cpass {
 		background-color: lightblue;
 		text-align: center;

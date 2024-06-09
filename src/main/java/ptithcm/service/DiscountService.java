@@ -96,6 +96,9 @@ public class DiscountService {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
+            // delete all discount details
+            this.deactiveDiscountForAllBooks(discount);
+
             session.delete(discount);
             transaction.commit();
         } catch (Exception e) {
@@ -107,7 +110,7 @@ public class DiscountService {
     }
 
     @Transactional
-    @ModelAttribute("discounts")
+    @ModelAttribute("discountDetails")
     public void applyDiscount(Discount discount, Book book, Integer tile) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -123,7 +126,7 @@ public class DiscountService {
     }
 
     @Transactional
-    @ModelAttribute("discounts")
+    @ModelAttribute("discountDetails")
     public void deactiveDiscount(Discount discount, Book book) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -134,6 +137,27 @@ public class DiscountService {
             query.setParameter("book", book);
             DiscountDetail link = (DiscountDetail) query.list().get(0);
             session.delete(link);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Transactional
+    @ModelAttribute("discountDetails")
+    public void deactiveDiscountForAllBooks(Discount discount) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "from DiscountDetail where discountdetail_discount = :discount";
+            Query query = session.createQuery(hql);
+            query.setParameter("discount", discount);
+            List<DiscountDetail> list = query.list();
+            for (DiscountDetail link : list) {
+                session.delete(link);
+            }
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -154,7 +178,7 @@ public class DiscountService {
     }
 
     @Transactional
-    @ModelAttribute("discounts")
+    @ModelAttribute("discountDetails")
     public List<DiscountDetail> getDiscountDetails(Discount discount) {
         Session session = factory.getCurrentSession();
         String hql = "from DiscountDetail where discountdetail_discount = :discount";

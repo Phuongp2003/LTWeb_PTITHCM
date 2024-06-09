@@ -68,28 +68,33 @@
 <div class="discount-list container-fluid w-75">
 	<a href="manage/discount/add.htm" class="add-discount"><i class="bi bi-plus-square"></i> Thêm khuyến mãi</a>
 	<div class="discount-group">
-		<div class="discount-list row">
-			<c:forEach var="discount" items="${discounts}">
-				<div class="discount col-6">
-					<div class="admin-action d-flex">
-						<a href="manage/discount/${discount.MAKM}/remove.htm" class="delete-discount" title="Xóa khuyến mãi"><i class="bi bi-trash3"></i></a>
-						| <a href="manage/discount/${discount.MAKM}/edit.htm" class="edit-discount" title="Sửa đổi khuyến mãi"><i class="bi bi-pen"></i></a>
-						| <a href="manage/discount/${discount.MAKM}/apply.htm" class="edit-discount" title="Áp dụng khuyến mãi"><i class="bi bi-check2-all"></i></a>
-					</div>
-					<div class="discount-head">
-						<div class="discount-title fs-4">
-							<a href="manage/discount/${discount.MAKM}.htm">
-								${discount.TENKM}
-							</a>
+		<c:if test="${not empty discounts}">
+			<div class="discount-list row">
+				<c:forEach var="discount" items="${discounts}">
+					<div class="discount col-6">
+						<div class="admin-action d-flex">
+							<a href="manage/discount/${discount.MAKM}/remove.htm" class="delete-discount" title="Xóa khuyến mãi"><i class="bi bi-trash3"></i></a>
+							| <a href="manage/discount/${discount.MAKM}/edit.htm" class="edit-discount" title="Sửa đổi khuyến mãi"><i class="bi bi-pen"></i></a>
+							| <a href="manage/discount/${discount.MAKM}/apply.htm" class="edit-discount" title="Áp dụng khuyến mãi"><i class="bi bi-check2-all"></i></a>
 						</div>
-						<p>
-							Từ <span class="discount-start fs-6">${discount.NGAYBD}</span>
-							đến
-							<span class="discount-end fs-6">${discount.NGAYKT}</span>
-						</p>
+						<div class="discount-head">
+							<div class="discount-title fs-4">
+								<a href="manage/discount/${discount.MAKM}.htm">
+									${discount.TENKM}
+								</a>
+							</div>
+							<p>
+								Từ <span class="discount-start fs-6">${discount.NGAYBD}</span>
+								đến
+								<span class="discount-end fs-6">${discount.NGAYKT}</span>
+							</p>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${empty discounts}">
+			<div class="no-post-message alert alert-info">Chưa có chương trình khuyến mãi nào!</div>
+		</c:if>
 	</div>
 </div>

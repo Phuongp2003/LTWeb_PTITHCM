@@ -51,21 +51,26 @@
 
 <div class="forum-post container-fluid w-75">
 	<div class="list-post-title fs-4 fw-bold">Danh sách bài viết chưa duyệt: </div>
-	<div class="post-group">
-		<div class="post-list row">
-			<c:forEach var="post" items="${posts}">
-				<div class="post col position-relative">
-					<div class="post-head">
-						<div class="post-title fs-4">
-							<a href="manage/posts/${post.id}.htm">
-								${post.title}
-							</a>
+	<c:if test="${not empty posts}">
+		<div class="post-group">
+			<div class="post-list row">
+				<c:forEach var="post" items="${posts}">
+					<div class="post col position-relative">
+						<div class="post-head">
+							<div class="post-title fs-4">
+								<a href="manage/posts/${post.id}.htm">
+									${post.title}
+								</a>
+							</div>
+							<div class="post-author fs-6">${post.author.getFullname()}</div>
 						</div>
-						<div class="post-author fs-6">${post.author.getFullname()}</div>
+						<div class="post-content fs-5">${post.description}</div>
 					</div>
-					<div class="post-content fs-5">${post.description}</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
+				</c:forEach>
+			</div>
+	</c:if>
+	<c:if test="${empty posts}">
+		<div class="no-post-message alert alert-info">Không có bài viết nào cần duyệt!</div>
+	</c:if>
+</div>
 </div>

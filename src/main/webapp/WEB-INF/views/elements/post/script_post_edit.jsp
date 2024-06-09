@@ -146,7 +146,7 @@
 			var textBlock =
 				'<div class="post-text post-content" id="container-' + id + '-' + parentId + ' text-' + id + '">' +
 				'<div class="dragbar" style="width: 825px;">' +
-				'<div class="content-' + id + ' ctextarea" id="content-' + id + '" contenteditable="true" style="width: 100%; min-height: 30px;"> </div>' +
+				'<div class="content-' + id + ' ctextarea" id="content-' + id + '" contenteditable="true" style="width: 100%; min-height: 30px; font-size: 12px;"> </div>' +
 				'</div>' +
 				'<div class="row-element-controller">' +
 				'<div class="text-controller">' +

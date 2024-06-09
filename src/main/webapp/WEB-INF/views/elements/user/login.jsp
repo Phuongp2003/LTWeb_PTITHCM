@@ -40,6 +40,10 @@
 		font-size: 16px;
 	}
 	
+	.input-box label {
+		font-size: 20px;
+	}
+	
 	.user-login .login-btn {
 		width: 50%;
 		height: 45px;
@@ -77,12 +81,12 @@
 	<form:form method="POST" action="user/login-success.htm" modelAttribute="account">
 		
 		<div class="input-box">
-			<form:label path="USERNAME"></form:label>
+			<form:label path="USERNAME">Tên người dùng</form:label>
 			<form:input type="text" class="username-input" path="USERNAME" placeholder="Username" />
 		</div>
 		
 		<div class="input-box">
-			<form:label path="PASSWORD"></form:label>
+			<form:label path="PASSWORD">Mật khẩu</form:label>
 			<form:input type="password" class="password-input" path="PASSWORD" placeholder="Password" />
 		</div>
 		

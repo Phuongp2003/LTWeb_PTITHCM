@@ -152,7 +152,7 @@ public class DiscountController {
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You must login to delete post");
+            model.addAttribute("message", "Cần đăng nhập để thực hiện chức năng này");
             return "pages/post/post_action";
         }
 
@@ -162,9 +162,10 @@ public class DiscountController {
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("success", 200);
-        model.addAttribute("message", "Delete post success");
+        model.addAttribute("message", "Xóa chương trình khuyến mãi thành công!");
+        
         BreadCrumb breadCrumb = new BreadCrumb();
-        breadCrumb.setCurrentLink("", "Thêm khuyến mãi \"" + discount.getTENKM() + "\" thành công");
+        breadCrumb.setCurrentLink("", "Xóa khuyến mãi \"" + discount.getTENKM() + "\" thành công");
         breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
         breadCrumb.addPreLink("manage/discount.htm", "Danh sách khuyến mãi");
         model.addAttribute("BC", breadCrumb);

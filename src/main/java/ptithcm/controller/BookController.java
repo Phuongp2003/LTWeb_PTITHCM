@@ -68,9 +68,8 @@ public class BookController {
                 model.addAttribute("message", 2);
             }
 
-            detail = CartDetailService
+            detail = cartDetailService
                     .getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
-
 
         }
         String cmd = (detail != null) ? "update" : "add";
