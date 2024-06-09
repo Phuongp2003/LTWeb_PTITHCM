@@ -16,13 +16,16 @@
 			<div class="offcanvas-body">
 				<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="admin/dashboard.htm">Dashboard</a>
+						<a href="manage/discount.htm" class="nav-link">Quản lý khuyến mãi</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="manage/category.htm">Thể loại sách</a>
+						<a href="manage/posts.htm" class="nav-link">Kiểm duyệt bài viết</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="manage/product.htm">Sách</a>
+						<a href="manage/category.htm" class="nav-link">Kiểm duyệt thể loại sách</a>
+					</li>
+					<li class="nav-item">
+						<a href="manage/product.htm" class="nav-link">Kiểm duyệt sách</a>
 					</li>
 				</ul>
 			</div>
