@@ -26,7 +26,6 @@
 	<div class="user-dashboard container-fluid w-100 fs-4 m-auto d-flex">
 		<unav class="user-navbar d-flex flex-column fs-6">
 			<a href="user/${account.ID}/posts.htm" class="posts-user fw-bold">Danh sách bài viết</a>
-			<a href="user/${account.ID}/books.htm" class="books-user fw-bold">Danh sách sách</a>
 		</unav>
 		<div class="user-info w-100">
 			<div class="account-info">

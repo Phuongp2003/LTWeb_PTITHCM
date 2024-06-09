@@ -8,9 +8,10 @@
 	</head>
 	
 	<body>
-		<jsp:include page="${elements}/admin/navbar.jsp" />
+		<jsp:include page="${elements}/navbar.jsp" />
+		<jsp:include page="${partial}/bread_crumb.jsp" />
 		<jsp:include page="${elements}/admin/categoryedit.jsp" />
 	</body>
-	</body>
+	<jsp:include page="${partial}/footer.jsp" />
 	
 </html>

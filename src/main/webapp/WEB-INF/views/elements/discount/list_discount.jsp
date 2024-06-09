@@ -2,33 +2,47 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page pageEncoding="UTF-8"%>
 <style>
+	a {
+		text-decoration: none;
+	}
+	
 	.discount-list {
-		border-top: brown;
-		border-top-style: solid;
-		border-top-width: 2px;
 		padding-top: 20px;
 	}
 	
 	.discount-list .discount-list {
-		border: brown;
+		border: black;
 		border-style: solid;
 		border-width: .5px;
+		border-radius: 5px;
+		border-top-left-radius: 0;
 		padding: 20px 10px;
 	}
 	
 	.discount-list .discount {
-		width: 220px;
+		width: 48.95%;
 		min-width: 220px;
 		margin: 3px calc(20px / 3);
-		border: brown;
+		border: black;
+		border-radius: 5px;
 		border-style: solid;
 		border-width: .5px;
-		padding-top: 20px;
+		padding-top: 10px;
+		position: relative;
+	}
+	
+	.discount-list .admin-action {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	
+	.discount-list .admin-action>* {
+		margin: 0 3px;
 	}
 	
 	.discount-list .discount .discount-head {
 		margin-bottom: 10px;
-		border-bottom: .3px brown solid;
 	}
 	
 	@media (max-width: 400px) {
@@ -52,19 +66,19 @@
 </style>
 
 <div class="discount-list container-fluid w-75">
-	<a href="discount/add.htm" class="add-discount">Add</a>
+	<a href="manage/discount/add.htm" class="add-discount"><i class="bi bi-plus-square"></i> Thêm khuyến mãi</a>
 	<div class="discount-group">
 		<div class="discount-list row">
 			<c:forEach var="discount" items="${discounts}">
-				<div class="admin-action d-flex">
-					<a href="discount/${discount.MAKM}/remove.htm" class="delete-discount">Delete</a>
-					<a href="discount/${discount.MAKM}/edit.htm" class="edit-discount">Edit </a>
-					<a href="discount/${discount.MAKM}/apply.htm" class="edit-discount">Apply </a>
-				</div>
-				<div class="discount col">
+				<div class="discount col-6">
+					<div class="admin-action d-flex">
+						<a href="manage/discount/${discount.MAKM}/remove.htm" class="delete-discount" title="Xóa khuyến mãi"><i class="bi bi-trash3"></i></a>
+						| <a href="manage/discount/${discount.MAKM}/edit.htm" class="edit-discount" title="Sửa đổi khuyến mãi"><i class="bi bi-pen"></i></a>
+						| <a href="manage/discount/${discount.MAKM}/apply.htm" class="edit-discount" title="Áp dụng khuyến mãi"><i class="bi bi-check2-all"></i></a>
+					</div>
 					<div class="discount-head">
 						<div class="discount-title fs-4">
-							<a href="discount/${discount.MAKM}.htm">
+							<a href="manage/discount/${discount.MAKM}.htm">
 								${discount.TENKM}
 							</a>
 						</div>
@@ -74,7 +88,6 @@
 							<span class="discount-end fs-6">${discount.NGAYKT}</span>
 						</p>
 					</div>
-					<div class="discount-book"></div>
 				</div>
 			</c:forEach>
 		</div>

@@ -7,7 +7,7 @@
 	}
 </style>
 
-<div class="product-add container-fluid mt-2" style="width: 50%;">
+<div class="product-add container-fluid mt-2" style="width: 50%;border: Black solid 1px; border-radius: 5px;">
     <form:form method="POST" action="manage/product/add-product.htm" modelAttribute="product" enctype="multipart/form-data">
         <div class="product-name d-flex gap-5 mb-2">
             <form:label path="TENSACH">Tên: </form:label>

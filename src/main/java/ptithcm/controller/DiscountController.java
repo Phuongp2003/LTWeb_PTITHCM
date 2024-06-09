@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ptithcm.bean.BreadCrumb;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Discount;
 import ptithcm.bean.DiscountDetail;
@@ -39,8 +40,12 @@ public class DiscountController {
         }
 
         List<Discount> discounts = discountService.getAllDiscounts();
-
         model.addAttribute("discounts", discounts);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Danh sách khuyến mãi");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        model.addAttribute("BC", breadCrumb);
         return "pages/discount/discount";
     }
 
@@ -59,6 +64,13 @@ public class DiscountController {
 
         model.addAttribute("discountd", discountDetail);
         model.addAttribute("discount", discount);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chi tiết khuyến mãi: " + discount.getTENKM());
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/discount.htm", "Danh sách khuyến mãi");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/discount/discount_detail";
     }
 
@@ -87,6 +99,12 @@ public class DiscountController {
         model.addAttribute("user_name", username);
         Discount discount = new Discount();
         model.addAttribute("discount", discount);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Thêm khuyến mãi");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/discount.htm", "Danh sách khuyến mãi");
+        model.addAttribute("BC", breadCrumb);
         return "pages/discount/discount_add";
     }
 
@@ -117,6 +135,11 @@ public class DiscountController {
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create discount success");
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Thêm khuyến mãi \"" + TENKM + "\" thành công");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/discount.htm", "Danh sách khuyến mãi");
+        model.addAttribute("BC", breadCrumb);
         return "pages/post/post_action";
     }
 
@@ -140,6 +163,11 @@ public class DiscountController {
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("success", 200);
         model.addAttribute("message", "Delete post success");
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Thêm khuyến mãi \"" + discount.getTENKM() + "\" thành công");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/discount.htm", "Danh sách khuyến mãi");
+        model.addAttribute("BC", breadCrumb);
         return "pages/post/post_action";
     }
 
