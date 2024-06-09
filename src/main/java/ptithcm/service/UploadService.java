@@ -62,6 +62,14 @@ public class UploadService {
             Path dest = Paths.get(prijectDir + imgPath);
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
+            Path source = Paths.get(prijectDir + "default.png");
+            Path dest = Paths.get(prijectDir + imgPath);
+            try {
+                Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("Error copying default image");
+            }
             e.printStackTrace();
             System.out.println("Error getting image");
         }

@@ -76,20 +76,6 @@ public class BillController {
 
     }
 
-    // @RequestMapping(value = "admin/bill/edit")
-    // public String editBill(ModelMap model, @CookieValue(value = "uid",
-    // defaultValue = "") String uid,
-    // @CookieValue(value = "role", defaultValue = "") String role) {
-    // if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid))
-    // != null
-    // && role.equals("employee")) {
-    // Bill bill = new Bill();
-    // model.addAttribute("bill", bill);
-    // return "pages/admin/billbystatus";
-    // }
-    // return "redirect:/user/login.htm";
-    // }
-
     @RequestMapping(value = "admin/bill/{status}/edit")
     public String checkBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role,
@@ -121,30 +107,13 @@ public class BillController {
 
     }
 
-    // @RequestMapping(value = "admin/bill")
-    // public String showStatus(ModelMap model, @CookieValue(value = "uid",
-    // defaultValue = "") String uid) {
-
-    // if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid))
-    // != null) {
-    // List<Status> statuslist = statusService.getAllStatus();
-    // // model.addAttribute("billlist", billlist);
-    // List<Bill> allbill = billService.getAllBill();
-    // model.addAttribute("statuslist", statuslist);
-    // model.addAttribute("allbill", allbill);
-
-    // return "pages/admin/billbystatus";
-    // }
-    // return "redirect:/user/login.htm";
-
-    // }
-
     @RequestMapping(value = "bill/check-out")
     public String addBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
             Bill bill = new Bill();
             model.addAttribute("bill", bill);
-
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            model.addAttribute("user", user);
             return "pages/bill/addbill";
         }
         return "redirect:/user/login.htm";
