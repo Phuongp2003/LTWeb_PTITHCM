@@ -107,7 +107,7 @@ public class BookController {
         return "pages/admin/product";
     }
 
-    @RequestMapping(value = "/admin/product/add-product",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/product/add-product")
     public String addProduct(ModelMap model) {
         Book book = new Book();
         model.addAttribute("product", book);
@@ -115,67 +115,68 @@ public class BookController {
     }
 
     @RequestMapping(value = "/admin/product/add-product", method = RequestMethod.POST)
-    public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book book, @ModelAttribute("category") TypeBook category,
-    @RequestParam("file") MultipartFile file, BindingResult errors) {
-
-        if(book.getLANTAIBAN() <= 0) {
-            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
-        }
-        if(book.getGIA() <= 0) {
-			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
-		}
-
+    public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book product, BindingResult errors,
+    @ModelAttribute("category") TypeBook category, @RequestParam("file") MultipartFile file) {
         String fileName = uploadService.saveFile(file);
         if(fileName == null) {
-            model.addAttribute("message", "File upload failed. Please try again.");
-            return "admin/product/addproduct";
+            // errors.rejectValue("file", "product", "Vui lòng chọn ảnh !");
+            model.addAttribute("message", -1);
         }
-        book.setANH(fileName);
+        product.setANH(fileName);
+
+        if(product.getTENSACH().trim().length() == 0){
+            errors.rejectValue("TENSACH", "product", "Vui lòng nhập tên sách !");
+        }
+        if(errors.hasErrors()){
+            model.addAttribute("message", -1);
+            return "pages/admin/addproduct";
+        }
         
-        TypeBook type = typeBookService.getTypeBookByID(book.getTypebook().getMATL());
-        Author author = authorService.getAuthorByID(book.getAuthor().getMATG());
-        Producer producer = producerService.getProducerByID(book.getProducer().getMANXB());
-        book.setTypebook(type);
-        book.setAuthor(author);
-        book.setProducer(producer);
-        bookService.addBook(book);
-        model.addAttribute("product", book);
+        TypeBook type = typeBookService.getTypeBookByID(product.getTypebook().getMATL());
+        Author author = authorService.getAuthorByID(product.getAuthor().getMATG());
+        Producer producer = producerService.getProducerByID(product.getProducer().getMANXB());
+        product.setTypebook(type);
+        product.setAuthor(author);
+        product.setProducer(producer);
+        bookService.addBook(product);
+        model.addAttribute("product", product);
         return "redirect:/admin/product.htm";
     }
 
     @RequestMapping(value = "/admin/product/{MASACH}/update")
     public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
-        Book book = new Book();
+        Book book = bookService.getBookByID(MASACH);
         uploadService.getImage(book);
         model.addAttribute("product", book);
         return "pages/admin/editproduct";
     }
 
     @RequestMapping(value = "/admin/product/{MASACH}/update", method = RequestMethod.POST)
-    public String saveEditProduct(ModelMap model, @ModelAttribute("book") Book book,
+    public String saveEditProduct(ModelMap model, @ModelAttribute("product") Book product,
     @RequestParam("file") MultipartFile file, BindingResult errors) {
-        if(book.getLANTAIBAN() <= 0) {
-            errors.rejectValue("LANTAIBAN", "product", "Lần tái bản phải lớn hơn 0 !");
+        if(product.getTENSACH().trim().length() == 0){
+            errors.rejectValue("TENSACH", "product", "Vui lòng nhập tên sách !");
         }
-        if(book.getGIA() <= 0) {
-			errors.rejectValue("GIA", "product", "Đơn giá phải lớn hơn 0 !");
-		}
+        if(errors.hasErrors()){
+            model.addAttribute("message", -1);
+            return "redirect:/admin/product/{MASACH}/update";
+        }
 
         String fileName = uploadService.saveFile(file);
         if(fileName == null) {
-            model.addAttribute("message", "File upload failed. Please try again.");
-            return "admin/product/addproduct";
-        }
-        book.setANH(fileName);
+            product.setANH(product.getANH());
+        } else {
+            product.setANH(fileName);
+        } 
         
-        TypeBook type = typeBookService.getTypeBookByID(book.getTypebook().getMATL());
-        Author author = authorService.getAuthorByID(book.getAuthor().getMATG());
-        Producer producer = producerService.getProducerByID(book.getProducer().getMANXB());
-        book.setTypebook(type);
-        book.setAuthor(author);
-        book.setProducer(producer);
-        bookService.updateBook(book);
-        model.addAttribute("product", book);
+        TypeBook type = typeBookService.getTypeBookByID(product.getTypebook().getMATL());
+        Author author = authorService.getAuthorByID(product.getAuthor().getMATG());
+        Producer producer = producerService.getProducerByID(product.getProducer().getMANXB());
+        product.setTypebook(type);
+        product.setAuthor(author);
+        product.setProducer(producer);
+        bookService.updateBook(product);
+        model.addAttribute("product", product);
         return "redirect:/admin/product.htm";
     }
 

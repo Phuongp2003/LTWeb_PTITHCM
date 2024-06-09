@@ -4,39 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Embeddable
 public class FeedbackPrimary implements Serializable {
-    // @ManyToOne
-    // @JoinColumn(name = "MAKH")
-    // private Customer customer;
-
-    // @ManyToOne
-    // @JoinColumn(name = "MASACH")
-    // private Book book;
-
-    // public FeedbackPrimary(){}
-
-    // public FeedbackPrimary(Customer customer, Book book) {
-    //     this.customer = customer;
-    //     this.book = book;
-    // }
-    
-    // public Customer getCustomer() {
-    //     return customer;
-    // }
-    // public void setCustomer(Customer customer) {
-    //     this.customer = customer;
-    // }
-    // public Book getBook() {
-    //     return book;
-    // }
-    // public void setBook(Book book) {
-    //     this.book = book;
-    // }
-
     @Column(name="MAKH")
     int MAKH;
 
