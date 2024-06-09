@@ -3,6 +3,7 @@ package ptithcm.controller;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
+import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,11 @@ public class ForumController {
     @RequestMapping(value = "post/{id}")
     public String post(Model model, @PathVariable("id") Integer id,
             @CookieValue(value = "uid", defaultValue = "") String uid) {
+        if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
+            Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+            model.addAttribute("user_id", Integer.parseInt(uid));
+            model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        }
         Post post;
         post = postServices.getPostByID(id);
         model.addAttribute("title", "PTITHCM Forum");
@@ -60,8 +66,10 @@ public class ForumController {
         model.addAttribute("type_2", "post/show");
 
         List<Comment> comments = commentService.getCommentsByIDPost(id);
+        Comment cmt = new Comment();
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
+        model.addAttribute("comment", cmt);
         return "pages/post/post";
     }
 
@@ -267,8 +275,50 @@ public class ForumController {
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
-        model.addAttribute("message", "Create comment success");
+        model.addAttribute("message", "Đăng bình luận thành công");
+        model.addAttribute("comment", comment);
         return "pages/post/post_action";
+        }
+    @RequestMapping(value = "post/{id}/comment/{cid}/edit-comment")
+    public String createComment(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+            @PathVariable("id") Integer id,
+            @PathVariable("cid") Integer cid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Post post;
+        post = postServices.getPostByID(id);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("type_2", "post/show");
+
+        List<Comment> comments = commentService.getCommentsByIDPost(id);
+        Comment cmt = commentService.getCommentByID(cid);
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        model.addAttribute("comment", cmt);
+        return "pages/post/post";
     }
 
+    @RequestMapping(value = "post/{id}/comment/{cid}/edit-success", method = RequestMethod.POST)
+    public String saveEditedComment(
+            @RequestParam("content") String content,
+            @PathVariable("id") Integer id,
+            @PathVariable("cid") Integer cid,
+            Model model,
+            @CookieValue(value = "uid", defaultValue = "") String uid,
+            @CookieValue(value = "role", defaultValue = "") String role) {
+        Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
+        Employee employee;
+        Comment cmt = commentService.getCommentByID(cid);
+        cmt.setContent(content);
+
+        commentService.editComment(cmt);
+        model.addAttribute("title", "PTITHCM Forum");
+        model.addAttribute("type", "forum");
+        model.addAttribute("user_id", Integer.parseInt(uid));
+        model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+        model.addAttribute("success", 200);
+        model.addAttribute("message", "Chỉnh sửa thành công");
+        model.addAttribute("comment", cmt);
+        return "pages/post/post_action";
+        }
 }
