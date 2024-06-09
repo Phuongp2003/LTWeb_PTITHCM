@@ -79,13 +79,20 @@ public class BillController {
     }
 
     // @RequestMapping(value = "admin/bill/edit")
-    // public String editBill(ModelMap model) {
+    // public String editBill(ModelMap model, @CookieValue(value = "uid",
+    // defaultValue = "") String uid,
+    // @CookieValue(value = "role", defaultValue = "") String role) {
+    // if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid))
+    // != null
+    // && role.equals("employee")) {
     // Bill bill = new Bill();
     // model.addAttribute("bill", bill);
     // return "pages/admin/billbystatus";
     // }
+    // return "redirect:/user/login.htm";
+    // }
 
-    @RequestMapping(value = "admin/bill/edit")
+    @RequestMapping(value = "admin/bill/{status}/edit")
     public String checkBill(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role,
             @RequestParam("MAHD") int MAHD, @RequestParam("status") int status) {
@@ -98,16 +105,19 @@ public class BillController {
 
             List<Status> statuss = statusService.getAllStatus();
             int old_status_id = bill.getStatus().getMATT();
-            if (status + 1 < statuss.size()) {
-                bill.setStatus((Status) statuss.get(status + 1));
+            if (status < statuss.size() - 1) {
+                bill.setStatus(statuss.get(status));
 
                 bill.setBill_employee(e);
                 billService.updateBill(bill);
-                model.addAttribute("billupdate", bill);
+                // model.addAttribute("bill", bill);
             }
             int tt = status + 1;
-
-            return "redirect:admin/bill/-1.htm";
+            List<Bill> bills = billService.getBillByStatus(status + 1);
+            List<Status> statuslist = statusService.getAllStatus();
+            model.addAttribute("billlist", bills);
+            model.addAttribute("statuslist", statuslist);
+            return "pages/admin/billbystatus";
         }
         return "redirect:/user/login.htm";
 

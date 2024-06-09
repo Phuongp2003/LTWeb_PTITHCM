@@ -37,7 +37,7 @@ public class BillService {
     @ModelAttribute("bill")
     public Bill getBillByID(int MAHD) {
         Session session = factory.getCurrentSession();
-        String hql = "FROM Bill  WHERE MAHD = :MAHD";
+        String hql = "FROM Bill b WHERE b.MAHD = :MAHD";
         Query query = session.createQuery(hql);
         query.setParameter("MAHD", MAHD);
         Bill list = (Bill) query.list().get(0);
@@ -125,7 +125,7 @@ public class BillService {
     }
 
     @Transactional
-    @ModelAttribute("billupdate")
+    @ModelAttribute("bill")
     public Bill updateBill(Bill bill) {
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
