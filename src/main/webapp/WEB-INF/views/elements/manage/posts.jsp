@@ -20,6 +20,12 @@
 		padding-top: 20px;
 	}
 	
+	@media (max-width: 1255px) {
+		.post-place {
+			width: 100%;
+		}
+	}
+	
 	.post-content {
 		padding-bottom: 10px;
 	}

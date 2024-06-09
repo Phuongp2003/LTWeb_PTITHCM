@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <style>
+
+
   .product-detail .wrapper {
     margin-bottom: 0.5rem;
   }
@@ -127,6 +129,7 @@
         <div class="card-header">
           <h5 class="card-title text-center">Sản phẩm tương tự</h5>
         </div>
+
 
         <div class="row gap-0">
           <c:forEach var="book" items="${books}">
@@ -259,6 +262,7 @@
       </div>
     </div>
   </div>
+
 
 </div>
 <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>

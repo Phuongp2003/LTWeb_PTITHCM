@@ -18,7 +18,7 @@ public class Post {
     @Column(name = "NOIDUNG")
     private String content;// property
     @Column(name = "MOTA")
-    private String desciption;// property
+    private String description;// property
     @Column(name = "LYDOTUCHOI")
     private String rejectReason;// property
     @ManyToOne
@@ -40,7 +40,7 @@ public class Post {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.desciption = description;
+        this.description = description;
         this.author = author;
         this.post_employee = employee;
         this.THOIGIANLAP = new Date();
@@ -71,19 +71,19 @@ public class Post {
     }
 
     public String getDescription() {
-        return desciption;
+        return description;
     }
 
     public void setDescription(String description) {
-        this.desciption = description;
+        this.description = description;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDesrciption() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDesrciption(String description) {
+        this.description = description;
     }
 
     public String getRejectReason() {
@@ -96,7 +96,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + desciption
+        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", description=" + description
                 + ", customer=" + author + ", employee=" + post_employee + "]";
     }
 

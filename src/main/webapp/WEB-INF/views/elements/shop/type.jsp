@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <div class="shop container-fluid mt-4" style="width: 80%;">
+
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5">
       <nav aria-label="breadcrumb">
@@ -123,3 +124,4 @@
     }
   });
 </script>
+

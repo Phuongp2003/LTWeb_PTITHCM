@@ -27,6 +27,9 @@
 	<div class="user-dashboard container-fluid w-100 fs-4 m-auto d-flex">
 		<unav class="user-navbar d-flex flex-column fs-6">
 			<a href="user/${account.ID}/edit-info.htm" class="c-info fw-bold">Thay đổi thông tin</a>
+			<a href="user/change-password.htm" class="c-password fw-bold">Thay đổi mật khẩu</a>
+			<a href="user/logout.htm" class="logout fw-bold">Đăng xuất</a>
+			<div class="split" style="border: 1px black dashed; width: 75%; margin: 5px 0;"></div>
 			<a href="user/${account.ID}/posts.htm" class="post-manage fw-bold">Quản lý bài viết</a>
 			<c:if test="${user_type == 'employee'}">
 				<a href="manage/discount.htm" class="fw-bold">Quản lý khuyến mãi</a>
@@ -35,8 +38,6 @@
 				<a href="manage/product.htm" class="fw-bold">Quản lý sản phẩm</a>
 				<a href="manage/bill/-1.htm" class="fw-bold">Quản lý đơn hàng</a>
 			</c:if>
-			<a href="user/change-password.htm" class="c-password fw-bold">Thay đổi mật khẩu</a>
-			<a href="user/logout.htm" class="logout fw-bold">Đăng xuất</a>
 		</unav>
 		<div class="user-info w-100">
 			<div class="account-info">

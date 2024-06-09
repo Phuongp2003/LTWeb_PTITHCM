@@ -186,8 +186,10 @@ public class BillController {
                         bookService.updateBook(book);
                         List<CartDetail> alllist = cartDetailService.getAllCartDetail();
                         for (CartDetail cd : alllist) {
+
                             Book b = bookService.getBookByID(cd.getCartdetail_book().getMASACH());
                             if (b.getSOLUONGTON() < cd.getSOLUONG()) {
+
                                 cartDetailService.deleteDetail(cd);
                             }
                         }
