@@ -54,6 +54,7 @@ public class BookController {
     public String book(ModelMap model, @PathVariable("MASACH") int MASACH,
             @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
+        List<Book> books = bookService.getBooksByCategory(book.getTypebook().getMATL());
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
         CartDetail detail = null;
@@ -67,14 +68,15 @@ public class BookController {
                 model.addAttribute("message", 2);
             }
 
-            CartDetail detail = cartDetailService
-                    .getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
-
+            CartDetail detail = cartDetailService.getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
+            String cmd = (detail != null) ? "update" : "add";
+            model.addAttribute("cmd", cmd);
         }
         String cmd = (detail != null) ? "update" : "add";
         model.addAttribute("cmd", cmd);
         // model.addAttribute("cmd", "add");
         model.addAttribute("book", book);
+        model.addAttribute("books", books);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
         uploadService.getImage(book);
@@ -181,7 +183,7 @@ public class BookController {
         }
         if (errors.hasErrors()) {
             model.addAttribute("message", -1);
-            return "redirect:/manage/product/{MASACH}/update";
+            return "pages/admin/editproduct";
         }
 
         String fileName = uploadService.saveFile(file);
