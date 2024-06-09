@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ptithcm.bean.BreadCrumb;
 import ptithcm.bean.Comment;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Employee;
@@ -44,6 +45,10 @@ public class ForumController {
         model.addAttribute("owner", true);
         List<Post> post = postServices.getPostsApproved();
         model.addAttribute("posts", post);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("forum.htm", "Bài viết");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
         return "pages/forum/forum";
     }
 
@@ -66,6 +71,13 @@ public class ForumController {
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
         model.addAttribute("comment", cmt);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", post.getTitle());
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post";
     }
 
@@ -76,21 +88,7 @@ public class ForumController {
             @RequestParam("description") String description,
             @RequestParam("content") String content,
             Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role,
-            BindingResult errors) {
-        // if(title.trim().length() == 0){
-        // errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
-        // }
-        // if(description.trim().length() == 0){
-        // errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
-        // }
-        // if(content.trim().length() == 0){
-        // errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
-        // }
-        // if(errors.hasErrors()){
-        // model.addAttribute("message", -1);
-        // return "pages/post/editpost";
-        // }
+            @CookieValue(value = "role", defaultValue = "") String role) {
         Post oPost = postServices.getPostByID(id);
         Post post = new Post(id, title, content, description, oPost.getAuthor(), null);
         Employee employee;
@@ -105,6 +103,12 @@ public class ForumController {
         model.addAttribute("type", "forum");
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chỉnh sửa bài viết " + id + " thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
 
         model.addAttribute("success", 200);
         model.addAttribute("message", "Update post success");
@@ -140,6 +144,13 @@ public class ForumController {
         model.addAttribute("user_name", username);
         Post post = new Post();
         model.addAttribute("post", post);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Tạo bài viết");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/createpost";
     }
 
@@ -172,6 +183,13 @@ public class ForumController {
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
 
         model.addAttribute("post", post);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chỉnh sửa bài viết " + post.getId());
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/editpost";
     }
 
@@ -181,21 +199,7 @@ public class ForumController {
             @RequestParam("content") String content,
             Model model,
             @CookieValue(value = "uid", defaultValue = "") String uid,
-            @CookieValue(value = "role", defaultValue = "") String role,
-            BindingResult errors) {
-        // if(title.trim().length() == 0){
-        // errors.rejectValue("title", "post", "Vui lòng nhập tiêu đề !");
-        // }
-        // if(description.trim().length() == 0){
-        // errors.rejectValue("description", "post", "Vui lòng nhập mô tả !");
-        // }
-        // if(content.trim().length() == 0){
-        // errors.rejectValue("content", "post", "Vui lòng nhập nội dung !");
-        // }
-        // if(errors.hasErrors()){
-        // model.addAttribute("errorMessage", -1);
-        // return "pages/post/createpost";
-        // }
+            @CookieValue(value = "role", defaultValue = "") String role) {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
         Employee employee;
         Post post;
@@ -213,6 +217,13 @@ public class ForumController {
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
         model.addAttribute("message", "Create post success");
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Tạo bài viết thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post_action";
     }
 
@@ -248,6 +259,13 @@ public class ForumController {
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
         model.addAttribute("message", "Delete post success");
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Xóa bài viết " + id + " thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post_action";
     }
 
@@ -273,6 +291,14 @@ public class ForumController {
         model.addAttribute("success", 200);
         model.addAttribute("message", "Đăng bình luận thành công");
         model.addAttribute("comment", comment);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Đăng bình luận thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        breadCrumb.addPreLink("forum/post/" + id + ".htm", postServices.getPostByID(id).getTitle());
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post_action";
     }
 
@@ -286,12 +312,24 @@ public class ForumController {
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");
         model.addAttribute("type_2", "post/show");
+        model.addAttribute("user_id", Integer.parseInt(uid));
+        model.addAttribute("user_name",
+                accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer().getHO()
+                        + " " + accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer().getTEN());
 
         List<Comment> comments = commentService.getCommentsByIDPost(id);
         Comment cmt = commentService.getCommentByID(cid);
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
         model.addAttribute("comment", cmt);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chỉnh sửa bình luận");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        breadCrumb.addPreLink("forum/post/" + id + ".htm", postServices.getPostByID(id).getTitle());
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post";
     }
 
@@ -315,6 +353,14 @@ public class ForumController {
         model.addAttribute("success", 200);
         model.addAttribute("message", "Chỉnh sửa thành công");
         model.addAttribute("comment", cmt);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chỉnh sửa bình luận thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("forum.htm", "Bài viết");
+        breadCrumb.addPreLink("forum/post/" + id + ".htm", postServices.getPostByID(id).getTitle());
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/post_action";
     }
 }
