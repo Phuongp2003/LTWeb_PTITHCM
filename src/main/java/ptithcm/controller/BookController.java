@@ -56,7 +56,7 @@ public class BookController {
         Book book = bookService.getBookByID(MASACH);
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
-
+        CartDetail detail = null;
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
             Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
             Feedback checkCustomer = feedbackService.getFeedbackById(user.getMAKH(), MASACH);
@@ -69,9 +69,11 @@ public class BookController {
 
             CartDetail detail = cartDetailService
                     .getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
-            String cmd = (detail != null) ? "update" : "add";
-            model.addAttribute("cmd", cmd);
+
         }
+        String cmd = (detail != null) ? "update" : "add";
+        model.addAttribute("cmd", cmd);
+        // model.addAttribute("cmd", "add");
         model.addAttribute("book", book);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);

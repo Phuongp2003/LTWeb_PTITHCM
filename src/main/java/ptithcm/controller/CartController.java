@@ -51,8 +51,8 @@ public class CartController {
                 model.addAttribute("totalitem", 0);
                 model.addAttribute("totalmoney", 0.0);
             } else {
-                int number = cartDetailService.getTotalItem(userId);
-                double money = cartDetailService.getTotalMoney(userId);
+                int number = cartDetailService.getTotalItem(cart.getIDGH());
+                double money = cartDetailService.getTotalMoney(cart.getIDGH());
                 model.addAttribute("cartdetail", cartdetail);
                 model.addAttribute("totalitem", number);
                 model.addAttribute("totalmoney", money);
@@ -127,8 +127,9 @@ public class CartController {
             int cart_id = cart.getIDGH();
             ///////////////////////////////
             CartDetail old = cartDetailService.getCartDetailByProductId(cart_id, MASACH);
+
             int oldSL = old.getSOLUONG();
-            int SL = SOLUONG + oldSL;
+            int SL = oldSL + SOLUONG;
             //////////////////////////
             CartDetailPrimary key = new CartDetailPrimary(cart_id, MASACH);
             key.setIDGH(cart.getIDGH());
