@@ -67,10 +67,11 @@
 					</div>
 					<div class="d-flex gap-3">
 						<a href="#" class="btn btn-danger">Mua ngay</a>
-						<form:form action="cart/add-cart-detail.htm" modelAttribute="detail">
+						<form:form action="cart/${cmd}-cart-detail.htm" modelAttribute="detail">
 							<input type="hidden" name="MASACH" value="${book.MASACH}">
 							<input type="hidden" name="DONGIA" value="${book.GIA}">
 							<input type="hidden" id="form-quantity" name="SOLUONG" value="1">
+							<input type="hidden" name="CHON" value="0">
 							<button type="submit" class="btn btn-primary">Thêm vào giỏ</button>
 						</form:form>
 					</div>

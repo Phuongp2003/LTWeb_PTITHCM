@@ -85,21 +85,20 @@ public class CartDetailService {
 
     @Transactional
     @ModelAttribute("totalitem")
-    public int getTotalItem(int userId) {
+    public int getTotalItem(int cartId) {
         // Session session = factory.getCurrentSession();
-        // String hql = "SELECT cd.cart_customer.MAKH, SUM(cd.SOLUONG) FROM CartDetail
-        // cd WHERE cd.cart_customer.MAKH = :id GROUP BY cd.cart_customer.MAKH";
+        // String hql = "SELECT cd.cartdetail_cart, SUM(cd.SOLUONG) " +
+        // "FROM CartDetail cd " +
+        // "WHERE cd.cartdetail_cart.IDGH = :id " +
+        // "GROUP BY cd.cartdetail_cart";
         // Query query = session.createQuery(hql);
 
-        // query.setParameter("id", userId);
+        // query.setParameter("id", cartId);
         // int num = (int) query.list().get(0);
-        // if (query.list().get(0) != null) {
-        // System.out.println(num);
-        // return num;
-        // }
 
-        // return -1;
-        List<CartDetail> list = getCartDetail(userId);
+        // return num;
+
+        List<CartDetail> list = getCartDetail(cartId);
         int num = 0;
         for (CartDetail detail : list) {
             num += detail.getSOLUONG();

@@ -13,7 +13,8 @@ public class Book {
 	private int LANTAIBAN;// property
 	private Float GIA;// property
 	private String ANH;// property
-
+	private int SOLUONGTON;// property
+	private int SOLUONGBAN;// property
 	@ManyToOne
 	@JoinColumn(name = "MATL")
 	private TypeBook typebook;// property
@@ -24,7 +25,7 @@ public class Book {
 
 	@ManyToOne
 	@JoinColumn(name = "MANCC")
-	private Supplier supplier;//property
+	private Supplier supplier;// property
 
 	@ManyToOne
 	@JoinColumn(name = "MANXB")
@@ -51,8 +52,32 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH, 
-	TypeBook typebook, Author author, Supplier supplier, Producer producer) {
+	public void setMASACH(int mASACH) {
+		MASACH = mASACH;
+	}
+
+	public void setLANTAIBAN(int lANTAIBAN) {
+		LANTAIBAN = lANTAIBAN;
+	}
+
+	public int getSOLUONGTON() {
+		return SOLUONGTON;
+	}
+
+	public void setSOLUONGTON(int sOLUONGTON) {
+		SOLUONGTON = sOLUONGTON;
+	}
+
+	public int getSOLUONGBAN() {
+		return SOLUONGBAN;
+	}
+
+	public void setSOLUONGBAN(int sOLUONGBAN) {
+		SOLUONGBAN = sOLUONGBAN;
+	}
+
+	public Book(Integer mASACH, String tENSACH, Integer lANTAIBAN, Float gIA, String aNH,
+			TypeBook typebook, Author author, Supplier supplier, Producer producer) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		LANTAIBAN = lANTAIBAN;
