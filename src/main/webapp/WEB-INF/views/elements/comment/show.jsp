@@ -41,7 +41,7 @@
 	.user-comment form {
 		display: flex;
 		width: 100%;
-		position: relative;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		padding: 0 10px 1px 10px;
 	}
@@ -79,6 +79,8 @@
 		border: 1px black solid;
 		border-bottom-right-radius: 10px;
 		background-color: inherit;
+		min-width: 45px;
+
 	}
 	
 	@media (max-width: 400px) {

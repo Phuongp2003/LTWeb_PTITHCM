@@ -56,14 +56,14 @@
 							<div class="col-md-4 col-sm-12 col-lg-4">
 								<a href="book/${book.MASACH}.htm">
 									<div class="card mb-4">
-										<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
+										<img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="..." height="400">
 										<div class="card-body">
 											<h5 class="card-text">
 												<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
 											</h5>
 											<p class="card-text text-capitalize fs-6">${book.author.HO} ${book.author.TEN}</p>
 											<p class="card-text text-capitalize fs-5" style="height: 3.7rem;">${book.TENSACH}</p>
-				
+											
 											<div class="d-flex justify-content-between">
 												<div><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i></div>
 												<div class="star-detail">

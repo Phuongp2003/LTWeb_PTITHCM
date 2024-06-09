@@ -23,24 +23,24 @@
 			var elementBlock = '<div class="content-row" id="content-row-' + id + '">' +
 				'<div class="post-element-controller" id="e-controller-' + id + '">' +
 				'<div class="pec-row1">' +
-				'<button type="button" name="delete-element" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
-				'<button type="button" name="set-left" title="Left align this element."><i class="bi bi-text-left"></i></button>' +
-				'<button type="button" name="set-right" title="Right align this element."><i class="bi bi-text-right"></i></button>' +
+				'<button type="button" name="delete-element" title="Xóa cả khối cùng các thành phần."><i class="bi bi-trash3"></i></button>' +
+				'<button type="button" name="set-left" title="Căn trái."><i class="bi bi-text-left"></i></button>' +
+				'<button type="button" name="set-right" title="Căn phải."><i class="bi bi-text-right"></i></button>' +
 				'</div>' +
 				'<div class="pec-row2">' +
-				'<button type="button" name="set-top" title="Remove this element."><i class="bi bi-align-top"></i></button>' +
-				'<button type="button" name="set-middle" title="Left align this element."><i class="bi bi-align-center"></i></button>' +
-				'<button type="button" name="set-bottom" title="Right align this element."><i class="bi bi-align-bottom"></i></button>' +
+				'<button type="button" name="set-top" title="Dồn các thành phần lên cao."><i class="bi bi-align-top"></i></button>' +
+				'<button type="button" name="set-middle" title="Dồn các thành phần vào giữa."><i class="bi bi-align-center"></i></button>' +
+				'<button type="button" name="set-bottom" title="Dồn các thành phần xuống đáy."><i class="bi bi-align-bottom"></i></button>' +
 				'</div>' +
 				'<div class="pec-row3">' +
-				'<button type="button" name="center-element-1" title="Center lv 1 this element.">Lv1</button>' +
-				'<button type="button" name="center-element-2" title="Center lv 2 this element.">Lv2</button>' +
-				'<button type="button" name="center-element-3" title="Center lv 3 this element.">Lv3</button>' +
-				'<button class="non-disabled-btn" type="button" name="center-element-4" title="Center lv 4 this element.">Lv4</button>' +
+				'<button type="button" name="center-element-1" title="Căn giữa sát cạnh.">Lv1</button>' +
+				'<button type="button" name="center-element-2" title="Căn đều nội dung.">Lv2</button>' +
+				'<button type="button" name="center-element-3" title="Căn nội dung gần cạnh.">Lv3</button>' +
+				'<button class="non-disabled-btn" type="button" name="center-element-4" title="Gom toàn bộ nội dung vào giữa.">Lv4</button>' +
 				'</div>' +
 				'<div class="pec-row4">' +
-				'<button type="button" name="add-text" title="Add text block to this element."><i class="bi bi-card-text"></i></button>' +
-				'<button type="button" name="add-image" title="Add image to this element."><i class="bi bi-file-image"></i></button>' +
+				'<button type="button" name="add-text" title="Thêm một khối văn bản."><i class="bi bi-card-text"></i></button>' +
+				'<button type="button" name="add-image" title="Thêm một khối hình."><i class="bi bi-file-image"></i></button>' +
 				'</div>' +
 				'</div>' +
 				'</div>';
@@ -82,7 +82,7 @@
 						'</img>' +
 						'<div class="row-element-controller">' +
 						'<div class="text-controller">' +
-						'<button type="button" name="delete-element-row" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
+						'<button type="button" name="delete-element-row" title="Xóa hình này."><i class="bi bi-trash3"></i></button>' +
 						'</div>' +
 						'<div class="size-controller">' +
 						'</div>' +
@@ -150,20 +150,20 @@
 				'</div>' +
 				'<div class="row-element-controller">' +
 				'<div class="text-controller">' +
-				'<button type="button" name="delete-element-row" title="Remove this element."><i class="bi bi-trash3"></i></button>' +
-				'<button type="button" name="set-left-row" title="Align text left."><i class="bi bi-text-left"></i></button>' +
-				'<button type="button" name="set-center-row" title="Align text center."><i class="bi bi-text-center"></i></button>' +
-				'<button type="button" name="set-right-row" title="Align text right."><i class="bi bi-text-right"></i></button>' +
+				'<button type="button" name="delete-element-row" title="Xóa khối chữ này."><i class="bi bi-trash3"></i></button>' +
+				'<button type="button" name="set-left-row" title="Căn trái."><i class="bi bi-text-left"></i></button>' +
+				'<button type="button" name="set-center-row" title="Căn giữa."><i class="bi bi-text-center"></i></button>' +
+				'<button type="button" name="set-right-row" title="Căn phải."><i class="bi bi-text-right"></i></button>' +
 				'</div>' +
 				'<div class="font-controller">' +
 				'<input class="font-size-controller" type="number" name="fs-input" placeholder="Height" value="12">' +
 				'<select class="color-selector" name="text-color">' +
-				'<option value="red">Red</option>' +
-				'<option value="yellow">Yellow</option>' +
-				'<option value="blue">Blue</option>' +
-				'<option value="green">Green</option>' +
-				'<option value="black" selected>Black</option>' +
-				'<option value="white">White</option>' +
+				'<option value="red">Đỏ</option>' +
+				'<option value="yellow">Vàng</option>' +
+				'<option value="blue">Xanh dương</option>' +
+				'<option value="green">Xanh lục</option>' +
+				'<option value="black" selected>Đen</option>' +
+				'<option value="white">Trắng</option>' +
 				'</select>' +
 				'<select class="font-family-selector" name="font-family">' +
 				'<option value="Arial">Arial</option>' +

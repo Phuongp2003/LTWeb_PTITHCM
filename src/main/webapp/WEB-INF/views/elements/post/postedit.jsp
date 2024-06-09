@@ -29,21 +29,21 @@
 <div class="forum-post-create container-fluid w-75">
 	<form:form method="POST" action="forum/post/${post.id}/edit-success.htm" modelAttribute="post">
 		<div class="post-title post-input">
-			<form:label class="form-title-1" path="title">Title: </form:label>
+			<form:label class="form-title-1" path="title">Tiêu đề: </form:label>
 			<form:input class="form-input-1" path="title" />
 		</div>
 		<div class="post-description post-input">
-			<form:label class="form-title-1" path="description">Description: </form:label>
+			<form:label class="form-title-1" path="description">Mô tả(tóm tắt): </form:label>
 			<form:input class="form-input-1" path="description" />
 		</div>
 		<div class="post-controller">
-			<button type="button" name="add-element-row" title="Add text-block"><i class="bi bi-plus-square"></i></button>
+			<button type="button" name="add-element-row" title="Thêm một khối lớn mới"><i class="bi bi-plus-square"></i></button>
 		</div>
-		<form:label path="content">Content: </form:label>
+		<form:label path="content">Nội dung: </form:label>
 		<div class="post-contents">
 			${post.content}</div>
 		<div class="mt-2 message-place"> </div>
-		<button type="submit">Save</button>
+		<button type="submit">Sửa bài viết</button>
 	</form:form>
 	<input type="file" id="imageInput" style="display: none;" accept="image/*">
 </div>

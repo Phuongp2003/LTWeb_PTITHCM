@@ -36,7 +36,7 @@
 					<td>
 						<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
 					</td>
-					<td><img src="resources/imgs/products/${book.ANH}" style="width: 150px; height: 160px;"></td>
+					<td><img src="resources/imgs/products/${book.ANH}" style="width: 150px; height: 160px;" height="400"></td>
 					<td>${book.typebook.TENTL}</td>
 					<td>${book.author.HO} ${book.author.TEN}</td>
 					<td>${book.supplier.TENNCC}</td>

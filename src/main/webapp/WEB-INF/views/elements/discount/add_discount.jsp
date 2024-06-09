@@ -54,17 +54,17 @@
 <div class="discount-list container-fluid w-75">
 	<form:form method="POST" action="manage/discount/add-success.htm" modelAttribute="discount">
 		<div class="port-title">
-			<form:label path="TENKM">Title: </form:label>
+			<form:label path="TENKM">Tên chương trình khuyến mãi: </form:label>
 			<form:input path="TENKM" />
 		</div>
 		<div class="port-title">
-			<form:label path="NGAYBD">Title: </form:label>
+			<form:label path="NGAYBD">Ngày bắt đầu: </form:label>
 			<form:input path="NGAYBD" type="date" />
 		</div>
 		<div class="port-title">
-			<form:label path="NGAYKT">Title: </form:label>
+			<form:label path="NGAYKT">Ngày kết thúc: </form:label>
 			<form:input path="NGAYKT" type="date" />
 		</div>
-		<button type="submit" title="Thêm khuyến mãi mới!">OK</button>
+		<button type="submit" title="Thêm khuyến mãi mới!">Thêm chương trình khuyến mãi</button>
 	</form:form>
 </div>

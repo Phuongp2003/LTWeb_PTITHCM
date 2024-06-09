@@ -19,11 +19,11 @@
 		border: 1px solid rgb(166, 166, 176);
 		border-radius: 4px;
 	}
-
-	.product-img .card{
+	
+	.product-img .card {
 		width: 25.2rem;
 	}
-
+	
 	.feedback-card {
 		margin-top: 1rem;
 	}
@@ -33,8 +33,7 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="home.htm">Trang chủ</a></li>
-			<li class="breadcrumb-item"><a
-					href="shop/typebook/${book.typebook.MATL}.htm">${book.typebook.TENTL}</a>
+			<li class="breadcrumb-item"><a href="shop/typebook/${book.typebook.MATL}.htm">${book.typebook.TENTL}</a>
 			</li>
 			<li class="breadcrumb-item active" aria-current="page">${book.TENSACH}</li>
 		</ol>
@@ -42,8 +41,7 @@
 	<div class="row">
 		<div class="product-img col-lg-4 col-md-4 col-sm-12 col-xs-4 pd5">
 			<div class="card">
-				<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp"
-					class="card-img-top" alt="..." style="width: 25rem; height: 25rem;">
+				<img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="..." height="400">
 			</div>
 		</div>
 		<div class="grid col-lg-4 col-md-4 col-sm-12 col-xs-4 pd5">
@@ -80,17 +78,15 @@
 						<h4 class="card-text">
 							<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
 						</h4>
-	
+						
 						<div class="wrapper">
 							<label>Số lượng</label>
 							<div class="group-input">
-								<button class="btn btn-outline-secondary" type="button"
-									onclick="adjustQuantity(false)"><i class="bi bi-dash"></i></button>
-	
-	
+								<button class="btn btn-outline-secondary" type="button" onclick="adjustQuantity(false)"><i class="bi bi-dash"></i></button>
+								
+								
 								<input type="text" value="1" class="input" id="quantity-input">
-								<button class="btn btn-outline-secondary" type="button"
-									onclick="adjustQuantity(true)"><i class="bi bi-plus"></i></button>
+								<button class="btn btn-outline-secondary" type="button" onclick="adjustQuantity(true)"><i class="bi bi-plus"></i></button>
 							</div>
 						</div>
 						<div class="d-flex gap-3">
@@ -103,7 +99,7 @@
 							</form:form>
 						</div>
 					</div>
-
+					
 					<div class="d-flex gap-3">
 						<a href="cart.htm" class="btn btn-danger">Mua ngay</a>
 						<form:form action="cart/${cmd}-cart-detail.htm" modelAttribute="detail">
@@ -115,7 +111,7 @@
 						</form:form>
 					</div>
 					<p class="card-text">${f.NOIDUNG}</p>
-
+					
 				</div>
 			</div>
 			<div class="mt-4">
@@ -132,21 +128,22 @@
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-4 pd5">
 			<div class="card">
-				<div class="card-header"><h5 class="card-title text-center">Sản phẩm tương tự</h5></div>
+				<div class="card-header">
+					<h5 class="card-title text-center">Sản phẩm tương tự</h5>
+				</div>
 				
 				<div class="row gap-0">
 					<c:forEach var="book" items="${books}">
 						<div class="col-md-4 col-sm-12 col-lg-4">
 							<a href="book/${book.MASACH}.htm">
 								<div class="card mb-2" style="width: 7.7rem;">
-									<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="..."
-										style="width:7.5rem;">
+									<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="..." style="width:7.5rem;">
 									<div class="card-body" style="padding:0px 10px;">
 										<h5 class="card-text">
 											<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
 										</h5>
 										<p class="card-text text-capitalize fs-6" style="height: 2.2rem;">${book.TENSACH}</p>
-			
+										
 										<div class="d-flex justify-content-between">
 											<div><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i></div>
 											<div class="star-detail">
@@ -174,7 +171,7 @@
 							</a>
 						</div>
 					</c:forEach>
-
+					
 				</div>
 			</div>
 		</div>
@@ -182,9 +179,10 @@
 	<div class="feedback-card card mb-3">
 		<div class="row g-0">
 			<div class="col-md-4 border-end border-secondary-subtle">
-				<div class="card-header"><h5 class="card-title text-center mt-2">Khách hàng đánh giá</h5></div>
-				<p class="sum-vote card-text text-center">Tổng quan: ${avgVote} <i class="bi bi-star-fill"
-						style="color:#FFDB00;"></i></p>
+				<div class="card-header">
+					<h5 class="card-title text-center mt-2">Khách hàng đánh giá</h5>
+				</div>
+				<p class="sum-vote card-text text-center">Tổng quan: ${avgVote} <i class="bi bi-star-fill" style="color:#FFDB00;"></i></p>
 				<p class="card-text text-center">(${feedback.size()} đánh giá)</p>
 				<div class="review border-top border-secondary-subtle text-center mt-2">
 					<h5 class="card-title mt-2">Đánh giá sản phẩm này</h5>
@@ -206,7 +204,9 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<div class="card-header"><h5 class="card-title text-center mt-2">Chi tiết</h5></div>
+				<div class="card-header">
+					<h5 class="card-title text-center mt-2">Chi tiết</h5>
+				</div>
 				<c:choose>
 					<c:when test="${feedback.size() != 0}">
 						<c:forEach var="f" items="${feedback}">
@@ -244,8 +244,7 @@
 			</div>
 		</div>
 	</div>
-  <div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog"
-		aria-labelledby="addToCartModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="addToCartModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -264,7 +263,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 </div>
 <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>

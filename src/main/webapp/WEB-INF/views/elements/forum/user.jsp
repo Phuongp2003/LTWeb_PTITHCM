@@ -54,13 +54,14 @@
 			display: block;
 		}
 		
-		.user-controller {	
+		.user-controller {
 			display: flex;
 			flex-flow: column;
 		}
 		
 		.user-func-toggler {
-			border-color: brown;
+			height: 100%;
+			border: solid 1px black;
 		}
 		
 		.nav-close-dropdown {
@@ -82,7 +83,6 @@
 		}
 		
 		.user-controller .nav-item>* {
-			border-top: solid 1px brown;
 			padding: 0 5px;
 		}
 		
@@ -116,18 +116,16 @@
 					<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z" />
 				</svg>
 			</button>
-			<c:if test="${owner != null && owner}">
-				<div class="nav-item">
-					<div class="user-createpost">
-						<a class="nav-link" href="forum/create-post.htm">
-							Tạo bài viết
-						</a>
-					</div>
-					<div class="user-postcontrol">
-						<a class="nav-link" href="user/${user_id}/posts.htm">Quản lý bài viết</a>
-					</div>
+			<div class="nav-item">
+				<div class="user-createpost">
+					<a class="nav-link" href="forum/create-post.htm">
+						Tạo bài viết
+					</a>
 				</div>
-			</c:if>
+				<div class="user-postcontrol">
+					<a class="nav-link" href="user/${user_id}/posts.htm">Quản lý bài viết</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	
