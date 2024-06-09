@@ -10,6 +10,7 @@
 	
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
+		<jsp:include page="${partial}/bread_crumb.jsp" />
 		<jsp:include page="${elements}/manage/post_control.jsp" />
 		<jsp:include page="${elements}/post/post.jsp" />
 	</body>

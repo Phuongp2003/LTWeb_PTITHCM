@@ -29,7 +29,10 @@
 			<a href="user/${account.ID}/edit-info.htm" class="c-info fw-bold">Thay đổi thông tin</a>
 			<a href="user/${account.ID}/posts.htm" class="post-manage fw-bold">Quản lý bài viết</a>
 			<c:if test="${user_type == 'employee'}">
-				<a href="manage/dashboard.htm" class="manage-link fw-bold">Quản lý shop</a>
+				<a href="manage/discount.htm" class="fw-bold">Quản lý khuyến mãi</a>
+				<a href="manage/posts.htm" class="fw-bold">Duyệt bài viết</a>
+				<a href="manage/category.htm" class="fw-bold">Quản lý thể loại sách</a>
+				<a href="manage/product.htm" class="fw-bold">Quản lý sản phẩm</a>
 			</c:if>
 			<a href="user/change-password.htm" class="c-password fw-bold">Thay đổi mật khẩu</a>
 			<a href="user/logout.htm" class="logout fw-bold">Đăng xuất</a>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Account;
+import ptithcm.bean.BreadCrumb;
 import ptithcm.bean.Cart;
 import ptithcm.bean.Customer;
 import ptithcm.bean.RegistrationForm;
@@ -51,6 +52,11 @@ public class AccountController {
 
         Account account = new Account();
         model.addAttribute("account", account);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Đăng nhập");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
         return "pages/user/login";
     }
 
@@ -95,6 +101,10 @@ public class AccountController {
         }
         RegistrationForm registrationForm = new RegistrationForm();
         model.addAttribute("registrationForm", registrationForm);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Đăng ký tài khoản");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
         return "pages/user/register";
     }
 
@@ -141,6 +151,11 @@ public class AccountController {
             model.addAttribute("message", "Register failed! Error: " + e);
             return "redirect:/user/register.htm";
         }
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Đăng ký thành công");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
         return "redirect:/home.htm";
     }
 
@@ -199,6 +214,10 @@ public class AccountController {
     @RequestMapping(value = "forgot-password", method = RequestMethod.GET)
     public String forgotPassword(ModelMap model) {
         model.addAttribute("title", "Quên mật khẩu");
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Quên mật khẩu");
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
         return "pages/user/forgot_password";
     }
 
