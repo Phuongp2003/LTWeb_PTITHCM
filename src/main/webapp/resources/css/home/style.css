@@ -11,16 +11,14 @@ a{
 
 .favorite-types .card:hover {
     transform: translate(0px, -5px);
-
     transition: all 0.5s;
     box-shadow: 2.5px 5px 7.5px 5px lightgrey;
-    
-    /* transition: all 0.5s ease-in-out; */
 }
 
 .favorite-types .card {
-    min-height: 8rem;
-    margin-bottom: 1.5rem;
+    min-height: 4rem;
+    margin-bottom: 1.3rem;
+    background-color:#EEEEEE;
 }
 
 .favorite-types .title {
@@ -31,11 +29,13 @@ a{
 }
 
 .top-sell .card:hover {
+    transition: all 0.5s;
     box-shadow: 2.5px 2.5px 2.5px 2.5px lightgrey;
 }
 
 .top-sell .card {
-    margin-bottom:1.5rem ;
+    margin-bottom:1.5rem;
+    width: 18.6rem;
 }
 
 .top-sell .title {
@@ -68,8 +68,6 @@ a{
 .collection-product .card:hover {
     transform: translate(0px, -5px);
 
-    transition: all 0.5s;
+    transition: all 0.5s ease-in-out;
     box-shadow: 2.5px 5px 7.5px 5px lightgrey;
-    
-    /* transition: all 0.5s ease-in-out; */
 }

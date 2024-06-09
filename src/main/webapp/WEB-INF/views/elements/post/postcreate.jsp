@@ -2,16 +2,38 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<div class="forum-post-create container-fluid w-75">
+<style>
+	.forum-post-create {
+		border: solid 1px black;
+		border-radius: 5px;
+		margin-top: 20px;
+		padding: 10px 5px;
+	}
 	
+	.forum-post-create .post-input {
+		width: 100%;
+		display: flex;
+		margin-bottom: 5px;
+	}
+	
+	.forum-post-create .form-title-1 {
+		width: 20%
+	}
+	
+	.forum-post-create .form-input-1 {
+		width: 80%;
+	}
+</style>
+
+<div class="forum-post-create container-fluid w-75">
 	<form:form method="POST" action="forum/create-success.htm" modelAttribute="post">
-		<div class="port-title">
-			<form:label path="title">Title: </form:label>
-			<form:input path="title" />
+		<div class="post-title post-input">
+			<form:label class="form-title-1" path="title">Title: </form:label>
+			<form:input class="form-input-1" path="title" />
 		</div>
-		<div class="port-description">
-			<form:label path="description">Description: </form:label>
-			<form:input path="description" />
+		<div class="post-description post-input">
+			<form:label class="form-title-1" path="description">Description: </form:label>
+			<form:input class="form-input-1" path="description" />
 		</div>
 		<div class="post-controller">
 			<button type="button" name="add-element-row" title="Add text-block"><i class="bi bi-plus-square"></i></button>

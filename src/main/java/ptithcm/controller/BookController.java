@@ -40,7 +40,7 @@ public class BookController {
     private FeedbackService feedbackService;
 
     @Autowired
-    private CartDetailService CartDetailService;
+    private CartDetailService cartDetailService;
     @Autowired
     private AccountService accountService;
     @Autowired
@@ -54,6 +54,7 @@ public class BookController {
     public String book(ModelMap model, @PathVariable("MASACH") int MASACH,
             @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
+        List<Book> books = bookService.getBooksByCategory(book.getTypebook().getMATL());
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
         CartDetail detail = null;
@@ -70,11 +71,13 @@ public class BookController {
             detail = CartDetailService
                     .getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
 
+
         }
         String cmd = (detail != null) ? "update" : "add";
         model.addAttribute("cmd", cmd);
         // model.addAttribute("cmd", "add");
         model.addAttribute("book", book);
+        model.addAttribute("books", books);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
         uploadService.getImage(book);
@@ -106,17 +109,26 @@ public class BookController {
     }
 
     @RequestMapping("/manage/product")
-    public String product(ModelMap model) {
+    public String product(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("books", book);
         uploadService.getImage(book);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Danh sách sản phẩm");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        model.addAttribute("BC", breadCrumb);
         return "pages/admin/product";
     }
 
     @RequestMapping(value = "/manage/product/add-product")
-    public String addProduct(ModelMap model) {
+    public String addProduct(ModelMap model, @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = new Book();
         model.addAttribute("product", book);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Thêm sản phẩm");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/product.htm", "Danh sách sản phẩm");
+        model.addAttribute("BC", breadCrumb);
         return "pages/admin/addproduct";
     }
 
@@ -150,10 +162,17 @@ public class BookController {
     }
 
     @RequestMapping(value = "/manage/product/{MASACH}/update")
-    public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
+    public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH,
+            @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
         uploadService.getImage(book);
         model.addAttribute("product", book);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Chỉnh sửa thông tin sản phẩm");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/product.htm", "Danh sách sản phẩm");
+        breadCrumb.addPreLink("book/" + MASACH + ".htm", "Sản phẩm: " + book.getTENSACH());
+        model.addAttribute("BC", breadCrumb);
         return "pages/admin/editproduct";
     }
 
@@ -165,7 +184,7 @@ public class BookController {
         }
         if (errors.hasErrors()) {
             model.addAttribute("message", -1);
-            return "redirect:/manage/product/{MASACH}/update";
+            return "pages/admin/editproduct";
         }
 
         String fileName = uploadService.saveFile(file);
@@ -187,17 +206,28 @@ public class BookController {
     }
 
     @RequestMapping(value = "/manage/product/{MASACH}/delete")
-    public String deleteCategory(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
+    public String deleteCategory(ModelMap model, @PathVariable("MASACH") Integer MASACH,
+            @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
         bookService.deleteBook(book);
         model.addAttribute("product", book);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Danh sách sản phẩm");
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        model.addAttribute("BC", breadCrumb);
         return "redirect:/manage/product.htm";
     }
 
     @RequestMapping(value = "/manage/product/search")
-    public String searchBook(HttpServletRequest request, ModelMap model) {
+    public String searchBook(HttpServletRequest request, ModelMap model,
+            @CookieValue(value = "uid", defaultValue = "") String uid) {
         List<Book> book = bookService.searchBook(request.getParameter("searchInput"));
         model.addAttribute("books", book);
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Tìm sản phẩm: " + request.getParameter("searchInput"));
+        breadCrumb.addPreLink("user/" + uid + ".htm", "Trang cá nhân");
+        breadCrumb.addPreLink("manage/product.htm", "Danh sách sản phẩm");
+        model.addAttribute("BC", breadCrumb);
         return "pages/admin/product";
     }
 }

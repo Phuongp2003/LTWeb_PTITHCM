@@ -83,8 +83,9 @@ public class CartService {
 			session.save(cart);
 			t.commit();
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			t.rollback();
+			System.out.println("Error: " + e.getMessage());
 			// return 0;
 		} finally {
 			session.close();

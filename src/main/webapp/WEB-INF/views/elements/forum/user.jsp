@@ -8,16 +8,13 @@
 	}
 	
 	.forum-user {
-		margin-top: 20px;
 		width: 100%;
 		height: 55px;
-		border: brown;
+		border: black;
 		border-style: solid;
 		border-width: 2px;
 		border-radius: 10px;
-		border-bottom-style: none;
 		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
 		line-height: 2.25;
 		margin: 0 auto;
 	}
@@ -57,7 +54,7 @@
 			display: block;
 		}
 		
-		.user-controller {
+		.user-controller {	
 			display: flex;
 			flex-flow: column;
 		}
@@ -105,12 +102,9 @@
 		}
 	}
 </style>
-
 <c:if test="${user_id != null}">
-	
 	<div class="forum-user w-75 fs-4 d-flex">
 		<a class="navbar-brand" href="user/${user_id}.htm">
-			<img class="user-img" src="resources/imgs/test1.jpg" class="userImg">
 			<div class="user-name">${user_name}</div>
 		</a>
 		<div class="user-controller">

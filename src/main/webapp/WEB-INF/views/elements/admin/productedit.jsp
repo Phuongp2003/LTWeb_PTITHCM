@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
+
   .product-add .form-select,
   .product-add .form-control {
     width: 50%;
@@ -89,3 +90,4 @@
     </c:if>
   </div>
 </div>
+

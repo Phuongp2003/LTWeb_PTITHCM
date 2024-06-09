@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.bean.Account;
+import ptithcm.bean.BreadCrumb;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Employee;
 import ptithcm.bean.Post;
@@ -64,6 +65,7 @@ public class UserController {
                 model.addAttribute("message", "Không tìm thấy tài khoản của bạn, vui lòng đăng nhập lại!");
 
             }
+
             return "pages/post/post_action";
         }
         Customer customer = account.getAccount_customer();
@@ -82,8 +84,18 @@ public class UserController {
         model.addAttribute("model", employee != null ? employee : customer);
         if (cookie_uid.equals(uid.toString())) {
             model.addAttribute("title", "Trang cá nhân");
+            BreadCrumb breadCrumb = new BreadCrumb();
+            breadCrumb.setCurrentLink("", "Trang cá nhân");
+            breadCrumb.addPreLink("home.htm", "Trang chủ");
+            model.addAttribute("BC", breadCrumb);
             return "pages/user/dashboard";
         }
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.setCurrentLink("", "Trang cá nhân của " + username);
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/user/profile";
     }
 
@@ -91,9 +103,12 @@ public class UserController {
     public String forum(Model model, @PathVariable("uid") Integer uid,
             @CookieValue(value = "uid", defaultValue = "") String cookie_uid) {
         List<Post> post;
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
         if (!cookie_uid.equals("") && accountService.getAccountByID(Integer.parseInt(cookie_uid)) != null
                 && uid == Integer.parseInt(cookie_uid)) {
             Customer user = accountService.getAccountByID(Integer.parseInt(cookie_uid)).getAccount_customer();
+            breadCrumb.addPreLink("user/" + uid + ".htm", user.getHO() + " " + user.getTEN());
             model.addAttribute("user_id", Integer.parseInt(cookie_uid));
             model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
             model.addAttribute("owner", true);
@@ -110,6 +125,9 @@ public class UserController {
         model.addAttribute("type", "forum");
 
         model.addAttribute("posts", post);
+        breadCrumb.setCurrentLink("", "Danh sách bài viết");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/post/userpost";
     }
 
@@ -192,6 +210,13 @@ public class UserController {
         model.addAttribute("account", account);
         model.addAttribute("birthday", customer.getNGAYSINH());
         model.addAttribute("model", employee != null ? employee : customer);
+
+        BreadCrumb breadCrumb = new BreadCrumb();
+        breadCrumb.addPreLink("home.htm", "Trang chủ");
+        breadCrumb.addPreLink("user/" + uid + ".htm", username);
+        breadCrumb.setCurrentLink("", "Chỉnh sửa thông tin");
+        model.addAttribute("BC", breadCrumb);
+
         return "pages/user/profile_edit";
     }
 }

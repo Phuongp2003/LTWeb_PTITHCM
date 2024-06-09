@@ -215,9 +215,13 @@ public class BillController {
 
                         billService.addDetail(detail);
                         bookService.updateBook(book);
-                        emailService.sendEmail(bill.getEMAILNN(),
+
+                        emailService.sendEmail(user.getEMAIL(),
                                 "Đặt hàng thành công từ Đồ án D21CQCN02-N",
-                                "Khách hàng đã mua hàng thành công");
+                                "MAHD:" + bill.getMAHD() +
+                                        "MAKH:" + user.getMAKH() +
+                                        "Họ tên khách hàng:" + user.getFullname());
+
                         count += 1;
                         System.out.println("in:" + detail.toString());
 

@@ -1,12 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<div class="container-fluid" style="width: 80%;">
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Danh Sách Thể Loại Sách</li>
-		</ol>
-	</nav>
+<div class="container-fluid" style="width: 80%;border: Black solid 1px; border-radius: 5px;">
 	<table class="category-list table">
 		<div class="filter-wrapper row">
 			<div class="col-md-10 col-sm-12 col-lg-10">
