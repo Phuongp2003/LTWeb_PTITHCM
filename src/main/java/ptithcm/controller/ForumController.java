@@ -303,7 +303,7 @@ public class ForumController {
     }
 
     @RequestMapping(value = "post/{id}/comment/{cid}/edit-comment")
-    public String createComment(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
+    public String editComment(Model model, @CookieValue(value = "uid", defaultValue = "") String uid,
             @PathVariable("id") Integer id,
             @PathVariable("cid") Integer cid,
             @CookieValue(value = "role", defaultValue = "") String role) {
