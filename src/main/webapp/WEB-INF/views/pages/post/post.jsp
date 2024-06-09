@@ -11,6 +11,7 @@
 	
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
+		<jsp:include page="${partial}/bread_crumb.jsp" />
 		<jsp:include page="${elements}/forum/user.jsp" />
 		<jsp:include page="${elements}/post/post.jsp" />
 		<jsp:include page="${elements}/comment/show.jsp" />

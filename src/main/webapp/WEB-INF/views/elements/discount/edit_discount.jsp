@@ -2,41 +2,43 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
-	.discount-list {
-		border-top: brown;
-		border-top-style: solid;
-		border-top-width: 2px;
-		padding-top: 20px;
+	.add-discount {
+		padding: 10px 0;
+		border: 1px black solid;
+		border-radius: 5px;
 	}
 	
-	.discount-list .discount-list {
-		border: brown;
-		border-style: solid;
-		border-width: .5px;
-		padding: 20px 10px;
+	.add-discount form>* {
+		padding: 3px 10px;
 	}
 	
-	.discount-list .discount {
-		width: 220px;
-		min-width: 220px;
-		margin: 3px calc(20px / 3);
-		border: brown;
-		border-style: solid;
-		border-width: .5px;
-		padding-top: 20px;
-	}
-	
-	.discount-list .discount .discount-head {
+	.add-discount .discount .discount-head {
 		margin-bottom: 10px;
-		border-bottom: .3px brown solid;
+	}
+	
+	.add-discount .discount-input--label {
+		width: 25%;
+	}
+	
+	.add-discount .discount-input--textbox {
+		width: 72%;
+	}
+	
+	label,
+	input {
+		width: 100%;
+	}
+	
+	.discount-input {
+		display: flex;
 	}
 	
 	@media (max-width: 400px) {
-		.discount-list .discount-list {
+		.add-discount .add-discount {
 			padding: 0;
 		}
 		
-		.discount-list .discount {
+		.add-discount .discount {
 			margin: 0 0;
 			margin-bottom: 10px;
 			border: none;
@@ -44,27 +46,42 @@
 			
 		}
 		
-		.discount-list .discount:last-child {
+		.add-discount .discount:last-child {
 			margin-bottom: 0;
 		}
 		
 	}
 </style>
 
-<div class="discount-list container-fluid w-75">
+<div class="add-discount container-fluid w-50">
 	<form:form method="POST" action="discount/${discount.MAKM}/edit-success.htm" modelAttribute="discount">
-		<div class="port-title">
-			<form:label path="TENKM">Title: </form:label>
-			<form:input path="TENKM" />
+		<div class="discount-input">
+			<div class="discount-input--label">
+				<form:label path="TENKM">Tên chương trình khuyến mãi: </form:label>
+			</div>
+			<div class="discount-input--textbox">
+				
+				<form:input path="TENKM" />
+			</div>
 		</div>
-		<div class="port-title">
-			<form:label path="NGAYBD">Title: </form:label>
-			<form:input path="NGAYBD" type="date" />
+		<div class="discount-input">
+			<div class="discount-input--label">
+				<form:label path="NGAYBD">Ngày bắt đầu: </form:label>
+			</div>
+			<div class="discount-input--textbox">
+				<form:input path="NGAYBD" type="date" />
+			</div>
 		</div>
-		<div class="port-title">
-			<form:label path="NGAYKT">Title: </form:label>
-			<form:input path="NGAYKT" type="date" />
+		<div class="discount-input">
+			<div class="discount-input--label">
+				<form:label path="NGAYKT">Ngày kết thúc: </form:label>
+			</div>
+			<div class="discount-input--textbox">
+				<form:input path="NGAYKT" type="date" />
+			</div>
 		</div>
-		<button type="submit">OK</button>
+		<div class="discount-input">
+			<button type="submit">Thêm chương trình khuyến mãi</button>
+		</div>
 	</form:form>
 </div>

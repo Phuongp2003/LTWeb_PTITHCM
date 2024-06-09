@@ -6,7 +6,7 @@
         width: 30%;
     }
 </style>
-<div class="category-edit container-fluid" style="width: 80%;">
+<div class="category-edit container-fluid" style="width: 80%;border: Black solid 1px; border-radius: 5px;">
     <form:form method="POST" action="manage/category/${category.MATL}/update.htm" modelAttribute="category">
         <div class="category-name">
 			<form:label path="TENTL">Tên: </form:label>

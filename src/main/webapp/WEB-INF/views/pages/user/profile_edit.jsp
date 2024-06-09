@@ -11,6 +11,7 @@
 	
 	<body>
 		<jsp:include page="${elements}/navbar.jsp" />
+		<jsp:include page="${partial}/bread_crumb.jsp" />
 		<jsp:include page="${elements}/user/profile_edit.jsp" />
 		
 	</body>

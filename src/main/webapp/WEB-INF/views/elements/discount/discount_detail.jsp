@@ -60,7 +60,7 @@
 			<div class="discount col">
 				<div class="discount-head">
 					<div class="discount-title fs-4">
-						<a href="discount/${discount.MAKM}.htm">
+						<a href="manage/discount/${discount.MAKM}.htm">
 							${discount.TENKM}
 						</a>
 					</div>

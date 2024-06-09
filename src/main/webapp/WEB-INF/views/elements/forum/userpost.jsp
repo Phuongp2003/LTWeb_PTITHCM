@@ -1,37 +1,31 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page pageEncoding="UTF-8"%>
 <style>
-	.forum-post {
-		border-top: brown;
-		border-top-style: solid;
-		border-top-width: 2px;
+	.post-group {
 		padding-top: 20px;
 	}
 	
-	.forum-post .post-list {
-		border: brown;
-		border-style: solid;
-		border-width: .5px;
-		padding: 20px 10px;
+	.post {
+		border: black solid 1px;
+		padding: 10px 15px;
+		border-radius: 5px;
 	}
 	
-	.forum-post .post {
-		width: 220px;
-		min-width: 220px;
-		margin: 3px calc(20px / 3);
-		border: brown;
-		border-style: solid;
-		border-width: .5px;
-		padding-top: 20px;
+	.forum-post .post-link {
+		color: black;
+		font-weight: 500;
+	}
+	
+	.forum-post .post-place {
+		padding: 10px 5px;
 	}
 	
 	.post-content {
-		padding-bottom: 50px;
+		padding-bottom: 40px;
 	}
 	
-	.forum-post .post .post-head {
-		margin-bottom: 10px;
-		border-bottom: .3px brown solid;
+	.post-action {
+		bottom: 5px;
 	}
 	
 	@media (max-width: 400px) {
@@ -42,8 +36,6 @@
 		.forum-post .post {
 			margin: 0 0;
 			margin-bottom: 10px;
-			border: none;
-			border-top: solid .5px brown;
 			
 		}
 		
@@ -56,44 +48,51 @@
 
 <div class="forum-post container-fluid w-75">
 	<div class="post-group">
-		<div class="post-list row">
-			<c:forEach var="post" items="${posts}">
-				<div class="post col position-relative">
-					<div class="post-head">
-						<div class="post-title fs-4">
-							<a href="forum/post/${post.id}.htm">
-								${post.title}
-							</a>
-						</div>
-						<div class="post-author fs-6">${post.author.getFullname()}</div>
-					</div>
-					<div class="post-content fs-5">${post.description}</div>
-					<div class="post-action position-absolute bottom-0 left-0">
-						<div class="post-status fs-5 d-inline">
-							<c:choose>
-								<c:when test="${not empty post.post_employee}">
+		<c:if test="${not empty posts}">
+			<div class="post-list row">
+				<c:forEach var="post" items="${posts}">
+					<div class="col-6 post-place">
+						<div class="post position-relative">
+							<div class="post-head">
+								<div class="post-title fs-4">
+									<a class="post-link" href="forum/post/${post.id}.htm">
+										${post.title}
+									</a>
+								</div>
+								<div class="post-author fs-6">${post.author.getFullname()}</div>
+							</div>
+							<div class="post-content fs-5">${post.description}</div>
+							<div class="post-action position-absolute left-0">
+								<div class="post-status fs-5 d-inline">
 									<c:choose>
-										<c:when test="${not empty post.rejectReason}">
-											<img src="<c:url value='resources/imgs/status-error.svg'/>" width="16" height="16" alt="Status Deny">
+										<c:when test="${not empty post.post_employee}">
+											<c:choose>
+												<c:when test="${not empty post.rejectReason}">
+													<img src="<c:url value='resources/imgs/status-error.svg'/>" width="16" height="16" alt="Status Deny">
+												</c:when>
+												<c:otherwise>
+													<img src="<c:url value='resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
+												</c:otherwise>
+											</c:choose>
 										</c:when>
 										<c:otherwise>
-											<img src="<c:url value='resources/imgs/status-ok.svg'/>" width="16" height="16" alt="Status OK">
+											<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status Waiting">
 										</c:otherwise>
 									</c:choose>
-								</c:when>
-								<c:otherwise>
-									<img src="<c:url value='resources/imgs/status-warn.svg'/>" width="16" height="16" alt="Status Waiting">
-								</c:otherwise>
-							</c:choose>
+								</div>
+								<c:if test="${owner != null && owner}">
+									|
+									<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
+									<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
+								</c:if>
+							</div>
 						</div>
-						<c:if test="${owner != null && owner}">
-							|
-							<a href="forum/post/${post.id}/edit.htm" class="post-edit fs-5"><i class="bi bi-pen"></i></a> |
-							<a href="forum/post/${post.id}/remove.htm" class="post-delete fs-5"><i class="bi bi-trash3"></i></a>
-						</c:if>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${empty posts}">
+			<div class="no-post-message alert alert-info">Người dùng này chưa có bài viết nào!</div>
+		</c:if>
 	</div>
 </div>

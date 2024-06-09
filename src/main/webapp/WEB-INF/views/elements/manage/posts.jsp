@@ -2,16 +2,10 @@
 <%@ page pageEncoding="UTF-8"%>
 <style>
 	.forum-post {
-		border-top: brown;
-		border-top-style: solid;
-		border-top-width: 2px;
 		padding-top: 20px;
 	}
 	
 	.forum-post .post-list {
-		border: brown;
-		border-style: solid;
-		border-width: .5px;
 		padding: 20px 10px;
 	}
 	
@@ -19,14 +13,15 @@
 		width: 220px;
 		min-width: 220px;
 		margin: 3px calc(20px / 3);
-		border: brown;
+		border: black;
+		border-radius: 5px;
 		border-style: solid;
 		border-width: .5px;
 		padding-top: 20px;
 	}
 	
 	.post-content {
-		padding-bottom: 50px;
+		padding-bottom: 10px;
 	}
 	
 	.forum-post .post .post-head {
@@ -55,6 +50,7 @@
 </style>
 
 <div class="forum-post container-fluid w-75">
+	<div class="list-post-title fs-4 fw-bold">Danh sách bài viết chưa duyệt: </div>
 	<div class="post-group">
 		<div class="post-list row">
 			<c:forEach var="post" items="${posts}">
