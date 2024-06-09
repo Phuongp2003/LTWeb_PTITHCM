@@ -18,8 +18,7 @@
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 				<div class="card">
 					<div class="card-header">
-						<h4>Danh mục nhóm</h4>
-						<!-- <i class="bi bi-dash h3"></i> -->
+						<h5 class="card-title">Khám phá theo danh mục</h5>
 					</div>
 					<ul class="list-group list-group-flush">
 						<c:forEach var="category" items="${categories}">
@@ -51,19 +50,45 @@
 						</div>
 					</nav>
 				</div>
-				<div class="collection-product">
-					<div class="row">
+				<div class="collection-product mt-2">
+					<div class="row rounded-2">
 						<c:forEach var="book" items="${books}">
 							<div class="col-md-4 col-sm-12 col-lg-4">
 								<a href="book/${book.MASACH}.htm">
 									<div class="card mb-4">
 										<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
 										<div class="card-body">
-											<h6 class="card-title" style="min-height: 2.5;">${book.TENSACH}</h6>
-											<p class="card-text">${book.author.HO} ${book.author.TEN}</p>
-											<p class="card-text">
+											<h5 class="card-text">
 												<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
-											</p>
+											</h5>
+											<p class="card-text text-capitalize fs-6">${book.author.HO} ${book.author.TEN}</p>
+											<p class="card-text text-capitalize fs-5" style="height: 3.7rem;">${book.TENSACH}</p>
+				
+											<div class="d-flex justify-content-between">
+												<div><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i></div>
+												<div class="star-detail">
+													<c:choose>
+														<c:when test="${f.VOTE == 1}">
+															<i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i>
+														</c:when>
+														<c:when test="${f.VOTE == 2}">
+															<i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+														</c:when>
+														<c:when test="${f.VOTE == 3}">
+															<i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+														</c:when>
+														<c:when test="${f.VOTE == 4}">
+															<i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i>
+														</c:when>
+														<c:when test="${f.VOTE == 5}">
+															<i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i>
+														</c:when>
+													</c:choose>
+												</div>
+												<div class="d-flex gap-3">
+													<div class="sold">Đã bán 10</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</a>
