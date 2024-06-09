@@ -12,27 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ptithcm.bean.Book;
 import ptithcm.bean.Customer;
 import ptithcm.bean.Discount;
 import ptithcm.bean.DiscountDetail;
 import ptithcm.bean.Employee;
-import ptithcm.bean.Post;
 import ptithcm.service.AccountService;
-import ptithcm.service.BookService;
 import ptithcm.service.DiscountService;
-import ptithcm.service.ListPostService;
 import ptithcm.util.DateHelper;
-import ptithcm.util.PostHelper;
 
 @Controller
-@RequestMapping("/discount")
+@RequestMapping("/manage/discount")
 public class DiscountController {
     @Autowired
     private DiscountService discountService;
-
-    @Autowired
-    private BookService bookService;
 
     @Autowired
     private AccountService accountService;

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ptithcm.bean.Book;
 import ptithcm.bean.Feedback;
 
 import java.util.List;

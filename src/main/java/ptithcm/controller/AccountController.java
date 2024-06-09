@@ -136,7 +136,7 @@ public class AccountController {
     public String changePasswordPost(@RequestParam("opassword") String password,
             @RequestParam("npassword") String newPassword,
             @RequestParam("rtnpassword") String retypedPassword,
-            @CookieValue(value = "uid", defaultValue = "") String uid, ModelMap model) {
+            @CookieValue(value = "uid", defaultValue = "") String uid, HttpServletResponse response, ModelMap model) {
         try {
             Account account = accountService.getAccountByID(Integer.parseInt(uid));
             if (account != null) {

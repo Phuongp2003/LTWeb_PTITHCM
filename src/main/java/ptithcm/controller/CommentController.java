@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ptithcm.bean.Comment;
 import ptithcm.bean.Customer;
-import ptithcm.bean.Employee;
-import ptithcm.bean.Post;
 import ptithcm.service.AccountService;
-import ptithcm.service.CommentService;
 import ptithcm.util.PostHelper;
 
 @Controller
@@ -23,9 +19,6 @@ public class CommentController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private CommentService commentService;
-
     @RequestMapping(value = "create-success", method = RequestMethod.POST)
     public String saveNewComment(
             @RequestParam("content") String content,
@@ -33,10 +26,6 @@ public class CommentController {
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
-        Employee employee;
-        // Comment comment = new Comment("",);
-        
-
         // commentService.createComment(comment);
         model.addAttribute("title", "PTITHCM Forum");
         model.addAttribute("type", "forum");

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Producer;
-import ptithcm.bean.Supplier;
 
 import java.util.List;
 

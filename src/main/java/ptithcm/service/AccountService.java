@@ -44,12 +44,17 @@ public class AccountService {
 	@Transactional
 	@ModelAttribute("accounts")
 	public Account getAccountByID(Integer ID) {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Account WHERE ID = :ID";
-		Query query = session.createQuery(hql);
-		query.setParameter("ID", ID);
-		Account list = (Account) query.list().get(0);
-		return list;
+		try {
+			Session session = factory.getCurrentSession();
+			String hql = "FROM Account WHERE ID = :ID";
+			Query query = session.createQuery(hql);
+			query.setParameter("ID", ID);
+			Account list = (Account) query.list().get(0);
+			return list;
+		} catch (Exception e) {
+			System.out.println("Error when get account by id: " + e);
+			return null;
+		}
 	}
 
 	@Transactional

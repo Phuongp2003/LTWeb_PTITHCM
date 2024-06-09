@@ -19,10 +19,10 @@
 						<a class="nav-link active" aria-current="page" href="admin/dashboard.htm">Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="admin/category.htm">Thể loại sách</a>
+						<a class="nav-link" href="manage/category.htm">Thể loại sách</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="admin/product.htm">Sách</a>
+						<a class="nav-link" href="manage/product.htm">Sách</a>
 					</li>
 				</ul>
 			</div>

@@ -7,7 +7,7 @@
     }
 </style>
 <div class="category-add container-fluid mt-2" style="width: 80%;">
-    <form:form method="POST" action="admin/category/add-category.htm" modelAttribute="category">
+    <form:form method="POST" action="manage/category/add-category.htm" modelAttribute="category">
         <div class="category-name d-flex gap-5">
             <form:label path="TENTL">Tên: </form:label>
             <form:input path="TENTL" class="form-control"/>
@@ -15,7 +15,7 @@
         </div>
         <button class="btn btn-primary mt-2" type="submit">Save</button>
     </form:form>
-    <a href="admin/category.htm"><button class="btn btn-secondary mt-2">Quay trở về</button></a>
+    <a href="manage/category.htm"><button class="btn btn-secondary mt-2">Quay trở về</button></a>
     <div class="mt-2">
         <c:if test="${message == -1}">
             <div class="col-sm-8 alert alert-danger" role="alert">

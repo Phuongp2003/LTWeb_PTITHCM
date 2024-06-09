@@ -18,7 +18,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/admin/category")
+@RequestMapping("/manage/category")
 public class CategoryController {
     @Autowired
     private TypeBookService typeBookService;
@@ -50,7 +50,7 @@ public class CategoryController {
 		}
         else {
             typeBookService.addTypeBook(category);
-            return "redirect:/admin/category.htm";
+            return "redirect:/manage/category.htm";
         }
         return "pages/admin/addcategory";
     }
@@ -75,7 +75,7 @@ public class CategoryController {
 		}
         else {
             typeBookService.updateTypeBook(category);
-            return "redirect:/admin/category.htm";
+            return "redirect:/manage/category.htm";
         }
         return "pages/admin/editcategory";
     }
@@ -86,7 +86,7 @@ public class CategoryController {
         typeBookService.deleteTypeBook(typebook);
         
         model.addAttribute("category", typebook);
-        return "redirect:/admin/category.htm";
+        return "redirect:/manage/category.htm";
     }
 
     @RequestMapping(value = "search")

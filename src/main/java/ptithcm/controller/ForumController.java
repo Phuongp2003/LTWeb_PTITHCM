@@ -2,9 +2,6 @@ package ptithcm.controller;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
-import javax.swing.text.html.FormSubmitEvent.MethodType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +20,6 @@ import ptithcm.service.ListPostService;
 import ptithcm.util.PostHelper;
 import ptithcm.service.AccountService;
 import ptithcm.service.CommentService;
-import ptithcm.service.CustomerService;
 
 @Controller
 @RequestMapping("/forum")
@@ -265,7 +261,6 @@ public class ForumController {
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
-        Employee employee;
         Comment comment = new Comment(content, postServices.getPostByID(id),
                 accountService.getAccountByID(Integer.parseInt(uid)));
 
@@ -307,7 +302,6 @@ public class ForumController {
             @CookieValue(value = "uid", defaultValue = "") String uid,
             @CookieValue(value = "role", defaultValue = "") String role) {
         Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
-        Employee employee;
         Comment cmt = commentService.getCommentByID(cid);
         cmt.setContent(content);
 

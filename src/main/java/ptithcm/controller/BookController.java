@@ -17,7 +17,6 @@ import ptithcm.bean.*;
 import ptithcm.service.*;
 
 
-import java.io.File;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -99,7 +98,7 @@ public class BookController {
 		return list;
 	}
 
-    @RequestMapping("/admin/product")
+    @RequestMapping("/manage/product")
     public String product(ModelMap model) {
         List<Book> book = bookService.getAllBooks();
         model.addAttribute("books", book);
@@ -107,14 +106,14 @@ public class BookController {
         return "pages/admin/product";
     }
 
-    @RequestMapping(value = "/admin/product/add-product")
+    @RequestMapping(value = "/manage/product/add-product")
     public String addProduct(ModelMap model) {
         Book book = new Book();
         model.addAttribute("product", book);
         return "pages/admin/addproduct";
     }
 
-    @RequestMapping(value = "/admin/product/add-product", method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/product/add-product", method = RequestMethod.POST)
     public String saveNewProduct(ModelMap model, @ModelAttribute("product") Book product, BindingResult errors,
     @ModelAttribute("category") TypeBook category, @RequestParam("file") MultipartFile file) {
         String fileName = uploadService.saveFile(file);
@@ -140,10 +139,10 @@ public class BookController {
         product.setProducer(producer);
         bookService.addBook(product);
         model.addAttribute("product", product);
-        return "redirect:/admin/product.htm";
+        return "redirect:/manage/product.htm";
     }
 
-    @RequestMapping(value = "/admin/product/{MASACH}/update")
+    @RequestMapping(value = "/manage/product/{MASACH}/update")
     public String editProduct(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
         Book book = bookService.getBookByID(MASACH);
         uploadService.getImage(book);
@@ -151,7 +150,7 @@ public class BookController {
         return "pages/admin/editproduct";
     }
 
-    @RequestMapping(value = "/admin/product/{MASACH}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/product/{MASACH}/update", method = RequestMethod.POST)
     public String saveEditProduct(ModelMap model, @ModelAttribute("product") Book product,
     @RequestParam("file") MultipartFile file, BindingResult errors) {
         if(product.getTENSACH().trim().length() == 0){
@@ -159,7 +158,7 @@ public class BookController {
         }
         if(errors.hasErrors()){
             model.addAttribute("message", -1);
-            return "redirect:/admin/product/{MASACH}/update";
+            return "redirect:/manage/product/{MASACH}/update";
         }
 
         String fileName = uploadService.saveFile(file);
@@ -177,18 +176,18 @@ public class BookController {
         product.setProducer(producer);
         bookService.updateBook(product);
         model.addAttribute("product", product);
-        return "redirect:/admin/product.htm";
+        return "redirect:/manage/product.htm";
     }
 
-    @RequestMapping(value = "/admin/product/{MASACH}/delete")
+    @RequestMapping(value = "/manage/product/{MASACH}/delete")
     public String deleteCategory(ModelMap model, @PathVariable("MASACH") Integer MASACH) {
         Book book = bookService.getBookByID(MASACH);
         bookService.deleteBook(book);
         model.addAttribute("product", book);
-        return "redirect:/admin/product.htm";
+        return "redirect:/manage/product.htm";
     }
 
-    @RequestMapping(value = "/admin/product/search")
+    @RequestMapping(value = "/manage/product/search")
     public String searchBook(HttpServletRequest request, ModelMap model) {
         List<Book> book = bookService.searchBook(request.getParameter("searchInput"));
         model.addAttribute("books", book);

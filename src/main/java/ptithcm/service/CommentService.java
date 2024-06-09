@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Comment;
-import ptithcm.bean.Post;
-
 import java.util.List;
 
 

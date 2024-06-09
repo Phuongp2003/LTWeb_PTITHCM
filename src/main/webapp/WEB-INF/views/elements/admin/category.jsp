@@ -10,12 +10,12 @@
 	<table class="category-list table">
 		<div class="filter-wrapper row">
 			<div class="col-md-10 col-sm-12 col-lg-10">
-				<form role="search" action="admin/category/search.htm">
+				<form role="search" action="manage/category/search.htm">
 					<input name="searchInput" class="form-control" type="search" placeholder="Tìm thể loại" aria-label="Search" style="width: 50%;">
 				</form>
 			</div>
 			<div class="col-md-2 col-sm-6 col-lg-2">
-				<a href="admin/category/add-category.htm"><button type="button" class="btn btn-outline-primary">Thêm thể loại</button></a>
+				<a href="manage/category/add-category.htm"><button type="button" class="btn btn-outline-primary">Thêm thể loại</button></a>
 			</div>
 		</div>
 		<thead>
@@ -33,8 +33,8 @@
 					<td>${category.getBooks().size()}</td>
 					<td>100.000</td>
 					<td>
-						<a href="admin/category/${category.MATL}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa thể loại ${category.TENTL}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
-						<a href="admin/category/${category.MATL}/update.htm"><button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
+						<a href="manage/category/${category.MATL}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa thể loại ${category.TENTL}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>
+						<a href="manage/category/${category.MATL}/update.htm"><button class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
 					</td>
 				</tr>
 			</c:forEach>

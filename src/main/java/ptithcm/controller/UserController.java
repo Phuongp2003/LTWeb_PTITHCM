@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,6 @@ import ptithcm.service.AccountService;
 import ptithcm.service.CustomerService;
 import ptithcm.service.EmployeeService;
 import ptithcm.service.ListPostService;
-import ptithcm.util.DateHelper;
 
 @Controller
 @RequestMapping("user")
@@ -41,8 +43,29 @@ public class UserController {
 
     @RequestMapping("{uid}")
     public String user(Model model, @PathVariable("uid") Integer uid,
-            @CookieValue(value = "uid", defaultValue = "") String cookie_uid) {
+            @CookieValue(value = "uid", defaultValue = "") String cookie_uid,
+            HttpServletResponse response) {
         Account account = accountService.getAccountByID(uid);
+        if (account == null) {
+            model.addAttribute("title", "Trang cá nhân");
+            model.addAttribute("type", "user");
+            model.addAttribute("user_id", uid);
+            model.addAttribute("message", "Không tìm thấy tài khoản");
+            if (cookie_uid.equals(uid.toString())) {
+                // logout error account
+                Cookie cookie = new Cookie("uid", "");
+                Cookie cookie2 = new Cookie("role", "");
+                cookie.setMaxAge(0);
+                cookie2.setMaxAge(0);
+                cookie.setPath("/");
+                cookie2.setPath("/");
+                response.addCookie(cookie);
+                response.addCookie(cookie2);
+                model.addAttribute("message", "Không tìm thấy tài khoản của bạn, vui lòng đăng nhập lại!");
+
+            }
+            return "pages/post/post_action";
+        }
         Customer customer = account.getAccount_customer();
         Employee employee = account.getAccount_employee();
 

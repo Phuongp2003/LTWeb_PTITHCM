@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ptithcm.bean.Book;
 import ptithcm.bean.Discount;
-import ptithcm.bean.TypeBook;
-
 import java.util.List;
 
 @Service

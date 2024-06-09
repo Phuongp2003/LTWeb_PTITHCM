@@ -8,7 +8,7 @@
 </style>
 
 <div class="product-add container-fluid mt-2" style="width: 50%;">
-    <form:form method="POST" action="admin/product/${MASACH}/update.htm" modelAttribute="product" enctype="multipart/form-data">
+    <form:form method="POST" action="manage/product/${MASACH}/update.htm" modelAttribute="product" enctype="multipart/form-data">
         <div class="product-name d-flex gap-5 mb-2">
             <form:label path="TENSACH">Tên: </form:label>
             <form:input path="TENSACH" class="form-control"/>
@@ -65,7 +65,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Save</button>
     </form:form>
-    <a href="admin/product.htm"><button class="btn btn-secondary mt-2">Quay trở về</button></a>
+    <a href="manage/product.htm"><button class="btn btn-secondary mt-2">Quay trở về</button></a>
     <div class="mt-2">
         <c:if test="${message == -1}">
             <div class="col-sm-8 alert alert-danger" role="alert">
