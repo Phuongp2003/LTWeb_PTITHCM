@@ -43,8 +43,8 @@
                     <td>${book.typebook.TENTL}</td>
                     <td>${book.author.HO} ${book.author.TEN}</td>
                     <td>${book.supplier.TENNCC}</td>
-                    <td>"${book.SOLUONGTON}" </td>
-                    <td>"${book.SOLUONGBAN}" </td>
+                    <td>${book.SOLUONGTON} </td>
+                    <td>${book.SOLUONGBAN} </td>
                     <td>${book.producer.TENNXB}</td>
                     <td>
                         <a href="manage/product/${book.MASACH}/delete.htm" onclick="return confirm('Bạn có chắc muốn xóa sách ${book.TENSACH}?')"><button class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></button></a>

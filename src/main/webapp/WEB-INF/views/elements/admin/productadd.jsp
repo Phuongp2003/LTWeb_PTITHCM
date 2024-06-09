@@ -56,9 +56,9 @@
         </c:forEach>
       </form:select>
     </div>
-    <div class="product-slton d-flex gap-5 mb-2">
+    <div class="product-republish d-flex gap-5 mb-2">
       <form:label path="SOLUONGTON">Số lượng tồn: </form:label>
-      <form:input path="SOLUONGTON" class="form-control" />
+      <form:input path="SOLUONGTON" type="number" min="1" class="form-control" />
       <form:errors path="SOLUONGTON" class="fst-italic text-danger" />
     </div>
 

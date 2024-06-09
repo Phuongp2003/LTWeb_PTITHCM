@@ -56,17 +56,11 @@
         </c:forEach>
       </form:select>
     </div>
-    <div class="product-name d-flex gap-5 mb-2">
+    <div class="product-republish d-flex gap-5 mb-2">
       <form:label path="SOLUONGTON">Số lượng tồn: </form:label>
-      <form:input path="SOLUONGTON" class="form-control" />
+      <form:input path="SOLUONGTON" type="number" min="1" class="form-control" />
       <form:errors path="SOLUONGTON" class="fst-italic text-danger" />
     </div>
-    <div class="product-name d-flex gap-5 mb-2">
-      <form:label path="SOLUONGBAN">Số lượng bán: </form:label>
-      <form:input path="SOLUONGBAN" class="form-control" readonly="true" />
-      <form:errors path="SOLUONGBAN" class="fst-italic text-danger" />
-    </div>
-
     <div class="product-nxb d-flex gap-5 mb-2">
       <label>Nhà xuất bản: </label>
       <form:select path="producer.MANXB" class="form-select">
