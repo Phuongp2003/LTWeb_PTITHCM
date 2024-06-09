@@ -63,6 +63,12 @@
 		}
 		
 	}
+	
+	@media (max-width: 1255px) {
+		.admin-action {
+			position: static !important;
+		}
+	}
 </style>
 
 <div class="discount-list container-fluid w-75">

@@ -28,6 +28,12 @@
 		bottom: 5px;
 	}
 	
+	@media (max-width: 1255px) {
+		.post-place {
+			width: 100%;
+		}
+	}
+	
 	@media (max-width: 400px) {
 		.forum-post .post-list {
 			padding: 0;
