@@ -158,22 +158,60 @@
 			</div>
 		</div>
 	</div>
-</div>
-<script>
-	function adjustQuantity(increment) {
-		var quantityInput = document.getElementById('quantity-input');
-		var currentQuantity = parseInt(quantityInput.value);
-		if (increment) {
-			quantityInput.value = currentQuantity + 1;
-		} else if (currentQuantity > 1) { // Prevents quantity from going below 1
-			quantityInput.value = currentQuantity - 1;
-		}
-		updateCart();
-	}
-	function updateCart() {
-		var quantityInput = document.getElementById('quantity-input');
-		var formQuantityInput = document.getElementById('form-quantity'); // Lấy thẻ input form-quantity
-		formQuantityInput.value = quantityInput.value; // Gán giá trị từ quantity-input cho form-quantity
-	}
+  
+  <div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog"
+					aria-labelledby="addToCartModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="addToCartModalLabel">Thông báo</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Sản phẩm đã được thêm vào giỏ hàng thành công!
+							</div>
+							<div class="modal-footer">
+								<a href="cart.htm" class="btn btn-primary">Đi tới giỏ hàng</a>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+							</div>
+						</div>
+					</div>
+				</div>
 
-</script>
+</div>
+<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+    <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+    <script>
+      function showAddToCartPopup(event) {
+        event.preventDefault();
+        $.ajax({
+          type: $(event.target).attr('method'),
+          url: $(event.target).attr('action'),
+          data: $(event.target).serialize(),
+          success: function (response) {
+            $('#addToCartModal').modal('show');
+          },
+          error: function (response) {
+            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+          }
+        });
+      }
+      function adjustQuantity(increment) {
+        var quantityInput = document.getElementById('quantity-input');
+        var currentQuantity = parseInt(quantityInput.value);
+        if (increment) {
+          quantityInput.value = currentQuantity + 1;
+        } else if (currentQuantity > 1) { // Prevents quantity from going below 1
+          quantityInput.value = currentQuantity - 1;
+        }
+        updateCart();
+      }
+      function updateCart() {
+        var quantityInput = document.getElementById('quantity-input');
+        var formQuantityInput = document.getElementById('form-quantity'); // Lấy thẻ input form-quantity
+        formQuantityInput.value = quantityInput.value; // Gán giá trị từ quantity-input cho form-quantity
+      }
+
+    </script>

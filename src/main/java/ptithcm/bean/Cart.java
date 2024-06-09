@@ -10,34 +10,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cart {
     @Id
     @GeneratedValue
-    private Integer IDGH;// property
+    private int IDGH;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date NGAYLAP;// property
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "MAKH")
     private Customer cart_customer;// property
 
     @OneToMany(mappedBy = "cartdetail_cart", fetch = FetchType.LAZY)
     private Collection<CartDetail> cartdetails;
 
-
     public Cart() {
     }
 
-    public Cart(Integer IDGH, Date NGAYLAP, Customer cart_customer) {
+    public Cart(int IDGH, Date NGAYLAP, Customer cart_customer) {
         this.IDGH = IDGH;
         this.NGAYLAP = NGAYLAP;
         this.cart_customer = cart_customer;
     }
 
-    public Integer getIDGH() {
+    public int getIDGH() {
         return IDGH;
     }
 
-    public void setIDGH(Integer iDGH) {
+    public void setIDGH(int iDGH) {
         IDGH = iDGH;
     }
 
@@ -56,14 +54,6 @@ public class Cart {
     public void setCartdetails(Collection<CartDetail> cartdetails) {
         this.cartdetails = cartdetails;
     }
-
-    // public Collection<Bill> getBills() {
-    // return bills;
-    // }
-
-    // public void setBills(Collection<Bill> bills) {
-    // this.bills = bills;
-    // }
 
     public Customer getCart_customer() {
         return cart_customer;

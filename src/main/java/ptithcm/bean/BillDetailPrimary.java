@@ -7,24 +7,24 @@ import javax.persistence.*;
 @Embeddable
 public class BillDetailPrimary implements Serializable {
     @Column(name = "MAHD")
-    String MAHD;
+    int MAHD;
 
     @Column(name = "MASACH")
-    String MASACH;
+    int MASACH;
 
-    public String getMAHD() {
+    public int getMAHD() {
         return MAHD;
     }
 
-    public void setMAHD(String mAHD) {
+    public void setMAHD(int mAHD) {
         MAHD = mAHD;
     }
 
-    public String getMASACH() {
+    public int getMASACH() {
         return MASACH;
     }
 
-    public void setMASACH(String mASACH) {
+    public void setMASACH(int mASACH) {
         MASACH = mASACH;
     }
 }

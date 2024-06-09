@@ -22,7 +22,7 @@ public class CartService {
 	@ModelAttribute("cart")
 	public Cart getCartById(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Cart WHERE IDGH = :id";
+		String hql = "FROM Cart c WHERE c.IDGH = :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 		Cart list = (Cart) query.list().get(0);
@@ -30,17 +30,50 @@ public class CartService {
 	}
 
 	@Transactional
-	@ModelAttribute("cartbyuserid")
+	@ModelAttribute("cart")
 	public Cart getCartByIdCustomer(int userId) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Cart WHERE cart_customer.MAKH = :id";
+		String hql = "FROM Cart c " + "WHERE c.cart_customer.MAKH = :userId";
 		Query query = session.createQuery(hql);
-		query.setParameter("id", userId);
+		query.setParameter("userId", userId);
 		Cart list = (Cart) query.list().get(0);
 		return list;
 	}
 
-	public int insertCart(Cart cart) {
+	@Transactional
+	@ModelAttribute("cart")
+	public List<Cart> getCart() {
+		Session session = factory.openSession();
+		String hql = "FROM Cart";
+		Query query = session.createQuery(hql);
+		List<Cart> list = query.list();
+		return list;
+	}
+
+	@Transactional
+	@ModelAttribute("cart")
+	public Integer getCartIdByIdCustomer(int userId) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT c.IDGH FROM Cart c " +
+				"WHERE c.cart_customer.MAKH = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", userId);
+
+		// Sử dụng uniqueResult() trực tiếp
+		Integer cartId = (Integer) query.uniqueResult();
+
+		// Kiểm tra xem kết quả trả về có null không
+		if (cartId != null) {
+			return cartId;
+		} else {
+			// Trả về giá trị mặc định hoặc null tùy thuộc vào logic của bạn
+			return null;
+		}
+	}
+
+	@Transactional
+	@ModelAttribute("cart")
+	public Cart insertCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
@@ -48,15 +81,17 @@ public class CartService {
 			session.save(cart);
 			t.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			t.rollback();
-			return 0;
+			// return 0;
 		} finally {
 			session.close();
 		}
-		return 1;
+		return cart;
 	}
 
+	@Transactional
+	@ModelAttribute("cart")
 	public int updateCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -74,6 +109,8 @@ public class CartService {
 		return 1;
 	}
 
+	@Transactional
+	@ModelAttribute("cart")
 	public int deleteCart(Cart cart) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();

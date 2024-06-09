@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ptithcm.bean.*;
 import ptithcm.service.*;
-
-
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -42,13 +40,15 @@ public class BookController {
     private FeedbackService feedbackService;
 
     @Autowired
+    private CartDetailService CartDetailService;
+    @Autowired
     private AccountService accountService;
-
+    @Autowired
+    private CartService cartService;
     @Autowired
     private UploadService uploadService;
-
     @Autowired
-	ServletContext context;
+    ServletContext context;
 
     @RequestMapping(value = "/book/{MASACH}")
     public String book(ModelMap model, @PathVariable("MASACH") int MASACH, 
@@ -60,13 +60,17 @@ public class BookController {
         if (!uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) != null) {
             Customer user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_customer();
             Feedback checkCustomer = feedbackService.getFeedbackById(user.getMAKH(), MASACH);
+            
             if(checkCustomer != null){
                 model.addAttribute("message", 1);
             } else {
                 model.addAttribute("message", 2);
             }
+          
+            CartDetail detail = CartDetailService.getCartDetailByProductId(cartService.getCartIdByIdCustomer(user.getMAKH()), MASACH);
+            String cmd = (detail != null) ? "update" : "add";
+            model.addAttribute("cmd", cmd);
         }
-
         model.addAttribute("book", book);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
@@ -75,16 +79,16 @@ public class BookController {
     }
 
     @ModelAttribute("categoryPick")
-	public List<TypeBook> getCategories() {
-		List<TypeBook> list = typeBookService.getAllTypeBooks();
-		return list;
-	}
+    public List<TypeBook> getCategories() {
+        List<TypeBook> list = typeBookService.getAllTypeBooks();
+        return list;
+    }
 
     @ModelAttribute("authorPick")
-	public List<Author> getAuthors() {
-		List<Author> list = authorService.getAllAuthors();
-		return list;
-	}
+    public List<Author> getAuthors() {
+        List<Author> list = authorService.getAllAuthors();
+        return list;
+    }
 
     @ModelAttribute("supplierPick")
 	public List<Supplier> getSuppliers() {
@@ -93,10 +97,10 @@ public class BookController {
 	}
 
     @ModelAttribute("producerPick")
-	public List<Producer> getProducers() {
-		List<Producer> list = producerService.getAllProducers();
-		return list;
-	}
+    public List<Producer> getProducers() {
+        List<Producer> list = producerService.getAllProducers();
+        return list;
+    }
 
     @RequestMapping("/manage/product")
     public String product(ModelMap model) {
@@ -193,4 +197,3 @@ public class BookController {
         model.addAttribute("books", book);
         return "pages/admin/product";
     }
-}
