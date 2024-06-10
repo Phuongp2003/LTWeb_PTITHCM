@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <style>
 
+
   .product-detail .wrapper {
     margin-bottom: 0.5rem;
   }

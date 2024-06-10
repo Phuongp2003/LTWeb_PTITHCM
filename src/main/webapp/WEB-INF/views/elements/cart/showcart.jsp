@@ -140,26 +140,28 @@
 
             </div>
             <div class="col-md-4">
-    <div class="card">
-      <div class="card-body d-flex flex-column h-100">
-        <h5 class="card-title">Đơn hàng</h5>
-        <p class="card-text">Tổng tiền</p>
-        <p class="card-text">
-          <fmt:formatNumber value="${totalmoney}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
-        </p>
-        <div>
-          <c:choose>
-            <c:when test="${totalmoney != 0}">
-              <a href="bill/check-out.htm" class="btn btn-primary">Thanh toán</a>
-            </c:when>
-            <c:otherwise>
-              <button href="bill/check-out.htm" class="btn btn-primary" disabled>Thanh toán</button>
-            </c:otherwise>
-          </c:choose>
-        </div>
-      </div>
-    </div>
-  </div>
+
+              <div class="card">
+                <div class="card-body d-flex flex-column h-100">
+                  <h5 class="card-title">Đơn hàng</h5>
+                  <p class="card-text">Tổng tiền</p>
+                  <p class="card-text">
+                    <fmt:formatNumber value="${totalmoney}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
+                  </p>
+                  <div>
+                    <c:choose>
+                      <c:when test="${totalmoney != 0}">
+                        <a href="bill/check-out.htm" class="btn btn-primary">Thanh toán</a>
+                      </c:when>
+                      <c:otherwise>
+                        <button href="bill/check-out.htm" class="btn btn-primary" disabled>Thanh toán</button>
+                      </c:otherwise>
+                    </c:choose>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
 
@@ -176,7 +178,7 @@
   </div> -->
 
 
-  
+
 
 
   <script>
@@ -186,6 +188,7 @@
     function adjustQuantity(index, increment) {
       try {
         var quantityInput = document.getElementById('quantity-' + index);
+        var maxQuantity = parseInt('${cartdetail[index].cartdetail_book.SOLUONGTON}') - parseInt('${cartdetail[index].SOLUONGBAN}');
         if (!quantityInput) {
           throw new Error("Không thể tìm thấy phần tử với id 'quantity-" + index + "'");
         }
@@ -194,7 +197,10 @@
           throw new Error("Giá trị của quantityInput không phải là một số hợp lệ");
         }
         if (increment) {
+
           quantityInput.value = currentQuantity + 1;
+
+
         } else if (currentQuantity > 1) { // Prevents quantity from going below 1
           quantityInput.value = currentQuantity - 1;
         }

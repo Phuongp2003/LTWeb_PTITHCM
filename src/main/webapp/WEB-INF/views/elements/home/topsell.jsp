@@ -3,6 +3,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <div class="top-sell container-fluid mt-4" style="width:80%;">
 
+
   <h2 class="title align-middle text-center">Top sách bán chạy - best seller</h2>
   <div class="row">
     <c:forEach var="book" items="${books}">
@@ -55,5 +56,6 @@
       </div>
     </c:forEach>
   </div>
+
 </div>
 
