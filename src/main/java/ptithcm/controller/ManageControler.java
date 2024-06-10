@@ -83,14 +83,14 @@ public class ManageControler {
         if (uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) == null) {
             model.addAttribute("title", "Request permission");
             model.addAttribute("type", "forum");
-            model.addAttribute("message", "You login to account have permission to approve post");
+            model.addAttribute("message", "Bạn cần phải có tài khoản có đủ quyền mới có thể duyệt bài!");
             return "pages/post/post_action";
         }
         user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee();
         if (user == null) {
             model.addAttribute("title", "Request permission");
             model.addAttribute("type", "forum");
-            model.addAttribute("message", "You don't have permission to approve post");
+            model.addAttribute("message", "Bạn không có quyền để duyệt bài viết!");
             return "pages/post/post_action";
         }
 
@@ -105,7 +105,7 @@ public class ManageControler {
 
         postServices.editPost(post);
         model.addAttribute("post", post);
-        model.addAttribute("message", "Post approved successfully!");
+        model.addAttribute("message", "Bài viết được duyệt thành công!");
 
         BreadCrumb breadCrumb = new BreadCrumb();
         breadCrumb.setCurrentLink("", "Duyệt bài viết: " + post.getTitle() + " của " + post.getAuthor().getHO()
@@ -126,14 +126,14 @@ public class ManageControler {
         if (uid.equals("") && accountService.getAccountByID(Integer.parseInt(uid)) == null) {
             model.addAttribute("title", "Request permission");
             model.addAttribute("type", "forum");
-            model.addAttribute("message", "You login to account have permission to reject post");
+            model.addAttribute("message", "Bạn cần phải có tài khoản có đủ quyền mới có thể duyệt bài!");
             return "pages/post/post_action";
         }
         user = accountService.getAccountByID(Integer.parseInt(uid)).getAccount_employee();
         if (user == null) {
             model.addAttribute("title", "Request permission");
             model.addAttribute("type", "forum");
-            model.addAttribute("message", "You don't have permission to reject post");
+            model.addAttribute("message", "Bạn không có quyền để từ chối bài viết!");
             return "pages/post/post_action";
         }
 
@@ -149,7 +149,7 @@ public class ManageControler {
 
         postServices.editPost(post);
         model.addAttribute("post", post);
-        model.addAttribute("message", "Post rejected successfully!");
+        model.addAttribute("message", "Bài viết bị từ chối thành công!");
         BreadCrumb breadCrumb = new BreadCrumb();
         breadCrumb.setCurrentLink("", "Đã từ chối bài viết: " + post.getTitle() + " của "
                 + post.getAuthor().getHO() + " " + post.getAuthor().getTEN());
