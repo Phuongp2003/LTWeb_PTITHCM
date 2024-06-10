@@ -123,7 +123,7 @@ public class ForumController {
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You must login to create post");
+            model.addAttribute("message", "Bạn cần phải đăng nhập!");
             return "pages/post/post_action";
         }
         model.addAttribute("title", "PTITHCM Forum");
@@ -164,7 +164,7 @@ public class ForumController {
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("owner", true);
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You must login to edit post");
+            model.addAttribute("message", "Bạn cần phải đăng nhập!");
             return "pages/post/post_action";
         }
         Post post;
@@ -174,7 +174,7 @@ public class ForumController {
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You don't have permission to edit this post");
+            model.addAttribute("message", "Bạn không có quyền chỉnh sửa bài viết này!");
             return "pages/error";
         }
         model.addAttribute("type", "forum");
@@ -216,10 +216,10 @@ public class ForumController {
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
-        model.addAttribute("message", "Create post success");
+        model.addAttribute("message", "Đăng bài viết thành công!");
 
         BreadCrumb breadCrumb = new BreadCrumb();
-        breadCrumb.setCurrentLink("", "Tạo bài viết thành công");
+        breadCrumb.setCurrentLink("", "Đăng bài viết thành công");
         breadCrumb.addPreLink("home.htm", "Trang chủ");
         breadCrumb.addPreLink("forum.htm", "Bài viết");
         model.addAttribute("BC", breadCrumb);
@@ -236,7 +236,7 @@ public class ForumController {
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You must login to delete post");
+            model.addAttribute("message", "Bạn cần phải đăng nhập!");
             return "pages/post/post_action";
         }
 
@@ -247,7 +247,7 @@ public class ForumController {
             model.addAttribute("type", "forum");
             model.addAttribute("type_2", "post/edit");
             model.addAttribute("error", 401);
-            model.addAttribute("message", "You don't have permission to remove this post");
+            model.addAttribute("message", "Bạn không có quyền xóa bài viết này!");
             return "pages/error";
         }
 
@@ -258,7 +258,7 @@ public class ForumController {
         model.addAttribute("user_id", Integer.parseInt(uid));
         model.addAttribute("user_name", user.getHO() + " " + user.getTEN());
         model.addAttribute("success", 200);
-        model.addAttribute("message", "Delete post success");
+        model.addAttribute("message", "Xóa bài viết thành công!");
 
         BreadCrumb breadCrumb = new BreadCrumb();
         breadCrumb.setCurrentLink("", "Xóa bài viết " + id + " thành công");
