@@ -76,7 +76,7 @@
 							<div class="card-body">
 								<h5 class="card-title">${dd.discountdetail_book.TENSACH} (giảm giá ${dd.TYLE}%)</h5>
 								<p class="card-text">Tác giả: ${dd.discountdetail_book.author.HO} ${dd.discountdetail_book.author.TEN}</p>
-								<img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="...">
+								<img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="...">
 								<p class="card-text">
 									<fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
 								</p>

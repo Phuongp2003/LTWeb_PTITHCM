@@ -63,7 +63,7 @@
                 <div class="card mb-3">
                   <div class="row no-gutters">
                     <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-                      <img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="img-fluid" alt="..." style="height: 100%;" />
+                      <img src="resources/imgs/products/${book.ANH}" class="img-fluid" alt="..." style="height: 100%;" />
                     </div>
 
                     <div class="col-md-8">
