@@ -14,7 +14,7 @@
 
         <!-- <a href="book/${book.MASACH}.htm"> -->
           <div class="card">
-            <img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="..." style="max-width: 18.5rem;">
+            <img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="..." style="width: 18.5rem; min-height: 24rem;">
             <div class="card-body">
               <h5 class="card-text">
                 <fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />

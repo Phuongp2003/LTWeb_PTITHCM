@@ -62,13 +62,32 @@ public class BookService {
 	@ModelAttribute("books")
 	public List<Book> getBooksByRating(double rating) {
 		Session session = factory.getCurrentSession();
-        // String hql = "select f.book FROM Feedback f where avg(f.VOTE) >= :rating";
 		String hql = "SELECT b FROM Book b WHERE (SELECT AVG(f.VOTE) FROM Feedback f WHERE f.book = b) >= :rating";
 		Query query = session.createQuery(hql);
 		query.setParameter("rating", rating);
 		List<Book> list = query.list();
 		return list;
     }
+
+	public List<Book> getBooksByRatingAndType(double rating, int MATL) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT b FROM Book b WHERE (SELECT AVG(f.VOTE) FROM Feedback f WHERE f.book = b) >= :rating "
+					+ "and b.typebook.MATL = :MATL";
+		Query query = session.createQuery(hql);
+		query.setParameter("rating", rating);
+		List<Book> list = query.list();
+		return list;
+	}
+
+	public List<Book> getSimilarBooks(int MATL, int MASACH){
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Book b WHERE b.typebook.MATL = :MATL AND b.MASACH != :MASACH";
+		Query query = session.createQuery(hql);
+		query.setParameter("MATL", MATL);
+		query.setParameter("MASACH", MASACH);
+		List<Book> list = query.list();
+		return list;
+	}
 
 	@ModelAttribute("books")
 	public Book addBook(Book b) {
