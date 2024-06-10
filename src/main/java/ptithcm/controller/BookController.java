@@ -55,6 +55,7 @@ public class BookController {
             @CookieValue(value = "uid", defaultValue = "") String uid) {
         Book book = bookService.getBookByID(MASACH);
         List<Book> books = bookService.getBooksByCategory(book.getTypebook().getMATL());
+        List<Book> similarBooks = bookService.getSimilarBooks(book.getTypebook().getMATL(), MASACH);
         List<Feedback> feedback = feedbackService.getFeedbacksByBook(MASACH);
         Double avgVote = (Double) feedbackService.getAverageVote(MASACH);
         CartDetail detail = null;
@@ -77,6 +78,7 @@ public class BookController {
         // model.addAttribute("cmd", "add");
         model.addAttribute("book", book);
         model.addAttribute("books", books);
+        model.addAttribute("similarBooks", similarBooks);
         model.addAttribute("feedback", feedback);
         model.addAttribute("avgVote", avgVote);
         uploadService.getImage(book);

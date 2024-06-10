@@ -43,7 +43,7 @@
   <div class="row">
     <div class="product-img col-lg-4 col-md-4 col-sm-12 col-xs-4 pd5">
       <div class="card">
-        <img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="..." style="width: 25rem; height: 25rem;">
+        <img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="..." style="width: 25rem; height: 25rem;">
       </div>
     </div>
     <div class="grid col-lg-4 col-md-4 col-sm-12 col-xs-4 pd5">
@@ -53,22 +53,21 @@
             <h6 class="card-text text-capitalize fs-5">${book.TENSACH}</h6>
             <p class="card-text text-capitalize fs-6">Tác giả: ${book.author.HO} ${book.author.TEN}</p>
             <div class="d-flex gap-1">
-              <div><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i></div>
               <div class="star-detail">
                 <c:choose>
-                  <c:when test="${f.VOTE == 1}">
+                  <c:when test="${avgVote == 1}">
                     <i class="bi bi-star-fill" style="color:#FFDB00;  "></i>
                   </c:when>
-                  <c:when test="${f.VOTE == 2}">
+                  <c:when test="${avgVote == 2}">
                     <i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
                   </c:when>
-                  <c:when test="${f.VOTE == 3}">
+                  <c:when test="${avgVote == 3}">
                     <i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i><i class="bi bi-star-fill" style="color:#FFDB00;"></i>
                   </c:when>
-                  <c:when test="${f.VOTE == 4}">
+                  <c:when test="${avgVote == 4}">
                     <i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i>
                   </c:when>
-                  <c:when test="${f.VOTE == 5}">
+                  <c:when test="${avgVote == 5}">
                     <i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i><i class="bi bi-star-fill" style="color:#FFDB00;  "></i>
                   </c:when>
                 </c:choose>
@@ -119,7 +118,7 @@
             <li class="list-group-item">Nhà cung cấp: <span class=" fw-semibold">${book.supplier.TENNCC}</span></li>
             <li class="list-group-item">Lần tái bản: <span class=" fw-semibold">${book.LANTAIBAN}</span></li>
             <li class="list-group-item">Nhà xuất bản: <span class=" fw-semibold">${book.producer.TENNXB}</span></li>
-            <li class="list-group-item">Số lượng tồn: <span class=" fw-semibold">10</span></li>
+            <li class="list-group-item">Số lượng sách: <span class=" fw-semibold">${book.SOLUONGTON - book.SOLUONGBAN}</span></li>
           </ul>
         </div>
       </div>
@@ -129,19 +128,17 @@
         <div class="card-header">
           <h5 class="card-title text-center">Sản phẩm tương tự</h5>
         </div>
-
-
         <div class="row gap-0">
-          <c:forEach var="book" items="${books}">
+          <c:forEach var="book" items="${similarBooks}">
             <div class="col-md-4 col-sm-12 col-lg-4">
               <a href="book/${book.MASACH}.htm">
                 <div class="card mb-2" style="width: 7.7rem;">
-                  <img src="https://salt.tikicdn.com/cache/750x750/ts/product/6f/c4/48/574854f032ae36fc0d0a57b61f588965.jpg.webp" class="card-img-top" alt="..." style="width:7.5rem;">
+                  <img src="resources/imgs/products/${book.ANH}" class="card-img-top" alt="..." style="width:7.5rem; height: 8rem;">
                   <div class="card-body" style="padding:0px 10px;">
                     <h5 class="card-text">
                       <fmt:formatNumber value="${book.GIA}" type="currency" currencySymbol="đ" maxFractionDigits="0" />
                     </h5>
-                    <p class="card-text text-capitalize fs-6" style="height: 2.2rem;">${book.TENSACH}</p>
+                    <p class="card-text text-capitalize fs-6" style="height: 2.7rem;">${book.TENSACH}</p>
 
                     <div class="d-flex justify-content-between">
                       <div><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i><i class="bi bi-star-fill" style="color:#FFDB00; font-size: 0.8rem;"></i></div>

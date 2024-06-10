@@ -31,10 +31,21 @@
 				<div class="row">
 					<nav class="navbar bg-body-tertiary">
 						<div class="container-fluid">
-							<h4>${category.TENTL}</h4>
+							<h5 class="card-title">${category.TENTL}</h5>
+							<form id="ratingForm" class="form-check" action="shop/rating.htm">
+								<input name="rating" class="form-check-input" type="checkbox" value="4" id="flexCheckDefault">
+								<label class="form-check-label" for="rating4">
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star-fill" style="color:#FFDB00;"></i>
+									<i class="bi bi-star" style="color:gainsboro;"></i>
+									<span>từ 4 sao</span>
+								</label>
+							</form>
 							<form class="d-flex" role="search" action="shop/search.htm">
-								<input name="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-								<button name="btn-seach" class="btn btn-outline-success" type="submit">Search</button>
+								<input name="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm sách" aria-label="Search">
+								<button name="btn-seach" class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
 							</form>
 							<div class="dropdown d-flex">
 								<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +97,7 @@
 													</c:choose>
 												</div>
 												<div class="d-flex gap-3">
-													<div class="sold">Đã bán 10</div>
+													<div class="sold">Đã bán ${book.SOLUONGBAN}/${book.SOLUONGTON}</div>
 												</div>
 											</div>
 										</div>
@@ -100,3 +111,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	document.getElementById('flexCheckDefault').addEventListener('change', function() {
+		if (this.checked) {
+			document.getElementById('ratingForm').submit();
+		}
+	});
+</script>

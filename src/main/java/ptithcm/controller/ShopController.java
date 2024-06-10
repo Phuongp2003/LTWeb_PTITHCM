@@ -31,9 +31,9 @@ public class ShopController {
         model.addAttribute("title", "PTITHCM All Books");
         model.addAttribute("type", "shop");
         List<TypeBook> category = typeBookService.getAllTypeBooks();
-        List<Book> book = bookService.getAllBooks();
+        List<Book> books = bookService.getAllBooks();
         model.addAttribute("categories", category);
-        model.addAttribute("books", book);
+        model.addAttribute("books", books);
         return "pages/shop/shop";
     }
 
@@ -104,6 +104,18 @@ public class ShopController {
         model.addAttribute("category", category);
         model.addAttribute("books", books);
         return "pages/shop/typebook";
+    }
+
+    @RequestMapping(value = "typebook/{MATL}/rating")
+    public String ratingByType(ModelMap model, @RequestParam(value = "rating") double rating, @PathVariable("MATL") Integer MATL) {
+        model.addAttribute("type", "shop");
+        List<TypeBook> categories = typeBookService.getAllTypeBooks();
+        TypeBook category = typeBookService.getTypeBookByID(MATL);
+        List<Book> book = bookService.getBooksByRatingAndType(rating, MATL);
+        model.addAttribute("categories", categories);
+        model.addAttribute("category", category);
+        model.addAttribute("books", book);
+        return "pages/shop/shop";
     }
 
     @RequestMapping(value = "search", params = "btn-seach")
